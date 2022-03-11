@@ -22,3 +22,27 @@ Umfang:
 - Mobile App 
   - Buddy synchronisiert und ist nur auf einem Bildschirm zu sehen
   - Wenn der PC herunter gefahren wird oder die Maus lange nicht bewegt wird, taucht der Buddy auf der Mobile App auf
+
+## Ziel von Ikitomo
+*Beschreibung des Projektziels, in unserem Fall ein Software-Produkt. Das
+Hauptziel soll so detailliert beschrieben werden, dass jemand ohne spezifisches Wissen
+dieses verstehen kann.*
+## Kundennutzen
+*Wer sind die Hauptbenutzer des Software-Produkts und was ist der Nutzen,
+den diese von Ihrem Softwareprodukt erhalten?*
+
+## Abgrenzung zu Bestehendem
+*Was existiert bereits und was ist neu/anders an Ihrer Idee?*
+
+## Weg zum Ziel
+*Dazu gehören eine Lösungsidee, die wichtigsten Ressourcen und eine
+zeitliche Grobplanung.*
+
+## Risiken auf dem Weg zum Ziel
+*Welche wichtigsten Risiken sehen Sie aus heutiger Sicht?*
+
+## Wirtschaftlichkeit
+*Basierend auf realistischen Annahmen, wie gedenken Sie den
+notwendigen Gewinn mit Ihrem Endprodukt zu erwirtschaften. Dies ist wichtig, sowohl um
+Ihr Startup-Unternehmen aufzubauen, als auch um den Investoren die versprochene
+Rendite zu ermöglichen.*
