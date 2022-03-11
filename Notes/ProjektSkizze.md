@@ -23,25 +23,26 @@ Umfang:
   - Buddy synchronisiert und ist nur auf einem Bildschirm zu sehen
   - Wenn der PC herunter gefahren wird oder die Maus lange nicht bewegt wird, taucht der Buddy auf der Mobile App auf
 
-## Ziel von Ikitomo
+## Ziel von Ikitomo (@thalmma5)
 *Beschreibung des Projektziels, in unserem Fall ein Software-Produkt. Das
 Hauptziel soll so detailliert beschrieben werden, dass jemand ohne spezifisches Wissen
 dieses verstehen kann.*
-## Kundennutzen
+## Kundennutzen (@zumbrseb)
 *Wer sind die Hauptbenutzer des Software-Produkts und was ist der Nutzen,
 den diese von Ihrem Softwareprodukt erhalten?*
 
-## Abgrenzung zu Bestehendem
+## Abgrenzung zu Bestehendem (@zumbrseb)
 *Was existiert bereits und was ist neu/anders an Ihrer Idee?*
+(Oneko könnte etwas vergleichbares sein)
 
-## Weg zum Ziel
+## Weg zum Ziel (@costajon)
 *Dazu gehören eine Lösungsidee, die wichtigsten Ressourcen und eine
 zeitliche Grobplanung.*
 
-## Risiken auf dem Weg zum Ziel
+## Risiken auf dem Weg zum Ziel (@costajon)
 *Welche wichtigsten Risiken sehen Sie aus heutiger Sicht?*
 
-## Wirtschaftlichkeit
+## Wirtschaftlichkeit (@zieglmic)
 *Basierend auf realistischen Annahmen, wie gedenken Sie den
 notwendigen Gewinn mit Ihrem Endprodukt zu erwirtschaften. Dies ist wichtig, sowohl um
 Ihr Startup-Unternehmen aufzubauen, als auch um den Investoren die versprochene
