@@ -23,7 +23,9 @@ Umfang:
   - Buddy synchronisiert und ist nur auf einem Bildschirm zu sehen
   - Wenn der PC herunter gefahren wird oder die Maus lange nicht bewegt wird, taucht der Buddy auf der Mobile App auf
 
-## Ziel von Ikitomo (@thalmma5)
+## Ausgangslage (@thalmma5)
+
+## Idee  von Ikitomo (@thalmma5)
 *Beschreibung des Projektziels, in unserem Fall ein Software-Produkt. Das
 Hauptziel soll so detailliert beschrieben werden, dass jemand ohne spezifisches Wissen
 dieses verstehen kann.*
@@ -31,15 +33,20 @@ dieses verstehen kann.*
 *Wer sind die Hauptbenutzer des Software-Produkts und was ist der Nutzen,
 den diese von Ihrem Softwareprodukt erhalten?*
 
-## Abgrenzung zu Bestehendem (@zumbrseb)
+## Konkurrenzanalyse und abgrenzung zu Bestehendem (@zumbrseb)
 *Was existiert bereits und was ist neu/anders an Ihrer Idee?*
 (Oneko könnte etwas vergleichbares sein)
 
-## Weg zum Ziel (@costajon)
-*Dazu gehören eine Lösungsidee, die wichtigsten Ressourcen und eine
-zeitliche Grobplanung.*
+## Hauptablauf (@costajon)
 
-## Risiken auf dem Weg zum Ziel (@costajon)
+## Weitere Anforderungen (@zieglmic)
+Funktionale Anforderungen beschreiben gewünschte Funktionalitäten (was soll das System tun/können) eines Systems bzw. Produkts, dessen Daten oder Verhalten.
+
+Nichtfunktionale Anforderungen sind Anforderungen, an die "Qualität" in welcher die geforderte Funktionalität zu erbringen ist.
+
+## Resourcen (@costajon)
+
+## Risiken (@costajon)
 *Welche wichtigsten Risiken sehen Sie aus heutiger Sicht?*
 
 ## Wirtschaftlichkeit (@zieglmic)
