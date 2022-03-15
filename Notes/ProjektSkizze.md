@@ -30,8 +30,17 @@ Umfang:
 Hauptziel soll so detailliert beschrieben werden, dass jemand ohne spezifisches Wissen
 dieses verstehen kann.*
 ## Kundennutzen (@zumbrseb)
-*Wer sind die Hauptbenutzer des Software-Produkts und was ist der Nutzen,
-den diese von Ihrem Softwareprodukt erhalten?*
+Wie auch bereits Tamagotischs soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Der Buddy soll mit dem Nutzer interagieren ohne dabei im Weg zu kommen. 
+Dies soll den Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da der Buddy einen gewissen Pflegeaufwand mitsich bringt, soll sich der Nutzer
+Emotional an seinen Buddy binden und eine Beziehung mit seinem Freund im Bildschirm führen, sei dies eine Katze oder eine anderes Tier.
+
+Für den Buddy soll ein kleines Zuhause gebaut werden können. Der Nutzer kann sich dabei kreativ ausleben und kann danach zu sehen, wie sein Buddy in seinen neuen 
+vier Wänden spielt oder schläft. 
+
+Ikitomo soll vielen Konfigurationsmöglichkeiten besitzen, damit der Buddy und sein Verhalten so angepasst werden kann, dass es den Nutzer unterhaltet und Spass
+bringt, ihn aber nicht nervt.
+
+Wenn der Nutzer das App heruntergeladen hat, kann sein Buddy ihm zusätzlich überal begleiten und so ihm immer emotionalen Support leisten zu können.
 
 ## Konkurrenzanalyse und abgrenzung zu Bestehendem (@zumbrseb)
 *Was existiert bereits und was ist neu/anders an Ihrer Idee?*
