@@ -48,7 +48,7 @@ Wenn der Nutzer das App heruntergeladen hat, kann sein Buddy ihm zusätzlich üb
 
 ## Hauptablauf (@costajon)
 *Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät des **Endbenutzers**. Es besteht aus dem *Tomodoachi*, das gewählte Tier des **Bentuzers**, und einer Konfigurationsschaltfläche, worin **Benutzer** ihren *Tomodachi* zu Belieben konfigurieren können. **Fortgeschrittene Benutzer** haben die möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalität zu kreieren.  
-Die zweite Komponente ist der *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. Im Plaza können **Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Adminstratoren** gibt es einen exklusiven Bereich zur Moderation der Platform.  
+Die zweite Komponente ist der *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. Im Plaza können **Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Adminstratoren** gibt es einen exklusiven Bereich zur Moderation der Plattform.  
 
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seiner Maus folgt und beginnt anschliessen mit seiner Arbeit. Im fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt und die Katze geht zum oberen Bildschirmrand ruht sich dort aus.  
@@ -59,7 +59,15 @@ Funktionale Anforderungen beschreiben gewünschte Funktionalitäten (was soll da
 
 Nichtfunktionale Anforderungen sind Anforderungen, an die "Qualität" in welcher die geforderte Funktionalität zu erbringen ist.
 
-## Resourcen (@costajon)
+## Ressourcen (@costajon)
+
+|Komponente|Benötigtes Know-How|Geschätzter Aufwand|
+|-|-|-|
+|Benutzerapplikation|Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI|50 h|
+|*Tomodachis*|Pixel-Art & Animation|20 h|
+|*Tomodachi Plaza* Grundgerüst|Datenbankmodell krieren, Netzwerksicherheit, Hosting|40 h|
+|*Tomodachi Plaza* Benutzeroberfläche|Webdesign, JavaScript, UX-Design|30 h|
+|**Total**||120 h|
 
 ## Risiken (@costajon)
 *Welche wichtigsten Risiken sehen Sie aus heutiger Sicht?*
