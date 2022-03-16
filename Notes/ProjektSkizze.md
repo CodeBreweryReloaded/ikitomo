@@ -24,11 +24,29 @@ Umfang:
   - Wenn der PC herunter gefahren wird oder die Maus lange nicht bewegt wird, taucht der Buddy auf der Mobile App auf
 
 ## Ausgangslage (@thalmma5)
+Gerade in den Zeiten der Pandemie sehen sich wohl viele Leute nach einem eigenen Haustier,
+was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt.
+
+Leider haben nicht alle Personen die finanzielle Möglichkeit,
+die Pflege, das Futter und die Behandlung eines Haustiers zu bezahlen.
+
+Es besteht also ein erhöhter Bedarf einer Möglichkeit,
+das preiswerte Beschaffen von Haustieren zu ermöglichen.
 
 ## Idee  von Ikitomo (@thalmma5)
-*Beschreibung des Projektziels, in unserem Fall ein Software-Produkt. Das
-Hauptziel soll so detailliert beschrieben werden, dass jemand ohne spezifisches Wissen
-dieses verstehen kann.*
+Ikitomo will genau diese genannten Punkte aufgreifen und es einem ermöglichen,
+für die ersten 30 Tage kostenlos Haustiere auf den eigenen Bildschirm einzuladen.
+
+Haustiere sollen hierbei so natürlich wie möglich agieren.
+
+So sind Katzen mit den klassischen "Schläft durchgehend", "Ist der König der Welt" (aka. "Braucht jetzt Aufmerksamkeit") und "Katz- und Maus-Spiel" Modi ausgestattet.
+
+Haustiere bewegen sich frei auf dem Bildschirm, interagieren mit dem Nutzer,
+zeigen Wertschätzung, Freude, Hass und weitere Emotionen auf nachvollziehbarer Weise.
+
+Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
+um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
+
 ## Kundennutzen (@zumbrseb)
 Wie auch bereits Tamagotischs soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Der Buddy soll mit dem Nutzer interagieren ohne dabei im Weg zu kommen. 
 Dies soll den Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da der Buddy einen gewissen Pflegeaufwand mitsich bringt, soll sich der Nutzer
