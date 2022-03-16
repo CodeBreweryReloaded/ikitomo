@@ -70,7 +70,8 @@ Nichtfunktionale Anforderungen sind Anforderungen, an die "Qualität" in welcher
 |**Total**||120 h|
 
 ## Risiken (@costajon)
-*Welche wichtigsten Risiken sehen Sie aus heutiger Sicht?*
+Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine sogenannte "Virtual Pet" Applikation, die 2000-er Jahren sehr beliebt waren aber wegen Marktübersättigung ausgestorben sind. *Ikitomo* versucht diesen Markt wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Traffic generiert um relevant zu bleiben. Aus diesem Grund ist es notwendig Social-Media intelligent anzuwenden um *Ikitomo* ausserordentlich zu vermarkten.  
+Ein weiterer Punkt ist das fehlende Know-How für Animation, Netzwerksicherheit und Webdesign. Wenn diese Fähigkeiten nicht bis zu Projektstart angeschafft werden, kommt es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
 
 ## Wirtschaftlichkeit (@zieglmic)
 *Basierend auf realistischen Annahmen, wie gedenken Sie den
