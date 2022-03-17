@@ -61,8 +61,11 @@ bringt, ihn aber nicht nervt.
 Wenn der Nutzer das App heruntergeladen hat, kann sein Buddy ihm zusätzlich überal begleiten und so ihm immer emotionalen Support leisten zu können.
 
 ## Konkurrenzanalyse und abgrenzung zu Bestehendem (@zumbrseb)
-*Was existiert bereits und was ist neu/anders an Ihrer Idee?*
-(Oneko könnte etwas vergleichbares sein)
+Es gibt einige Programme, in welchen ein animiertes Tier oder Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
+Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
+Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft oder eSheep, welche nach einer Windows Alternative aussieht.
+
+Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind.
 
 ## Hauptablauf (@costajon)
 *Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät des **Endbenutzers**. Es besteht aus dem *Tomodoachi*, das gewählte Tier des **Bentuzers**, und einer Konfigurationsschaltfläche, worin **Benutzer** ihren *Tomodachi* zu Belieben konfigurieren können. **Fortgeschrittene Benutzer** haben die möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalität zu kreieren.  
@@ -79,13 +82,13 @@ Nichtfunktionale Anforderungen sind Anforderungen, an die "Qualität" in welcher
 
 ## Ressourcen (@costajon)
 
-|Komponente|Benötigtes Know-How|Geschätzter Aufwand|
-|-|-|-|
-|Benutzerapplikation|Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI|50 h|
-|*Tomodachis*|Pixel-Art & Animation|20 h|
-|*Tomodachi Plaza* Grundgerüst|Datenbankmodell krieren, Netzwerksicherheit, Hosting|40 h|
-|*Tomodachi Plaza* Benutzeroberfläche|Webdesign, JavaScript, UX-Design|30 h|
-|**Total**||120 h|
+| Komponente                           | Benötigtes Know-How                                                    | Geschätzter Aufwand |
+| ------------------------------------ | ---------------------------------------------------------------------- | ------------------- |
+| Benutzerapplikation                  | Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI | 50 h                |
+| *Tomodachis*                         | Pixel-Art & Animation                                                  | 20 h                |
+| *Tomodachi Plaza* Grundgerüst        | Datenbankmodell krieren, Netzwerksicherheit, Hosting                   | 40 h                |
+| *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                       | 30 h                |
+| **Total**                            |                                                                        | 120 h               |
 
 ## Risiken (@costajon)
 Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine sogenannte "Virtual Pet" Applikation, die 2000-er Jahren sehr beliebt waren aber wegen Marktübersättigung ausgestorben sind. *Ikitomo* versucht diesen Markt wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Traffic generiert um relevant zu bleiben. Aus diesem Grund ist es notwendig Social-Media intelligent anzuwenden um *Ikitomo* ausserordentlich zu vermarkten.  
