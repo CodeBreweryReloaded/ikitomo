@@ -65,9 +65,16 @@ Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute
 Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffnet das Bedienfeld von *Ikitomo* und sieht sich die vorinstallierten *Tomodachis* an. Keine der Optionen gefallen ihm aber und er navigiert über das Bedienfeld zum *Tomodachi Plaza*. Dort meldet er sich mit seinem Benutzerkonto and sieht sich die beliebtesten *Tomodachis* der Woche an. Mark findet einen Tiger *Tomodachi* und fügt ihn zu seinem Profil hinzu. *Ikitomo* lädt den neuen *Tomodachi* innert Sekunden herunter und wird in der Applikation angezeigt. Mark wählt den neuen *Tomodachi* aus und beobachtet das neue Verhalten. Der Tiger ist deutlich schneller als die Katze und das Futter sieht ebenfalls anders aus. Mark ist zufrieden mit dem Tiger und wendet sich wieder seiner Arbeit.
 
 ## Weitere Anforderungen (@zieglmic)
-Funktionale Anforderungen beschreiben gewünschte Funktionalitäten (was soll das System tun/können) eines Systems bzw. Produkts, dessen Daten oder Verhalten.
 
-Nichtfunktionale Anforderungen sind Anforderungen, an die "Qualität" in welcher die geforderte Funktionalität zu erbringen ist.
+Funktionale Anforderungen
+- Beim Klick der Katze soll eine Interaktion gestartet werden, um die Benutzererfahrung zu erweitern. Die Interaktionen sind verschieden und können zufällig angezeigt werden. Beispielsweise würde die Katze ein Herz ausgeben oder auf dem Boden liegen.
+- Beim Verschieben (Drag-and-Drop) kann man die Katze verschieben.
+- Es gibt ein Korb, bei der die Katze schlafen kann. 
+Nicht-Funktionale Anforderung
+- Performance beziehungsweise Resourcenleichte Software.
+- Die Software soll so wenig wie möglich mit der Kontrolle des Benutzers schneiden. Beispielsweise soll die Katze nicht Elemente zu stark verdecken können.
+- Security des Softwares
+
 
 ## Ressourcen (@costajon)
 
@@ -88,3 +95,11 @@ Ein weiterer Punkt ist das fehlende Know-How für Animation, Netzwerksicherheit 
 notwendigen Gewinn mit Ihrem Endprodukt zu erwirtschaften. Dies ist wichtig, sowohl um
 Ihr Startup-Unternehmen aufzubauen, als auch um den Investoren die versprochene
 Rendite zu ermöglichen.*
+
+Für die Bewirtschaftung des Softwares wird ein Gesamtaufwand von CHF 62'000 
+
+Dieser Betrag wird wie gefolgt ausgerechnet 
+
+- Personenaufwand 50'000. Dieser Aufwand beinhaltet den Stundensatz von CHF 104.10 für 4 Entwickler mit dem geschätzten Zeitaufwand von 120 Stunden gerechnet.
+- Hardwareaufwand CHF 2'000. Dieser Aufwand rechnet den Server ein, der die Webseite und den Server der eigentlichen Applikation beinhaltet. 
+- Marketing Aufwand CHF 10'000. Dieser Aufwand beinhaltet die Werbekampagne auf Social Media und Suchmaschinenoptimierungen. 
