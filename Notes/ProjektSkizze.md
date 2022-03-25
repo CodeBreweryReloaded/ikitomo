@@ -18,6 +18,8 @@ Header:
   - [Risiken](#risiken)
   - [Wirtschaftlichkeit](#wirtschaftlichkeit)
 
+- nicht auf katzen spezifizieren
+- nach IEEE zitieren
 ## Ausgangslage
 Gerade in den Zeiten der Pandemie sehen sich wohl viele Leute nach einem eigenen Haustier,
 was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt.
@@ -29,6 +31,8 @@ Es besteht also ein erhöhter Bedarf einer Möglichkeit,
 das preiswerte Beschaffen von Haustieren zu ermöglichen.
 
 ## Idee  von Ikitomo
+- die Idee genauer formulieren
+
 Ikitomo will genau diese genannten Punkte aufgreifen und es einem ermöglichen,
 für die ersten 30 Tage kostenlos Haustiere auf den eigenen Bildschirm einzuladen.
 
@@ -43,6 +47,8 @@ Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
 
 ## Kundennutzen
+- "Buddy" definieren oder ersetzen
+
 Wie auch bereits Tamagotischs soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Der Buddy soll mit dem Nutzer interagieren ohne dabei im Weg zu kommen. 
 Dies soll den Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da der Buddy einen gewissen Pflegeaufwand mitsich bringt, soll sich der Nutzer
 Emotional an seinen Buddy binden und eine Beziehung mit seinem Freund im Bildschirm führen, sei dies eine Katze oder eine anderes Tier.
@@ -56,13 +62,16 @@ bringt, ihn aber nicht nervt.
 Wenn der Nutzer das App heruntergeladen hat, kann sein Buddy ihm zusätzlich überal begleiten und so ihm immer emotionalen Support leisten zu können.
 
 ## Konkurrenzanalyse und abgrenzung zu Bestehendem
+- Alleinstellungsmerkmal schreiben
+ 
 Es gibt einige Programme, in welchen ein animiertes Tier oder Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
 Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
 Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft oder eSheep, welche nach einer Windows Alternative aussieht.
 
 Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind.
-
 ## Hauptablauf
+- noch schreiben, was für den Prototyp genau realisiert werden soll
+ 
 *Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät des **Endbenutzers**. Es besteht aus dem *Tomodoachi*, das gewählte Tier des **Bentuzers**, und einer Konfigurationsschaltfläche, worin **Benutzer** ihren *Tomodachi* zu Belieben konfigurieren können. **Fortgeschrittene Benutzer** haben die möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalität zu kreieren.  
 Die zweite Komponente ist der *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. Im Plaza können **Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Adminstratoren** gibt es einen exklusiven Bereich zur Moderation der Plattform.  
 
@@ -75,6 +84,7 @@ Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffne
 
 
 ## Weitere Anforderungen
+- was Nice to have wäre
 
 Funktionale Anforderungen
 - Beim Klick der Katze soll eine Interaktion gestartet werden, um die Benutzererfahrung zu erweitern. Die Interaktionen sind verschieden und können zufällig angezeigt werden. Beispielsweise würde die Katze ein Herz ausgeben oder auf dem Boden liegen.
@@ -84,7 +94,6 @@ Nicht-Funktionale Anforderung
 - Performance beziehungsweise Resourcenleichte Software.
 - Die Software soll so wenig wie möglich mit der Kontrolle des Benutzers schneiden. Beispielsweise soll die Katze nicht Elemente zu stark verdecken können.
 - Security des Softwares
-
 
 ## Ressourcen
 
