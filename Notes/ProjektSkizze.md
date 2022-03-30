@@ -67,7 +67,12 @@ Es gibt einige Programme, in welchen ein animiertes Tier oder Figur dem Mauszeig
 Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann [1]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
 Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft [2] oder eSheep, welche nach einer Windows Alternative aussieht[3].
 
-Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind.
+Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind. Unsere Software
+soll eine höhere Qualität aufweissen. Sie soll auch mehr Funktionen implementieren, wie das Bauen von einem Zuhause für das *Tomodachi* oder 
+ein App, welches mit dem Desktop Client synchronisiert, so dass der Nutzer nie sein *Tomdachi* am Rechner zurück lassen muss. All dies
+soll dazu führen, dass Ikitomo mehr als nur eine Software ist, sondern dass das *Tomodachi* zu einem Freund wird. 
+
+Um den Nutzer über eine lange Zeit zu fesseln, können über einen Store Erweiterungen gekauft werden, um neuen Inhalt, wie neue Skins, Gebäude oder Minigames, freizuschalten.
 ## Hauptablauf
 - noch schreiben, was für den Prototyp genau realisiert werden soll
  
