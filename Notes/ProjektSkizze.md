@@ -17,6 +17,7 @@ Header:
   - [Ressourcen](#ressourcen)
   - [Risiken](#risiken)
   - [Wirtschaftlichkeit](#wirtschaftlichkeit)
+  - [Bibliographie](#bibliographie)
 
 - nicht auf katzen spezifizieren
 - nach IEEE zitieren
@@ -47,26 +48,24 @@ Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
 
 ## Kundennutzen
-- "Buddy" definieren oder ersetzen
+Wie auch bereits Tamagotchis soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Das *Tomodachi*, ein virtuelles Haustier, soll mit dem Nutzer interagieren ohne dabei nervend zu werden.
+Dies soll dem Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da das *Tomodachi* einen gewissen Pflegeaufwand mit sich bringt, soll sich der Nutzer
+emotional an sein *Tomodachi* binden und eine Beziehung mit seinem Freund auf dem Bildschirm führen, sei dies eine Katze, ein Hund oder eine anderes Tier.
 
-Wie auch bereits Tamagotischs soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Der Buddy soll mit dem Nutzer interagieren ohne dabei im Weg zu kommen. 
-Dies soll den Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da der Buddy einen gewissen Pflegeaufwand mitsich bringt, soll sich der Nutzer
-Emotional an seinen Buddy binden und eine Beziehung mit seinem Freund im Bildschirm führen, sei dies eine Katze oder eine anderes Tier.
-
-Für den Buddy soll ein kleines Zuhause gebaut werden können. Der Nutzer kann sich dabei kreativ ausleben und kann danach zu sehen, wie sein Buddy in seinen neuen 
+Für das *Tomodachi* soll ein kleines Zuhause gebaut werden können. Der Nutzer kann sich dabei kreativ ausleben und kann danach zusehen, wie sein *Tomodachi* in seinen neuen 
 vier Wänden spielt oder schläft. 
 
-Ikitomo soll vielen Konfigurationsmöglichkeiten besitzen, damit der Buddy und sein Verhalten so angepasst werden kann, dass es den Nutzer unterhaltet und Spass
-bringt, ihn aber nicht nervt.
+Ikitomo soll viel Konfigurationsmöglichkeiten besitzen, damit das *Tomodachi* und sein Verhalten so angepasst werden kann, dass es den Nutzer unterhält und ihm Spass
+bringt.
 
-Wenn der Nutzer das App heruntergeladen hat, kann sein Buddy ihm zusätzlich überal begleiten und so ihm immer emotionalen Support leisten zu können.
+Wenn der Nutzer das App heruntergeladen hat, kann sein *Tomodachi* ihn zusätzlich überal begleiten und ihm so immer emotionalen Support leisten.
 
 ## Konkurrenzanalyse und abgrenzung zu Bestehendem
 - Alleinstellungsmerkmal schreiben
  
 Es gibt einige Programme, in welchen ein animiertes Tier oder Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
-Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
-Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft oder eSheep, welche nach einer Windows Alternative aussieht.
+Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann [1]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
+Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft [2] oder eSheep, welche nach einer Windows Alternative aussieht[3].
 
 Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind.
 ## Hauptablauf
@@ -122,3 +121,8 @@ Dieser Betrag wird wie gefolgt ausgerechnet
 - Personenaufwand 50'000. Dieser Aufwand beinhaltet den Stundensatz von CHF 104.10 für 4 Entwickler mit dem geschätzten Zeitaufwand von 120 Stunden gerechnet.
 - Hardwareaufwand CHF 2'000. Dieser Aufwand rechnet den Server ein, der die Webseite und den Server der eigentlichen Applikation beinhaltet. 
 - Marketing Aufwand CHF 10'000. Dieser Aufwand beinhaltet die Werbekampagne auf Social Media und Suchmaschinenoptimierungen. 
+
+## Bibliographie
+[1] "oneko-1.3", [http://www.daidouji.com/oneko/](http://www.daidouji.com/oneko/) (Zugegriffen: 30.03.2022)<br/>
+[2] "Desktop Goose by samperson", [https://samperson.itch.io/desktop-goose](https://samperson.itch.io/desktop-goose) (Zugegriffen: 30.03.2022)<br/>
+[3] "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", [https://adrianotiger.github.io/desktopPet/](https://adrianotiger.github.io/desktopPet/) (Zugegriffen: 30.03.2022)
