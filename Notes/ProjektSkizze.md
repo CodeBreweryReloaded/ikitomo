@@ -108,8 +108,8 @@ Optionale Ziele:
 
 
 ### Anwendungsbeispiel
-Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt und die Katze geht zum oberen Bildschirmrand ruht sich dort aus.  
-Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffnet das Bedienfeld von *Ikitomo* und sieht sich die vorinstallierten *Tomodachis* an. Keine der Optionen gefallen ihm aber und er navigiert über das Bedienfeld zum *Tomodachi Plaza*. Dort meldet er sich mit seinem Benutzerkonto and sieht sich die beliebtesten *Tomodachis* der Woche an. Mark findet einen Tiger *Tomodachi* und fügt ihn zu seinem Profil hinzu. *Ikitomo* lädt den neuen *Tomodachi* innert Sekunden herunter und wird in der Applikation angezeigt. Mark wählt den neuen *Tomodachi* aus und beobachtet das neue Verhalten. Der Tiger ist deutlich schneller als die Katze und das Futter sieht ebenfalls anders aus. Mark ist zufrieden mit dem Tiger und wendet sich wieder seiner Arbeit zu.
+Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt worauf die Katze zum oberen Bildschirmrand geht und sich dort ausruht.  
+Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffnet das Bedienfeld von *Ikitomo* und sieht sich die vorinstallierten *Tomodachi*s an. Jedoch gefällt ihm Keine der Optionen und er navigiert über das Bedienfeld zum *Tomodachi Plaza*. Dort meldet er sich mit seinem Benutzerkonto an und sieht sich die beliebtesten *Tomodachi*s der Woche an. Mark findet einen Tiger *Tomodachi* und fügt ihn zu seinem Profil hinzu. *Ikitomo* lädt den neuen *Tomodachi* innert Sekunden herunter, welcher daraufhin in der Applikation angezeigt wird. Mark wählt den neuen *Tomodachi* aus und beobachtet das neue Verhalten. Der Tiger ist deutlich schneller als die Katze und das Futter sieht ebenfalls anders aus. Mark ist zufrieden mit dem Tiger und wendet sich wieder seiner Arbeit zu.
 
 <p style="page-break-after: always;">&nbsp;</p>
 <p style="page-break-before: always;">&nbsp;</p>
@@ -136,32 +136,32 @@ Bei Nicht-Funktionalen Anforderungen
 
 ## Ressourcen
 
-| Komponente                           | Benötigtes Know-How                                                    | Geschätzter Aufwand |
-| ------------------------------------ | ---------------------------------------------------------------------- | ------------------- |
-| Benutzerapplikation                  | Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI | 640 h               |
-| *Tomodachis*                         | Pixel-Art & Animation                                                  | 50 h                |
-| *Tomodachi Plaza* Grundgerüst        | Datenbankmodell krieren, Netzwerksicherheit, Hosting                   | 200 h               |
-| *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                       | 200 h               |
-| **Total**                            |                                                                        | 1090 h              |
+| Komponente                           | Benötigtes Know-How                                                     | Geschätzter Aufwand |
+| ------------------------------------ | ----------------------------------------------------------------------- | ------------------- |
+| Benutzerapplikation                  | Plattformunabhängige Entwicklung, Dateiformate kreieren, Rudimentäre KI | 640 h               |
+| *Tomodachi*s                         | Pixel-Art & Animation                                                   | 50 h                |
+| *Tomodachi Plaza* Grundgerüst        | Datenbankmodell kreieren, Netzwerksicherheit, Hosting                   | 200 h               |
+| *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                        | 200 h               |
+| **Total**                            |                                                                         | 1090 h              |
 
 ## Risiken
 Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine 
-sogenannte "Virtual Pet" Applikation, die in den 2000-er Jahren sehr beliebt waren 
+sogenannte "Virtual Pet" Applikation, welche in den 2000-er Jahren sehr beliebt waren 
 aber wegen Marktübersättigung ausgestorben sind. *Ikitomo* versucht diesen Markt 
-wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Traffic oder 
+wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Aufsehen oder 
 Onlinediskussion generiert, um relevant zu bleiben. Aus diesem Grund ist es notwendig Social-Media intelligent anzuwenden, um *Ikitomo* ausserordentlich zu vermarkten.  
-Ein weiterer Punkt ist das fehlende Know-How für Animation, Netzwerksicherheit und 
-Webdesign. Wenn diese Fähigkeiten nicht bis zu Projektstart angeschafft werden, kommt 
+Ein weiterer Punkt ist das fehlende Know-How für das Erstellen von Animationen, für Netzwerksicherheit und
+für Webdesign. Sollten diese Fähigkeiten und Know-How bis zum Projektstart nicht vorhanden sein, kommt
 es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
 
 ## Wirtschaftlichkeit
-Für das Endprodukt schätzen wir einen Aufwand von 1'090h, für was wir mit einem
-Stundenanstatz von 90.- pro Stunde 98'100.- benötigt, um das Produkt zu verwirklichen.
-Zu diesen Kosten kommen wiederkehrende Kosten für die Server-Infrastruktur, für was wir 5000.- 
+Für das Endprodukt schätzen wir einen Aufwand von 1'090h, für welchen mit einem
+Stundenansatz von 90.- pro Stunde 98'100.- benötigt wird, um das Produkt zu verwirklichen.
+Zu diesen Kosten kommen zusätzlich wiederkehrende Kosten für die Server-Infrastruktur, für welche wir mit 5000.- 
 pro Jahr rechnen.
 
-Die Haupteinnahmequelle werden verkaufte *Tomodachis* und weitere Accessoirs vom *Ikitomo Plaza* sein. 
-Ein *Tomodachi* wird 5.- kosten; Accessiors zwischen 1.- bis 15.- für grössere interaktive Objekte. 
+Die Haupteinnahmequelle werden verkaufte *Tomodachi*s und weitere Accessoires vom *Ikitomo Plaza* sein. 
+Ein *Tomodachi* wird 5.- kosten; Accessoires zwischen 1.- und 15.- entsprechend der Grösse, Interaktivität und Besonderheit dieser Objekte. 
 Wir erwarten 100'000 Nutzer nach 2 Jahren, davon werden 30% drei Käufe im *Ikitomo Plaza* tätigen und somit über 
 diese zwei Jahre 630'000.- einbringen. 
 
