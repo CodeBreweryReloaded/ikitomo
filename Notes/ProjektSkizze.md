@@ -89,12 +89,19 @@ Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffne
 
 ## Weitere Anforderungen
 - was Nice to have wäre
+Um die Benutzererfahrung zu erhöhen
 
-Funktionale Anforderungen
+
+### Funktionale Anforderungen
+Bei Funktionalen Anforderungen wird spezifisch zusätzliche Features im Programm selber aufgezählt, die für den Endnutzer zur Verfügung gestellt werden wird und und vom Endnutzer manipuliarbar ist 
+
 - Beim Klick der Katze soll eine Interaktion gestartet werden, um die Benutzererfahrung zu erweitern. Die Interaktionen sind verschieden und können zufällig angezeigt werden. Beispielsweise würde die Katze ein Herz ausgeben oder auf dem Boden liegen.
-- Beim Verschieben (Drag-and-Drop) kann man die Katze verschieben.
+- Katze ist per Drag-and-Drop verschiebbar, um so nicht die Interaktion zwischen Benutzern und anderen Programmen bzw. Software zu beeinträchtigen.
 - Es gibt ein Korb, bei der die Katze schlafen kann. 
-Nicht-Funktionale Anforderung
+
+### Nicht-Funktionale Anforderung
+Bei Nicht-Funktionalen Anforderungen 
+
 - Performance beziehungsweise Resourcenleichte Software.
 - Die Software soll so wenig wie möglich mit der Kontrolle des Benutzers schneiden. Beispielsweise soll die Katze nicht Elemente zu stark verdecken können.
 - Security des Softwares
