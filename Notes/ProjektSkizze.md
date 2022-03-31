@@ -10,7 +10,7 @@ Header:
   - [Ausgangslage](#ausgangslage)
   - [Idee  von Ikitomo](#idee--von-ikitomo)
   - [Kundennutzen](#kundennutzen)
-  - [Konkurrenzanalyse und abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
+  - [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
   - [Hauptablauf](#hauptablauf)
     - [Anwendungsbeispiel](#anwendungsbeispiel)
   - [Weitere Anforderungen](#weitere-anforderungen)
@@ -21,23 +21,27 @@ Header:
   - [Wirtschaftlichkeit](#wirtschaftlichkeit)
   - [Bibliographie](#bibliographie)
 
-- nicht auf katzen spezifizieren
+- nicht auf Katzen spezifizieren
 - nach IEEE zitieren
 ## Ausgangslage
-Gerade in den Zeiten der Pandemie sehen sich wohl viele Leute nach einem eigenen Haustier,
+Gerade in den Zeiten der Corona-Pandemie sehnen sich wohl viele Leute nach einem eigenen Haustier,
 was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt.
 
-Leider haben nicht alle Personen die finanzielle Möglichkeit,
-die Pflege, das Futter und die Behandlung eines Haustiers zu bezahlen.
+![](./PetStats.png)
+_Statistik über die Anzahl registrierter Hunde in der Schweiz[^PetStats]_
 
-Es besteht also ein erhöhter Bedarf einer Möglichkeit,
-das preiswerte Beschaffen von Haustieren zu ermöglichen.
+Leider haben nicht alle Personen die finanzielle Möglichkeit,
+für die Pflege, das Futter und die tierärztliche Behandlung eines Haustiers aufzukommen.
+
+Es besteht also ein erhöhter Bedarf zu kostengünstiger Haustierhaltung.
 
 ## Idee  von Ikitomo
 - die Idee genauer formulieren
 
-Ikitomo will genau diese genannten Punkte aufgreifen und es einem ermöglichen,
-für die ersten 30 Tage kostenlos Haustiere auf den eigenen Bildschirm einzuladen.
+Ikitomo will genau diesen Bedarf decken, indem es die Möglichkeit bereitstellt,
+eine breite Auswahl von Haustieren auf den eigenen Bildschirm einzuladen.
+
+Diese virtuellen Haustiere sollen es sich auf dem Bildschirm gemütlich machen, ab und zu den Mauszeiger verfolgen, schlafen und für Unterhaltung sorgen.
 
 Haustiere sollen hierbei so natürlich wie möglich agieren.
 
@@ -50,36 +54,37 @@ Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
 
 ## Kundennutzen
-Wie auch bereits Tamagotchis soll Ikitomo dem Nutzer ein virtuelles Haustier haben. Das *Tomodachi*, ein virtuelles Haustier, soll mit dem Nutzer interagieren ohne dabei nervend zu werden.
+Wie auch bereits Tamagotchis soll Ikitomo dem Nutzer ein virtuelles Haustier verleihen. Das *Tomodachi*, ein virtuelles Haustier, soll mit dem Nutzer interagieren ohne dabei nervend zu werden.
 Dies soll dem Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da das *Tomodachi* einen gewissen Pflegeaufwand mit sich bringt, soll sich der Nutzer
-emotional an sein *Tomodachi* binden und eine Beziehung mit seinem Freund auf dem Bildschirm führen, sei dies eine Katze, ein Hund oder eine anderes Tier.
+emotional an sein *Tomodachi* binden und eine Beziehung mit seinem Freund auf dem Bildschirm aufbauen, sei dies eine Katze, ein Hund oder eine anderes Tier.
 
 Für das *Tomodachi* soll ein kleines Zuhause gebaut werden können. Der Nutzer kann sich dabei kreativ ausleben und kann danach zusehen, wie sein *Tomodachi* in seinen neuen 
 vier Wänden spielt oder schläft. 
 
-Ikitomo soll viel Konfigurationsmöglichkeiten besitzen, damit das *Tomodachi* und sein Verhalten so angepasst werden kann, dass es den Nutzer unterhält und ihm Spass
+Ikitomo soll viele Konfigurationsmöglichkeiten besitzen, damit das *Tomodachi* und sein Verhalten so angepasst werden kann, dass es den Nutzer unterhält und ihm Spass
 bringt.
 
-Wenn der Nutzer das App heruntergeladen hat, kann sein *Tomodachi* ihn zusätzlich überal begleiten und ihm so immer emotionalen Support leisten.
+Wenn der Nutzer die App heruntergeladen hat, kann sein *Tomodachi* ihn zusätzlich überallhin begleiten und ihm so immer emotionalen Support leisten.
 
-## Konkurrenzanalyse und abgrenzung zu Bestehendem
+## Konkurrenzanalyse und Abgrenzung zu Bestehendem
 - Alleinstellungsmerkmal schreiben
  
-Es gibt einige Programme, in welchen ein animiertes Tier oder Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
-Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebsystemen installiert werden kann [^1]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
-Eine weitere Applikation ist Desktop Goose, welche ein Gans auf dem Dekstop anzeigt, welche den Nutzer nerft [^2] oder eSheep, welche nach einer Windows Alternative aussieht[^3].
+Es gibt einige Programme, in welchen ein animiertes Tier oder eine Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
+Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [^1]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
+Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [^2] oder eSheep, die nach einer Windows Alternative aussieht[^3].
 
-Keine der oben genannten Software hat den geplanten Umfang und sind alles Fan-Projekte, welche nicht kommerzialisiert sind. Unsere Software
-soll eine höhere Qualität aufweissen. Sie soll auch mehr Funktionen implementieren, wie das Bauen von einem Zuhause für das *Tomodachi* oder 
-ein App, welches mit dem Desktop Client synchronisiert, so dass der Nutzer nie sein *Tomdachi* am Rechner zurück lassen muss. All dies
-soll dazu führen, dass Ikitomo mehr als nur eine Software ist, sondern dass das *Tomodachi* zu einem Freund wird. 
+Keine der oben genannten Projekte hat den geplanten Umfang. Zudem sind die genannten Beispiele alle Fan-Projekte, welche nicht kommerzialisiert sind. Unsere Software
+soll eine höhere Qualität aufweisen. Sie soll auch mehr Funktionen implementieren, wie das Bauen von einem Zuhause für das *Tomodachi* oder 
+eine App, welche sich mit dem Desktop Client synchronisiert, sodass der Nutzer nie sein *Tomodachi* auf dem Rechner zurücklassen muss. All dies
+soll dazu führen, dass Ikitomo mehr als nur eine Software ist, sondern ein Schlüssel zum Schliessen einer Freundschaft mit seinen *Tomodachi*s. 
 
-Um den Nutzer über eine lange Zeit zu fesseln, können über einen Store Erweiterungen gekauft werden, um neuen Inhalt, wie neue Skins, Gebäude oder Minigames, freizuschalten.
+Um den Nutzer über eine lange Zeit hinweg zu fesseln, können über einen Store Erweiterungen gekauft werden, um neue Inhalte wie neue Skins, Gebäude oder Mini-Games, freischalten zu können.
+
 ## Hauptablauf
 - noch schreiben, was für den Prototyp genau realisiert werden soll
  
-*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodoachi*, dem gewählten Tier **der Benutzerin oder des Bentuzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* zu Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalität zu kreieren.  
-Die zweite Komponente ist der *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. Im Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Adminstratoren** gibt es einen exklusiven Bereich zur Moderation der Plattform.  
+*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodachi*, dem gewählten Tier **der Benutzerin oder des Benutzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* nach Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
+Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. In der Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Administratoren und Administratorinnen** gibt es einen exklusiven Bereich zur Moderation der Plattform.
 
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt und die Katze geht zum oberen Bildschirmrand ruht sich dort aus.  
@@ -140,6 +145,7 @@ Wir erwarten 100'000 Nutzer nach 2 Jahren, davon werden 30% drei Käufe im *Ikit
 diese zwei Jahre 630'000.- einbringen. 
 
 ## Bibliographie
-[^1]: "oneko-1.3", [http://www.daidouji.com/oneko/](http://www.daidouji.com/oneko/) (Zugegriffen: 30.03.2022)
-[^2]: "Desktop Goose by samperson", [https://samperson.itch.io/desktop-goose](https://samperson.itch.io/desktop-goose) (Zugegriffen: 30.03.2022)
-[^3]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", [https://adrianotiger.github.io/desktopPet/](https://adrianotiger.github.io/desktopPet/) (Zugegriffen: 30.03.2022)
+[^1]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)
+[^2]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)
+[^3]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
+[^PetStats]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html>
