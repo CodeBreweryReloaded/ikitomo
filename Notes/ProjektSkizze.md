@@ -156,14 +156,14 @@ es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
 
 ## Wirtschaftlichkeit
 Für das Endprodukt schätzen wir einen Aufwand von 1'090h, für welchen mit einem
-Stundenansatz von 90.- pro Stunde 98'100.- benötigt wird, um das Produkt zu verwirklichen.
-Zu diesen Kosten kommen zusätzlich wiederkehrende Kosten für die Server-Infrastruktur, für welche wir mit 5000.- 
+Stundenansatz von 90.- Fr. pro Stunde 98'100.- Fr. benötigt wird, um das Produkt zu verwirklichen.
+Zu diesen Kosten kommen zusätzlich wiederkehrende Kosten für die Server-Infrastruktur, für welche wir mit 5000.- Fr.
 pro Jahr rechnen.
 
 Die Haupteinnahmequelle werden verkaufte *Tomodachi*s und weitere Accessoires vom *Ikitomo Plaza* sein. 
-Ein *Tomodachi* wird 5.- kosten; Accessoires zwischen 1.- und 15.- entsprechend der Grösse, Interaktivität und Besonderheit dieser Objekte. 
+Ein *Tomodachi* wird 5.- kosten; Accessoires zwischen 1.- Fr. und 15.- Fr. entsprechend der Grösse, Interaktivität und Besonderheit dieser Objekte. 
 Wir erwarten 100'000 Nutzer nach 2 Jahren, davon werden 30% drei Käufe im *Ikitomo Plaza* tätigen und somit über 
-diese zwei Jahre 630'000.- einbringen. 
+diese zwei Jahre 630'000.- Fr. einbringen. 
 
 ## Bibliographie
 [^Oneko]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)
