@@ -8,7 +8,7 @@ Header:
 
 - [Projekt Skizze](#projekt-skizze)
   - [Ausgangslage](#ausgangslage)
-  - [Idee  von Ikitomo](#idee--von-ikitomo)
+  - [Idee von Ikitomo](#idee-von-ikitomo)
   - [Kundennutzen](#kundennutzen)
   - [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
   - [Hauptablauf](#hauptablauf)
@@ -35,7 +35,7 @@ für die Pflege, das Futter und die tierärztliche Behandlung eines Haustiers au
 
 Es besteht also ein erhöhter Bedarf zu kostengünstiger Haustierhaltung.
 
-## Idee  von Ikitomo
+## Idee von Ikitomo
 - die Idee genauer formulieren
 
 Ikitomo will genau diesen Bedarf decken, indem es die Möglichkeit bereitstellt,
@@ -70,8 +70,8 @@ Wenn der Nutzer die App heruntergeladen hat, kann sein *Tomodachi* ihn zusätzli
 - Alleinstellungsmerkmal schreiben
  
 Es gibt einige Programme, in welchen ein animiertes Tier oder eine Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
-Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [^1]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
-Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [^2] oder eSheep, die nach einer Windows Alternative aussieht[^3].
+Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [^Oneko]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
+Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [^Goose] oder eSheep, die nach einer Windows Alternative aussieht[^Sheepy].
 
 Keine der oben genannten Projekte hat den geplanten Umfang. Zudem sind die genannten Beispiele alle Fan-Projekte, welche nicht kommerzialisiert sind. Unsere Software
 soll eine höhere Qualität aufweisen. Sie soll auch mehr Funktionen implementieren, wie das Bauen von einem Zuhause für das *Tomodachi* oder 
@@ -83,8 +83,8 @@ Um den Nutzer über eine lange Zeit hinweg zu fesseln, können über einen Store
 ## Hauptablauf
 - noch schreiben, was für den Prototyp genau realisiert werden soll
  
-*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodachi*, dem gewählten Tier **der Benutzerin oder des Benutzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* nach Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachis* zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
-Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachis* verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachis* hochladen und teilen können. In der Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachis* verwalten und organisieren. Für **Administratoren und Administratorinnen** gibt es einen exklusiven Bereich zur Moderation der Plattform.
+*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodachi*, dem gewählten Tier **der Benutzerin oder des Benutzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* nach Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachi*s zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
+Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachi*s verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachi*s hochladen und teilen können. In der Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachi*s verwalten und organisieren. Für **Administratoren und Administratorinnen** gibt es einen exklusiven Bereich zur Moderation der Plattform.
 
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt und die Katze geht zum oberen Bildschirmrand ruht sich dort aus.  
@@ -145,7 +145,7 @@ Wir erwarten 100'000 Nutzer nach 2 Jahren, davon werden 30% drei Käufe im *Ikit
 diese zwei Jahre 630'000.- einbringen. 
 
 ## Bibliographie
-[^1]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)
-[^2]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)
-[^3]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
+[^Oneko]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)
+[^Sheepy]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)
+[^Goose]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
 [^PetStats]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html>
