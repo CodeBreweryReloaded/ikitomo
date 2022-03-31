@@ -12,6 +12,7 @@ Header:
   - [Kundennutzen](#kundennutzen)
   - [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
   - [Hauptablauf](#hauptablauf)
+    - [Inhalt des Prototyps](#inhalt-des-prototyps)
     - [Anwendungsbeispiel](#anwendungsbeispiel)
   - [Weitere Anforderungen](#weitere-anforderungen)
     - [Funktionale Anforderungen](#funktionale-anforderungen)
@@ -85,6 +86,26 @@ Um den Nutzer über eine lange Zeit hinweg zu fesseln, können über einen Store
  
 *Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodachi*, dem gewählten Tier **der Benutzerin oder des Benutzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* nach Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachi*s zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
 Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachi*s verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachi*s hochladen und teilen können. In der Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachi*s verwalten und organisieren. Für **Administratoren und Administratorinnen** gibt es einen exklusiven Bereich zur Moderation der Plattform.
+
+### Inhalt des Prototyps
+
+Selbstverständlich ist die Umsetzung eines Projekts dieser Grösser nicht trivial. Aus diesem Grund wird im Zeitraum vom 08.04.2022 bis zum 13.05.2022 Zeit investiert, um einen Prototyp von *Ikitomo* in Java entwickeln. Dieser Prototyp wird eine drastisch reduzierte Anzahl an Funktionalitäten bieten und dient zur Evaluation der Idee, in anderen Worten ein "Proof-of-Concept"  
+
+Per dem erwähnten Enddatum wird die folgende Funktionalität implementiert:  
+
+- Offline-Version von *Ikitomo* auf Windows, Linux und MacOS lauffähig
+- Mindestens zwei *Tomodachi* mit unterschiedlichem Aussehen
+  - Das *Tomodachi* soll hin und wieder dem Mauszeiger folgen
+  - Bei einem Klick auf das *Tomodachi* soll es gefüttert werden
+  - Das *Tomodochi* soll in zufälligen Zeitabständen schlafen gehen
+- Speicherformat für Konfigurationen
+- Management-GUI zur Anpassung der Konfigurationsdatei
+
+Optionale Ziele:
+
+- Veränderbares Verhalten
+- Erkennen welches Fenster im Fokus ist
+
 
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt und die Katze geht zum oberen Bildschirmrand ruht sich dort aus.  
