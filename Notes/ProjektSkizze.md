@@ -116,23 +116,23 @@ Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffne
 
 
 ## Weitere Anforderungen
-- was Nice to have wäre
-Um die Benutzererfahrung zu erhöhen
-
+Um die Benutzererfahrung zu erhöhen, fügen wir weitere Features hinzu, die sowohl für die BenutzerInnen als auch für die Entwicklung betrifft. Diese Anforderungen betreffen nicht beziehungsweise nur indirekt die Hauptfunktion des Programmes.
+Die Anforderungen sind in folgende Kategorien unterteilt:
 
 ### Funktionale Anforderungen
-Bei Funktionalen Anforderungen wird spezifisch zusätzliche Features im Programm selber aufgezählt, die für den Endnutzer zur Verfügung gestellt werden wird und und vom Endnutzer manipuliarbar ist 
+Bei Funktionalen Anforderungen wird spezifisch zusätzliche Features im Programm selber aufgezählt, die für den Endnutzer zur Verfügung gestellt werden wird und und vom Endnutzer manipuliarbar ist. Funktionale Anforderungen sind Benutzungsfälle und betreffen nur einzelne Komponenten im Programm selber.
+Folgende Funktionale Anforderungen wurden aufgelistet:
 
 - Beim Klick der Katze soll eine Interaktion gestartet werden, um die Benutzererfahrung zu erweitern. Die Interaktionen sind verschieden und können zufällig angezeigt werden. Beispielsweise würde die Katze ein Herz ausgeben oder auf dem Boden liegen.
-- Katze ist per Drag-and-Drop verschiebbar, um so nicht die Interaktion zwischen Benutzern und anderen Programmen bzw. Software zu beeinträchtigen.
-- Es gibt ein Korb, bei der die Katze schlafen kann. 
+- Katze ist per Drag-and-Drop verschiebbar, um so nicht die Interaktion zwischen Benutzer/in und anderen Programmen bzw. Software zu beeinträchtigen.
+- Es gibt ein Korb, bei der die Katze schlafen kann. So kann der Benutzer/die Benutzerin 
 
 ### Nicht-Funktionale Anforderung
-Bei Nicht-Funktionalen Anforderungen 
+Bei Nicht-Funktionalen Anforderungen werden Features aufgelistet, die der Benutzer/die Benutzerin nicht manipulieren kann. Diese Features sind Attribute, die das Programm besitzt und betreffen das ganze System.
+Folgende Nicht-Funktionale Anforderungen wurden aufgelistet:
 
-- Performance beziehungsweise Resourcenleichte Software.
-- Die Software soll so wenig wie möglich mit der Kontrolle des Benutzers schneiden. Beispielsweise soll die Katze nicht Elemente zu stark verdecken können.
-- Security des Softwares
+- Die Software soll so wenig Resourcen von der Hardware brauchen, damit der Benutzer/die Benutzerin beim Interagieren von anderen Programmen so wenig wie möglich beeinträchtigt wird.
+- Die Software soll so skalierbar sein für zukünftige Features. Dies verursacht für die Entwicklung einen wesentlich geringeren Aufwand
 
 ## Ressourcen
 
