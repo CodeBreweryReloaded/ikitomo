@@ -103,29 +103,32 @@ Nicht-Funktionale Anforderung
 
 | Komponente                           | Benötigtes Know-How                                                    | Geschätzter Aufwand |
 | ------------------------------------ | ---------------------------------------------------------------------- | ------------------- |
-| Benutzerapplikation                  | Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI | 50 h                |
-| *Tomodachis*                         | Pixel-Art & Animation                                                  | 20 h                |
-| *Tomodachi Plaza* Grundgerüst        | Datenbankmodell krieren, Netzwerksicherheit, Hosting                   | 40 h                |
-| *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                       | 30 h                |
-| **Total**                            |                                                                        | 120 h               |
+| Benutzerapplikation                  | Plattformunabhängige Entwicklung, Dateiformate kreiern, Rudimentäre KI | 640 h               |
+| *Tomodachis*                         | Pixel-Art & Animation                                                  | 50 h                |
+| *Tomodachi Plaza* Grundgerüst        | Datenbankmodell krieren, Netzwerksicherheit, Hosting                   | 200 h               |
+| *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                       | 200 h               |
+| **Total**                            |                                                                        | 1090 h              |
 
 ## Risiken
-Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine sogenannte "Virtual Pet" Applikation, die 2000-er Jahren sehr beliebt waren aber wegen Marktübersättigung ausgestorben sind. *Ikitomo* versucht diesen Markt wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Traffic generiert um relevant zu bleiben. Aus diesem Grund ist es notwendig Social-Media intelligent anzuwenden um *Ikitomo* ausserordentlich zu vermarkten.  
-Ein weiterer Punkt ist das fehlende Know-How für Animation, Netzwerksicherheit und Webdesign. Wenn diese Fähigkeiten nicht bis zu Projektstart angeschafft werden, kommt es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
+Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine 
+sogenannte "Virtual Pet" Applikation, die in den 2000-er Jahren sehr beliebt waren 
+aber wegen Marktübersättigung ausgestorben sind. *Ikitomo* versucht diesen Markt 
+wiederzubeleben. Es ist durchaus möglich, dass *Ikitomo* nicht genug Traffic oder 
+Onlinediskussion generiert, um relevant zu bleiben. Aus diesem Grund ist es notwendig Social-Media intelligent anzuwenden, um *Ikitomo* ausserordentlich zu vermarkten.  
+Ein weiterer Punkt ist das fehlende Know-How für Animation, Netzwerksicherheit und 
+Webdesign. Wenn diese Fähigkeiten nicht bis zu Projektstart angeschafft werden, kommt 
+es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
 
 ## Wirtschaftlichkeit
-*Basierend auf realistischen Annahmen, wie gedenken Sie den
-notwendigen Gewinn mit Ihrem Endprodukt zu erwirtschaften. Dies ist wichtig, sowohl um
-Ihr Startup-Unternehmen aufzubauen, als auch um den Investoren die versprochene
-Rendite zu ermöglichen.*
+Für das Endprodukt schätzen wir einen Aufwand von 1'090h, für was wir mit einem
+Stundenanstatz von 90.- pro Stunde 98'100.- benötigt, um das Produkt zu verwirklichen.
+Zu diesen Kosten kommen wiederkehrende Kosten für die Server-Infrastruktur, für was wir 5000.- 
+pro Jahr rechnen.
 
-Für die Bewirtschaftung des Softwares wird ein Gesamtaufwand von CHF 62'000 
-
-Dieser Betrag wird wie gefolgt ausgerechnet 
-
-- Personenaufwand 50'000. Dieser Aufwand beinhaltet den Stundensatz von CHF 104.10 für 4 Entwickler mit dem geschätzten Zeitaufwand von 120 Stunden gerechnet.
-- Hardwareaufwand CHF 2'000. Dieser Aufwand rechnet den Server ein, der die Webseite und den Server der eigentlichen Applikation beinhaltet. 
-- Marketing Aufwand CHF 10'000. Dieser Aufwand beinhaltet die Werbekampagne auf Social Media und Suchmaschinenoptimierungen. 
+Die Haupteinnahmequelle werden verkaufte *Tomodachis* und weitere Accessoirs vom *Ikitomo Plaza* sein. 
+Ein *Tomodachi* wird 5.- kosten; Accessiors zwischen 1.- bis 15.- für grössere interaktive Objekte. 
+Wir erwarten 100'000 Nutzer nach 2 Jahren, davon werden 30% drei Käufe im *Ikitomo Plaza* tätigen und somit über 
+diese zwei Jahre 630'000.- einbringen. 
 
 ## Bibliographie
 [^1]: "oneko-1.3", [http://www.daidouji.com/oneko/](http://www.daidouji.com/oneko/) (Zugegriffen: 30.03.2022)
