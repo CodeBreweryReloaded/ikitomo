@@ -4,26 +4,36 @@ Header:
   Center: "{{ChangeDate}}"
 ---
 
+<style>
+  h1, h2, h3, h4, h5, h6 { 
+    break-after: avoid-page;
+  }
+
+  h2 {
+    break-before: page;
+  }
+
+  p {
+    break-inside: avoid-page;
+  }
+</style>
+
 # Projekt Skizze
+- [Ausgangslage](#ausgangslage)
+- [Idee von Ikitomo](#idee-von-ikitomo)
+- [Kundennutzen](#kundennutzen)
+- [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
+- [Hauptablauf](#hauptablauf)
+  - [Inhalt des Prototyps](#inhalt-des-prototyps)
+  - [Anwendungsbeispiel](#anwendungsbeispiel)
+- [Weitere Anforderungen](#weitere-anforderungen)
+  - [Funktionale Anforderungen](#funktionale-anforderungen)
+  - [Nicht-Funktionale Anforderung](#nicht-funktionale-anforderung)
+- [Ressourcen](#ressourcen)
+- [Risiken](#risiken)
+- [Wirtschaftlichkeit](#wirtschaftlichkeit)
+- [Bibliographie](#bibliographie)
 
-- [Projekt Skizze](#projekt-skizze)
-  - [Ausgangslage](#ausgangslage)
-  - [Idee von Ikitomo](#idee-von-ikitomo)
-  - [Kundennutzen](#kundennutzen)
-  - [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
-  - [Hauptablauf](#hauptablauf)
-    - [Inhalt des Prototyps](#inhalt-des-prototyps)
-    - [Anwendungsbeispiel](#anwendungsbeispiel)
-  - [Weitere Anforderungen](#weitere-anforderungen)
-    - [Funktionale Anforderungen](#funktionale-anforderungen)
-    - [Nicht-Funktionale Anforderung](#nicht-funktionale-anforderung)
-  - [Ressourcen](#ressourcen)
-  - [Risiken](#risiken)
-  - [Wirtschaftlichkeit](#wirtschaftlichkeit)
-  - [Bibliographie](#bibliographie)
-
-- nicht auf Katzen spezifizieren
-- nach IEEE zitieren
 ## Ausgangslage
 Gerade in den Zeiten der Corona-Pandemie sehnen sich wohl viele Leute nach einem eigenen Haustier,
 was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt. Dies kann auch in der Grafik unten beobachtet werden.
@@ -95,13 +105,11 @@ Optionale Ziele:
 - Veränderbares Verhalten
 - Erkennen, welches Fenster im Fokus ist
 
+<div style="break-after: page; "></div>
+
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt, worauf die Katze zum oberen Bildschirmrand geht und sich dort ausruht.  
 Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffnet das Bedienfeld von *Ikitomo* und sieht sich die vorinstallierten *Tomodachi*s an. Jedoch gefällt ihm keine der Optionen und er navigiert über das Bedienfeld zum *Tomodachi Plaza*. Dort meldet er sich mit seinem Benutzerkonto an und sieht sich die beliebtesten *Tomodachi*s der Woche an. Mark findet einen Tiger *Tomodachi* und fügt ihn zu seinem Profil hinzu. *Ikitomo* lädt den neuen *Tomodachi* innert Sekunden herunter, welcher daraufhin in der Applikation angezeigt wird. Mark wählt den neuen *Tomodachi* aus und beobachtet das neue Verhalten. Der Tiger ist deutlich schneller als die Katze und das Futter sieht ebenfalls anders aus. Mark ist zufrieden mit dem Tiger und wendet sich wieder seiner Arbeit zu.
-
-<p style="page-break-after: always;">&nbsp;</p>
-<p style="page-break-before: always;">&nbsp;</p>
-
 
 ## Weitere Anforderungen
 Um die Benutzererfahrung zu verbessern, fügen wir weitere Features hinzu, die sowohl für die Benutzer und Benutzerinnen als auch für die Entwicklung hilfreich sind. Diese Anforderungen betreffen nicht - beziehungsweise nur indirekt - die Hauptfunktion des Programmes.

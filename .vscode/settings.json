@@ -1,0 +1,9 @@
+{
+    "markdown.extension.toc.levels": "2..6",
+    "markdownConverter.Document.Paper.Margin": {
+        "Top": "1.5cm",
+        "Right": "1cm",
+        "Bottom": "1cm",
+        "Left": "1cm"
+    }
+}
