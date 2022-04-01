@@ -14,6 +14,8 @@ Header:
   }
 </style>
 
+::: break
+::: no-break
 # Projekt Skizze
 - [Ausgangslage](#ausgangslage)
 - [Idee von Ikitomo](#idee-von-ikitomo)
@@ -29,8 +31,7 @@ Header:
 - [Risiken](#risiken)
 - [Wirtschaftlichkeit](#wirtschaftlichkeit)
 - [Bibliographie](#bibliographie)
-
-::: break
+:::
 :::
 
 ::: no-break
