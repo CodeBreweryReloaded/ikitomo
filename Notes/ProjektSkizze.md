@@ -26,7 +26,7 @@ Header:
 - nach IEEE zitieren
 ## Ausgangslage
 Gerade in den Zeiten der Corona-Pandemie sehnen sich wohl viele Leute nach einem eigenen Haustier,
-was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt.
+was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt. Dies kann auch in der Grafik unten beobachtet werden.
 
 ![](./PetStats.png)
 _Statistik über die Anzahl registrierter Hunde in der Schweiz[^PetStats]_
@@ -41,16 +41,13 @@ Es besteht also ein erhöhter Bedarf zu kostengünstiger Haustierhaltung.
 
 Ikitomo will genau diesen Bedarf decken, indem es die Möglichkeit bereitstellt,
 eine breite Auswahl von Haustieren auf den eigenen Bildschirm einzuladen.
-
 Diese virtuellen Haustiere sollen es sich auf dem Bildschirm gemütlich machen, ab und zu den Mauszeiger verfolgen, schlafen und für Unterhaltung sorgen.
 
 Haustiere sollen hierbei so natürlich wie möglich agieren.
-
-So sind Katzen mit den klassischen "Schläft durchgehend", "Ist der König der Welt" (aka. "Braucht jetzt Aufmerksamkeit") und "Katz- und Maus-Spiel" Modi ausgestattet.
+So sind zum Beispiel Katzen mit den klassischen "Schläft durchgehend", "Braucht jetzt Aufmerksamkeit" und "Katz- und Maus-Spiel" Modi ausgestattet.
 
 Haustiere bewegen sich frei auf dem Bildschirm, interagieren mit dem Nutzer,
 zeigen Wertschätzung, Freude, Hass und weitere Emotionen auf nachvollziehbarer Weise.
-
 Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
 
