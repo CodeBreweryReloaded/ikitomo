@@ -29,7 +29,7 @@ Gerade in den Zeiten der Corona-Pandemie sehnen sich wohl viele Leute nach einem
 was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt. Dies kann auch in der Grafik unten beobachtet werden.
 
 ![](./PetStats.png)
-_Statistik über die Anzahl registrierter Hunde in der Schweiz[^PetStats]_
+_Statistik über die Anzahl registrierter Hunde in der Schweiz [1]_
 
 Leider haben nicht alle Personen die finanzielle Möglichkeit,
 für die Pflege, das Futter und die tierärztliche Behandlung eines Haustiers aufzukommen.
@@ -63,8 +63,8 @@ Wenn die Nutzer und Nutzerinnen die App heruntergeladen haben, kann ihr *Tomodac
 
 ## Konkurrenzanalyse und Abgrenzung zu Bestehendem
 Es gibt einige Programme, in welchen ein animiertes Tier oder eine Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen kann.
-Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [^Oneko]. Es gibt mehrere Windows Ports, kostenlose wie auch kostenpflichtige.
-Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [^Goose] oder eSheep, die nach einer Windows-Alternative aussieht[^Sheepy].
+Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [2]. Es gibt mehrere Windows Ports, kostenlose wie auch kostenpflichtige.
+Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [3] oder eSheep, die nach einer Windows-Alternative aussieht[4].
 
 Keine der oben genannten Projekte hat den geplanten Umfang. Zudem sind die genannten Beispiele alle Fan-Projekte, welche nicht kommerzialisiert sind. Unsere Software
 soll eine höhere Qualität aufweisen. Sie soll auch mehr Funktionen implementieren, wie das Bauen von einem Zuhause für das *Tomodachi* oder 
@@ -157,7 +157,7 @@ Die Haupteinnahmequelle werden verkaufte *Tomodachi*s und weitere Accessoires vo
 Ein *Tomodachi* wird 5.- kosten, Accessoires zwischen 1.- Fr. und 15.- Fr. entsprechend der Grösse, Interaktivität und Besonderheit dieser Objekte. Wir erwarten innert 2 Jahren 100'000 Nutzer, wovon voraussichtlich 30% mindestens drei Käufe im *Ikitomo Plaza* getätigt werden haben und somit über diese zwei Jahre 630'000.- Fr. einbringen werden.
 
 ## Bibliographie
-[^Oneko]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)
-[^Goose]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)
-[^Sheepy]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
-[^PetStats]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html>
+[1]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html><br/>
+[2]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)<br/>
+[3]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)<br/>
+[4]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
