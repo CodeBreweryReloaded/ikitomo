@@ -46,15 +46,14 @@ Diese virtuellen Haustiere sollen es sich auf dem Bildschirm gemütlich machen, 
 Haustiere sollen hierbei so natürlich wie möglich agieren.
 So sind zum Beispiel Katzen mit den klassischen "Schläft durchgehend", "Braucht jetzt Aufmerksamkeit" und "Katz- und Maus-Spiel" Modi ausgestattet.
 
-Haustiere bewegen sich frei auf dem Bildschirm, interagieren mit dem Nutzer,
+Haustiere bewegen sich frei auf dem Bildschirm, interagieren mit dem Nutzerin und Nutzer,
 zeigen Wertschätzung, Freude, Hass und weitere Emotionen auf nachvollziehbarer Weise.
 Zusätzlich sollen über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
 
 ## Kundennutzen
-Wie auch bereits Tamagotchis soll Ikitomo dem Nutzer ein virtuelles Haustier verleihen. Das *Tomodachi*, ein virtuelles Haustier, soll mit dem Nutzer interagieren ohne dabei nervend zu werden.
-Dies soll dem Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da das *Tomodachi* einen gewissen Pflegeaufwand mit sich bringt, soll sich der Nutzer
-emotional an sein *Tomodachi* binden und eine Beziehung mit seinem Freund auf dem Bildschirm aufbauen, sei dies eine Katze, ein Hund oder eine anderes Tier.
+Wie auch bereits Tamagotchis soll Ikitomo der Nutzerin und dem Nutzer ein virtuelles Haustier verleihen. Das *Tomodachi*, ein virtuelles Haustier, soll mit der Nutzerin und dem Nutzer interagieren ohne dabei nervend zu werden.
+Dies soll der Nutzerin und dem Nutzer regelmässig ein Lächeln auf das Gesicht zaubern. Da das *Tomodachi* einen gewissen Pflegeaufwand mit sich bringt, soll sich die Nutzerin und Nutzer emotional an sein *Tomodachi* binden und eine Beziehung mit seinem Freund auf dem Bildschirm aufbauen, sei dies eine Katze, ein Hund oder eine anderes Tier.
 
 Für das *Tomodachi* soll ein kleines Zuhause gebaut werden können. Der Nutzer kann sich dabei kreativ ausleben und kann danach zusehen, wie sein *Tomodachi* in seinen neuen 
 vier Wänden spielt oder schläft. 
@@ -66,7 +65,7 @@ Wenn der Nutzer die App heruntergeladen hat, kann sein *Tomodachi* ihn zusätzli
 
 ## Konkurrenzanalyse und Abgrenzung zu Bestehendem
 - Alleinstellungsmerkmal schreiben
- 
+
 Es gibt einige Programme, in welchen ein animiertes Tier oder eine Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen. 
 Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [^Oneko]. Es gibt mehrere Windows Ports, kostenlose, wie auch kostenpflichtige.
 Eine weitere Applikation ist Desktop Goose, welche eine Gans auf dem Desktop anzeigt, welche den Nutzer so effektiv wie möglich nervt [^Goose] oder eSheep, die nach einer Windows Alternative aussieht[^Sheepy].
@@ -80,9 +79,9 @@ Um den Nutzer über eine lange Zeit hinweg zu fesseln, können über einen Store
 
 ## Hauptablauf
 - noch schreiben, was für den Prototyp genau realisiert werden soll
- 
-*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät **der Endbenutzerin oder des Endbenutzer**. Es besteht aus dem *Tomodachi*, dem gewählten Tier **der Benutzerin oder des Benutzers**, und einer Konfigurationsschaltfläche, worin **Benutzerinnen und Benutzer** ihren *Tomodachi* nach Belieben konfigurieren können. **Fortgeschrittene Benutzerinnen und Benutzer** haben die Möglichkeit direkt auf die Dateien des *Tomodachi*s zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
-Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachi*s verkauft werden und **Benutzerinnen und Benutzer** ihre eigenen *Tomodachi*s hochladen und teilen können. In der Plaza können **Benutzerinnen und Benutzer** auch ihre hochgeladenen *Tomodachi*s verwalten und organisieren. Für **Administratoren und Administratorinnen** gibt es einen exklusiven Bereich zur Moderation der Plattform.
+
+*Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät der Endbenutzerin oder des Endbenutzer. Es besteht aus dem *Tomodachi*, dem gewählten Tier der Benutzerin oder des Benutzers, und einer Konfigurationsschaltfläche, worin Benutzerinnen und Benutzer ihren *Tomodachi* nach Belieben konfigurieren können. fortgeschrittene Benutzerinnen und Benutzer haben die Möglichkeit direkt auf die Dateien des *Tomodachi*s zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
+Die zweite Komponente ist sie *Tomodachi Plaza*, ein digitaler Marktplatz worin offizielle *Tomodachi*s verkauft werden und Benutzerinnen und Benutzer ihre eigenen *Tomodachi*s hochladen und teilen können. In der Plaza können Benutzerinnen und Benutzer auch ihre hochgeladenen *Tomodachi*s verwalten und organisieren. Für Administratoren und Administratorinnen gibt es einen exklusiven Bereich zur Moderation der Plattform.
 
 ### Inhalt des Prototyps
 
