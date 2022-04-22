@@ -4,26 +4,37 @@ Header:
   Center: "{{ChangeDate}}"
 ---
 
+<style>
+  p, .no-break {
+    break-inside: avoid-page;
+  }
+
+  .break {
+    break-after: page;
+  }
+</style>
+
+::: break
+::: no-break
 # Projekt Skizze
+- [Ausgangslage](#ausgangslage)
+- [Idee von Ikitomo](#idee-von-ikitomo)
+- [Kundennutzen](#kundennutzen)
+- [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
+- [Hauptablauf](#hauptablauf)
+  - [Inhalt des Prototyps](#inhalt-des-prototyps)
+  - [Anwendungsbeispiel](#anwendungsbeispiel)
+- [Weitere Anforderungen](#weitere-anforderungen)
+  - [Funktionale Anforderungen](#funktionale-anforderungen)
+  - [Nicht-Funktionale Anforderung](#nicht-funktionale-anforderung)
+- [Ressourcen](#ressourcen)
+- [Risiken](#risiken)
+- [Wirtschaftlichkeit](#wirtschaftlichkeit)
+- [Bibliographie](#bibliographie)
+:::
+:::
 
-- [Projekt Skizze](#projekt-skizze)
-  - [Ausgangslage](#ausgangslage)
-  - [Idee von Ikitomo](#idee-von-ikitomo)
-  - [Kundennutzen](#kundennutzen)
-  - [Konkurrenzanalyse und Abgrenzung zu Bestehendem](#konkurrenzanalyse-und-abgrenzung-zu-bestehendem)
-  - [Hauptablauf](#hauptablauf)
-    - [Inhalt des Prototyps](#inhalt-des-prototyps)
-    - [Anwendungsbeispiel](#anwendungsbeispiel)
-  - [Weitere Anforderungen](#weitere-anforderungen)
-    - [Funktionale Anforderungen](#funktionale-anforderungen)
-    - [Nicht-Funktionale Anforderung](#nicht-funktionale-anforderung)
-  - [Ressourcen](#ressourcen)
-  - [Risiken](#risiken)
-  - [Wirtschaftlichkeit](#wirtschaftlichkeit)
-  - [Bibliographie](#bibliographie)
-
-- nicht auf Katzen spezifizieren
-- nach IEEE zitieren
+::: no-break
 ## Ausgangslage
 Gerade in den Zeiten der Corona-Pandemie sehnen sich wohl viele Leute nach einem eigenen Haustier,
 was sich schon alleine anhand der erhöhten Nachfrage nach Hauskatzen und Hunden feststellen lässt. Dies kann auch in der Grafik unten beobachtet werden.
@@ -35,7 +46,9 @@ Leider haben nicht alle Personen die finanzielle Möglichkeit,
 für die Pflege, das Futter und die tierärztliche Behandlung eines Haustiers aufzukommen.
 
 Es besteht also ein erhöhter Bedarf zu kostengünstiger Haustierhaltung.
+:::
 
+:::no-break
 ## Idee von Ikitomo
 Ikitomo will genau diesen Bedarf decken, indem es die Möglichkeit bereitstellt,
 eine breite Auswahl von Haustieren auf den eigenen Bildschirm einzuladen.
@@ -48,7 +61,9 @@ Haustiere bewegen sich frei auf dem Bildschirm, interagieren mit Nutzerinen und 
 zeigen Wertschätzung, Freude, Hass und weitere Emotionen auf nachvollziehbarer Weise.
 Zusätzlich soll über eine Online-Plattform Tauschhandel möglich sein,
 um neue Kostüme, Spezies, Verhaltensweisen und weiteres erleben zu können.
+:::
 
+::: no-break
 ## Kundennutzen
 Wie auch bereits Tamagotchis, soll Ikitomo den Nutzern und Nutzerinnen ein Haustier verleihen. Das *Tomodachi*, ein virtuelles Haustier, soll mit den Nutzern und Nutzerinnen interagieren, ohne dabei nervend zu werden.
 Dies soll den Nutzerinnen und Nutzern regelmässig ein Lächeln auf das Gesicht zaubern. Da das *Tomodachi* einen gewissen Pflegeaufwand mit sich bringt, sollen sich die Nutzerinnen und Nutzer emotional an ihr *Tomodachi* binden und eine Beziehung mit ihrem Freund auf dem Bildschirm aufbauen, sei dies eine Katze, ein Hund oder ein anderes Tier.
@@ -60,7 +75,9 @@ Ikitomo soll viele Konfigurationsmöglichkeiten besitzen, damit das *Tomodachi* 
 bringt.
 
 Wenn die Nutzer und Nutzerinnen die App heruntergeladen haben, kann ihr *Tomodachi* sie zusätzlich überallhin begleiten und ihnen so immer emotionalen Support leisten.
+:::
 
+::: no-break
 ## Konkurrenzanalyse und Abgrenzung zu Bestehendem
 Es gibt einige Programme, in welchen ein animiertes Tier oder eine Figur dem Mauszeiger folgen oder alternativ auch zum aktiven Fenster laufen kann.
 Das bekannteste davon ist Oneko, welches Open-Source ist und kostenlos auf Unix Betriebssystemen installiert werden kann [2]. Es gibt mehrere Windows Ports, kostenlose wie auch kostenpflichtige.
@@ -72,11 +89,16 @@ eine App, welche sich mit dem Desktop Client synchronisiert, sodass die Nutzer u
 soll dazu führen, dass Ikitomo mehr als nur eine Software ist, sondern ein Schlüssel zum Schliessen einer Freundschaft mit seinen *Tomodachi*s. 
 
 Um Nutzerinnen und Nutzer über eine lange Zeit hinweg zu fesseln, können über einen Online-Shop Erweiterungen gekauft werden, um neue Inhalte wie neue *Tomodachi*s, Gebäude oder Mini-Spiele freischalten zu können.
+:::
 
+::: no-break
 ## Hauptablauf
 *Ikitomo* als Ganzes besteht aus zwei Komponenten, welche in weitere Unterkomponenten aufgeteilt sind. Die erste Komponente ist die *Ikitomo* Benutzerapplikation. Diese läuft lokal auf dem Gerät der Endbenutzerinnen und Endbenutzer. Es besteht aus dem *Tomodachi*, dem gewählten Tier der Benutzerin oder des Benutzers, und einer Konfigurationsschaltfläche, worin Benutzerinnen und Benutzer ihren *Tomodachi* nach Belieben konfigurieren können. Fortgeschrittene Benutzerinnen und Benutzer haben die Möglichkeit, direkt auf die Dateien des *Tomodachi*s zuzugreifen, um erweiterte Funktionalitäten zu kreieren.  
 Die zweite Komponente ist die *Tomodachi Plaza*, ein digitaler Marktplatz, worin offizielle *Tomodachi*s verkauft werden und Benutzerinnen und Benutzer ihre eigenen *Tomodachi*s hochladen und teilen können. In der Plaza können Benutzerinnen und Benutzer auch ihre hochgeladenen *Tomodachi*s verwalten und organisieren. Für Administratoren und Administratorinnen gibt es einen exklusiven Bereich zur Moderation der Plattform.
+:::
 
+
+:::no-break
 ### Inhalt des Prototyps
 Selbstverständlich ist die Umsetzung eines Projekts dieser Grösser nicht trivial. Aus diesem Grund wird im Zeitraum vom 08.04.2022 bis zum 13.05.2022 Zeit investiert, um einen Prototyp von *Ikitomo* in Java zu entwickeln. Dieser Prototyp wird eine drastisch reduzierte Anzahl an Funktionalitäten bieten und dient zur Evaluation der Idee, in anderen Worten ein "Proof-of-Concept".  
 
@@ -95,14 +117,15 @@ Optionale Ziele:
 - Veränderbares Verhalten
 - Erkennen, welches Fenster im Fokus ist
 
+:::
+
+::: no-break
 ### Anwendungsbeispiel
 Mark verwendet nun seit einer Woche *Ikitomo* auf seinem Hauptgerät. Auch heute startet er seinen PC auf und *Ikitomo* startet automatisch mit. Nach ein paar Sekunden taucht eine kleine Katze auf Marks Bildschirm auf. Dies ist sein aktueller *Tomodachi*. Für eine kurze Weile beobachtet er wie die Katze seinem Mauszeiger folgt und beginnt anschliessend mit seiner Arbeit. Ihm fällt ein, dass er vergessen hat seinen *Tomodachi* zu füttern und klickt auf die Katze mit der rechten Maustaste. Eine kurze Animation wird abgespielt, worauf die Katze zum oberen Bildschirmrand geht und sich dort ausruht.  
 Während der Mittagspause möchte Mark seinen *Tomodachi* austauschen. Er öffnet das Bedienfeld von *Ikitomo* und sieht sich die vorinstallierten *Tomodachi*s an. Jedoch gefällt ihm keine der Optionen und er navigiert über das Bedienfeld zum *Tomodachi Plaza*. Dort meldet er sich mit seinem Benutzerkonto an und sieht sich die beliebtesten *Tomodachi*s der Woche an. Mark findet einen Tiger *Tomodachi* und fügt ihn zu seinem Profil hinzu. *Ikitomo* lädt den neuen *Tomodachi* innert Sekunden herunter, welcher daraufhin in der Applikation angezeigt wird. Mark wählt den neuen *Tomodachi* aus und beobachtet das neue Verhalten. Der Tiger ist deutlich schneller als die Katze und das Futter sieht ebenfalls anders aus. Mark ist zufrieden mit dem Tiger und wendet sich wieder seiner Arbeit zu.
+:::
 
-<p style="page-break-after: always;">&nbsp;</p>
-<p style="page-break-before: always;">&nbsp;</p>
-
-
+::: no-break
 ## Weitere Anforderungen
 Um die Benutzererfahrung zu verbessern, fügen wir weitere Features hinzu, die sowohl für die Benutzer und Benutzerinnen als auch für die Entwicklung hilfreich sind. Diese Anforderungen betreffen nicht - beziehungsweise nur indirekt - die Hauptfunktion des Programmes.
 Die Kategorien, in die diese unterteilt werden, sind in den folgenden Abschnitten beschrieben.
@@ -126,7 +149,9 @@ Folgende Nicht-Funktionale Anforderungen sollen umgesetzt werden:
 
 - Die Software soll möglichst ressourceneffizient sein, damit der Benutzerinnen und Benutzer beim Interagieren von anderen Programmen so wenig wie möglich beeinträchtigt werden.
 - Die Software soll skalierbar sein für zukünftige Features. Dies soll den zukünftigen Entwicklungsaufwand möglichst reduzieren.
+:::
 
+::: no-break
 ## Ressourcen
 
 | Komponente                           | Benötigtes Know-How                                                     | Geschätzter Aufwand |
@@ -136,7 +161,9 @@ Folgende Nicht-Funktionale Anforderungen sollen umgesetzt werden:
 | *Tomodachi Plaza* Grundgerüst        | Datenbankmodell kreieren, Netzwerksicherheit, Hosting                   | 200 h               |
 | *Tomodachi Plaza* Benutzeroberfläche | Webdesign, JavaScript, UX-Design                                        | 200 h               |
 | **Total**                            |                                                                         | **1090 h**          |
+:::
 
+::: no-break
 ## Risiken
 Ein wichtiger Aspekt von *Ikitomo* ist die Art des Produktes. *Ikitomo* ist eine 
 sogenannte "Virtual Pet" Applikation, welche in den 2000-er Jahren sehr beliebt waren 
@@ -146,7 +173,9 @@ Onlinediskussion generiert, um relevant zu bleiben. Aus diesem Grund ist es notw
 Ein weiterer Punkt ist das fehlende Know-How für das Erstellen von Animationen, für Netzwerksicherheit und
 für Webdesign. Sollten diese Fähigkeiten und Know-How bis zum Projektstart nicht vorhanden sein, kommt
 es zu Verschiebungen und Verzögerungen. Somit würden auch die Kosten steigen.
+:::
 
+::: no-break
 ## Wirtschaftlichkeit
 Für das Endprodukt schätzen wir einen Aufwand von 1'090 Stunden, für welchen mit einem
 Stundenansatz von 90.- Fr. gerechnet wird. Somit werden dafür 98'100.- Fr. benötigt, um das Produkt zu verwirklichen.
@@ -155,9 +184,12 @@ pro Jahr rechnen.
 
 Die Haupteinnahmequelle werden verkaufte *Tomodachi*s und weitere Accessoires vom *Ikitomo Plaza* sein. 
 Ein *Tomodachi* wird 5.- kosten, Accessoires zwischen 1.- Fr. und 15.- Fr. entsprechend der Grösse, Interaktivität und Besonderheit dieser Objekte. Wir erwarten innert 2 Jahren 100'000 Nutzer, wovon voraussichtlich 30% mindestens drei Käufe im *Ikitomo Plaza* getätigt werden haben und somit über diese zwei Jahre 630'000.- Fr. einbringen werden.
+:::
 
+::: no-break
 ## Bibliographie
-[1]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html><br/>
-[2]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)<br/>
-[3]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)<br/>
+[1]: "Entwicklung in der Schweiz" Statistik aus identitas' Datenbank <https://tierstatistik.identitas.ch/de/fig-dogs-CH.html>  
+[2]: "oneko-1.3", <http://www.daidouji.com/oneko/> (Zugegriffen: 30.03.2022)  
+[3]: "Desktop Goose by samperson", <https://samperson.itch.io/desktop-goose> (Zugegriffen: 30.03.2022)  
 [4]: "Desktop Pet (eSheep 64bit) | Add a screen mate to your desktop", <https://adrianotiger.github.io/desktopPet/> (Zugegriffen: 30.03.2022)
+:::
