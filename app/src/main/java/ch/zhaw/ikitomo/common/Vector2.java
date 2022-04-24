@@ -6,11 +6,11 @@ package ch.zhaw.ikitomo.common;
  * @param x the x coordinate
  * @param y the y coordinate
  */
-public record Vector(int x, int y) {
+public record Vector2(int x, int y) {
     /**
      * The zero vector
      */
-    public static final Vector ZERO = new Vector(0, 0);
+    public static final Vector2 ZERO = new Vector2(0, 0);
 
     /**
      * Adds the given vector to this vector and returns it
@@ -18,8 +18,8 @@ public record Vector(int x, int y) {
      * @param v the other vector
      * @return the newly calculated vector
      */
-    public Vector add(Vector v) {
-        return new Vector(x + v.x, y + v.y);
+    public Vector2 add(Vector2 v) {
+        return new Vector2(x + v.x, y + v.y);
     }
 
     /**
@@ -28,8 +28,8 @@ public record Vector(int x, int y) {
      * @param v the other vector
      * @return the newly calculated vector
      */
-    public Vector subtract(Vector v) {
-        return new Vector(x - v.x, y - v.y);
+    public Vector2 subtract(Vector2 v) {
+        return new Vector2(x - v.x, y - v.y);
     }
 
     /**
@@ -38,8 +38,8 @@ public record Vector(int x, int y) {
      * @param n the scalar
      * @return the newly calculated vector
      */
-    public Vector multiply(int n) {
-        return new Vector(x * n, y * n);
+    public Vector2 multiply(int n) {
+        return new Vector2(x * n, y * n);
     }
 
     /**
@@ -48,7 +48,7 @@ public record Vector(int x, int y) {
      * @return the inverse of the vector
      * @see #multiply(int)
      */
-    public Vector inverse() {
+    public Vector2 inverse() {
         return multiply(-1);
     }
 
@@ -58,8 +58,8 @@ public record Vector(int x, int y) {
      * @param n the scalar
      * @return the newly calculated vector
      */
-    public Vector divide(int n) {
-        return new Vector(x / n, y / n);
+    public Vector2 divide(int n) {
+        return new Vector2(x / n, y / n);
     }
 
     /**

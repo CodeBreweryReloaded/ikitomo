@@ -3,7 +3,7 @@ package ch.zhaw.ikitomo.overlay.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.zhaw.ikitomo.common.Vector;
+import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -26,12 +26,12 @@ public class TomodachiModel {
     /**
      * the position property
      */
-    private ObjectProperty<Vector> position = new SimpleObjectProperty<>();
+    private ObjectProperty<Vector2> position = new SimpleObjectProperty<>();
 
     /**
      * the velocity property
      */
-    private ObjectProperty<Vector> velocity = new SimpleObjectProperty<>(Vector.ZERO);
+    private ObjectProperty<Vector2> velocity = new SimpleObjectProperty<>(Vector2.ZERO);
 
     /**
      * the states
@@ -47,7 +47,8 @@ public class TomodachiModel {
      * @param velocity the velocity
      * @param states   the states
      */
-    public TomodachiModel(String id, String name, Vector position, Vector velocity, List<TomodachiModelState> states) {
+    public TomodachiModel(String id, String name, Vector2 position, Vector2 velocity,
+            List<TomodachiModelState> states) {
         this.id = id;
         this.name = name;
         this.position.set(position);
@@ -76,10 +77,10 @@ public class TomodachiModel {
         return new ArrayList<>(states);
     }
 
-    public static TomodachiModel loadFromTomodachiFile(TomodachiFile tomodachiFile, Vector position) {
+    public static TomodachiModel loadFromTomodachiFile(TomodachiFile tomodachiFile, Vector2 position) {
         TomodachiModel model = new TomodachiModel(tomodachiFile.getConfig().getId(),
                 tomodachiFile.getConfig().getName(), position,
-                Vector.ZERO, null);
+                Vector2.ZERO, null);
         throw new UnsupportedOperationException("not implemented yet loading the animations");
     }
 
