@@ -25,13 +25,10 @@ trigger:
 kind: pipeline
 type: docker
 name: sonar-pullrequest
-clone:
-  disable: true
 steps:
   - name: clone
     image: alpine/git
     commands:
-      - git clone "https://github.zhaw.ch/PM2-IT21bWIN-ruiz-mach-krea/team03-codebrewery-projekt2-ikitomo.git"
       - git fetch origin "$DRONE_SOURCE_BRANCH"
       - git checkout "$DRONE_SOURCE_BRANCH"
   - name: code-analysis
