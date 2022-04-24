@@ -1,0 +1,42 @@
+# if it is a push to dev or main, we use -Dsonar.branch.name
+kind: pipeline
+type: docker
+name: sonar
+steps:
+  - name: code-analysis
+    image: gradle:jdk17
+    commands:
+      - gradle test sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.branch.name="$DRONE_BRANCH"
+    environment:
+      SONAR_HOST:
+        from_secret: sonar_host
+      SONAR_TOKEN:
+        from_secret: sonar_token
+trigger:
+  branch:
+    - main
+  event:
+    include:
+      - push
+    exclude:
+      - pull_request
+---
+# if it is a pull request, we use -Dsonar.pullrequest.branch, -Dsonar.pullrequest.key and -Dsonar.pullrequest.base
+kind: pipeline
+type: docker
+name: sonar-pullrequest
+steps:
+  - name: code-analysis
+    image: gradle:jdk17
+    commands:
+      - gradle test sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.pullrequest.branch="$DRONE_SOURCE_BRANCH"  -Dsonar.pullrequest.key="$DRONE_PULL_REQUEST" -Dsonar.pullrequest.base="$DRONE_TARGET_BRANCH"
+    environment:
+      SONAR_HOST:
+        from_secret: sonar_host
+      SONAR_TOKEN:
+        from_secret: sonar_token
+trigger:
+  branch:
+    - main
+  event:
+    - pull_request

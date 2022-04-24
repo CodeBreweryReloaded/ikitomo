@@ -7,9 +7,30 @@
  */
 
 plugins {
+    id 'java'
+
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+    // sonarqube plugin for uploading code to sonarqube instance
+    id "org.sonarqube" version "3.3"
+
+    // jacoco plugin for test generting teest covarage
+    id 'jacoco'
+
+    // shdadow plugin - useful to create fat jars
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+
+    // apply ide plugins to generate project files
+    id 'eclipse'
+    id 'idea'
+
+    // Support for JavaFX
+    id 'org.openjfx.javafxplugin' version '0.0.12'
 }
+
+group = 'ch.zhaw.codebrewery'
+version = '0.1'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -26,10 +47,18 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'ch.zhaw.ikitomo.App'
+    mainClass = 'ch.zhaw.ikitomo.IkitomoMain'
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
+test {
+    // Use junit platform for unit tests
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        xml.outputLocation = layout.buildDirectory.file("jacoco.xml")
+    }
 }
