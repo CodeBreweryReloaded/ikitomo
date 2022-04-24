@@ -26,7 +26,7 @@ kind: pipeline
 type: docker
 name: sonar-pullrequest
 steps:
-  - name: clone
+  - name: switch to source branch
     image: alpine/git
     commands:
       - git fetch origin "$DRONE_SOURCE_BRANCH"
