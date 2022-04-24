@@ -37,22 +37,10 @@ public class TomodachiConfigurationFile {
         return name;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
 
     @Override
     public boolean equals(Object obj) {

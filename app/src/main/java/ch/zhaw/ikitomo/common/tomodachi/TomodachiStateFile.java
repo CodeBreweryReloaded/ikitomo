@@ -48,22 +48,10 @@ public class TomodachiStateFile {
         return animation;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-
     @Override
     public int hashCode() {
         return Objects.hash(animation, type);
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
 
     @Override
     public boolean equals(Object obj) {

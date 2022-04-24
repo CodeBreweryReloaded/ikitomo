@@ -83,22 +83,10 @@ public class TomodachiSettings {
         return wakeChance.get();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-
     @Override
     public int hashCode() {
         return Objects.hash(sleepChance, wakeChance);
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
 
     @Override
     public boolean equals(Object obj) {
