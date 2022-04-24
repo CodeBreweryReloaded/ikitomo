@@ -77,6 +77,14 @@ public class TomodachiModel {
         return new ArrayList<>(states);
     }
 
+    /**
+     * Loads a {@link TomodachiModel} from a given {@link TomodachiFile}.
+     * The model is set at the given initial position with the velocity of zero
+     * 
+     * @param tomodachiFile the tomodachi file
+     * @param position      the initial position
+     * @return the created model
+     */
     public static TomodachiModel loadFromTomodachiFile(TomodachiFile tomodachiFile, Vector2 position) {
         TomodachiModel model = new TomodachiModel(tomodachiFile.getConfig().getId(),
                 tomodachiFile.getConfig().getName(), position,
