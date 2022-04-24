@@ -32,7 +32,7 @@ steps:
       - git reset --hard "origin/$DRONE_TARGET_BRANCH"
       - git fetch origin "$DRONE_SOURCE_BRANCH"
       - git checkout "$DRONE_SOURCE_BRANCH"
-      - gradle sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.pullrequest.branch="$DRONE_SOURCE_BRANCH"  -Dsonar.pullrequest.key="$DRONE_PULL_REQUEST" -Dsonar.pullrequest.base="$DRONE_TARGET_BRANCH"
+      - gradle test sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.pullrequest.branch="$DRONE_SOURCE_BRANCH"  -Dsonar.pullrequest.key="$DRONE_PULL_REQUEST" -Dsonar.pullrequest.base="$DRONE_TARGET_BRANCH"
     environment:
       SONAR_HOST:
         from_secret: sonar_host
