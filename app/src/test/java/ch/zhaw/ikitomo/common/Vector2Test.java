@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests the Vector class
  */
-public class Vector2Test {
+class Vector2Test {
     /**
      * Tests if {@link Vector2#add(Vector2)} works correctly
      */
     @Test
-    public void testAddition() {
+    void testAddition() {
         var v1 = new Vector2(1, 1);
         var v2 = new Vector2(2, 2);
         assertEquals(new Vector2(3, 3), v1.add(v2));
@@ -23,7 +23,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#subtract(Vector2)} works correctly
      */
     @Test
-    public void testSubtraction() {
+    void testSubtraction() {
         var v1 = new Vector2(1, 1);
         var v2 = new Vector2(2, 2);
         assertEquals(new Vector2(-1, -1), v1.subtract(v2));
@@ -33,7 +33,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#multiply(int)} works correctly
      */
     @Test
-    public void testMultiplication() {
+    void testMultiplication() {
         var v1 = new Vector2(1, 1);
         assertEquals(new Vector2(2, 2), v1.multiply(2));
     }
@@ -42,7 +42,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#inverse()} works correctly
      */
     @Test
-    public void testInverse() {
+    void testInverse() {
         var v1 = new Vector2(1, 1);
         assertEquals(new Vector2(-1, -1), v1.inverse());
     }
@@ -51,7 +51,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#divide(int)} works correctly
      */
     @Test
-    public void testDivide() {
+    void testDivide() {
         var v1 = new Vector2(2, 2);
         assertEquals(new Vector2(1, 1), v1.divide(2));
 
@@ -64,7 +64,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#absolute()} works correctly
      */
     @Test
-    public void testAbsolute() {
+    void testAbsolute() {
         var v1 = new Vector2(2, 2);
         assertEquals(2.828427, v1.absolute(), 0.00001);
 
@@ -74,7 +74,7 @@ public class Vector2Test {
      * Tests if {@link Vector2#equals(Object)} works correctly
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         assertEquals(new Vector2(1, 1), new Vector2(1, 1));
         assertNotEquals(new Vector2(1, 1), new Vector2(2, 2));
     }
