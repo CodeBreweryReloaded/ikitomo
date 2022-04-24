@@ -21,20 +21,44 @@ trigger:
     exclude:
       - pull_request
 ---
-# if it is a pull request, we use -Dsonar.pullrequest.branch, -Dsonar.pullrequest.key and -Dsonar.pullrequest.base
+# if it is a pull request, we use -Dsonar.pullrequest.branch, -Dsonar.pullrequest.key and -Dsonar.pullrequest.base and use custom clone which checkouts on the target branch
 kind: pipeline
 type: docker
 name: sonar-pullrequest
+clone:
+  disable: true
 steps:
+  - name: clone
+    image: alpine/git
+    commands:
+      - git clone "$DRONE_GIT_HTTP_URL"
+      - git fetch origin "$DRONE_SOURCE_BRANCH"
+      - git checkout "$DRONE_SOURCE_BRANCH"
   - name: code-analysis
     image: gradle:jdk17
     commands:
-      - gradle test sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.pullrequest.branch="$DRONE_SOURCE_BRANCH"  -Dsonar.pullrequest.key="$DRONE_PULL_REQUEST" -Dsonar.pullrequest.base="$DRONE_TARGET_BRANCH"
+      - gradle sonar -Dsonar.host.url="$SONAR_HOST" -Dsonar.login="$SONAR_TOKEN" -Dsonar.pullrequest.branch="$DRONE_SOURCE_BRANCH"  -Dsonar.pullrequest.key="$DRONE_PULL_REQUEST" -Dsonar.pullrequest.base="$DRONE_TARGET_BRANCH"
     environment:
       SONAR_HOST:
         from_secret: sonar_host
       SONAR_TOKEN:
         from_secret: sonar_token
+trigger:
+  branch:
+    - main
+  event:
+    - pull_request
+
+---
+# separat test pipeline which uses the conventional git checkout mechanism of drone
+kind: pipeline
+type: docker
+name: test-pullrequest
+steps:
+  - name: run tets
+    image: gradle:jdk17
+    commands:
+      - gradle test
 trigger:
   branch:
     - main
