@@ -8,3 +8,4 @@
  */
 
 rootProject.name = 'team03-codebrewery-projekt2-ikitomo'
+include 'app'
