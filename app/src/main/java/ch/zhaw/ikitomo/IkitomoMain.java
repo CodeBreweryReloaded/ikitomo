@@ -18,7 +18,7 @@ public class IkitomoMain {
     /**
      * Main method
      * 
-     * @param args the console args
+     * @param args The console arguments
      */
     public static void main(String[] args) {
         Application.launch(IkitomoApplication.class, args);
