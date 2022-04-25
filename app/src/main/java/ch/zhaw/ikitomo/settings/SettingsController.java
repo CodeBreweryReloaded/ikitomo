@@ -29,11 +29,11 @@ public class SettingsController implements Killable {
     }
 
     /**
-     * Creates a new settings windows from the settings fxml and returns the
+     * Creates a new settings window based on the settings FXML and returns the
      * Settings controller
      * 
-     * @param settings the global settings object
-     * @return the new {@link SettingsController}
+     * @param settings The global settings object
+     * @return The new {@link SettingsController}
      */
     public static SettingsController newSettingsUI(Settings settings) {
         throw new UnsupportedOperationException("not implemented yet");
