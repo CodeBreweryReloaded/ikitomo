@@ -16,24 +16,24 @@ public class TomodachiFile {
      */
     private Path rootFolder;
     /**
-     * the settings of the tomodachi
+     * The settings of the tomodachi
      */
     private TomodachiSettings settings;
     /**
-     * the config of the tomodachi
+     * The config of the tomodachi
      */
     private TomodachiConfigurationFile config;
     /**
-     * the states of the tomodachi
+     * The states of the tomodachi
      */
     private List<TomodachiStateFile> states = new ArrayList<>();
 
     /**
      * Constructor
      * 
-     * @param settings the settings
-     * @param config   the config
-     * @param states   the states
+     * @param settings The settings
+     * @param config   The config
+     * @param states   The states
      */
     public TomodachiFile(Path rootFolder, TomodachiSettings settings, TomodachiConfigurationFile config,
             List<TomodachiStateFile> states) {
@@ -44,30 +44,30 @@ public class TomodachiFile {
     }
 
     /**
-     * Returns the root folder. All files have to relative to this folder
+     * Returns the root folder. All files must be relative to this folder
      * 
-     * @return the rootFolder
+     * @return The rootFolder
      */
     public Path getRootFolder() {
         return rootFolder;
     }
 
     /**
-     * @return the settings
+     * @return The settings
      */
     public TomodachiSettings getSettings() {
         return settings;
     }
 
     /**
-     * @return the config
+     * @return The config
      */
     public TomodachiConfigurationFile getConfig() {
         return config;
     }
 
     /**
-     * @return a copy of the states list
+     * @return A copy of the states list
      */
     public List<TomodachiStateFile> getStates() {
         return new ArrayList<>(states);

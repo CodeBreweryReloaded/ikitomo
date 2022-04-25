@@ -7,12 +7,12 @@ import java.io.IOException;
  */
 public class SettingsLoader {
     /**
-     * the default path for the ikitomo settings
+     * The default path for the ikitomo settings
      */
     public static final String DEFAULT_SETTINGS_PATH = "./settings";
 
     /**
-     * private constructor
+     * Private constructor
      */
     private SettingsLoader() {
     }
@@ -20,9 +20,9 @@ public class SettingsLoader {
     /**
      * Loads the settings from the given file.
      * 
-     * @param file the file to load from
-     * @return the loaded settings
-     * @throws IOException if the file could not be read
+     * @param file The file to load from
+     * @return The loaded settings
+     * @throws IOException If the file could not be read
      */
     public static Settings load(String path) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");
@@ -31,9 +31,9 @@ public class SettingsLoader {
     /**
      * Saves the settings to the given file.
      * 
-     * @param settings the settings to save
-     * @param file     the file to save to
-     * @throws IOException if the file could not be written
+     * @param settings The settings to save
+     * @param file     The file to save to
+     * @throws IOException If the file could not be written
      */
     public static void save(String path, Settings settings) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");

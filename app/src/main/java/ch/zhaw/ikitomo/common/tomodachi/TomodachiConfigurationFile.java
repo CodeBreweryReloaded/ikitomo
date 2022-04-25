@@ -7,11 +7,11 @@ import java.util.Objects;
  */
 public class TomodachiConfigurationFile {
     /**
-     * the id
+     * The id
      */
     private String id;
     /**
-     * the name
+     * The name
      */
     private String name;
 
@@ -24,14 +24,14 @@ public class TomodachiConfigurationFile {
     }
 
     /**
-     * @return the id
+     * @return The ID
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return the name
+     * @return The name
      */
     public String getName() {
         return name;

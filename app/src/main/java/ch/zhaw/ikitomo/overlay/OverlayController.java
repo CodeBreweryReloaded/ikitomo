@@ -6,18 +6,18 @@ import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
 
 /**
- * The controller for the overlay which displays the tomodachi
+ * The controller for the overlay that displays the Tomodachi.
  */
 public class OverlayController implements Killable {
     /**
-     * the global settings object
+     * The global settings object
      */
     private Settings settings;
 
     /**
-     * private constructor
+     * Private constructor
      * 
-     * @param settings the global settings object
+     * @param settings The global settings object
      */
     private OverlayController(Settings settings) {
         this.settings = settings;
@@ -29,10 +29,10 @@ public class OverlayController implements Killable {
     }
 
     /**
-     * Creates a new overlay ui and returns the controller
+     * Creates a new overlay UI and returns the controller
      * 
-     * @param settings the global settings object
-     * @return the newly created {@link OverlayController}
+     * @param settings The global settings object
+     * @return The newly created {@link OverlayController}
      */
     public static OverlayController newOverlayUI(Settings settings) {
         throw new UnsupportedOperationException("not implemented yet");

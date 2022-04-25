@@ -9,43 +9,43 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * the a tomodachi for the {@link ch.zhaw.ikitomo.overlay.OverlayController}.
+ * Represents a Tomodachi model for {@link ch.zhaw.ikitomo.overlay.OverlayController}.
  * This model also includes loaded resources like animations and fields needed
- * to display the tomodachi (like the position or velocity).
+ * to display a Tomodachi, such as position and velocity.
  */
 public class TomodachiModel {
     /**
-     * the id
+     * The id
      */
     private String id;
     /**
-     * the name
+     * The name
      */
     private String name;
 
     /**
-     * the position property
+     * The position property
      */
     private ObjectProperty<Vector2> position = new SimpleObjectProperty<>();
 
     /**
-     * the velocity property
+     * The velocity property
      */
     private ObjectProperty<Vector2> velocity = new SimpleObjectProperty<>(Vector2.ZERO);
 
     /**
-     * the states
+     * The states
      */
     private List<TomodachiModelState> states = new ArrayList<>();
 
     /**
      * Constructor
      * 
-     * @param id       the id
-     * @param name     the name
-     * @param position the position
-     * @param velocity the velocity
-     * @param states   the states
+     * @param id       The id
+     * @param name     The name
+     * @param position The position
+     * @param velocity The velocity
+     * @param states   The states
      */
     public TomodachiModel(String id, String name, Vector2 position, Vector2 velocity,
             List<TomodachiModelState> states) {
@@ -57,14 +57,14 @@ public class TomodachiModel {
     }
 
     /**
-     * @return the id
+     * @return The id
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return the name
+     * @return The name
      */
     public String getName() {
         return name;

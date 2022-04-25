@@ -8,7 +8,7 @@ import java.nio.file.Path;
  */
 public class TomodachiLoader {
     /**
-     * private constructor
+     * Private constructor
      */
     private TomodachiLoader() {
     }
@@ -16,9 +16,9 @@ public class TomodachiLoader {
     /**
      * Loads a {@link TomodachiFile} from the given root folder
      * 
-     * @param path the path to the root folder of the tomodachi
-     * @return the loaded Tomodachi File
-     * @throws IOException if the file could not be loaded
+     * @param path The path to the root folder of the tomodachi
+     * @return The loaded Tomodachi File
+     * @throws IOException If the file could not be loaded
      */
     public static TomodachiFile load(String rootFolder) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");

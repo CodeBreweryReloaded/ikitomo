@@ -15,8 +15,8 @@ public record Vector2(int x, int y) {
     /**
      * Adds the given vector to this vector and returns it
      * 
-     * @param v the other vector
-     * @return the newly calculated vector
+     * @param v The other vector
+     * @return The newly calculated vector
      */
     public Vector2 add(Vector2 v) {
         return new Vector2(x + v.x, y + v.y);
@@ -25,8 +25,8 @@ public record Vector2(int x, int y) {
     /**
      * Subtracts the given vector from this vector and returns it
      * 
-     * @param v the other vector
-     * @return the newly calculated vector
+     * @param v The other vector
+     * @return The newly calculated vector
      */
     public Vector2 subtract(Vector2 v) {
         return new Vector2(x - v.x, y - v.y);
@@ -35,8 +35,8 @@ public record Vector2(int x, int y) {
     /**
      * Multiplies the given scalar with this vector and returns it
      * 
-     * @param n the scalar
-     * @return the newly calculated vector
+     * @param n The scalar
+     * @return The newly calculated vector
      */
     public Vector2 multiply(int n) {
         return new Vector2(x * n, y * n);
@@ -45,7 +45,7 @@ public record Vector2(int x, int y) {
     /**
      * This vector is multiplied with -1 and returned
      * 
-     * @return the inverse of the vector
+     * @return The inverse of the vector
      * @see #multiply(int)
      */
     public Vector2 inverse() {
@@ -55,15 +55,15 @@ public record Vector2(int x, int y) {
     /**
      * Divides this vector by the given scalar and returns it
      * 
-     * @param n the scalar
-     * @return the newly calculated vector
+     * @param n The scalar
+     * @return The newly calculated vector
      */
     public Vector2 divide(int n) {
         return new Vector2(x / n, y / n);
     }
 
     /**
-     * @return the length of this vector
+     * @return The length of this vector
      */
     public float absolute() {
         return (float) Math.sqrt(x * x + y * y);
