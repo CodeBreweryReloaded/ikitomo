@@ -71,7 +71,7 @@ public class TomodachiModel {
     }
 
     /**
-     * @return a copy of the states list
+     * @return A copy of the states list
      */
     public List<TomodachiModelState> getStates() {
         return new ArrayList<>(states);
