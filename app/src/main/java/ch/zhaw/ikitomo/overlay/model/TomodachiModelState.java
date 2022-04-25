@@ -7,8 +7,8 @@ import ch.zhaw.ikitomo.common.StateType;
  * Represents a state of the tomodachi model for the
  * {@link ch.zhaw.ikitomo.overlay.OverlayController}
  * 
- * @param type      the type of the state
- * @param animation the animation
+ * @param type      The type of the state
+ * @param animation The animation
  */
 public record TomodachiModelState(StateType type, Animation animation) {
 }

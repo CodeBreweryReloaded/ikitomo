@@ -10,15 +10,15 @@ import javafx.application.Application;
  */
 public class IkitomoMain {
     /**
-     * private constructor to prevent instantiation
+     * Private constructor to prevent instantiation
      */
     private IkitomoMain() {
     }
 
     /**
-     * main method
+     * Main method
      * 
-     * @param args the console args
+     * @param args The console arguments
      */
     public static void main(String[] args) {
         Application.launch(IkitomoApplication.class, args);

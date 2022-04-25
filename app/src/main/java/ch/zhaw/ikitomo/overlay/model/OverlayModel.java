@@ -5,19 +5,21 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 
 /**
- * the model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
+ * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
  */
 public class OverlayModel {
     /**
-     * the global settings object
+     * The global settings object
      */
     private Settings settings;
     /**
-     * the currently loaded tomodachi
+     * The currently loaded tomodachi
      */
     private ObjectBinding<TomodachiModel> tomodachi;
 
     /**
+     * Constructor
+     *
      * @param settings
      */
     public OverlayModel(Settings settings) {
@@ -26,30 +28,30 @@ public class OverlayModel {
     }
 
     /**
-     * @return the tomodachi binding of the currently selected tomodachi
+     * @return The tomodachi binding of the currently selected tomodachi
      */
     public ObjectBinding<TomodachiModel> tomodachiBinding() {
         return tomodachi;
     }
 
     /**
-     * @returnt the currently selected tomodachi
+     * @return The currently selected tomodachi
      */
     public TomodachiModel getTomodachi() {
         return tomodachi.get();
     }
 
     /**
-     * @return the settings
+     * @return The settings
      */
     public Settings getSettings() {
         return settings;
     }
 
     /**
-     * Loads a tomodachi model from currently loaded tomodachi
+     * Loads a Tomodachi model from the currently loaded Tomodachi
      * 
-     * @return the loaded tomodachi model
+     * @return The loaded Tomodachi model
      */
     private TomodachiModel loadTomodachiModel() {
         throw new UnsupportedOperationException("not implemented yet");

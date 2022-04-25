@@ -26,8 +26,8 @@ public class TomodachiStateFile {
     /**
      * Constructor
      * 
-     * @param type      the name
-     * @param animation the animation of the state
+     * @param type      The name
+     * @param animation The animation of the state
      */
     public TomodachiStateFile(StateType type, String animation) {
         this.type = type;
@@ -35,14 +35,14 @@ public class TomodachiStateFile {
     }
 
     /**
-     * @return the name
+     * @return The name
      */
     public StateType getType() {
         return type;
     }
 
     /**
-     * @return the animation
+     * @return The animation
      */
     public String getAnimation() {
         return animation;

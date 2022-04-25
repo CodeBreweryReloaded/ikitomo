@@ -12,11 +12,11 @@ import javafx.collections.ObservableList;
  */
 public class Settings {
     /**
-     * the possible tomodachi files
+     * The possible tomodachi files
      */
     private ObservableList<TomodachiFile> tomodachiFiles = FXCollections.observableArrayList();
     /**
-     * the currently seleted tomodachi model
+     * The currently seleted tomodachi model
      */
     private ObjectProperty<TomodachiFile> tomodachiFile = new SimpleObjectProperty<>();
     /**
@@ -32,10 +32,10 @@ public class Settings {
     }
 
     /**
-     * constructor
+     * Constructor
      * 
-     * @param tomodachiID       the current id
-     * @param tomodachiSettings the tomodachi settings
+     * @param tomodachiID       The current id
+     * @param tomodachiSettings The tomodachi settings
      */
     public Settings(TomodachiFile tomodachiFile, TomodachiSettings tomodachiSettings) {
         this.tomodachiFile.set(tomodachiFile);
@@ -43,37 +43,37 @@ public class Settings {
     }
 
     /**
-     * @return the tomodachiFiles
+     * @return The tomodachiFiles
      */
     public ObservableList<TomodachiFile> getTomodachiFiles() {
         return tomodachiFiles;
     }
 
     /**
-     * @return the tomodachi ID property
+     * @return The tomodachi ID property
      */
     public ObjectProperty<TomodachiFile> tomodachiFileProperty() {
         return tomodachiFile;
     }
 
     /**
-     * Sets the tomodachi id
+     * Sets the tomodachi ID
      * 
-     * @param tomodachiID the id
+     * @param tomodachiID The ID
      */
     public void setTomodachiModel(TomodachiFile tomodachiFile) {
         this.tomodachiFile.set(tomodachiFile);
     }
 
     /**
-     * @return the current tomodachi id or null if none was selected.
+     * @return The current tomodachi ID or null if none was selected.
      */
     public TomodachiFile getTomodachiModel() {
         return tomodachiFile.get();
     }
 
     /**
-     * @return the tomodachiSettings
+     * @return The tomodachiSettings
      */
     public TomodachiSettings getTomodachiSettings() {
         return tomodachiSettings;

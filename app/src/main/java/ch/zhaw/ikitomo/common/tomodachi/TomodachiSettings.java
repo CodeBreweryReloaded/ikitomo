@@ -6,15 +6,15 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 
 /**
- * Represents the settings which the user can change of a tomodachi
+ * Represents the user settings of a Tomodachi. These may also be modified by the user.
  */
 public class TomodachiSettings {
     /**
-     * the chance to sleep
+     * The chance to sleep
      */
     private FloatProperty sleepChance = new SimpleFloatProperty();
     /**
-     * the chance to wake up
+     * The chance to wake up
      */
     private FloatProperty wakeChance = new SimpleFloatProperty();
 
@@ -27,8 +27,8 @@ public class TomodachiSettings {
     /**
      * Constructor
      * 
-     * @param sleepChance the sleep chance
-     * @param wakeChance  the wake up chance
+     * @param sleepChance The sleep chance
+     * @param wakeChance  The wake up chance
      */
     public TomodachiSettings(float sleepChance, float wakeChance) {
         this.sleepChance.set(sleepChance);
@@ -36,7 +36,7 @@ public class TomodachiSettings {
     }
 
     /**
-     * @return the sleep chance property
+     * @return The sleep chance property
      */
     public FloatProperty sleepChanceProperty() {
         return sleepChance;
@@ -45,7 +45,7 @@ public class TomodachiSettings {
     /**
      * Sets the sleep chance
      * 
-     * @param sleepChance the sleep chance
+     * @param sleepChance The sleep chance
      */
     public void setSleepChance(Float sleepChance) {
         this.sleepChance.set(sleepChance);
@@ -53,14 +53,14 @@ public class TomodachiSettings {
 
     /**
      * 
-     * @return the chance to sleep
+     * @return The chance to sleep
      */
     public Float getSleepChance() {
         return sleepChance.get();
     }
 
     /**
-     * @return the wake up chance property
+     * @return The wake up chance property
      */
     public FloatProperty wakeChanceProperty() {
         return wakeChance;
@@ -69,7 +69,7 @@ public class TomodachiSettings {
     /**
      * Sets the wake up chance property
      * 
-     * @param wakeChance the wake up chance
+     * @param wakeChance The wake up chance
      */
     public void setWakeChance(float wakeChance) {
         this.wakeChance.set(wakeChance);
@@ -77,7 +77,7 @@ public class TomodachiSettings {
 
     /**
      * 
-     * @return the chance to wake up
+     * @return The chance to wake up
      */
     public float getWakeChance() {
         return wakeChance.get();

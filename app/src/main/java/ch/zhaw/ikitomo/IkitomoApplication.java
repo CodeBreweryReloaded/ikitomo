@@ -6,11 +6,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * The javafx application class to bootstrap the gui
+ * The javafx application class to bootstrap the GUI
  */
 public class IkitomoApplication extends Application {
     /**
-     * the global setings
+     * The global setings
      */
     private Settings settings;
 
