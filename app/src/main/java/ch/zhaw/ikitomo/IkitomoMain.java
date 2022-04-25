@@ -10,7 +10,7 @@ import javafx.application.Application;
  */
 public class IkitomoMain {
     /**
-     * private constructor to prevent instantiation
+     * Private constructor to prevent instantiation
      */
     private IkitomoMain() {
     }
