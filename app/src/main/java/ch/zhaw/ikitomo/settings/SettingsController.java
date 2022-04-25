@@ -15,9 +15,9 @@ public class SettingsController implements Killable {
     private Settings settings;
 
     /**
-     * private constructor
+     * Private constructor
      * 
-     * @param settings the global settings object
+     * @param settings The global settings object
      */
     private SettingsController(Settings settings) {
         this.settings = settings;
