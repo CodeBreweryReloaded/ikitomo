@@ -16,7 +16,7 @@ public class IkitomoMain {
     }
 
     /**
-     * main method
+     * Main method
      * 
      * @param args the console args
      */
