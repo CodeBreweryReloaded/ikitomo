@@ -3,8 +3,10 @@ package ch.zhaw.ikitomo.common;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * A class which can be killed/closed or shutdown. The class can do
- * finalizations in a separate thread and complete the future when its done
+ * A class which can be killed/closed or shutdown.
+ * <p>
+ * The class can do finalizations in a separate thread and complete the future when its done
+ * </p>
  */
 public interface Killable {
     /**
