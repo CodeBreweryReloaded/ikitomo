@@ -74,3 +74,10 @@ jacocoTestReport {
         xml.outputLocation = layout.buildDirectory.file("jacoco.xml")
     }
 }
+
+sonarqube {
+    properties{
+        property 'sonar.projectKey', "${group}:${rootProject.name}"
+        property "sonar.projectName", "${rootProject.name}" 
+    }
+}

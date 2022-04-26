@@ -6,5 +6,10 @@
         "Bottom": "1cm",
         "Left": "1cm"
     },
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "cSpell.words": [
+        "Ikitomo",
+        "Killable",
+        "Tomodachi"
+    ]
 }

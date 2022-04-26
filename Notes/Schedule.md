@@ -1,6 +1,7 @@
 # Schedule
 ```mermaid
 gantt
+    todaymarker off
     title Ikitomo
     dateFormat YYYY-MM-DD
     axisFormat %d.%m.%Y
