@@ -1,7 +1,7 @@
 package ch.zhaw.ikitomo.common;
 
 /**
- * The different state types
+ * Represents the state of an ikitomo.
  */
 public enum StateType {
     /**

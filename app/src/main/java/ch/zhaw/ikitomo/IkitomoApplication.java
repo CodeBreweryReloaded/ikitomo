@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * The javafx application class to bootstrap the GUI
+ * The javafx application class to bootstrap the GUI.
  */
 public class IkitomoApplication extends Application {
     /**

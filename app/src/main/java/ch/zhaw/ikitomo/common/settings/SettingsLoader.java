@@ -20,9 +20,9 @@ public class SettingsLoader {
     /**
      * Loads the settings from the given file.
      * 
-     * @param file The file to load from
+     * @param file The file to load the settings from
      * @return The loaded settings
-     * @throws IOException If the file could not be read
+     * @throws IOException Occurs when the file could not be read
      */
     public static Settings load(String path) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");
@@ -32,8 +32,8 @@ public class SettingsLoader {
      * Saves the settings to the given file.
      * 
      * @param settings The settings to save
-     * @param file     The file to save to
-     * @throws IOException If the file could not be written
+     * @param path     The name of the file to save the settings to
+     * @throws IOException Occurs when the file could not be written
      */
     public static void save(String path, Settings settings) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");

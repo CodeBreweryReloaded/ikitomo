@@ -24,7 +24,7 @@ public class TomodachiFile {
      */
     private TomodachiConfigurationFile config;
     /**
-     * The states of the tomodachi
+     * The available states of the tomodachi
      */
     private List<TomodachiStateFile> states = new ArrayList<>();
 
@@ -53,6 +53,8 @@ public class TomodachiFile {
     }
 
     /**
+     * Gets the settings
+     *
      * @return The settings
      */
     public TomodachiSettings getSettings() {
@@ -60,14 +62,18 @@ public class TomodachiFile {
     }
 
     /**
-     * @return The config
+     * Gets the configuration
+     *
+     * @return The configuration
      */
     public TomodachiConfigurationFile getConfig() {
         return config;
     }
 
     /**
-     * @return A copy of the states list
+     * Gets a copy of the list of available states
+     *
+     * @return A copy of the list of available states
      */
     public List<TomodachiStateFile> getStates() {
         return new ArrayList<>(states);

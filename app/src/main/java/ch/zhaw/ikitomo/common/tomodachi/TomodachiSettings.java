@@ -36,6 +36,8 @@ public class TomodachiSettings {
     }
 
     /**
+     * Gets a property holding the sleep chance
+     *
      * @return The sleep chance property
      */
     public FloatProperty sleepChanceProperty() {
@@ -52,7 +54,8 @@ public class TomodachiSettings {
     }
 
     /**
-     * 
+     * Gets the chance to sleep
+     *
      * @return The chance to sleep
      */
     public Float getSleepChance() {
@@ -60,6 +63,8 @@ public class TomodachiSettings {
     }
 
     /**
+     * Gets a property holding the chance to wake up
+     *
      * @return The wake up chance property
      */
     public FloatProperty wakeChanceProperty() {
@@ -67,17 +72,18 @@ public class TomodachiSettings {
     }
 
     /**
-     * Sets the wake up chance property
-     * 
-     * @param wakeChance The wake up chance
+     * Sets the wake-up chance
+     *
+     * @param wakeChance The wake-up chance
      */
     public void setWakeChance(float wakeChance) {
         this.wakeChance.set(wakeChance);
     }
 
     /**
-     * 
-     * @return The chance to wake up
+     * Gets the wake-up chance
+     *
+     * @return The chance to wake-up
      */
     public float getWakeChance() {
         return wakeChance.get();

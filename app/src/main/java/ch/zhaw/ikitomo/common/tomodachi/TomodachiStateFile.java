@@ -5,7 +5,7 @@ import java.util.Objects;
 import ch.zhaw.ikitomo.common.StateType;
 
 /**
- * A state of the tomodachi's state machine
+ * Represents a state of  a tomodachi's state machine
  */
 public class TomodachiStateFile {
     /**
@@ -13,7 +13,7 @@ public class TomodachiStateFile {
      */
     private StateType type;
     /**
-     * The animation beloging to the state
+     * The animation belonging to the state
      */
     private String animation;
 
@@ -35,13 +35,17 @@ public class TomodachiStateFile {
     }
 
     /**
-     * @return The name
+     * Gets the type of the state
+     *
+     * @return The type of the state
      */
     public StateType getType() {
         return type;
     }
 
     /**
+     * Gets the animation
+     *
      * @return The animation
      */
     public String getAnimation() {

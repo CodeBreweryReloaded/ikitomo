@@ -45,7 +45,7 @@ trigger:
     - pull_request
 
 ---
-# separat test pipeline which uses the conventional git checkout mechanism of drone
+# separate test pipeline which uses the conventional git checkout mechanism of drone
 kind: pipeline
 type: docker
 name: test-pullrequest

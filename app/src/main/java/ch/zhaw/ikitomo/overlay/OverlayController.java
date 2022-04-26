@@ -6,7 +6,7 @@ import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
 
 /**
- * The controller for the overlay that displays the Tomodachi.
+ * The controller for the overlay that displays the Tomodachi
  */
 public class OverlayController implements Killable {
     /**

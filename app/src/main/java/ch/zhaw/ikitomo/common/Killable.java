@@ -8,10 +8,12 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface Killable {
     /**
-     * Kill this object. After the finalizations are finished the future has to be
-     * completed.
+     * Kill this object.
+     * <p>
+     * After the finalizations are finished the future has to be completed.
+     * </p>
      * 
-     * @return The future which is completed after the class is finished
+     * @return The future which is completed after the process is finished.
      */
     public CompletableFuture<Void> kill();
 }

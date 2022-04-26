@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class TomodachiConfigurationFile {
     /**
-     * The id
+     * The id of the configuration
      */
     private String id;
     /**
@@ -17,6 +17,8 @@ public class TomodachiConfigurationFile {
 
     /**
      * Constructor
+     * @param id The id of the configuration
+     * @param name The name of the configuration
      */
     public TomodachiConfigurationFile(String id, String name) {
         this.id = id;
@@ -24,14 +26,18 @@ public class TomodachiConfigurationFile {
     }
 
     /**
-     * @return The ID
+     * Gets the id of the configuration
+     *
+     * @return The id of the configuration
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return The name
+     * Gets the name of the configuration
+     *
+     * @return The name of the configuration
      */
     public String getName() {
         return name;

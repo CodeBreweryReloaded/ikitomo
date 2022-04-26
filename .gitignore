@@ -1,3 +1,6 @@
+# Temporary sprites
+Assets/**/export/*
+
 # InelliJ IDEA files
 *.iml
 *.ipr
