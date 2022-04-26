@@ -20,7 +20,7 @@ public class OverlayModel {
     /**
      * Constructor
      *
-     * @param settings
+     * @param settings The global settings object
      */
     public OverlayModel(Settings settings) {
         this.settings = settings;
@@ -28,13 +28,17 @@ public class OverlayModel {
     }
 
     /**
-     * @return The tomodachi binding of the currently selected tomodachi
+     * Gets the binding of the currently selected tomodachi
+     *
+     * @return The binding of the currently selected tomodachi
      */
     public ObjectBinding<TomodachiModel> tomodachiBinding() {
         return tomodachi;
     }
 
     /**
+     * Gets the currently selected tomodachi
+     *
      * @return The currently selected tomodachi
      */
     public TomodachiModel getTomodachi() {

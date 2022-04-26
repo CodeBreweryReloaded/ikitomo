@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class Settings {
     /**
-     * The possible tomodachi files
+     * The available tomodachi files
      */
     private ObservableList<TomodachiFile> tomodachiFiles = FXCollections.observableArrayList();
     /**
@@ -25,7 +25,7 @@ public class Settings {
     private TomodachiSettings tomodachiSettings;
 
     /**
-     * Constructor.
+     * Initializes a new instance of the {@link Settings} class
      */
     public Settings() {
         this.tomodachiSettings = new TomodachiSettings();
@@ -34,7 +34,7 @@ public class Settings {
     /**
      * Constructor
      * 
-     * @param tomodachiID       The current id
+     * @param tomodachiID       The id of the tomodachi to display
      * @param tomodachiSettings The tomodachi settings
      */
     public Settings(TomodachiFile tomodachiFile, TomodachiSettings tomodachiSettings) {
@@ -43,36 +43,44 @@ public class Settings {
     }
 
     /**
-     * @return The tomodachiFiles
+     * Gets the available tomodachi files
+     *
+     * @return The available tomodachi files
      */
     public ObservableList<TomodachiFile> getTomodachiFiles() {
         return tomodachiFiles;
     }
 
     /**
-     * @return The tomodachi ID property
+     * Gets a property holding the tomodachi id
+     *
+     * @return A property holding the tomodachi id
      */
     public ObjectProperty<TomodachiFile> tomodachiFileProperty() {
         return tomodachiFile;
     }
 
     /**
-     * Sets the tomodachi ID
+     * Sets the id of the tomodachi to display
      * 
-     * @param tomodachiID The ID
+     * @param tomodachiID The id of the tomodachi to display
      */
     public void setTomodachiModel(TomodachiFile tomodachiFile) {
         this.tomodachiFile.set(tomodachiFile);
     }
 
     /**
-     * @return The current tomodachi ID or null if none was selected.
+     * Gets the id of the tomodachi to display or <code>null</code> if none was selected
+     *
+     * @return The id of the tomodachi to display or <code>null</code> if none was selected
      */
     public TomodachiFile getTomodachiModel() {
         return tomodachiFile.get();
     }
 
     /**
+     * Gets the tomodachi settings
+     *
      * @return The tomodachiSettings
      */
     public TomodachiSettings getTomodachiSettings() {
@@ -80,7 +88,7 @@ public class Settings {
     }
 
     /**
-     * Loads all possible tomodachi files and loads it in the
+     * Loads all available tomodachi files and stores them inside the
      * {@link #tomodachiFiles} list
      */
     public void loadPossibleTomodachiFiles() {

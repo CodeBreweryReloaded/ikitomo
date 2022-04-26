@@ -11,7 +11,7 @@ public interface Killable {
      * Kill this object. After the finalizations are finished the future has to be
      * completed.
      * 
-     * @return The future which is completed after the class is finished
+     * @return The future which is completed after the process is finished.
      */
     public CompletableFuture<Void> kill();
 }

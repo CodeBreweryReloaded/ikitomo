@@ -9,17 +9,19 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * Represents a Tomodachi model for {@link ch.zhaw.ikitomo.overlay.OverlayController}.
+ * Represents a the model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}.
+ * <p>
  * This model also includes loaded resources like animations and fields needed
  * to display a Tomodachi, such as position and velocity.
+ * </p>
  */
 public class TomodachiModel {
     /**
-     * The id
+     * The id of the tomodachi
      */
     private String id;
     /**
-     * The name
+     * The name of the tomodachi
      */
     private String name;
 
@@ -34,7 +36,7 @@ public class TomodachiModel {
     private ObjectProperty<Vector2> velocity = new SimpleObjectProperty<>(Vector2.ZERO);
 
     /**
-     * The states
+     * The available states of the tomodachi
      */
     private List<TomodachiModelState> states = new ArrayList<>();
 
@@ -57,21 +59,27 @@ public class TomodachiModel {
     }
 
     /**
-     * @return The id
+     * Gets the id of the tomodachi
+     *
+     * @return The id of the tomodachi
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return The name
+     * Gets the name of the tomodachi
+     *
+     * @return The name of the tomodachi
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return A copy of the states list
+     * Gets a copy of the list of available states
+     *
+     * @return A copy of the list of available states
      */
     public List<TomodachiModelState> getStates() {
         return new ArrayList<>(states);
@@ -79,7 +87,9 @@ public class TomodachiModel {
 
     /**
      * Loads a {@link TomodachiModel} from a given {@link TomodachiFile}.
-     * The model is set at the given initial position with the velocity of zero
+     * <p>
+     * The model is set at the given initial position with the velocity of zero.
+     * </p>
      * 
      * @param tomodachiFile The tomodachi file
      * @param position      The initial position

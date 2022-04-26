@@ -43,8 +43,8 @@ public record Vector2(int x, int y) {
     }
 
     /**
-     * This vector is multiplied with -1 and returned
-     * 
+     * Inverts the vector by multiplying it with -1
+     *
      * @return The inverse of the vector
      * @see #multiply(int)
      */
@@ -63,6 +63,8 @@ public record Vector2(int x, int y) {
     }
 
     /**
+     * Gets the length of this vector
+     *
      * @return The length of this vector
      */
     public float absolute() {
