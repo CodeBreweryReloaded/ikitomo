@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class TomodachiConfigurationFile {
     /**
-     * The id
+     * The id of the configuration
      */
     private String id;
     /**

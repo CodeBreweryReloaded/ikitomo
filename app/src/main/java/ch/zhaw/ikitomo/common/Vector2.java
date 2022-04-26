@@ -3,8 +3,8 @@ package ch.zhaw.ikitomo.common;
 /**
  * Represents a vetor
  * 
- * @param x the x coordinate
- * @param y the y coordinate
+ * @param x The x coordinate
+ * @param y The y coordinate
  */
 public record Vector2(int x, int y) {
     /**

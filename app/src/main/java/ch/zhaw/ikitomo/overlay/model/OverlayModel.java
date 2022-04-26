@@ -46,7 +46,9 @@ public class OverlayModel {
     }
 
     /**
-     * @return The settings
+     * Gets the global settings
+     *
+     * @return The global settings
      */
     public Settings getSettings() {
         return settings;

@@ -54,7 +54,8 @@ public class TomodachiSettings {
     }
 
     /**
-     * 
+     * Gets the chance to sleep
+     *
      * @return The chance to sleep
      */
     public Float getSleepChance() {
