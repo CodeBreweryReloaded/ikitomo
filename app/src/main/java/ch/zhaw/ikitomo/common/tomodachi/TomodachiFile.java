@@ -1,15 +1,18 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import ch.zhaw.ikitomo.common.StateType;
 
 /**
  * Represents a tomodachi file
  */
 public class TomodachiFile {
-
     /**
      * The root folder of the tomodachi file
      * //TODO this field has to be transient
@@ -95,6 +98,16 @@ public class TomodachiFile {
         TomodachiFile other = (TomodachiFile) obj;
         return Objects.equals(config, other.config) && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
+    }
+
+    private static int nextId = 0;
+
+    public static TomodachiFile createMockObject() {
+        var tomodachiSettings = new TomodachiSettings(0.01f, 0.01f);
+        int id = nextId++;
+        var tomodachiConfig = new TomodachiConfigurationFile("ch.zhaw.mock" + id, "Mock " + id);
+        var states = Arrays.asList(new TomodachiStateFile(StateType.IDLE, null));
+        return new TomodachiFile(Paths.get("./"), tomodachiSettings, tomodachiConfig, states);
     }
 
 }

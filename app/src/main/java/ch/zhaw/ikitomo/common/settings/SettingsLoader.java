@@ -1,6 +1,9 @@
 package ch.zhaw.ikitomo.common.settings;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 
 /**
  * A helper class to load and save {@link Settings} objects
@@ -25,7 +28,8 @@ public class SettingsLoader {
      * @throws IOException Occurs when the file could not be read
      */
     public static Settings load(String path) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+        // TODO: throw new UnsupportedOperationException("not implemented yet");
+        return new Settings(TomodachiFile.createMockObject(), new HashMap<>());
     }
 
     /**
