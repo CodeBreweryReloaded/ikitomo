@@ -75,6 +75,29 @@ public class DelayedRunnableTest {
     }
 
     /**
+     * Tests if the {@link Runnable} given to {@link DelayedRunnable} throws an
+     * {@link RuntimeException} that subsequence calls to
+     * {@link DelayedRunnable#run()} still work correctly
+     * 
+     * @throws InterruptedException
+     */
+    @Test
+    void testExceptionsInRunnable() throws InterruptedException {
+        var latch1 = new CountDownLatch(1); // reaches zero after the first call
+        var latch2 = new CountDownLatch(2); // reaches zero after the second call
+
+        var runnable = new DelayedRunnable(() -> {
+            latch1.countDown();
+            latch2.countDown();
+            throw new RuntimeException("Some exception");
+        }, 100);
+        runnable.run();
+        assertTrue(latch1.await(150, TimeUnit.MILLISECONDS), "run was not invoked the first time");
+        runnable.run();
+        assertTrue(latch2.await(150, TimeUnit.MILLISECONDS), "run was not invoked a second time");
+    }
+
+    /**
      * An internal method to sleep for a given amount of time. The method makes sure
      * that the current thread doesn't wake up before the time is up
      * 

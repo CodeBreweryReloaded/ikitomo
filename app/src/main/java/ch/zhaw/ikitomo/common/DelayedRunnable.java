@@ -3,6 +3,8 @@ package ch.zhaw.ikitomo.common;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Decorates a runnable with a delay. When the runnable is called again the
@@ -10,11 +12,15 @@ import java.util.TimerTask;
  */
 public class DelayedRunnable implements Runnable {
     /**
-     * the global timer for delayed runnable instances
+     * The logger
+     */
+    private static final Logger logger = Logger.getLogger(DelayedRunnable.class.getName());
+    /**
+     * The global timer for delayed runnable instances
      */
     private Timer timer = new Timer(DelayedRunnable.class.getName() + " timer", true);
     /**
-     * the runnable to decorate
+     * The runnable to decorate
      */
     private Runnable runnable;
 
@@ -53,7 +59,11 @@ public class DelayedRunnable implements Runnable {
         lastTask = new TimerTask() {
             @Override
             public void run() {
-                runnable.run();
+                try {
+                    runnable.run();
+                } catch (Exception e) {
+                    logger.log(Level.SEVERE, "The runnable threw an exception: ", e);
+                }
             }
         };
         timer.schedule(lastTask, delayInMs);
