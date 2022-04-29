@@ -17,8 +17,8 @@ public class IkitomoApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //settings = SettingsLoader.load(SettingsLoader.DEFAULT_SETTINGS_PATH);
-        //settings.loadPossibleTomodachiFiles();
+        settings = SettingsLoader.load(SettingsLoader.DEFAULT_SETTINGS_PATH);
+        settings.loadPossibleTomodachiFiles();
         OverlayController overlayController = OverlayController.newOverlayUI(settings, primaryStage);
     }
 }
