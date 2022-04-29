@@ -5,6 +5,8 @@ import java.util.Map;
 
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -26,6 +28,15 @@ public class Settings {
      * The current settings of the tomodachi.
      */
     private Map<String, TomodachiSettings> tomodachiSettings = new HashMap<>();
+
+    /**
+     * A binding to the current selected tomodachi settings. If
+     * {@link #tomodachiFileProperty()} points to a {@link TomodachiFile} for which
+     * no Settings currently exists than a new {@link TomodachiSettings} object is
+     * created and added to the {@link #tomodachiSettings} map
+     */
+    private ObjectBinding<TomodachiSettings> currentTomodachiSettings = Bindings
+            .createObjectBinding(() -> getTomodachiSettings(getTomodachiModel()), tomodachiFile);
 
     /**
      * Initializes a new instance of the {@link Settings} class
@@ -90,6 +101,20 @@ public class Settings {
     public TomodachiSettings getTomodachiSettings(TomodachiFile tomodachiFile) {
         tomodachiSettings.computeIfAbsent(tomodachiFile.getConfig().getId(), key -> new TomodachiSettings());
         return tomodachiSettings.get(tomodachiFile.getConfig().getId());
+    }
+
+    /**
+     * @return the currentTomodachiSettings
+     */
+    public ObjectBinding<TomodachiSettings> currentTomodachiSettingsBinding() {
+        return currentTomodachiSettings;
+    }
+
+    /**
+     * @return the currentTomodachiSettings
+     */
+    public TomodachiSettings getCurrentTomodachiSettings() {
+        return currentTomodachiSettings.get();
     }
 
     /**

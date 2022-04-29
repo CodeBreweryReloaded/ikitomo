@@ -17,7 +17,7 @@ public class IkitomoApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        settings = SettingsLoader.load(SettingsLoader.DEFAULT_SETTINGS_PATH);
+        settings = SettingsLoader.loadFromDefault();
         settings.loadPossibleTomodachiFiles();
         SettingsController.newSettingsUI(settings);
     }

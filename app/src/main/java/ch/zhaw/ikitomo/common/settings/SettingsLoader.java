@@ -33,13 +33,35 @@ public class SettingsLoader {
     }
 
     /**
+     * Loads the settings from the default file at {@value #DEFAULT_SETTINGS_PATH}
+     * which is stored in {@link #DEFAULT_SETTINGS_PATH}
+     * 
+     * @return The loaded settings
+     * @throws IOException Occurs when the file could not be read
+     */
+    public static Settings loadFromDefault() throws IOException {
+        return load(DEFAULT_SETTINGS_PATH);
+    }
+
+    /**
      * Saves the settings to the given file.
      * 
-     * @param settings The settings to save
      * @param path     The name of the file to save the settings to
+     * @param settings The settings to save
      * @throws IOException Occurs when the file could not be written
      */
     public static void save(String path, Settings settings) throws IOException {
+        throw new UnsupportedOperationException("not implemented yet");
+    }
+
+    /**
+     * Saves the settings to the default path {@link #DEFAULT_SETTINGS_PATH} at
+     * {@value #DEFAULT_SETTINGS_PATH}
+     * 
+     * @param settings The settings to save
+     * @throws IOException Occurs when the file could not be written
+     */
+    public static void saveToDefault(Settings settings) throws IOException {
         throw new UnsupportedOperationException("not implemented yet");
     }
 }
