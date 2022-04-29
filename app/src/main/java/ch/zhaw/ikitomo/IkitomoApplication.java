@@ -2,6 +2,7 @@ package ch.zhaw.ikitomo;
 
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsLoader;
+import ch.zhaw.ikitomo.overlay.OverlayController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,6 +19,6 @@ public class IkitomoApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         settings = SettingsLoader.load(SettingsLoader.DEFAULT_SETTINGS_PATH);
         settings.loadPossibleTomodachiFiles();
+        OverlayController overlayController = OverlayController.newOverlayUI(settings, primaryStage);
     }
-
 }
