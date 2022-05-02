@@ -96,8 +96,8 @@ public class TomodachiModel {
      * @return The created model
      */
     public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachiFile, Vector2 position) {
-        TomodachiModel model = new TomodachiModel(tomodachiFile.getConfig().getId(),
-                tomodachiFile.getConfig().getName(), position,
+        TomodachiModel model = new TomodachiModel(tomodachiFile.getID(),
+                tomodachiFile.getName(), position,
                 Vector2.ZERO, null);
         throw new UnsupportedOperationException("not implemented yet loading the animations");
     }
