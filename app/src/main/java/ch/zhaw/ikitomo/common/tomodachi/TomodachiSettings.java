@@ -3,6 +3,7 @@ package ch.zhaw.ikitomo.common.tomodachi;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
@@ -14,11 +15,13 @@ public class TomodachiSettings {
     /**
      * The chance to sleep
      */
+    @JsonIgnore
     private FloatProperty sleepChance = new SimpleFloatProperty();
 
     /**
      * The chance to wake up
      */
+    @JsonIgnore
     private FloatProperty wakeChance = new SimpleFloatProperty();
 
     /**
@@ -43,6 +46,7 @@ public class TomodachiSettings {
      *
      * @return The chance to sleep
      */
+    @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
     public Float getSleepChance() {
         return sleepChance.get();
     }
@@ -52,6 +56,7 @@ public class TomodachiSettings {
      * 
      * @param sleepChance The sleep chance
      */
+    @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
     public void setSleepChance(Float sleepChance) {
         this.sleepChance.set(sleepChance);
     }
@@ -61,6 +66,7 @@ public class TomodachiSettings {
      *
      * @return The chance to wake-up
      */
+    @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
     public float getWakeChance() {
         return wakeChance.get();
     }
@@ -70,6 +76,7 @@ public class TomodachiSettings {
      *
      * @param wakeChance The wake-up chance
      */
+    @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
     public void setWakeChance(float wakeChance) {
         this.wakeChance.set(wakeChance);
     }
