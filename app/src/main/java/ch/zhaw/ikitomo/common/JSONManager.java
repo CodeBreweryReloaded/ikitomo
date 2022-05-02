@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 /**
  * Provides the functionality to manage settings stored in JSON code
@@ -79,6 +80,7 @@ public abstract class JSONManager<T> {
     protected ObjectMapper initializeMapper() {
         ObjectMapper parser = new ObjectMapper();
         parser.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
+        parser.configure(SerializationFeature.INDENT_OUTPUT, true);
         return parser;
     }
 }
