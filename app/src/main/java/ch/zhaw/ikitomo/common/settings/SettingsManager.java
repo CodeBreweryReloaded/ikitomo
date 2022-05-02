@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * A helper class to load and save {@link Settings} objects
  */
-public class SettingsLoader {
+public class SettingsManager {
     /**
      * The default path for the ikitomo settings
      */
@@ -14,7 +14,7 @@ public class SettingsLoader {
     /**
      * Private constructor
      */
-    private SettingsLoader() {
+    private SettingsManager() {
     }
 
     /**
