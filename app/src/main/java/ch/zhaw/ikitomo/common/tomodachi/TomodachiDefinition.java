@@ -6,23 +6,25 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a tomodachi file
+ * Represents a the definition of a tomodachi
  */
-public class TomodachiFile {
-
+public class TomodachiDefinition {
     /**
      * The root folder of the tomodachi file
      * //TODO this field has to be transient
      */
     private Path rootFolder;
+
     /**
      * The settings of the tomodachi
      */
     private TomodachiSettings settings;
+
     /**
      * The config of the tomodachi
      */
     private TomodachiConfigurationFile config;
+
     /**
      * The available states of the tomodachi
      */
@@ -35,7 +37,7 @@ public class TomodachiFile {
      * @param config   The config
      * @param states   The states
      */
-    public TomodachiFile(Path rootFolder, TomodachiSettings settings, TomodachiConfigurationFile config,
+    public TomodachiDefinition(Path rootFolder, TomodachiSettings settings, TomodachiConfigurationFile config,
             List<TomodachiStateFile> states) {
         this.rootFolder = rootFolder;
         this.settings = settings;
@@ -89,10 +91,10 @@ public class TomodachiFile {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof TomodachiFile)) {
+        if (!(obj instanceof TomodachiDefinition)) {
             return false;
         }
-        TomodachiFile other = (TomodachiFile) obj;
+        TomodachiDefinition other = (TomodachiDefinition) obj;
         return Objects.equals(config, other.config) && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
     }
