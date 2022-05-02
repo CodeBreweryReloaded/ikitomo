@@ -17,6 +17,7 @@ public class Settings {
     /**
      * The id of the currently selected tomodachi
      */
+    @JsonIgnore
     private StringProperty tomodachiID = new SimpleStringProperty(); 
 
     /**

@@ -2,6 +2,8 @@ package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 
