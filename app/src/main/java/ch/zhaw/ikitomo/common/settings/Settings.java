@@ -3,6 +3,9 @@ package ch.zhaw.ikitomo.common.settings;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,6 +22,7 @@ public class Settings {
     /**
      * A set of tomodachi ids and their corresponding settings
      */
+    @JsonProperty(SettingKey.TOMODACHI_SETTINGS)
     private Map<String, TomodachiSettings> tomodachiSettings = new HashMap<>();
 
     /**
@@ -42,6 +46,7 @@ public class Settings {
      *
      * @return The id of the currently selected tomodachi
      */
+    @JsonProperty(SettingKey.TOMODACHI_ID)
     public String getTomodachiID() {
         return tomodachiID.get();
     }
@@ -51,6 +56,7 @@ public class Settings {
      *
      * @param tomodachiID The id of the currently selected tomodachi
      */
+    @JsonProperty(SettingKey.TOMODACHI_ID)
     public void setTomodachiID(String value) {
         this.tomodachiID.set(value);
     }
@@ -60,6 +66,7 @@ public class Settings {
      *
      * @return The tomodachiSettings
      */
+    @JsonIgnore
     public TomodachiSettings getTomodachiSettings() {
         tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
         return tomodachiSettings.get(getTomodachiID());
