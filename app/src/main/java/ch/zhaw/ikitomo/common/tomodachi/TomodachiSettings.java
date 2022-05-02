@@ -13,6 +13,7 @@ public class TomodachiSettings {
      * The chance to sleep
      */
     private FloatProperty sleepChance = new SimpleFloatProperty();
+
     /**
      * The chance to wake up
      */
@@ -36,12 +37,12 @@ public class TomodachiSettings {
     }
 
     /**
-     * Gets a property holding the sleep chance
+     * Gets the chance to sleep
      *
-     * @return The sleep chance property
+     * @return The chance to sleep
      */
-    public FloatProperty sleepChanceProperty() {
-        return sleepChance;
+    public Float getSleepChance() {
+        return sleepChance.get();
     }
 
     /**
@@ -54,21 +55,12 @@ public class TomodachiSettings {
     }
 
     /**
-     * Gets the chance to sleep
+     * Gets the wake-up chance
      *
-     * @return The chance to sleep
+     * @return The chance to wake-up
      */
-    public Float getSleepChance() {
-        return sleepChance.get();
-    }
-
-    /**
-     * Gets a property holding the chance to wake up
-     *
-     * @return The wake up chance property
-     */
-    public FloatProperty wakeChanceProperty() {
-        return wakeChance;
+    public float getWakeChance() {
+        return wakeChance.get();
     }
 
     /**
@@ -81,12 +73,21 @@ public class TomodachiSettings {
     }
 
     /**
-     * Gets the wake-up chance
+     * Gets a property holding the sleep chance
      *
-     * @return The chance to wake-up
+     * @return The sleep chance property
      */
-    public float getWakeChance() {
-        return wakeChance.get();
+    public FloatProperty sleepChanceProperty() {
+        return sleepChance;
+    }
+
+    /**
+     * Gets a property holding the chance to wake up
+     *
+     * @return The wake up chance property
+     */
+    public FloatProperty wakeChanceProperty() {
+        return wakeChance;
     }
 
     @Override
