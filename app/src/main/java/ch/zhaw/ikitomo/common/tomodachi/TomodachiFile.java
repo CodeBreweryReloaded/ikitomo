@@ -1,9 +1,13 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import ch.zhaw.ikitomo.common.StateType;
 
 /**
  * Represents a tomodachi file
@@ -95,6 +99,17 @@ public class TomodachiFile {
         TomodachiFile other = (TomodachiFile) obj;
         return Objects.equals(config, other.config) && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
+    }
+
+    // TODO: Remove when reading JSON files becomes possible
+    private static int nextID;
+    
+    public static TomodachiFile createMockObject() {
+        var tomodachiSettings = new TomodachiSettings(0.01f, 0.01f);
+        int id = nextID++;
+        var tomodachiConfig = new TomodachiConfigurationFile("ch.zhaw.mock" + id, "Mock " + id);
+        var states = Arrays.asList(new TomodachiStateFile(StateType.IDLE, null));
+        return new TomodachiFile(Paths.get("./"), tomodachiSettings, tomodachiConfig, states);
     }
 
 }
