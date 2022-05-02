@@ -2,10 +2,12 @@ package ch.zhaw.ikitomo.common.settings;
 
 import java.io.IOException;
 
+import ch.zhaw.ikitomo.common.JSONManager;
+
 /**
  * A helper class to load and save {@link Settings} objects
  */
-public class SettingsManager {
+public class SettingsManager extends JSONManager<Settings> {
     /**
      * The default path for the ikitomo settings
      */
@@ -15,6 +17,7 @@ public class SettingsManager {
      * Private constructor
      */
     private SettingsManager() {
+        super(Settings.class);
     }
 
     /**
@@ -24,8 +27,8 @@ public class SettingsManager {
      * @return The loaded settings
      * @throws IOException Occurs when the file could not be read
      */
-    public static Settings load(String path) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+    public Settings load(String path) throws IOException {
+        return super.load(path);
     }
 
     /**
@@ -35,7 +38,7 @@ public class SettingsManager {
      * @param path     The name of the file to save the settings to
      * @throws IOException Occurs when the file could not be written
      */
-    public static void save(String path, Settings settings) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+    public void save(String path, Settings settings) throws IOException {
+        super.save(path, settings);
     }
 }
