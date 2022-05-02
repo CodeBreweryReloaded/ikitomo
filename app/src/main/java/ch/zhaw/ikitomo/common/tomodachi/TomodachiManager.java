@@ -6,11 +6,11 @@ import java.nio.file.Path;
 /**
  * A helper class to load {@link TomodachiFile} objects
  */
-public class TomodachiLoader {
+public class TomodachiManager {
     /**
      * Private constructor
      */
-    private TomodachiLoader() {
+    private TomodachiManager() {
     }
 
     /**
