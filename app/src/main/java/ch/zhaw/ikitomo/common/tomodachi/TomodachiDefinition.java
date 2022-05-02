@@ -28,7 +28,7 @@ public class TomodachiDefinition {
     /**
      * The available states of the tomodachi
      */
-    private List<TomodachiStateFile> states = new ArrayList<>();
+    private List<TomodachiStateDefinition> states = new ArrayList<>();
 
     /**
      * Constructor
@@ -38,7 +38,7 @@ public class TomodachiDefinition {
      * @param states   The states
      */
     public TomodachiDefinition(Path rootFolder, TomodachiSettings settings, TomodachiConfigurationFile config,
-            List<TomodachiStateFile> states) {
+            List<TomodachiStateDefinition> states) {
         this.rootFolder = rootFolder;
         this.settings = settings;
         this.config = config;
@@ -77,7 +77,7 @@ public class TomodachiDefinition {
      *
      * @return A copy of the list of available states
      */
-    public List<TomodachiStateFile> getStates() {
+    public List<TomodachiStateDefinition> getStates() {
         return new ArrayList<>(states);
     }
 
