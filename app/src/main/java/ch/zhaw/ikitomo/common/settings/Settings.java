@@ -1,5 +1,8 @@
 package ch.zhaw.ikitomo.common.settings;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.property.ObjectProperty;
@@ -17,9 +20,9 @@ public class Settings {
     private StringProperty tomodachiID = new SimpleStringProperty(); 
 
     /**
-     * The current settings of the tomodachi.
+     * A set of tomodachi ids and their corresponding settings
      */
-    private TomodachiSettings tomodachiSettings;
+    private Map<String, TomodachiSettings> tomodachiSettings = new HashMap<>();
 
     /**
      * Initializes a new instance of the {@link Settings} class
@@ -28,11 +31,12 @@ public class Settings {
     }
 
     /**
-     * Constructor
+     * Initializes a new instance of the {@link Settings} class
      *
-     * @param tomodachiSettings The tomodachi settings
+     * @param tomodachiSettings A set of tomodachi ids and their corresponding settings
      */
-    public Settings(TomodachiSettings tomodachiSettings) {
+    public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
+        this.setTomodachiID(tomodachiID);
         this.tomodachiSettings = tomodachiSettings;
     }
 
@@ -60,7 +64,8 @@ public class Settings {
      * @return The tomodachiSettings
      */
     public TomodachiSettings getTomodachiSettings() {
-        return tomodachiSettings;
+        tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
+        return tomodachiSettings.get(getTomodachiID());
     }
 
     /**
