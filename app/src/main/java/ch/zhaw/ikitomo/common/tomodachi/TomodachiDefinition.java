@@ -16,14 +16,19 @@ public class TomodachiDefinition {
     private Path rootFolder;
 
     /**
+     * The id of the tomodachi
+     */
+    private String id;
+
+    /**
+     * The name of the tomodachi
+     */
+    private String name;
+
+    /**
      * The settings of the tomodachi
      */
     private TomodachiSettings settings;
-
-    /**
-     * The config of the tomodachi
-     */
-    private TomodachiConfigurationFile config;
 
     /**
      * The available states of the tomodachi
@@ -37,11 +42,12 @@ public class TomodachiDefinition {
      * @param config   The config
      * @param states   The states
      */
-    public TomodachiDefinition(Path rootFolder, TomodachiSettings settings, TomodachiConfigurationFile config,
+    public TomodachiDefinition(Path rootFolder, String id, String name, TomodachiSettings settings,
             List<TomodachiStateDefinition> states) {
         this.rootFolder = rootFolder;
+        this.id = id;
+        this.name = name;
         this.settings = settings;
-        this.config = config;
         this.states.addAll(states);
     }
 
@@ -55,21 +61,30 @@ public class TomodachiDefinition {
     }
 
     /**
+     * Gets the id of the tomodachi
+     * 
+     * @return The id
+     */
+    public String getID() {
+        return id;
+    }
+
+    /**
+     * Gets the name of the tomodachi
+     * 
+     * @return The name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Gets the settings
      *
      * @return The settings
      */
     public TomodachiSettings getSettings() {
         return settings;
-    }
-
-    /**
-     * Gets the configuration
-     *
-     * @return The configuration
-     */
-    public TomodachiConfigurationFile getConfig() {
-        return config;
     }
 
     /**
@@ -83,7 +98,7 @@ public class TomodachiDefinition {
 
     @Override
     public int hashCode() {
-        return Objects.hash(config, settings, states);
+        return Objects.hash(id, name, settings, states);
     }
 
     @Override
@@ -95,7 +110,8 @@ public class TomodachiDefinition {
             return false;
         }
         TomodachiDefinition other = (TomodachiDefinition) obj;
-        return Objects.equals(config, other.config) && Objects.equals(settings, other.settings)
+        return Objects.equals(id, other.id) && Objects.equals(name, other.name)
+                && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
     }
 
