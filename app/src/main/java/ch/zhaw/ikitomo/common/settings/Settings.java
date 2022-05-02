@@ -3,10 +3,7 @@ package ch.zhaw.ikitomo.common.settings;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
