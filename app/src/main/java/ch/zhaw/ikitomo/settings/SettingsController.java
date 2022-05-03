@@ -3,24 +3,23 @@ package ch.zhaw.ikitomo.settings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ch.zhaw.ikitomo.common.DelayedRunnable;
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
-import ch.zhaw.ikitomo.common.settings.SettingsLoader;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
+import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
+import ch.zhaw.ikitomo.settings.view.FloatFilter;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
@@ -40,21 +39,22 @@ public class SettingsController implements Killable {
     /**
      * The minimum width of the settings window
      */
-    private static final int SETTINGS_MIN_WIDTH = 500;
+    private static final int SETTINGS_MIN_WIDTH = 650;
     /**
      * The minimum height of the settings window
      */
-    private static final int SETTINGS_HEIGHT = 300;
+    private static final int SETTINGS_HEIGHT = 400;
 
     /**
-     * the delay in ms between the last keystroke and the saving of the settings
+     * The settings view model
      */
-    private static final long SAVING_DELAY = 2000;
+    private SettingsModel model;
 
     /**
-     * The global settings object
+     * The root pane
      */
-    private Settings settings;
+    @FXML
+    private BorderPane rootPane;
 
     /**
      * The list of available tomodachi files
@@ -62,13 +62,22 @@ public class SettingsController implements Killable {
     @FXML
     private ListView<TomodachiFile> tomodachiList;
 
+    /**
+     * The text field for the sleep chance of the tomodachi
+     */
     @FXML
     private TextField sleepChance;
 
+    /**
+     * The text field for the wake up chance of the tomodachi
+     */
     @FXML
     private TextField wakeUpChance;
 
-    private DelayedRunnable delayedSaveRunnable = new DelayedRunnable(this::actuallySaveToFile, SAVING_DELAY);
+    /**
+     * The notification pane to show error messages
+     */
+    private BottomNotificationPane notificationPane = new BottomNotificationPane();
 
     /**
      * Private constructor
@@ -76,7 +85,7 @@ public class SettingsController implements Killable {
      * @param settings The global settings object
      */
     private SettingsController(Settings settings) {
-        this.settings = settings;
+        this.model = new SettingsModel(settings);
     }
 
     /**
@@ -84,42 +93,48 @@ public class SettingsController implements Killable {
      */
     @FXML
     private void initialize() {
+        Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
-        ObservableList<TomodachiFile> tomodachiFiles = settings.getTomodachiFiles();
-        tomodachiList.setItems(tomodachiFiles);
-        initProperties(settings.getCurrentTomodachiSettings());
+        tomodachiList.setItems(model.getTomodachiFiles());
+        initProperties(null, settings.getCurrentTomodachiSettings());
         settings.currentTomodachiSettingsBinding()
-                .addListener((observable, oldValue, newValue) -> initProperties(newValue));
+                .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
 
         tomodachiList.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> save());
-        sleepChance.textProperty().addListener((observable, oldValue, newValue) -> save());
-        wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> save());
+                .addListener((observable, oldValue, newValue) -> model.setTomodachi(newValue));
+        sleepChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
+        wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
 
+        sleepChance.setTextFormatter(FloatFilter.newFloatTextFormatter(FloatFilter.IS_POSITIVE_PREDICATE));
+        wakeUpChance.setTextFormatter(FloatFilter.newFloatTextFormatter(FloatFilter.IS_POSITIVE_PREDICATE));
+
+        rootPane.setBottom(notificationPane);
+        model.addSaveExceptionHandler(
+                exception -> notificationPane.showText("Couldn't save: " + exception.getMessage()));
     }
 
-    private void initProperties(TomodachiSettings tomodachiSettings) {
-        sleepChance.textProperty().bindBidirectional(tomodachiSettings.sleepChanceProperty(),
-                new NumberStringConverter());
-        wakeUpChance.textProperty().bindBidirectional(tomodachiSettings.wakeChanceProperty(),
-                new NumberStringConverter());
-    }
-
-    private void save() {
-        delayedSaveRunnable.run();
-    }
-
-    private void actuallySaveToFile() {
-        try {
-            SettingsLoader.saveToDefault(settings);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Could not save settings", e);
-            // TODO: show error message to the user
+    /**
+     * Initializes the properties of the settings window. If the oldSettings
+     * parameter is not null then properties of the text fields are
+     * 
+     * @param oldSettings
+     * @param newSettings
+     */
+    private void initProperties(TomodachiSettings oldSettings, TomodachiSettings newSettings) {
+        if (oldSettings != null) {
+            // unbind properties from oldSettings
+            sleepChance.textProperty().unbindBidirectional(oldSettings.sleepChanceProperty());
+            wakeUpChance.textProperty().unbindBidirectional(oldSettings.wakeChanceProperty());
         }
+        sleepChance.textProperty().bindBidirectional(newSettings.sleepChanceProperty(),
+                new NumberStringConverter());
+        wakeUpChance.textProperty().bindBidirectional(newSettings.wakeChanceProperty(),
+                new NumberStringConverter());
     }
 
     @Override
     public CompletableFuture<Void> kill() {
+        model.save();
         return CompletableFuture.completedFuture(null);
     }
 
