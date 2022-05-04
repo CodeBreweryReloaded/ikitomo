@@ -20,6 +20,7 @@ public class IkitomoApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
+        environment.load();
         OverlayController overlayController = OverlayController.newOverlayUI(environment, primaryStage);
     }
 }
