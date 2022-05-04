@@ -24,7 +24,7 @@ public class OverlayModel {
      */
     public OverlayModel(Settings settings) {
         this.settings = settings;
-        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel, settings.tomodachiFileProperty());
+        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel, settings.tomodachiIDProperty());
     }
 
     /**

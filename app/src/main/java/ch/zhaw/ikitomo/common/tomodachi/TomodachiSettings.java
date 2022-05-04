@@ -2,6 +2,9 @@ package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 
@@ -12,10 +15,13 @@ public class TomodachiSettings {
     /**
      * The chance to sleep
      */
+    @JsonIgnore
     private FloatProperty sleepChance = new SimpleFloatProperty();
+
     /**
      * The chance to wake up
      */
+    @JsonIgnore
     private FloatProperty wakeChance = new SimpleFloatProperty();
 
     /**
@@ -36,6 +42,46 @@ public class TomodachiSettings {
     }
 
     /**
+     * Gets the chance to sleep
+     *
+     * @return The chance to sleep
+     */
+    @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
+    public float getSleepChance() {
+        return sleepChance.get();
+    }
+
+    /**
+     * Sets the sleep chance
+     * 
+     * @param sleepChance The sleep chance
+     */
+    @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
+    public void setSleepChance(float sleepChance) {
+        this.sleepChance.set(sleepChance);
+    }
+
+    /**
+     * Gets the wake-up chance
+     *
+     * @return The chance to wake-up
+     */
+    @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
+    public float getWakeChance() {
+        return wakeChance.get();
+    }
+
+    /**
+     * Sets the wake-up chance
+     *
+     * @param wakeChance The wake-up chance
+     */
+    @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
+    public void setWakeChance(float wakeChance) {
+        this.wakeChance.set(wakeChance);
+    }
+
+    /**
      * Gets a property holding the sleep chance
      *
      * @return The sleep chance property
@@ -45,48 +91,12 @@ public class TomodachiSettings {
     }
 
     /**
-     * Sets the sleep chance
-     * 
-     * @param sleepChance The sleep chance
-     */
-    public void setSleepChance(Float sleepChance) {
-        this.sleepChance.set(sleepChance);
-    }
-
-    /**
-     * Gets the chance to sleep
-     *
-     * @return The chance to sleep
-     */
-    public Float getSleepChance() {
-        return sleepChance.get();
-    }
-
-    /**
      * Gets a property holding the chance to wake up
      *
      * @return The wake up chance property
      */
     public FloatProperty wakeChanceProperty() {
         return wakeChance;
-    }
-
-    /**
-     * Sets the wake-up chance
-     *
-     * @param wakeChance The wake-up chance
-     */
-    public void setWakeChance(float wakeChance) {
-        this.wakeChance.set(wakeChance);
-    }
-
-    /**
-     * Gets the wake-up chance
-     *
-     * @return The chance to wake-up
-     */
-    public float getWakeChance() {
-        return wakeChance.get();
     }
 
     @Override
