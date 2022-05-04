@@ -14,9 +14,9 @@ public class SettingsManager extends JSONManager<Settings> {
     public static final String DEFAULT_SETTINGS_PATH = "./settings";
 
     /**
-     * Private constructor
+     * Initializes a new instance of the {@link SettingsManager} class
      */
-    private SettingsManager() {
+    public SettingsManager() {
         super(Settings.class);
     }
 
