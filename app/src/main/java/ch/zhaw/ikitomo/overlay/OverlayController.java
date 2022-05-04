@@ -6,14 +6,13 @@ import java.util.concurrent.CompletableFuture;
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.settings.Settings;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.embed.swing.JFXPanel;
 
 /**
@@ -24,18 +23,18 @@ public class OverlayController implements Killable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
     /**
-     * The global settings object
+     * The global environment object
      */
-    private Settings settings;
+    private TomodachiEnvironment environment;
     private JFrame frame;
 
     /**
      * Private constructor
      * 
-     * @param settings The global settings object
+     * @param environment The global environment object
      */
-    private OverlayController(Settings settings, JFrame frame) {
-        this.settings = settings;
+    private OverlayController(TomodachiEnvironment environment, JFrame frame) {
+        this.environment = environment;
     }
     
     @Override
@@ -47,10 +46,10 @@ public class OverlayController implements Killable {
     /**
      * Creates a new overlay UI and returns the controller
      * 
-     * @param settings The global settings object
+     * @param environment The global environment object
      * @return The newly created {@link OverlayController}
      */
-    public static OverlayController newOverlayUI(Settings settings, Stage primaryStage) {
+    public static OverlayController newOverlayUI(TomodachiEnvironment environment, Stage primaryStage) {
         Pane pane = new Pane();
         Image image = new Image("file:Assets/neko-classic-dev/sprites/awake.png");
         ImageView imageView = new ImageView(image);
@@ -72,6 +71,6 @@ public class OverlayController implements Killable {
         frame.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f, 0.0f));
         frame.setVisible(true);
         
-        return new OverlayController(settings, frame);
+        return new OverlayController(environment, frame);
     }
 }
