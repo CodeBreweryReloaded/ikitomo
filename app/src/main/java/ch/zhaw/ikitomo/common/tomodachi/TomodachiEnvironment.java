@@ -75,12 +75,9 @@ public class TomodachiEnvironment {
      * @throws IOException Occurs when the settings could not be loaded
      */
     public Settings load() {
-        try
-        {
+        try {
             settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             LOGGER.log(Level.WARNING, "The settings could not be loaded.", e);
             settings = new Settings();
         }
