@@ -1,5 +1,8 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
+import java.io.IOException;
+
+import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 
 /**
@@ -15,6 +18,11 @@ public class TomodachiEnvironment {
      * A component for loading and saving tomodachi definitions
      */
     private TomodachiManager tomodachiManager;
+
+    /**
+     * The settings of the application
+     */
+    private Settings settings = null;
 
     /**
      * Initializes a new instance of the {@link TomodachiEnvironment} class
@@ -42,5 +50,22 @@ public class TomodachiEnvironment {
      */
     public TomodachiManager getTomodachiManager() {
         return tomodachiManager;
+    }
+
+    /**
+     * Gets the settings of the application
+     *
+     * @return The settings of the application
+     */
+    public Settings getSettings() {
+        if (settings == null) {
+            try {
+                settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return settings;
     }
 }
