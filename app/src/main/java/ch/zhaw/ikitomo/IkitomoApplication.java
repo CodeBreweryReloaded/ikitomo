@@ -17,7 +17,7 @@ public class IkitomoApplication extends Application {
     private TomodachiEnvironment environment;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
         environment.load();
         OverlayController overlayController = OverlayController.newOverlayUI(environment, primaryStage);
