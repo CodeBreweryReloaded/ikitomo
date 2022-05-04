@@ -20,18 +20,44 @@ import javafx.scene.paint.Color;
  * an {@link OverlayController} when it's done.
  */
 public class OverlayControllerBuilder {
-    private OverlayController controller;
-    private JFrame frame;
-    private JFXPanel panel;
-    private Pane pane;
-    private Scene scene;
-    private ImageView imageView;
+    /**
+     * Window width
+     */
     private final int width;
+    /**
+     * Window height
+     */
     private final int height;
 
     /**
+     * The controller instance
+     */
+    private OverlayController controller;
+    /**
+     * The frame instance
+     */
+    private JFrame frame;
+    /**
+     * The panel instance
+     */
+    private JFXPanel panel;
+    /**
+     * The pane instance
+     */
+    private Pane pane;
+    /**
+     * The scene instance
+     */
+    private Scene scene;
+    /**
+     * The JFX ImageView instance
+     */
+    private ImageView imageView;
+
+    /**
      * Constructor
-     * @param width The width to be used in dimensional operations
+     * 
+     * @param width  The width to be used in dimensional operations
      * @param height The height to be used in dimensional operations
      */
     public OverlayControllerBuilder(int width, int height) {
@@ -42,6 +68,7 @@ public class OverlayControllerBuilder {
 
     /**
      * Creates and {@link ImageView} object and stores it internally
+     * 
      * @param image The defaultImage to be displayed
      */
     public void createImageView(Image image) {
@@ -50,7 +77,8 @@ public class OverlayControllerBuilder {
     }
 
     /**
-     * Creates a scene and stores it internally. Also appends a previously created {@link ImageView}
+     * Creates a scene and stores it internally. Also appends a previously created
+     * {@link ImageView}
      */
     public void createScene() {
         pane = new Pane();
@@ -90,6 +118,7 @@ public class OverlayControllerBuilder {
 
     /**
      * Finally add all relevant variables to a controller and returns it
+     * 
      * @param settings The {@link Settings} object to be used
      * @return The created {@link OverlayController} object
      */

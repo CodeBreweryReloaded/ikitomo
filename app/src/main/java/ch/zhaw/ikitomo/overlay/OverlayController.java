@@ -66,6 +66,7 @@ public class OverlayController implements Killable {
 
     /**
      * Sets settings
+     * 
      * @param settings The desired settings to set
      */
     protected void setSettings(Settings settings) {
@@ -74,6 +75,7 @@ public class OverlayController implements Killable {
 
     /**
      * Sets the frame
+     * 
      * @param frame The JFX frame
      */
     protected void setFrame(JFrame frame) {
@@ -82,6 +84,7 @@ public class OverlayController implements Killable {
 
     /**
      * Sets the pane contained in the JFX frame
+     * 
      * @param pane The pane
      */
     protected void setPane(Pane pane) {
@@ -90,6 +93,7 @@ public class OverlayController implements Killable {
 
     /**
      * Sets the {@link ObjectProperty} from the {@link ImageView}
+     * 
      * @param imageProperty The property
      */
     protected void setImageProperty(ObjectProperty<Image> imageProperty) {
