@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
@@ -60,7 +60,7 @@ public class SettingsController implements Killable {
      * The list of available tomodachi files
      */
     @FXML
-    private ListView<TomodachiFile> tomodachiList;
+    private ListView<TomodachiDefinition> tomodachiList;
 
     /**
      * The text field for the sleep chance of the tomodachi
@@ -95,7 +95,7 @@ public class SettingsController implements Killable {
     private void initialize() {
         Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
-        tomodachiList.setItems(model.getTomodachiFiles());
+        tomodachiList.setItems(model.getTomodachiDefinitions());
         initProperties(null, settings.getCurrentTomodachiSettings());
         settings.currentTomodachiSettingsBinding()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));

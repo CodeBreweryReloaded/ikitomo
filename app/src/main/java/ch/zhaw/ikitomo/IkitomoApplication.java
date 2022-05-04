@@ -1,7 +1,7 @@
 package ch.zhaw.ikitomo;
 
 import ch.zhaw.ikitomo.common.settings.Settings;
-import ch.zhaw.ikitomo.common.settings.SettingsLoader;
+import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,7 +17,7 @@ public class IkitomoApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        settings = SettingsLoader.loadFromDefault();
+        settings = SettingsManager.loadFromDefault();
         settings.loadPossibleTomodachiFiles();
         SettingsController.newSettingsUI(settings);
     }

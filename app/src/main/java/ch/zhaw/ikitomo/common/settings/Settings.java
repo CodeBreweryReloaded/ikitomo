@@ -3,7 +3,7 @@ package ch.zhaw.ikitomo.common.settings;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
@@ -19,11 +19,11 @@ public class Settings {
     /**
      * The available tomodachi files
      */
-    private ObservableList<TomodachiFile> tomodachiFiles = FXCollections.observableArrayList();
+    private ObservableList<TomodachiDefinition> tomodachiFiles = FXCollections.observableArrayList();
     /**
      * The currently seleted tomodachi model
      */
-    private ObjectProperty<TomodachiFile> tomodachiFile = new SimpleObjectProperty<>();
+    private ObjectProperty<TomodachiDefinition> tomodachiFile = new SimpleObjectProperty<>();
     /**
      * The current settings of the tomodachi.
      */
@@ -31,7 +31,8 @@ public class Settings {
 
     /**
      * A binding to the current selected tomodachi settings. If
-     * {@link #tomodachiFileProperty()} points to a {@link TomodachiFile} for which
+     * {@link #tomodachiFileProperty()} points to a {@link TomodachiDefinition} for
+     * which
      * no Settings currently exists than a new {@link TomodachiSettings} object is
      * created and added to the {@link #tomodachiSettings} map
      */
@@ -50,7 +51,7 @@ public class Settings {
      * @param tomodachiID       The id of the tomodachi to display
      * @param tomodachiSettings The tomodachi settings
      */
-    public Settings(TomodachiFile tomodachiFile, Map<String, TomodachiSettings> tomodachiSettings) {
+    public Settings(TomodachiDefinition tomodachiFile, Map<String, TomodachiSettings> tomodachiSettings) {
         this.tomodachiFile.set(tomodachiFile);
         this.tomodachiSettings = tomodachiSettings;
     }
@@ -60,7 +61,7 @@ public class Settings {
      *
      * @return The available tomodachi files
      */
-    public ObservableList<TomodachiFile> getTomodachiFiles() {
+    public ObservableList<TomodachiDefinition> getTomodachiFiles() {
         return tomodachiFiles;
     }
 
@@ -69,7 +70,7 @@ public class Settings {
      *
      * @return A property holding the tomodachi id
      */
-    public ObjectProperty<TomodachiFile> tomodachiFileProperty() {
+    public ObjectProperty<TomodachiDefinition> tomodachiFileProperty() {
         return tomodachiFile;
     }
 
@@ -78,7 +79,7 @@ public class Settings {
      * 
      * @param tomodachiID The id of the tomodachi to display
      */
-    public void setTomodachiModel(TomodachiFile tomodachiFile) {
+    public void setTomodachiModel(TomodachiDefinition tomodachiFile) {
         this.tomodachiFile.set(tomodachiFile);
     }
 
@@ -89,7 +90,7 @@ public class Settings {
      * @return The id of the tomodachi to display or <code>null</code> if none was
      *         selected
      */
-    public TomodachiFile getTomodachiModel() {
+    public TomodachiDefinition getTomodachiModel() {
         return tomodachiFile.get();
     }
 
@@ -98,7 +99,7 @@ public class Settings {
      *
      * @return The tomodachiSettings
      */
-    public TomodachiSettings getTomodachiSettings(TomodachiFile tomodachiFile) {
+    public TomodachiSettings getTomodachiSettings(TomodachiDefinition tomodachiFile) {
         tomodachiSettings.computeIfAbsent(tomodachiFile.getConfig().getId(), key -> new TomodachiSettings());
         return tomodachiSettings.get(tomodachiFile.getConfig().getId());
     }
@@ -124,6 +125,7 @@ public class Settings {
     public void loadPossibleTomodachiFiles() {
         // TODO: throw new UnsupportedOperationException("not implemented yet");
         tomodachiFiles.clear();
-        tomodachiFiles.addAll(tomodachiFile.get(), TomodachiFile.createMockObject(), TomodachiFile.createMockObject());
+        tomodachiFiles.addAll(tomodachiFile.get(), TomodachiDefinition.createMockObject(),
+                TomodachiDefinition.createMockObject());
     }
 }

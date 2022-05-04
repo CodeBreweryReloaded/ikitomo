@@ -3,7 +3,7 @@ package ch.zhaw.ikitomo.settings.view;
 import java.io.IOException;
 import java.net.URL;
 
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.exception.LoadUIException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
- * A cell for a list showing {@link TomodachiFile}s
+ * A cell for a list showing {@link TomodachiDefinition}s
  */
-public class TomodachiListViewCell extends ListCell<TomodachiFile> {
+public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
 
     /**
      * The root pane
@@ -46,7 +46,7 @@ public class TomodachiListViewCell extends ListCell<TomodachiFile> {
     }
 
     @Override
-    protected void updateItem(TomodachiFile item, boolean empty) {
+    protected void updateItem(TomodachiDefinition item, boolean empty) {
         super.updateItem(item, empty);
         setText(null);
         if (empty || item == null) {

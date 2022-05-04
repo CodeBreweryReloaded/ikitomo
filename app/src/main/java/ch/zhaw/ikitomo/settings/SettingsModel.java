@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.DelayedRunnable;
 import ch.zhaw.ikitomo.common.settings.Settings;
-import ch.zhaw.ikitomo.common.settings.SettingsLoader;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import ch.zhaw.ikitomo.common.settings.SettingsManager;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
@@ -76,7 +76,7 @@ public class SettingsModel {
      */
     private void actuallySaveToFile() {
         try {
-            SettingsLoader.saveToDefault(settings);
+            SettingsManager.saveToDefault(settings);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not save settings", e);
             fireSaveExceptionHandler(e);
@@ -84,11 +84,11 @@ public class SettingsModel {
     }
 
     /**
-     * Setts the current {@link TomodachiFile}
+     * Setts the current {@link TomodachiDefinition}
      * 
      * @param tomodachiFile the tomodachi file
      */
-    public void setTomodachi(TomodachiFile tomodachiFile) {
+    public void setTomodachi(TomodachiDefinition tomodachiFile) {
         settings.setTomodachiModel(tomodachiFile);
         save();
     }
@@ -116,7 +116,7 @@ public class SettingsModel {
      * 
      * @return the list
      */
-    public ObservableList<TomodachiFile> getTomodachiFiles() {
+    public ObservableList<TomodachiDefinition> getTomodachiDefinitions() {
         return settings.getTomodachiFiles();
     }
 
