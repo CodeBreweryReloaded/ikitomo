@@ -1,6 +1,5 @@
 package ch.zhaw.ikitomo;
 
-import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;

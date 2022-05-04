@@ -47,7 +47,7 @@ public class TomodachiSettings {
      * @return The chance to sleep
      */
     @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
-    public Float getSleepChance() {
+    public float getSleepChance() {
         return sleepChance.get();
     }
 
@@ -57,7 +57,7 @@ public class TomodachiSettings {
      * @param sleepChance The sleep chance
      */
     @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
-    public void setSleepChance(Float sleepChance) {
+    public void setSleepChance(float sleepChance) {
         this.sleepChance.set(sleepChance);
     }
 
