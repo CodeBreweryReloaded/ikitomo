@@ -1,12 +1,14 @@
 package ch.zhaw.ikitomo.overlay;
 
 import java.awt.Window.Type;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.beans.property.ObjectProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.Event;
 
@@ -22,34 +25,39 @@ import javafx.event.Event;
  */
 public class OverlayController implements Killable {
 
-    private static final int WIDTH = 32;
-    private static final int HEIGHT = 32;
     /**
      * The global settings object
      */
     private Settings settings;
+    /**
+     * Field containing the JFX Frame
+     */
     private JFrame frame;
-    private ImageView imageView;
+    /**
+     * The JFX root pane
+     */
     private Pane pane;
-
-
+    /**
+     * The image property from an {@link ImageView}
+     */
+    private ObjectProperty<Image> imageProperty;
 
     /**
-     * Private constructor
-     * 
-     * @param settings The global settings object
+     * Protected controller for {@link OverlayControllerBuilder}
      */
-    private OverlayController(Settings settings, JFrame frame, Pane pane, ImageView imageView) {
-        this.settings = settings;
-        this.frame = frame;
-        this.pane = pane;
-        this.imageView = imageView;
+    protected OverlayController() {
+    }
 
+    /**
+     * A setup method that initializes bindings and EventListeners
+     */
+    public void setup() {
         pane.setOnMouseDragged(dragEvent -> {
-            frame.setLocation((int)(frame.getX() + dragEvent.getX() - pane.getWidth() / 2), (int)(frame.getY() + dragEvent.getY() - pane.getHeight() / 2));
+            frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
+                    (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2));
         });
     }
-    
+
     @Override
     public CompletableFuture<Void> kill() {
         frame.dispose();
@@ -57,33 +65,34 @@ public class OverlayController implements Killable {
     }
 
     /**
-     * Creates a new overlay UI and returns the controller
-     * 
-     * @param settings The global settings object
-     * @return The newly created {@link OverlayController}
+     * Sets settings
+     * @param settings The desired settings to set
      */
-    public static OverlayController newOverlayUI(Settings settings) {
-        Pane pane = new Pane();
-        Image image = new Image("file:Assets/neko-classic-dev/sprites/awake.png");
-        ImageView imageView = new ImageView(image);
-        imageView.setStyle("-fx-background-color: rgba(0,0,0,0);");
-        pane.getChildren().add(imageView);
-        
-        Scene scene = new Scene(pane, WIDTH, HEIGHT);
-        scene.setFill(Color.TRANSPARENT);
+    protected void setSettings(Settings settings) {
+        this.settings = settings;
+    }
 
-        JFrame frame = new JFrame();
-        JFXPanel container = new JFXPanel();
-        container.setScene(scene);
-        frame.getContentPane().add(container);
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setResizable(false);
-        frame.setUndecorated(true);
-        frame.setAlwaysOnTop(true);        
-        frame.setType(Type.UTILITY);
-        frame.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f, 0.0f));
-        frame.setVisible(true);
-        
-        return new OverlayController(settings, frame, pane, imageView);
+    /**
+     * Sets the frame
+     * @param frame The JFX frame
+     */
+    protected void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    /**
+     * Sets the pane contained in the JFX frame
+     * @param pane The pane
+     */
+    protected void setPane(Pane pane) {
+        this.pane = pane;
+    }
+
+    /**
+     * Sets the {@link ObjectProperty} from the {@link ImageView}
+     * @param imageProperty The property
+     */
+    protected void setImageProperty(ObjectProperty<Image> imageProperty) {
+        this.imageProperty = imageProperty;
     }
 }
