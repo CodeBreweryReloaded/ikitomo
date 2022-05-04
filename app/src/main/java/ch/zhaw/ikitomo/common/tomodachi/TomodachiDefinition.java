@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Represents a the definition of a tomodachi
  */
 public class TomodachiDefinition {
     /**
      * The root folder of the tomodachi file
-     * //TODO this field has to be transient
      */
+    @JsonIgnore
     private Path rootFolder;
 
     /**
