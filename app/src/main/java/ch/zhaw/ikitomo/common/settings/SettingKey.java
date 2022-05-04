@@ -3,7 +3,7 @@ package ch.zhaw.ikitomo.common.settings;
 /**
  * Represents the key of a setting
  */
-public abstract class SettingKey {
+public class SettingKey {
     /**
      * Indicates the id of the currently selected tomodachi
      */

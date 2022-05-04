@@ -3,7 +3,7 @@ package ch.zhaw.ikitomo.common.tomodachi;
 /**
  * Represents the key of a setting
  */
-public abstract class TomodachiSettingKey {
+public class TomodachiSettingKey {
     /**
      * Indicates the chance of the tomodachi to sleep
      */
