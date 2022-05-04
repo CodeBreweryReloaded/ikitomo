@@ -1,6 +1,8 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
@@ -9,6 +11,11 @@ import ch.zhaw.ikitomo.common.settings.SettingsManager;
  * Represents the environment of the tomodachi application
  */
 public class TomodachiEnvironment {
+    /**
+     * A component for logging messages.
+     */
+    private static final Logger LOGGER = Logger.getLogger(TomodachiEnvironment.class.getName());
+
     /**
      * A component for loading and saving settings
      */
@@ -67,8 +74,17 @@ public class TomodachiEnvironment {
      * @return The settings of the application
      * @throws IOException Occurs when the settings could not be loaded
      */
-    public Settings load() throws IOException {
-        settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
+    public Settings load() {
+        try
+        {
+            settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
+        }
+        catch (IOException e)
+        {
+            LOGGER.log(Level.WARNING, "The settings could not be loaded.", e);
+            settings = new Settings();
+        }
+
         return settings;
     }
 
