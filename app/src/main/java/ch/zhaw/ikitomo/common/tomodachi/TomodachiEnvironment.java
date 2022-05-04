@@ -58,14 +58,26 @@ public class TomodachiEnvironment {
      * @return The settings of the application
      */
     public Settings getSettings() {
-        if (settings == null) {
-            try {
-                settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
         return settings;
+    }
+
+    /**
+     * Loads the settings from the default location
+     *
+     * @return The settings of the application
+     * @throws IOException Occurs when the settings could not be loaded
+     */
+    public Settings load() throws IOException {
+        settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
+        return settings;
+    }
+
+    /**
+     * Saves the settings to the default location
+     *
+     * @throws IOException Occurs when the settings could not be saved
+     */
+    public void save() throws IOException {
+        settingsManager.save(SettingsManager.DEFAULT_SETTINGS_PATH, settings);
     }
 }
