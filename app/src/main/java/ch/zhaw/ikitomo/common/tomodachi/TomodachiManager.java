@@ -32,6 +32,7 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
      * @return The loaded Tomodachi File
      * @throws IOException If the file could not be loaded
      */
+    @Override
     public TomodachiDefinition load(String rootFolder) throws IOException {
         return super.load(Paths.get(rootFolder, getConfigBaseName()).toString());
     }
