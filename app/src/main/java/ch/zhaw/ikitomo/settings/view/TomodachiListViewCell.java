@@ -12,19 +12,36 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * A cell for a list showing {@link TomodachiFile}s
+ */
 public class TomodachiListViewCell extends ListCell<TomodachiFile> {
 
+    /**
+     * The root pane
+     */
     @FXML
     private BorderPane rootPane;
 
+    /**
+     * the label showing the text
+     */
     @FXML
     private Label label;
-
+    /**
+     * The image view showing an image of the tomodachi
+     */
     @FXML
     private ImageView tomodachiImage;
 
+    /**
+     * The internal fxml loader
+     */
     private FXMLLoader fxmlLoader;
 
+    /**
+     * Constructor
+     */
     public TomodachiListViewCell() {
     }
 
@@ -50,6 +67,9 @@ public class TomodachiListViewCell extends ListCell<TomodachiFile> {
         }
     }
 
+    /**
+     * Loads the fxml file and initializes this instance as a controller
+     */
     private void loadFromFXML() {
         URL location = getClass().getResource("tomodachi-list-view-cell.fxml");
         if (location == null) {

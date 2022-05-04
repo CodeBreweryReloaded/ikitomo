@@ -13,6 +13,9 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
+/**
+ * The model class for the {@link SettingsController}
+ */
 public class SettingsModel {
     /**
      * the logger
@@ -40,21 +43,37 @@ public class SettingsModel {
      */
     private List<Consumer<Exception>> saveExceptionHandler = new ArrayList<>();
 
+    /**
+     * Constructor
+     * 
+     * @param settings The global {@link Settings} object
+     */
     public SettingsModel(Settings settings) {
         this.settings = settings;
     }
 
     /**
-     * @return the settings
+     * Gets the settings object
+     * 
+     * @return The settings
      */
     public Settings getSettings() {
         return settings;
     }
 
+    /**
+     * Saves the current settings after a period to make sure that the program only
+     * saves when the user finished an action.
+     * The waiting period is defined in {@link #SAVING_DELAY}
+     */
     public void save() {
         delayedSaveRunnable.run();
     }
 
+    /**
+     * The method called by the {@link #delayedSaveRunnable} which actually saves
+     * the content of settings
+     */
     private void actuallySaveToFile() {
         try {
             SettingsLoader.saveToDefault(settings);
@@ -64,19 +83,39 @@ public class SettingsModel {
         }
     }
 
+    /**
+     * Setts the current {@link TomodachiFile}
+     * 
+     * @param tomodachiFile the tomodachi file
+     */
     public void setTomodachi(TomodachiFile tomodachiFile) {
         settings.setTomodachiModel(tomodachiFile);
         save();
     }
 
+    /**
+     * Adds an exception handler which is called when saving the settings fails
+     * 
+     * @param handler The handler
+     */
     public void addSaveExceptionHandler(Consumer<Exception> handler) {
         saveExceptionHandler.add(handler);
     }
 
+    /**
+     * Fires all {@link #saveExceptionHandler}
+     * 
+     * @param e The exception which is given to the exception handlers
+     */
     private void fireSaveExceptionHandler(Exception e) {
         Platform.runLater(() -> saveExceptionHandler.forEach(handler -> handler.accept(e)));
     }
 
+    /**
+     * Gets a list with all tomodachi files
+     * 
+     * @return the list
+     */
     public ObservableList<TomodachiFile> getTomodachiFiles() {
         return settings.getTomodachiFiles();
     }
