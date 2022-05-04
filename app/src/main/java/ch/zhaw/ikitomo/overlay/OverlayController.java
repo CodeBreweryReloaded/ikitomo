@@ -1,24 +1,15 @@
 package ch.zhaw.ikitomo.overlay;
 
-import java.awt.Window.Type;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.beans.property.ObjectProperty;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.Event;
 
 /**
  * The controller for the overlay that displays the Tomodachi

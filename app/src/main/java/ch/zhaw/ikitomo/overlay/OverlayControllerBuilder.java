@@ -1,14 +1,11 @@
 package ch.zhaw.ikitomo.overlay;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.Window.Type;
 
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.settings.Settings;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
