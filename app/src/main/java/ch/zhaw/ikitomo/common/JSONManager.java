@@ -24,7 +24,7 @@ public abstract class JSONManager<T> {
     /**
      * Initializes a new instance of the {@link JSONManager} class
      */
-    public JSONManager(Class<T> dataType) {
+    protected JSONManager(Class<T> dataType) {
         this.dataType = dataType;
     }
 
