@@ -92,13 +92,19 @@ public class TomodachiModel {
      * The model is set at the given initial position with the velocity of zero.
      * </p>
      * 
-     * @param tomodachiFile The tomodachi file
-     * @param position      The initial position
+     * @param tomodachi The tomodachi definition
+     * @param position  The initial position
      * @return The created model
      */
+<<<<<<< HEAD
     public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachiFile, Vector2 position) {
         TomodachiModel model = new TomodachiModel(tomodachiFile.getConfig().getId(),
                 tomodachiFile.getConfig().getName(), position,
+=======
+    public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachi, Vector2 position) {
+        TomodachiModel model = new TomodachiModel(tomodachi.getID(),
+                tomodachi.getName(), position,
+>>>>>>> main
                 Vector2.ZERO, null);
         throw new UnsupportedOperationException("not implemented yet loading the animations");
     }

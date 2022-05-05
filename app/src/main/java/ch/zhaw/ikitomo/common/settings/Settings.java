@@ -3,30 +3,30 @@ package ch.zhaw.ikitomo.common.settings;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Represents the settings of the application.
  */
 public class Settings {
     /**
-     * The available tomodachi files
+     * The id of the currently selected tomodachi
      */
-    private ObservableList<TomodachiDefinition> tomodachiFiles = FXCollections.observableArrayList();
+    @JsonIgnore
+    private StringProperty tomodachiID = new SimpleStringProperty();
+
     /**
-     * The currently seleted tomodachi model
+     * A set of tomodachi ids and their corresponding settings
      */
-    private ObjectProperty<TomodachiDefinition> tomodachiFile = new SimpleObjectProperty<>();
-    /**
-     * The current settings of the tomodachi.
-     */
+    @JsonProperty(SettingKey.TOMODACHI_SETTINGS)
     private Map<String, TomodachiSettings> tomodachiSettings = new HashMap<>();
 
     /**
@@ -37,7 +37,7 @@ public class Settings {
      * created and added to the {@link #tomodachiSettings} map
      */
     private ObjectBinding<TomodachiSettings> currentTomodachiSettings = Bindings
-            .createObjectBinding(() -> getTomodachiSettings(getTomodachiModel()), tomodachiFile);
+            .createObjectBinding(() -> getTomodachiSettings(), tomodachiID);
 
     /**
      * Initializes a new instance of the {@link Settings} class
@@ -46,86 +46,68 @@ public class Settings {
     }
 
     /**
-     * Constructor
-     * 
-     * @param tomodachiID       The id of the tomodachi to display
-     * @param tomodachiSettings The tomodachi settings
+     * Initializes a new instance of the {@link Settings} class
+     *
+     * @param tomodachiSettings A set of tomodachi ids and their corresponding
+     *                          settings
      */
-    public Settings(TomodachiDefinition tomodachiFile, Map<String, TomodachiSettings> tomodachiSettings) {
-        this.tomodachiFile.set(tomodachiFile);
+
+    public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
+        this.setTomodachiID(tomodachiID);
         this.tomodachiSettings = tomodachiSettings;
     }
 
     /**
-     * Gets the available tomodachi files
+     * Gets the id of the currently selected tomodachi
      *
-     * @return The available tomodachi files
+     * @return The id of the currently selected tomodachi
      */
-    public ObservableList<TomodachiDefinition> getTomodachiFiles() {
-        return tomodachiFiles;
+
+    @JsonProperty(SettingKey.TOMODACHI_ID)
+    public String getTomodachiID() {
+        return tomodachiID.get();
     }
 
     /**
-     * Gets a property holding the tomodachi id
+     * Sets the id of the currently selected tomodachi
      *
-     * @return A property holding the tomodachi id
+     * @param tomodachiID The id of the currently selected tomodachi
      */
-    public ObjectProperty<TomodachiDefinition> tomodachiFileProperty() {
-        return tomodachiFile;
+
+    @JsonProperty(SettingKey.TOMODACHI_ID)
+    public void setTomodachiID(String value) {
+        this.tomodachiID.set(value);
     }
 
     /**
-     * Sets the id of the tomodachi to display
-     * 
-     * @param tomodachiID The id of the tomodachi to display
-     */
-    public void setTomodachiModel(TomodachiDefinition tomodachiFile) {
-        this.tomodachiFile.set(tomodachiFile);
-    }
-
-    /**
-     * Gets the id of the tomodachi to display or <code>null</code> if none was
-     * selected
-     *
-     * @return The id of the tomodachi to display or <code>null</code> if none was
-     *         selected
-     */
-    public TomodachiDefinition getTomodachiModel() {
-        return tomodachiFile.get();
-    }
-
-    /**
-     * Gets the tomodachi settings
+     * Gets the currently selected tomodachi settings
      *
      * @return The tomodachiSettings
      */
-    public TomodachiSettings getTomodachiSettings(TomodachiDefinition tomodachiFile) {
-        tomodachiSettings.computeIfAbsent(tomodachiFile.getConfig().getId(), key -> new TomodachiSettings());
-        return tomodachiSettings.get(tomodachiFile.getConfig().getId());
+
+    @JsonIgnore
+    public TomodachiSettings getTomodachiSettings() {
+        tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
+        return tomodachiSettings.get(getTomodachiID());
     }
 
     /**
-     * @return the currentTomodachiSettings
+     * Gets a property holding the id of the currently selected tomodachi
+     *
+     * @return A property holding the id of the currently selected tomodachi
      */
+    @JsonIgnore
+    public StringProperty tomodachiIDProperty() {
+        return tomodachiID;
+    }
+
+    /**
+     * Gets a binding to the current selected tomodachi settings
+     * 
+     * @return the binding
+     */
+    @JsonIgnore
     public ObjectBinding<TomodachiSettings> currentTomodachiSettingsBinding() {
         return currentTomodachiSettings;
-    }
-
-    /**
-     * @return the currentTomodachiSettings
-     */
-    public TomodachiSettings getCurrentTomodachiSettings() {
-        return currentTomodachiSettings.get();
-    }
-
-    /**
-     * Loads all available tomodachi files and stores them inside the
-     * {@link #tomodachiFiles} list
-     */
-    public void loadPossibleTomodachiFiles() {
-        // TODO: throw new UnsupportedOperationException("not implemented yet");
-        tomodachiFiles.clear();
-        tomodachiFiles.addAll(tomodachiFile.get(), TomodachiDefinition.createMockObject(),
-                TomodachiDefinition.createMockObject());
     }
 }

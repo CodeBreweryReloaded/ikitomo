@@ -1,16 +1,28 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import ch.zhaw.ikitomo.common.JSONManager;
 
 /**
  * A helper class to load {@link TomodachiDefinition} objects
  */
-public class TomodachiManager {
+public class TomodachiManager extends JSONManager<TomodachiDefinition> {
     /**
      * Private constructor
      */
-    private TomodachiManager() {
+    public TomodachiManager() {
+        super(TomodachiDefinition.class);
+    }
+
+    /**
+     * Gets the base name of the tomodachi definition files
+     *
+     * @return The base name of the tomodachi definition files
+     */
+    protected String getConfigBaseName() {
+        return "tomodachi.json";
     }
 
     /**
@@ -20,18 +32,19 @@ public class TomodachiManager {
      * @return The loaded Tomodachi File
      * @throws IOException If the file could not be loaded
      */
-    public static TomodachiDefinition load(String rootFolder) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+    @Override
+    public TomodachiDefinition load(String rootFolder) throws IOException {
+        return super.load(Paths.get(rootFolder, getConfigBaseName()).toString());
     }
 
     /**
      * Saves the given {@link TomodachiDefinition} to the root folder set in the
      * {@link TomodachiDefinition#getRootFolder()}
      * 
-     * @param file the tomodachi file to save
+     * @param definition The tomodachi definition to save
+     * @throws IOException Occurs when the file could not be saved
      */
-    public static void save(TomodachiDefinition file) {
-        Path tomodachiFile = file.getRootFolder().resolve("tomodachi.json");
-        throw new UnsupportedOperationException("not implemented yet");
+    public void save(TomodachiDefinition definition) throws IOException {
+        super.save(definition.getRootFolder().resolve(getConfigBaseName()).toString(), definition);
     }
 }

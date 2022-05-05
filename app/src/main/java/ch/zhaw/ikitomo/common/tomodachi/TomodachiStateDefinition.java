@@ -5,13 +5,14 @@ import java.util.Objects;
 import ch.zhaw.ikitomo.common.StateType;
 
 /**
- * Represents a state of a tomodachi's state machine
+ * Represents the definition of a state of a tomodachi's state machine
  */
 public class TomodachiStateDefinition {
     /**
      * The type of the state
      */
     private StateType type;
+
     /**
      * The animation belonging to the state
      */
