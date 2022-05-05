@@ -6,7 +6,9 @@ import java.awt.Window.Type;
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.overlay.model.OverlayModel;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.beans.property.ObjectProperty;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Rectangle2D;
 
 /**
  * The controller for the overlay that displays the Tomodachi
@@ -22,6 +25,10 @@ import javafx.embed.swing.JFXPanel;
 public class OverlayController implements Killable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
+    /**
+     * The overlay model instance
+     */
+    private OverlayModel model;
     /**
      * The global environment object
      */
@@ -35,21 +42,20 @@ public class OverlayController implements Killable {
      */
     private Pane pane;
     /**
-     * The image property from an {@link ImageView}
+     * The {@link Image} property from an {@link ImageView}
      */
     private ObjectProperty<Image> imageProperty;
+    /**
+     * The {@link Rectangle2D} property from an {@link ImageView}
+     */
+    private ObjectProperty<Rectangle2D> viewportPorperty;
 
     /**
      * Protected controller for {@link OverlayControllerBuilder}
      */
-    public OverlayController() {
+    public OverlayController(TomodachiEnvironment environment, Image image) {
+        model = new OverlayModel(environment);
 
-    }
-
-    /**
-     * A setup method that initializes bindings and EventListeners
-     */
-    public void setup(Image image) {
         createPane(image);
         createFrame(pane);
 
@@ -66,19 +72,23 @@ public class OverlayController implements Killable {
     }
 
     /**
-     * Creates a scene and stores it internally. Also appends a previously created
-     * {@link ImageView}
+     * Creates a pane containing an {@link Image} node. Also stores two
+     * ObjectProperties and the pane inside their respective fields
+     * 
+     * @param image
      */
     private void createPane(Image image) {
         ImageView imageView = new ImageView(image);
         imageView.setStyle("-fx-background-color: rgba(0,0,0,0);");
+        this.viewportPorperty = imageView.viewportProperty();
         this.imageProperty = imageView.imageProperty();
         this.pane = new Pane();
         this.pane.getChildren().add(imageView);
     }
-    
+
     /**
      * Spawns a transparent utility window with the specified {@link Pane}
+     * 
      * @param pane The pane to show
      */
     private void createFrame(Pane pane) {

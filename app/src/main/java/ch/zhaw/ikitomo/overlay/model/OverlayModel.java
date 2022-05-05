@@ -1,17 +1,20 @@
 package ch.zhaw.ikitomo.overlay.model;
 
 import ch.zhaw.ikitomo.common.settings.Settings;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
+import javafx.beans.value.ObservableObjectValue;
+import javafx.scene.image.Image;
 
 /**
  * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
  */
 public class OverlayModel {
     /**
-     * The global settings object
+     * The current tomodachi environment object
      */
-    private Settings settings;
+    private TomodachiEnvironment environment;
     /**
      * The currently loaded tomodachi
      */
@@ -20,11 +23,11 @@ public class OverlayModel {
     /**
      * Constructor
      *
-     * @param settings The global settings object
+     * @param environment The global settings object
      */
-    public OverlayModel(Settings settings) {
-        this.settings = settings;
-        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel, settings.tomodachiIDProperty());
+    public OverlayModel(TomodachiEnvironment environment) {
+        this.environment = environment;
+        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel, environment.getSettings().tomodachiIDProperty());
     }
 
     /**
@@ -43,15 +46,6 @@ public class OverlayModel {
      */
     public TomodachiModel getTomodachi() {
         return tomodachi.get();
-    }
-
-    /**
-     * Gets the global settings
-     *
-     * @return The global settings
-     */
-    public Settings getSettings() {
-        return settings;
     }
 
     /**
