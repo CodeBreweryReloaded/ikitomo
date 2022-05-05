@@ -6,6 +6,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;
 import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +22,6 @@ public class IkitomoApplication extends Application {
     public void start(Stage primaryStage) {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
         SettingsController.newSettingsUI(environment);
-        OverlayController overlayController = OverlayController.newOverlayUI(environment, primaryStage);
+        OverlayController overlayController = new OverlayController(environment, new Image("file:../Assets/neko-classic-dev/sprites/awake.png"));
     }
 }
