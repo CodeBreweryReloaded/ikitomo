@@ -12,6 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ch.zhaw.ikitomo.common.StateType;
 
 /**
+ * Represents a tomodachi file
+ * import com.fasterxml.jackson.annotation.JsonIgnore;
+ * 
+ * /**
  * Represents a the definition of a tomodachi
  */
 public class TomodachiDefinition {
@@ -40,6 +44,9 @@ public class TomodachiDefinition {
      * The available states of the tomodachi
      */
     private List<TomodachiStateDefinition> states = new ArrayList<>();
+
+    private TomodachiDefinition() {
+    }
 
     /**
      * Constructor
@@ -121,14 +128,17 @@ public class TomodachiDefinition {
                 && Objects.equals(states, other.states);
     }
 
-    // TODO: Remove when reading JSON files becomes possible
-    private static int nextID;
-    
+    private static int nextId = 0;
+
     public static TomodachiDefinition createMockObject() {
         var tomodachiSettings = new TomodachiSettings(0.01f, 0.01f);
-        int id = nextID++;
+        var id = Integer.toString(nextId++);
         var states = Arrays.asList(new TomodachiStateDefinition(StateType.IDLE, null));
-        return new TomodachiDefinition(Paths.get("./"), "ch.zhaw.mock" + id, "Mock " + id, tomodachiSettings, states);
+        return new TomodachiDefinition(Paths.get("./"), id, "Mock " + id, tomodachiSettings, states);
+    }
+
+    protected void setRootPath(Path rootFolder) {
+        this.rootFolder = rootFolder;
     }
 
 }

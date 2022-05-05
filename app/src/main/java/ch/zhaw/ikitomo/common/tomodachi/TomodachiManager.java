@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import ch.zhaw.ikitomo.common.JSONManager;
@@ -34,7 +35,10 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
      */
     @Override
     public TomodachiDefinition load(String rootFolder) throws IOException {
-        return super.load(Paths.get(rootFolder, getConfigBaseName()).toString());
+        Path rootFolderPath = Paths.get(rootFolder, getConfigBaseName());
+        var result = super.load(rootFolderPath.toString());
+        result.setRootPath(rootFolderPath);
+        return result;
     }
 
     /**
