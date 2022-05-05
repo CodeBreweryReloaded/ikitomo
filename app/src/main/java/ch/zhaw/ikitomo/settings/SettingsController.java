@@ -3,11 +3,11 @@ package ch.zhaw.ikitomo.settings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
@@ -27,10 +27,6 @@ import javafx.util.converter.NumberStringConverter;
  * The settings controller
  */
 public class SettingsController implements Killable {
-    /**
-     * the logger
-     */
-    private static final Logger logger = Logger.getLogger(SettingsController.class.getName());
 
     /**
      * The title of the settings window
@@ -82,10 +78,10 @@ public class SettingsController implements Killable {
     /**
      * Private constructor
      * 
-     * @param settings The global settings object
+     * @param environment The global environment object
      */
-    private SettingsController(Settings settings) {
-        this.model = new SettingsModel(settings);
+    private SettingsController(TomodachiEnvironment environment) {
+        this.model = new SettingsModel(environment);
     }
 
     /**
@@ -96,7 +92,7 @@ public class SettingsController implements Killable {
         Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
         tomodachiList.setItems(model.getTomodachiDefinitions());
-        initProperties(null, settings.getCurrentTomodachiSettings());
+        initProperties(null, settings.getTomodachiSettings());
         settings.currentTomodachiSettingsBinding()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
 
@@ -142,10 +138,10 @@ public class SettingsController implements Killable {
      * Creates a new settings window based on the settings FXML and returns the
      * Settings controller
      * 
-     * @param settings The global settings object
+     * @param environment The global environment object
      * @return The new {@link SettingsController}
      */
-    public static SettingsController newSettingsUI(Settings settings) {
+    public static SettingsController newSettingsUI(TomodachiEnvironment environment) {
         URL settingsFxmlUrl = SettingsController.class.getResource("settings.fxml");
         FXMLLoader loader = new FXMLLoader(settingsFxmlUrl);
         try {
@@ -153,7 +149,7 @@ public class SettingsController implements Killable {
                 if (!param.equals(SettingsController.class)) {
                     throw new LoadUIException("The controller factory can only create SettingsController");
                 }
-                return new SettingsController(settings);
+                return new SettingsController(environment);
             });
             Parent parent = loader.load();
             SettingsController controller = loader.getController();

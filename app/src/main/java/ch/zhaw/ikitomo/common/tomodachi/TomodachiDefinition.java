@@ -45,6 +45,9 @@ public class TomodachiDefinition {
      */
     private List<TomodachiStateDefinition> states = new ArrayList<>();
 
+    private TomodachiDefinition() {
+    }
+
     /**
      * Constructor
      * 
@@ -132,6 +135,10 @@ public class TomodachiDefinition {
         var id = Integer.toString(nextId++);
         var states = Arrays.asList(new TomodachiStateDefinition(StateType.IDLE, null));
         return new TomodachiDefinition(Paths.get("./"), id, "Mock " + id, tomodachiSettings, states);
+    }
+
+    protected void setRootPath(Path rootFolder) {
+        this.rootFolder = rootFolder;
     }
 
 }

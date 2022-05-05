@@ -57,7 +57,7 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
             if (label == null) {
                 loadFromFXML();
             }
-            label.setText(item.getConfig().getName());
+            label.setText(item.getName());
             if (isSelected()) {
                 setStyle("-fx-background-color: -fx-focus-color;");
             } else {

@@ -2,10 +2,14 @@ package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -31,9 +35,10 @@ public class TomodachiEnvironment {
     private static final String DEFAULT_TOMODACHI_FOLDER_PATH = "./tomodachi";
 
     /**
-     * The id of the default tomodachi
+     * The location of the default tomodachi definition file
      */
-    private static final String DEFAULT_TOMODACHI_ID = "ch.zhaw.ikitomo.neko";
+    private static final URL DEFAULT_TOMODACHI_LOCATION = TomodachiEnvironment.class
+            .getResource("/defaultTomodachi/tomodachi.json");
 
     /**
      * A component for logging messages.
@@ -71,8 +76,7 @@ public class TomodachiEnvironment {
      * A binding of the currently selected tomodachi definition in the
      * {@link #settings} object
      */
-    private ObjectBinding<TomodachiDefinition> currentTomodachiDefinition = Bindings.createObjectBinding(
-            this::getCurrentTomodachiDefinitionFromTomodachiDefinitionMap, settings.tomodachiIDProperty());
+    private ObjectBinding<TomodachiDefinition> currentTomodachiDefinition;
 
     /**
      * The default tomodachi definition. This is loaded in
@@ -88,6 +92,12 @@ public class TomodachiEnvironment {
     public TomodachiEnvironment(SettingsManager settingsManager, TomodachiManager tomodachiManager) {
         this.settingsManager = settingsManager;
         this.tomodachiManager = tomodachiManager;
+        loadSettings();
+        loadDefaultTomodachiDefinition();
+        reloadTomodachis().join();
+        // settings is set by load()
+        this.currentTomodachiDefinition = Bindings.createObjectBinding(
+                this::getCurrentTomodachiDefinitionFromTomodachiDefinitionMap, settings.tomodachiIDProperty());
     }
 
     /**
@@ -121,14 +131,28 @@ public class TomodachiEnvironment {
      * Loads the settings from the default location and loads all available
      * tomodachis
      */
-    public void load() {
+    private void loadSettings() {
         try {
             settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "The settings could not be loaded.", e);
             settings = new Settings();
         }
-        reloadTomodachis().join();
+    }
+
+    /**
+     * Loads the default tomodachi from the classpath
+     */
+    private void loadDefaultTomodachiDefinition() {
+        Objects.requireNonNull(DEFAULT_TOMODACHI_LOCATION,
+                "The default tomodachi definition could not be loaded because the location is null");
+        try {
+            var reader = new InputStreamReader(DEFAULT_TOMODACHI_LOCATION.openStream(), StandardCharsets.UTF_8);
+            defaultTomodachiDefinition = tomodachiManager.load(reader);
+        } catch (IOException e) {
+            throw new IllegalStateException(
+                    "Could not load default tomodachi from \"" + DEFAULT_TOMODACHI_LOCATION + "\"", e);
+        }
     }
 
     /**
@@ -174,16 +198,9 @@ public class TomodachiEnvironment {
     private CompletableFuture<Void> updateTomodachiDefinitions(List<TomodachiDefinition> list) {
         Map<String, TomodachiDefinition> map = list.stream()
                 .collect(Collectors.toMap(TomodachiDefinition::getID, Function.identity()));
-        TomodachiDefinition defaultTomodachi = map.get(DEFAULT_TOMODACHI_ID);
-        if (defaultTomodachi == null) {
-            // TODO: add default tomodachi to resource and load it
-            throw new IllegalStateException("The default tomodachi \"" + DEFAULT_TOMODACHI_ID + "\" doesn't exist");
-        }
-        currentTomodachiDefinitionBinding().invalidate(); // invalidate binging in case the default tomodachi changed
         return JavaFXUtils.runLater(() -> {
             tomodachiDefinitionMap.clear();
             tomodachiDefinitionMap.putAll(map);
-            this.defaultTomodachiDefinition = defaultTomodachi;
         });
     }
 

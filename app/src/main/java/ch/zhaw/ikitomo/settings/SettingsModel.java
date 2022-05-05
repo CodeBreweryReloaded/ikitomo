@@ -1,5 +1,6 @@
 package ch.zhaw.ikitomo.settings;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -8,8 +9,8 @@ import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.DelayedRunnable;
 import ch.zhaw.ikitomo.common.settings.Settings;
-import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
@@ -25,6 +26,8 @@ public class SettingsModel {
      * the delay in ms between the last keystroke and the saving of the settings
      */
     private static final long SAVING_DELAY = 200;
+
+    private TomodachiEnvironment environment;
 
     /**
      * The global settings object
@@ -46,10 +49,11 @@ public class SettingsModel {
     /**
      * Constructor
      * 
-     * @param settings The global {@link Settings} object
+     * @param environment the global environnement object
      */
-    public SettingsModel(Settings settings) {
-        this.settings = settings;
+    public SettingsModel(TomodachiEnvironment environment) {
+        this.environment = environment;
+        this.settings = environment.getSettings();
     }
 
     /**
@@ -76,8 +80,8 @@ public class SettingsModel {
      */
     private void actuallySaveToFile() {
         try {
-            SettingsManager.saveToDefault(settings);
-        } catch (Exception e) {
+            environment.save();
+        } catch (IOException e) {
             logger.log(Level.SEVERE, "Could not save settings", e);
             fireSaveExceptionHandler(e);
         }
@@ -89,7 +93,7 @@ public class SettingsModel {
      * @param tomodachiFile the tomodachi file
      */
     public void setTomodachi(TomodachiDefinition tomodachiFile) {
-        settings.setTomodachiModel(tomodachiFile);
+        settings.setTomodachiID(tomodachiFile.getID());
         save();
     }
 
@@ -117,7 +121,7 @@ public class SettingsModel {
      * @return the list
      */
     public ObservableList<TomodachiDefinition> getTomodachiDefinitions() {
-        return settings.getTomodachiFiles();
+        return environment.getTomodachiDefinitions();
     }
 
 }
