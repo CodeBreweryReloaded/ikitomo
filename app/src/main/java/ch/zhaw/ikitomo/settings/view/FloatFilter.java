@@ -16,13 +16,9 @@ import javafx.scene.control.TextFormatter.Change;
  */
 public class FloatFilter implements UnaryOperator<Change> {
     /**
-     * A predicate which only allows positive numbers
-     */
-    public static final Predicate<Float> IS_POSITIVE_PREDICATE = num -> num >= 0;
-    /**
      * The pattern for recognizing a float number
      */
-    private static final Pattern FLOAT_PATTERN = Pattern.compile("-?\\d*(\\.\\d*)?");
+    private static final Pattern FLOAT_PATTERN = Pattern.compile("\\d*(\\.\\d*)?");
     /**
      * The predicate which restricts the allowed numbers. By default all floats are
      * allowed

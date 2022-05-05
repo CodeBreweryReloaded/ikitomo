@@ -101,8 +101,8 @@ public class SettingsController implements Killable {
         sleepChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
         wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
 
-        sleepChance.setTextFormatter(FloatFilter.newFloatTextFormatter(FloatFilter.IS_POSITIVE_PREDICATE));
-        wakeUpChance.setTextFormatter(FloatFilter.newFloatTextFormatter(FloatFilter.IS_POSITIVE_PREDICATE));
+        sleepChance.setTextFormatter(FloatFilter.newFloatTextFormatter());
+        wakeUpChance.setTextFormatter(FloatFilter.newFloatTextFormatter());
 
         rootPane.setBottom(notificationPane);
         model.addSaveExceptionHandler(

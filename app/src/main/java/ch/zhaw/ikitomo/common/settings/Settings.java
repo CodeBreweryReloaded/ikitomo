@@ -37,12 +37,12 @@ public class Settings {
      * created and added to the {@link #tomodachiSettings} map
      */
     private ObjectBinding<TomodachiSettings> currentTomodachiSettings = Bindings
-            .createObjectBinding(() -> getTomodachiSettings(), tomodachiID);
+            .createObjectBinding(this::getTomodachiSettings, tomodachiID);
 
     /**
      * Initializes a new instance of the {@link Settings} class
      */
-    public Settings() {
+    private Settings() {
     }
 
     /**
@@ -104,10 +104,19 @@ public class Settings {
     /**
      * Gets a binding to the current selected tomodachi settings
      * 
-     * @return the binding
+     * @return The binding
      */
     @JsonIgnore
     public ObjectBinding<TomodachiSettings> currentTomodachiSettingsBinding() {
         return currentTomodachiSettings;
+    }
+
+    /**
+     * Creates a new default settings object
+     * 
+     * @return The default settings object
+     */
+    public static Settings createDefaultSettings() {
+        return new Settings("ch.zhaw.ikitomo.defaultNeko", new HashMap<>());
     }
 }

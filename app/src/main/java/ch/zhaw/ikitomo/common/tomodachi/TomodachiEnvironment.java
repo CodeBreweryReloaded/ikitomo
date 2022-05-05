@@ -136,7 +136,7 @@ public class TomodachiEnvironment {
             settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "The settings could not be loaded.", e);
-            settings = new Settings();
+            settings = Settings.createDefaultSettings();
         }
     }
 
@@ -198,6 +198,7 @@ public class TomodachiEnvironment {
     private CompletableFuture<Void> updateTomodachiDefinitions(List<TomodachiDefinition> list) {
         Map<String, TomodachiDefinition> map = list.stream()
                 .collect(Collectors.toMap(TomodachiDefinition::getID, Function.identity()));
+        map.putIfAbsent(defaultTomodachiDefinition.getID(), defaultTomodachiDefinition);
         return JavaFXUtils.runLater(() -> {
             tomodachiDefinitionMap.clear();
             tomodachiDefinitionMap.putAll(map);
