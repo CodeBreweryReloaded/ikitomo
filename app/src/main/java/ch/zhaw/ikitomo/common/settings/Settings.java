@@ -1,81 +1,65 @@
 package ch.zhaw.ikitomo.common.settings;
 
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Represents the settings of the application.
  */
 public class Settings {
     /**
-     * The available tomodachi files
+     * The id of the currently selected tomodachi
      */
-    private ObservableList<TomodachiFile> tomodachiFiles = FXCollections.observableArrayList();
+    @JsonIgnore
+    private StringProperty tomodachiID = new SimpleStringProperty(); 
+
     /**
-     * The currently seleted tomodachi model
+     * A set of tomodachi ids and their corresponding settings
      */
-    private ObjectProperty<TomodachiFile> tomodachiFile = new SimpleObjectProperty<>();
-    /**
-     * The current settings of the tomodachi.
-     */
-    private TomodachiSettings tomodachiSettings;
+    @JsonProperty(SettingKey.TOMODACHI_SETTINGS)
+    private Map<String, TomodachiSettings> tomodachiSettings = new HashMap<>();
 
     /**
      * Initializes a new instance of the {@link Settings} class
      */
     public Settings() {
-        this.tomodachiSettings = new TomodachiSettings();
     }
 
     /**
-     * Constructor
-     * 
-     * @param tomodachiID       The id of the tomodachi to display
-     * @param tomodachiSettings The tomodachi settings
+     * Initializes a new instance of the {@link Settings} class
+     *
+     * @param tomodachiSettings A set of tomodachi ids and their corresponding settings
      */
-    public Settings(TomodachiFile tomodachiFile, TomodachiSettings tomodachiSettings) {
-        this.tomodachiFile.set(tomodachiFile);
+    public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
+        this.setTomodachiID(tomodachiID);
         this.tomodachiSettings = tomodachiSettings;
     }
 
     /**
-     * Gets the available tomodachi files
+     * Gets the id of the currently selected tomodachi
      *
-     * @return The available tomodachi files
+     * @return The id of the currently selected tomodachi
      */
-    public ObservableList<TomodachiFile> getTomodachiFiles() {
-        return tomodachiFiles;
+    @JsonProperty(SettingKey.TOMODACHI_ID)
+    public String getTomodachiID() {
+        return tomodachiID.get();
     }
 
     /**
-     * Gets a property holding the tomodachi id
+     * Sets the id of the currently selected tomodachi
      *
-     * @return A property holding the tomodachi id
+     * @param tomodachiID The id of the currently selected tomodachi
      */
-    public ObjectProperty<TomodachiFile> tomodachiFileProperty() {
-        return tomodachiFile;
-    }
-
-    /**
-     * Sets the id of the tomodachi to display
-     * 
-     * @param tomodachiID The id of the tomodachi to display
-     */
-    public void setTomodachiModel(TomodachiFile tomodachiFile) {
-        this.tomodachiFile.set(tomodachiFile);
-    }
-
-    /**
-     * Gets the id of the tomodachi to display or <code>null</code> if none was selected
-     *
-     * @return The id of the tomodachi to display or <code>null</code> if none was selected
-     */
-    public TomodachiFile getTomodachiModel() {
-        return tomodachiFile.get();
+    @JsonProperty(SettingKey.TOMODACHI_ID)
+    public void setTomodachiID(String value) {
+        this.tomodachiID.set(value);
     }
 
     /**
@@ -83,8 +67,19 @@ public class Settings {
      *
      * @return The tomodachiSettings
      */
+    @JsonIgnore
     public TomodachiSettings getTomodachiSettings() {
-        return tomodachiSettings;
+        tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
+        return tomodachiSettings.get(getTomodachiID());
+    }
+
+    /**
+     * Gets a property holding the id of the currently selected tomodachi
+     *
+     * @return A property holding the id of the currently selected tomodachi
+     */
+    public StringProperty tomodachiIDProperty() {
+        return tomodachiID;
     }
 
     /**

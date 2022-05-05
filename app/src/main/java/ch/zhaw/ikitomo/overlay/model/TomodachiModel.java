@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.zhaw.ikitomo.common.Vector2;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiFile;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * Represents a the model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}.
+ * Represents a the model for the
+ * {@link ch.zhaw.ikitomo.overlay.OverlayController}.
  * <p>
  * This model also includes loaded resources like animations and fields needed
  * to display a Tomodachi, such as position and velocity.
@@ -86,18 +87,18 @@ public class TomodachiModel {
     }
 
     /**
-     * Loads a {@link TomodachiModel} from a given {@link TomodachiFile}.
+     * Loads a {@link TomodachiModel} from a given {@link TomodachiDefinition}.
      * <p>
      * The model is set at the given initial position with the velocity of zero.
      * </p>
      * 
-     * @param tomodachiFile The tomodachi file
-     * @param position      The initial position
+     * @param tomodachi The tomodachi definition
+     * @param position  The initial position
      * @return The created model
      */
-    public static TomodachiModel loadFromTomodachiFile(TomodachiFile tomodachiFile, Vector2 position) {
-        TomodachiModel model = new TomodachiModel(tomodachiFile.getConfig().getId(),
-                tomodachiFile.getConfig().getName(), position,
+    public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachi, Vector2 position) {
+        TomodachiModel model = new TomodachiModel(tomodachi.getID(),
+                tomodachi.getName(), position,
                 Vector2.ZERO, null);
         throw new UnsupportedOperationException("not implemented yet loading the animations");
     }

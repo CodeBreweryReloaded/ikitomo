@@ -6,14 +6,15 @@ import java.awt.Window.Type;
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.settings.Settings;
-import javafx.beans.property.ObjectProperty;
-import javafx.embed.swing.JFXPanel;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.beans.property.ObjectProperty;
+import javafx.embed.swing.JFXPanel;
 
 /**
  * The controller for the overlay that displays the Tomodachi
@@ -22,9 +23,9 @@ public class OverlayController implements Killable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
     /**
-     * The global settings object
+     * The global environment object
      */
-    private Settings settings;
+    private TomodachiEnvironment environment;
     /**
      * Field containing the JFX Frame
      */

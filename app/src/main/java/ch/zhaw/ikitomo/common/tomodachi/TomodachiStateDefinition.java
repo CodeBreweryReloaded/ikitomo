@@ -5,13 +5,14 @@ import java.util.Objects;
 import ch.zhaw.ikitomo.common.StateType;
 
 /**
- * Represents a state of  a tomodachi's state machine
+ * Represents the definition of a state of a tomodachi's state machine
  */
-public class TomodachiStateFile {
+public class TomodachiStateDefinition {
     /**
      * The type of the state
      */
     private StateType type;
+
     /**
      * The animation belonging to the state
      */
@@ -20,7 +21,7 @@ public class TomodachiStateFile {
     /**
      * Constructor
      */
-    public TomodachiStateFile() {
+    public TomodachiStateDefinition() {
     }
 
     /**
@@ -29,7 +30,7 @@ public class TomodachiStateFile {
      * @param type      The name
      * @param animation The animation of the state
      */
-    public TomodachiStateFile(StateType type, String animation) {
+    public TomodachiStateDefinition(StateType type, String animation) {
         this.type = type;
         this.animation = animation;
     }
@@ -62,10 +63,10 @@ public class TomodachiStateFile {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof TomodachiStateFile)) {
+        if (!(obj instanceof TomodachiStateDefinition)) {
             return false;
         }
-        TomodachiStateFile other = (TomodachiStateFile) obj;
+        TomodachiStateDefinition other = (TomodachiStateDefinition) obj;
         return Objects.equals(animation, other.animation) && Objects.equals(type, other.type);
     }
 
