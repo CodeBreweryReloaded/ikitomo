@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 /**
- * A pane which can show a notifaciation at the bottom of the screen
+ * A pane which can show a notification at the bottom of the screen
  */
 public class BottomNotificationPane extends Pane {
     /**
@@ -28,6 +28,7 @@ public class BottomNotificationPane extends Pane {
      * the label which shows the notification
      */
     private Label label = new Label();
+
     /**
      * The pane which contains the label and is moved by the animation
      */

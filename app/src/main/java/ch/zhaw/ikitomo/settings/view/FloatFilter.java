@@ -19,6 +19,7 @@ public class FloatFilter implements UnaryOperator<Change> {
      * The pattern for recognizing a float number
      */
     private static final Pattern FLOAT_PATTERN = Pattern.compile("\\d*(\\.\\d*)?");
+
     /**
      * The predicate which restricts the allowed numbers. By default all floats are
      * allowed
@@ -34,7 +35,7 @@ public class FloatFilter implements UnaryOperator<Change> {
     /**
      * Constructor
      * 
-     * @param predicate A predicate to further restirct the allowed numbers
+     * @param predicate A predicate to further restrict the allowed numbers
      */
     public FloatFilter(Predicate<Float> predicate) {
         this.predicate = predicate;

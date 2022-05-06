@@ -22,11 +22,15 @@ public class SettingsModel {
      * the logger
      */
     private static final Logger LOGGER = Logger.getLogger(SettingsModel.class.getName());
+
     /**
      * the delay in ms between the last keystroke and the saving of the settings
      */
     private static final long SAVING_DELAY = 200;
 
+    /**
+     * The global tomodachi environment object
+     */
     private TomodachiEnvironment environment;
 
     /**
