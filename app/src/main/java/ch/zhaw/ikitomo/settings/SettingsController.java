@@ -153,7 +153,7 @@ public class SettingsController implements Killable {
         URL settingsFxmlUrl = SettingsController.class.getResource("settings.fxml");
         FXMLLoader loader = new FXMLLoader(settingsFxmlUrl);
         try {
-            loader.setControllerFactory((param) -> {
+            loader.setControllerFactory(param -> {
                 if (!param.equals(SettingsController.class)) {
                     throw new LoadUIException("The controller factory can only create SettingsController");
                 }

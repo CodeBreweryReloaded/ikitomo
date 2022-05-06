@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests the {@link DelayedRunnable} class
  */
-public class DelayedRunnableTest {
+class DelayedRunnableTest {
     /**
      * Tests if {@link #DelayedRunnableTest()} constructor throws the correct errors
      */
