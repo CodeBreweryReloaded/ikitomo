@@ -94,7 +94,7 @@ public class TomodachiEnvironment {
         this.tomodachiManager = tomodachiManager;
         loadSettings();
         loadDefaultTomodachiDefinition();
-        reloadTomodachis().join();
+        updateTomodachiDefinitions(readAvailableTomodachis());
         // settings is set by load()
         this.currentTomodachiDefinition = Bindings.createObjectBinding(
                 this::getCurrentTomodachiDefinitionFromTomodachiDefinitionMap, settings.tomodachiIDProperty());
@@ -164,7 +164,7 @@ public class TomodachiEnvironment {
      */
     public CompletableFuture<Void> reloadTomodachis() {
         return CompletableFuture.supplyAsync(this::readAvailableTomodachis)
-                .thenAccept(this::updateTomodachiDefinitions);
+                .thenCompose(list -> JavaFXUtils.runLater(() -> updateTomodachiDefinitions(list)));
     }
 
     /**
@@ -195,14 +195,12 @@ public class TomodachiEnvironment {
      * 
      * @param list The new list
      */
-    private CompletableFuture<Void> updateTomodachiDefinitions(List<TomodachiDefinition> list) {
+    private void updateTomodachiDefinitions(List<TomodachiDefinition> list) {
         Map<String, TomodachiDefinition> map = list.stream()
                 .collect(Collectors.toMap(TomodachiDefinition::getID, Function.identity()));
         map.putIfAbsent(defaultTomodachiDefinition.getID(), defaultTomodachiDefinition);
-        return JavaFXUtils.runLater(() -> {
-            tomodachiDefinitionMap.clear();
-            tomodachiDefinitionMap.putAll(map);
-        });
+        tomodachiDefinitionMap.clear();
+        tomodachiDefinitionMap.putAll(map);
     }
 
     /**

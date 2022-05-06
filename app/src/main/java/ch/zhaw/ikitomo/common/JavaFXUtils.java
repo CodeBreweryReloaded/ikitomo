@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -93,7 +94,7 @@ public class JavaFXUtils {
      */
     public static <K, T> ObservableList<T> observableValuesFromMap(ObservableMap<K, T> map) {
         Objects.requireNonNull(map, "ObservableMap must not be null");
-        ObservableList<T> list = FXCollections.observableArrayList();
+        ObservableList<T> list = FXCollections.observableArrayList(map.values());
         MapChangeListener<K, T> listener = change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
@@ -102,6 +103,14 @@ public class JavaFXUtils {
             }
         };
         map.addListener(listener);
+        list.addListener(new ListChangeListener<>() {
+
+            @Override
+            public void onChanged(Change<? extends T> c) {
+                System.out.println("added: " + c.getList());
+            }
+
+        });
         return FXCollections.unmodifiableObservableList(list);
     }
 }

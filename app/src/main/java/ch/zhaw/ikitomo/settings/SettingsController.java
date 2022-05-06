@@ -3,6 +3,7 @@ package ch.zhaw.ikitomo.settings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
@@ -27,6 +28,10 @@ import javafx.util.converter.NumberStringConverter;
  * The settings controller
  */
 public class SettingsController implements Killable {
+    /**
+     * The logger
+     */
+    private static final Logger LOGGER = Logger.getLogger(SettingsController.class.getName());
 
     /**
      * The title of the settings window
@@ -92,6 +97,8 @@ public class SettingsController implements Killable {
         Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
         tomodachiList.setItems(model.getTomodachiDefinitions());
+        tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
+
         initProperties(null, settings.getTomodachiSettings());
         settings.currentTomodachiSettingsBinding()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
@@ -130,7 +137,7 @@ public class SettingsController implements Killable {
 
     @Override
     public CompletableFuture<Void> kill() {
-        model.save();
+        model.saveImmediately();
         return CompletableFuture.completedFuture(null);
     }
 
@@ -142,6 +149,7 @@ public class SettingsController implements Killable {
      * @return The new {@link SettingsController}
      */
     public static SettingsController newSettingsUI(TomodachiEnvironment environment) {
+        LOGGER.info("Opening settings window");
         URL settingsFxmlUrl = SettingsController.class.getResource("settings.fxml");
         FXMLLoader loader = new FXMLLoader(settingsFxmlUrl);
         try {
