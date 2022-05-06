@@ -1,6 +1,5 @@
 package ch.zhaw.ikitomo.overlay.model;
 
-import ch.zhaw.ikitomo.common.Animation;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 
