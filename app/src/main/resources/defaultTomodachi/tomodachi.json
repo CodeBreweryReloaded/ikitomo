@@ -8,21 +8,19 @@
     "states": [
         {
             "type": "IDLE",
-            "animationPrefix": "idle",
+            "animationPrefix": "idle_",
             "animations": [
                 {
                     "direction": "NONE",
-                    "animationSuffix": ""
-                }
-            ]
-        },
-        {
-            "type": "THINK",
-            "animationPrefix": "thinking",
-            "animations": [
+                    "animationSuffix": "blink"
+                },
                 {
                     "direction": "NONE",
-                    "animationSuffix": ""
+                    "animationSuffix": "think"
+                },
+                {
+                    "direction": "NONE",
+                    "animationSuffix": "groom"
                 }
             ]
         },

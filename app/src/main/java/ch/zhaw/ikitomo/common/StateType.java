@@ -9,10 +9,6 @@ public enum StateType {
      */
     IDLE,
     /**
-     * The thinking state
-     */
-    THINK,
-    /**
      * The walking state
      */
     RUN,
