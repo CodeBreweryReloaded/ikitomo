@@ -1,4 +1,30 @@
 package ch.zhaw.ikitomo.overlay.model.animation;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javafx.scene.image.Image;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AnimationData {
-    public Frame[] frames;
+    private Frame[] frames;
+
+    @JsonIgnore
+    private Image image;
+
+    private AnimationData() {
+
+    }
+
+    public Frame[] getFrames() {
+        return frames;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
 }
