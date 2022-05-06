@@ -2,33 +2,97 @@
     "id": "ch.zhaw.ikitomo.defaultNeko",
     "name": "Default Neko",
     "settings": {
-        "sleepChance": 0,
-        "wakeChance": 0
+        "sleepChance": 0.5,
+        "wakeChance": 0.5
     },
     "states": [
         {
             "type": "IDLE",
-            "animation": "idle"
+            "animationPrefix": "idle",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
         },
         {
             "type": "THINK",
-            "animation": "thinking"
-        },
-        {
-            "type": "RUN",
-            "animation": "run_"
+            "animationPrefix": "thinking",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
         },
         {
             "type": "YAWN",
-            "animation": "yawn"
+            "animationPrefix": "yawn",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
         },
         {
             "type": "SLEEP",
-            "animation": "sleep"
+            "animationPrefix": "sleep",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
         },
         {
             "type": "WAKE",
-            "animation": "awake"
+            "animationPrefix": "awake",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
+        },
+        {
+            "type": "RUN",
+            "animationPrefix": "run_",
+            "animations": [
+                {
+                    "direction": "UP",
+                    "animationSuffix": "up"
+                },
+                {
+                    "direction": "UP_RIGHT",
+                    "animationSuffix": "up_right"
+                },
+                {
+                    "direction": "RIGHT",
+                    "animationSuffix": "right"
+                },
+                {
+                    "direction": "DOWN_RIGHT",
+                    "animationSuffix": "down_right"
+                },
+                {
+                    "direction": "DOWN",
+                    "animationSuffix": "down_right"
+                },
+                {
+                    "direction": "DOWN_LEFT",
+                    "animationSuffix": "down_left"
+                },
+                {
+                    "direction": "LEFT",
+                    "animationSuffix": "left"
+                },
+                {
+                    "direction": "UP_LEFT",
+                    "animationSuffix": "up_left"
+                }
+            ]
         }
     ]
 }

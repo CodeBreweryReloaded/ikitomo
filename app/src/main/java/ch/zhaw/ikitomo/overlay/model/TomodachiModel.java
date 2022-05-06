@@ -1,7 +1,9 @@
 package ch.zhaw.ikitomo.overlay.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
@@ -50,13 +52,10 @@ public class TomodachiModel {
      * @param velocity The velocity
      * @param states   The states
      */
-    public TomodachiModel(String id, String name, Vector2 position, Vector2 velocity,
-            List<TomodachiModelState> states) {
-        this.id = id;
-        this.name = name;
-        this.position.set(position);
-        this.velocity.set(velocity);
-        this.states.addAll(states);
+    public TomodachiModel(TomodachiDefinition definition) {
+        this.id = definition.getID();
+        this.name = definition.getName();
+        // TODO: Implement
     }
 
     /**
@@ -97,9 +96,7 @@ public class TomodachiModel {
      * @return The created model
      */
     public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachi, Vector2 position) {
-        TomodachiModel model = new TomodachiModel(tomodachi.getID(),
-                tomodachi.getName(), position,
-                Vector2.ZERO, null);
+        TomodachiModel model = new TomodachiModel(null);
         throw new UnsupportedOperationException("not implemented yet loading the animations");
     }
 

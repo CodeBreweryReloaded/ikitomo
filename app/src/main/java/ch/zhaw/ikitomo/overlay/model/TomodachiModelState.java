@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.overlay.model;
 
 import ch.zhaw.ikitomo.common.Animation;
+import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 
 /**
@@ -10,5 +11,5 @@ import ch.zhaw.ikitomo.common.StateType;
  * @param type      The type of the state
  * @param animation The animation
  */
-public record TomodachiModelState(StateType type, Animation animation) {
+public record TomodachiModelState(StateType type, Direction direction, String animationName) {
 }
