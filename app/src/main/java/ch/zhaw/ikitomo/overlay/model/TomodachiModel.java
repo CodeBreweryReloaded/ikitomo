@@ -16,6 +16,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableMap;
 import javafx.scene.image.Image;
 
 /**
@@ -59,7 +60,10 @@ public class TomodachiModel {
      */
     private List<TomodachiModelState> states = new ArrayList<>();
 
-    private Map<StateType, List<AnimationData>> animations;
+    /**
+     * A hash map containing all available animations for each {@link StateType}
+     */
+    private ObservableMap<StateType, List<AnimationData>> animations;
 
     /**
      * Constructor
@@ -73,7 +77,7 @@ public class TomodachiModel {
     public TomodachiModel(TomodachiDefinition definition, Map<StateType, List<AnimationData>> animations) {
         this.id = definition.getID();
         this.name = definition.getName();
-        this.animations = animations;
+        this.animations.putAll(animations);
     }
 
     /**
@@ -104,6 +108,14 @@ public class TomodachiModel {
     }
 
     /**
+     * Provides an observable map containing all currently loaded animations
+     * @return An observable map
+     */
+    public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
+        return animations;
+    }
+
+    /**
      * Creates complete {@link TomodachiModel} based on information inside the
      * provided {@link TomodachiEnvironment}. It is also positioned at the given
      * vector
@@ -127,6 +139,7 @@ public class TomodachiModel {
                     // Load the JSON file
                     AnimationData data = loader.load(rootPath + prefix + animation.animationSuffix() + METADATA_FORMAT);
                     data.setImage(new Image(rootPath + prefix + animation.animationSuffix() + IMAGE_FORMAT));
+                    data.setDirection(animation.direction());
                     return data;
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -51,12 +51,17 @@ public class OverlayController implements Killable {
      * The {@link Rectangle2D} property from an {@link ImageView}
      */
     private ObjectProperty<Rectangle2D> viewportPorperty;
+    /**
+     * Reference to the animator instance
+     */
+    private SpritesheetAnimation animator;
 
     /**
      * Protected controller for {@link OverlayControllerBuilder}
      */
     public OverlayController(TomodachiEnvironment environment, Image image) {
-        model = new OverlayModel(environment, this);
+        this.model = new OverlayModel(environment, this);
+        this.animator = new SpritesheetAnimation(model.getObservableAnimations());
 
         createPane(image);
         createFrame(pane);
@@ -66,7 +71,6 @@ public class OverlayController implements Killable {
                     (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2));
         });
 
-        new SpritesheetAnimation(imageProperty, viewportPorperty);
     }
 
     /**

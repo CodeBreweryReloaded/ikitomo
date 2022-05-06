@@ -1,9 +1,14 @@
 package ch.zhaw.ikitomo.overlay.model;
 
+import java.util.List;
+
+import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.OverlayController;
+import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
+import javafx.collections.ObservableMap;
 
 /**
  * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
@@ -33,6 +38,7 @@ public class OverlayModel {
         this.controller = controller;
         tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel,
                 environment.getSettings().tomodachiIDProperty());
+        loadTomodachiModel();
     }
 
     /**
@@ -53,6 +59,10 @@ public class OverlayModel {
         return tomodachi.get();
     }
 
+    public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
+        return tomodachi.get().getObservableAnimations();
+    }
+
     /**
      * Loads a Tomodachi model from the currently loaded Tomodachi
      * 
@@ -61,7 +71,5 @@ public class OverlayModel {
     private TomodachiModel loadTomodachiModel() {
         return TomodachiModel.loadFromTomodachiFile(environment, controller.getScreenCenter());
     }
-
-
 
 }
