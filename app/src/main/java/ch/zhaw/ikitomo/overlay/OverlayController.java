@@ -9,6 +9,7 @@ import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
+import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +26,7 @@ import javafx.geometry.Rectangle2D;
 public class OverlayController implements Killable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
+    private static final String TRANSPARENT_STYLE = "-fx-background-color: rgba(0,0,0,0);";
     /**
      * The overlay model instance
      */
@@ -63,6 +65,8 @@ public class OverlayController implements Killable {
             frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
                     (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2));
         });
+
+        new SpritesheetAnimation(imageProperty, viewportPorperty);
     }
 
     @Override
@@ -79,10 +83,11 @@ public class OverlayController implements Killable {
      */
     private void createPane(Image image) {
         ImageView imageView = new ImageView(image);
-        imageView.setStyle("-fx-background-color: rgba(0,0,0,0);");
+        imageView.setStyle(TRANSPARENT_STYLE);
         this.viewportPorperty = imageView.viewportProperty();
         this.imageProperty = imageView.imageProperty();
         this.pane = new Pane();
+        pane.setStyle(TRANSPARENT_STYLE);
         this.pane.getChildren().add(imageView);
     }
 
