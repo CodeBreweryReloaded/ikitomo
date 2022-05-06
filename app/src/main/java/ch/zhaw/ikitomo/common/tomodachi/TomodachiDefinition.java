@@ -1,15 +1,11 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import ch.zhaw.ikitomo.common.StateType;
 
 /**
  * Represents a tomodachi file
@@ -74,6 +70,16 @@ public class TomodachiDefinition {
     }
 
     /**
+     * Sets the root folder. This method is package-private that only
+     * {@link TomodachiManager} can set it (and other package classes)
+     * 
+     * @param rootFolder the root folder
+     */
+    void setRootPath(Path rootFolder) {
+        this.rootFolder = rootFolder;
+    }
+
+    /**
      * Gets the id of the tomodachi
      * 
      * @return The id
@@ -126,19 +132,6 @@ public class TomodachiDefinition {
         return Objects.equals(id, other.id) && Objects.equals(name, other.name)
                 && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
-    }
-
-    private static int nextId = 0;
-
-    public static TomodachiDefinition createMockObject() {
-        var tomodachiSettings = new TomodachiSettings(0.01f, 0.01f);
-        var id = Integer.toString(nextId++);
-        var states = Arrays.asList(new TomodachiStateDefinition(StateType.IDLE, null));
-        return new TomodachiDefinition(Paths.get("./"), id, "Mock " + id, tomodachiSettings, states);
-    }
-
-    protected void setRootPath(Path rootFolder) {
-        this.rootFolder = rootFolder;
     }
 
 }
