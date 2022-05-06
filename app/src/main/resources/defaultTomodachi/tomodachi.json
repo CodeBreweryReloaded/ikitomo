@@ -8,15 +8,27 @@
     "states": [
         {
             "type": "IDLE",
-            "animation": "TODO"
+            "animation": "idle"
         },
         {
-            "type": "WALK",
-            "animation": "TODO"
+            "type": "THINK",
+            "animation": "thinking"
+        },
+        {
+            "type": "RUN",
+            "animation": "run_"
+        },
+        {
+            "type": "YAWN",
+            "animation": "yawn"
         },
         {
             "type": "SLEEP",
-            "animation": "TODO"
+            "animation": "sleep"
+        },
+        {
+            "type": "WAKE",
+            "animation": "awake"
         }
     ]
 }

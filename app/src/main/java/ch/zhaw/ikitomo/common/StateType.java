@@ -9,11 +9,23 @@ public enum StateType {
      */
     IDLE,
     /**
+     * The thinking state
+     */
+    THINK,
+    /**
      * The walking state
      */
-    WALK,
+    RUN,
     /**
      * The sleeping state
      */
-    SLEEP
+    SLEEP,
+    /**
+     * The wakening state
+     */
+    AWAKE,
+    /**
+     * The yawning state
+     */
+    YAWN
 }
