@@ -1,20 +1,23 @@
 package ch.zhaw.ikitomo.overlay.model;
 
-import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.overlay.OverlayController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
-import javafx.beans.value.ObservableObjectValue;
-import javafx.scene.image.Image;
 
 /**
  * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
  */
 public class OverlayModel {
+
     /**
      * The current tomodachi environment object
      */
     private TomodachiEnvironment environment;
+    /**
+     * A reference to the controller that created this model
+     */
+    private OverlayController controller;
     /**
      * The currently loaded tomodachi
      */
@@ -25,9 +28,11 @@ public class OverlayModel {
      *
      * @param environment The global settings object
      */
-    public OverlayModel(TomodachiEnvironment environment) {
+    public OverlayModel(TomodachiEnvironment environment, OverlayController controller) {
         this.environment = environment;
-        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel, environment.getSettings().tomodachiIDProperty());
+        this.controller = controller;
+        tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel,
+                environment.getSettings().tomodachiIDProperty());
     }
 
     /**
@@ -54,7 +59,9 @@ public class OverlayModel {
      * @return The loaded Tomodachi model
      */
     private TomodachiModel loadTomodachiModel() {
-        throw new UnsupportedOperationException("not implemented yet");
+        return TomodachiModel.loadFromTomodachiFile(environment, controller.getScreenCenter());
     }
+
+
 
 }

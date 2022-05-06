@@ -1,24 +1,24 @@
 package ch.zhaw.ikitomo.overlay;
 
-import java.util.concurrent.CompletableFuture;
 import java.awt.Window.Type;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.JFrame;
 
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
 import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
+import javafx.beans.property.ObjectProperty;
+import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.beans.property.ObjectProperty;
-import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 /**
  * The controller for the overlay that displays the Tomodachi
@@ -56,7 +56,7 @@ public class OverlayController implements Killable {
      * Protected controller for {@link OverlayControllerBuilder}
      */
     public OverlayController(TomodachiEnvironment environment, Image image) {
-        model = new OverlayModel(environment);
+        model = new OverlayModel(environment, this);
 
         createPane(image);
         createFrame(pane);
@@ -67,6 +67,15 @@ public class OverlayController implements Killable {
         });
 
         new SpritesheetAnimation(imageProperty, viewportPorperty);
+    }
+
+    /**
+     * Gets the center of the primary monitor
+     * @return A vector representing the center point
+     */
+    public Vector2 getScreenCenter() {
+        Rectangle2D screen = Screen.getPrimary().getBounds();
+        return new Vector2((int)screen.getMaxX() / 2, (int)screen.getMaxY() / 2);
     }
 
     @Override

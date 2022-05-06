@@ -1,14 +1,22 @@
 package ch.zhaw.ikitomo.overlay.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+import ch.zhaw.ikitomo.common.JSONManager;
+import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
 
 /**
  * Represents a the model for the
@@ -19,6 +27,14 @@ import javafx.beans.property.SimpleObjectProperty;
  * </p>
  */
 public class TomodachiModel {
+    /**
+    * The file extension that will be used to read images
+    */
+    private static final String IMAGE_FORMAT = ".png";
+    /**
+     * The file extension that will be used to read metadata
+     */
+    private static final String METADATA_FORMAT = ".json";
     /**
      * The id of the tomodachi
      */
@@ -43,6 +59,8 @@ public class TomodachiModel {
      */
     private List<TomodachiModelState> states = new ArrayList<>();
 
+    private Map<StateType, List<AnimationData>> animations;
+
     /**
      * Constructor
      * 
@@ -52,10 +70,10 @@ public class TomodachiModel {
      * @param velocity The velocity
      * @param states   The states
      */
-    public TomodachiModel(TomodachiDefinition definition) {
+    public TomodachiModel(TomodachiDefinition definition, Map<StateType, List<AnimationData>> animations) {
         this.id = definition.getID();
         this.name = definition.getName();
-        // TODO: Implement
+        this.animations = animations;
     }
 
     /**
@@ -86,18 +104,49 @@ public class TomodachiModel {
     }
 
     /**
-     * Loads a {@link TomodachiModel} from a given {@link TomodachiDefinition}.
-     * <p>
-     * The model is set at the given initial position with the velocity of zero.
-     * </p>
+     * Creates complete {@link TomodachiModel} based on information inside the
+     * provided {@link TomodachiEnvironment}. It is also positioned at the given
+     * vector
      * 
-     * @param tomodachi The tomodachi definition
-     * @param position  The initial position
-     * @return The created model
+     * @param environment The current environment
+     * @param position    The desired initial position
+     * @return A working Tomodachi model
      */
-    public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachi, Vector2 position) {
-        TomodachiModel model = new TomodachiModel(null);
-        throw new UnsupportedOperationException("not implemented yet loading the animations");
+    public static TomodachiModel loadFromTomodachiFile(TomodachiEnvironment environment, Vector2 position) {
+        // TODO: Stop animation timer to prevent potential weirdness
+        Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
+        AnimationLoader loader = new AnimationLoader();
+        String rootPath = environment.getCurrentTomodachiDefinition().getRootFolder().toString();
+        environment.getCurrentTomodachiDefinition().getStates().forEach(state -> {
+            // Setup useful variables for later
+            StateType type = state.type();
+            String prefix = state.animationPrefix();
+            // Create AnimationData from each animation
+            animations.put(type, state.animations().stream().map(animation -> {
+                try {
+                    // Load the JSON file
+                    AnimationData data = loader.load(rootPath + prefix + animation.animationSuffix() + METADATA_FORMAT);
+                    data.setImage(new Image(rootPath + prefix + animation.animationSuffix() + IMAGE_FORMAT));
+                    return data;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            })
+                    .collect(Collectors.toList()));
+        });
+        // Remove potential null entries introduced by an IOException
+        animations.forEach((state, data) -> data.removeIf(Objects::isNull));
+
+        return new TomodachiModel(environment.getCurrentTomodachiDefinition(), animations);
     }
 
+    /**
+     * A small {@link JSONManager} extension class for <code>loadFromTomodachiFile()</code>
+     */
+    static class AnimationLoader extends JSONManager<AnimationData> {
+        protected AnimationLoader() {
+            super(AnimationData.class);
+        }
+    }
 }
