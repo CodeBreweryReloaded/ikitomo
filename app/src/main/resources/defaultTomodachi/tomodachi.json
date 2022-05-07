@@ -45,8 +45,8 @@
             ]
         },
         {
-            "type": "AWAKE",
-            "animationPrefix": "awake",
+            "type": "WAKE",
+            "animationPrefix": "wake",
             "animations": [
                 {
                     "direction": "NONE",

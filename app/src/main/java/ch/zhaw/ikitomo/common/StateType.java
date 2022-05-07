@@ -19,7 +19,7 @@ public enum StateType {
     /**
      * The wakening state
      */
-    AWAKE,
+    WAKE,
     /**
      * The yawning state
      */
