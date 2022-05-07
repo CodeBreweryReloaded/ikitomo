@@ -26,7 +26,7 @@ class DelayedRunnableTest {
 
     /**
      * Tests if the task is canceled when {@link DelayedRunnable#run()} is invoked
-     * multiple times. For this a sleep is required.
+     * multiple times. A sleep is required for this.
      * 
      * @throws InterruptedException
      */
