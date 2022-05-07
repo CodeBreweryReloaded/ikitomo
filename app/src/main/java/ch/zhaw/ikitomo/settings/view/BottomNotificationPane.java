@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 /**
- * A pane which can show a notifaciation at the bottom of the screen
+ * A pane which can show a notification at the bottom of the screen
  */
 public class BottomNotificationPane extends Pane {
     /**
@@ -25,9 +25,10 @@ public class BottomNotificationPane extends Pane {
     private Timeline timeline = new Timeline();
 
     /**
-     * the label which shows the notification
+     * The label which shows the notification
      */
     private Label label = new Label();
+
     /**
      * The pane which contains the label and is moved by the animation
      */
@@ -48,7 +49,7 @@ public class BottomNotificationPane extends Pane {
     /**
      * Constructor
      * 
-     * @param autoHideDuration the duration after which the notification is hidden
+     * @param autoHideDuration The duration after which the notification is hidden
      */
     public BottomNotificationPane(Duration autoHideDuration) {
         getChildren().setAll(borderPane);
@@ -114,7 +115,7 @@ public class BottomNotificationPane extends Pane {
      * @param duration The time of the key frame
      * @param y        The y position of the pane
      * @param visible  The visibility of the pane
-     * @return the created key frame
+     * @return The created key frame
      */
     private KeyFrame createKeyFrame(Duration duration, double y, boolean visible) {
         return new KeyFrame(duration, new KeyValue(borderPane.translateYProperty(), y),

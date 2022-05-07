@@ -35,11 +35,6 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
     private ImageView tomodachiImage;
 
     /**
-     * The internal fxml loader
-     */
-    private FXMLLoader fxmlLoader;
-
-    /**
      * Constructor
      */
     public TomodachiListViewCell() {
@@ -75,7 +70,7 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
         if (location == null) {
             throw new LoadUIException("Cannot find tomodachi-list-view-cell.fxml");
         }
-        fxmlLoader = new FXMLLoader(location);
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();

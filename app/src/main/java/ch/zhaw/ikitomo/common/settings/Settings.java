@@ -51,7 +51,6 @@ public class Settings {
      * @param tomodachiSettings A set of tomodachi ids and their corresponding
      *                          settings
      */
-
     public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
         this.setTomodachiID(tomodachiID);
         this.tomodachiSettings = tomodachiSettings;
@@ -62,7 +61,6 @@ public class Settings {
      *
      * @return The id of the currently selected tomodachi
      */
-
     @JsonProperty(SettingKey.TOMODACHI_ID)
     public String getTomodachiID() {
         return tomodachiID.get();
@@ -73,7 +71,6 @@ public class Settings {
      *
      * @param tomodachiID The id of the currently selected tomodachi
      */
-
     @JsonProperty(SettingKey.TOMODACHI_ID)
     public void setTomodachiID(String value) {
         this.tomodachiID.set(value);
@@ -84,7 +81,6 @@ public class Settings {
      *
      * @return The tomodachiSettings
      */
-
     @JsonIgnore
     public TomodachiSettings getTomodachiSettings() {
         tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());

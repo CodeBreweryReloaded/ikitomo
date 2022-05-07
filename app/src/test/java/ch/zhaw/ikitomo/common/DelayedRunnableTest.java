@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests the {@link DelayedRunnable} class
  */
-public class DelayedRunnableTest {
+class DelayedRunnableTest {
     /**
      * Tests if {@link #DelayedRunnableTest()} constructor throws the correct errors
      */
@@ -26,7 +26,7 @@ public class DelayedRunnableTest {
 
     /**
      * Tests if the task is canceled when {@link DelayedRunnable#run()} is invoked
-     * multiple times. For this a sleep is required.
+     * multiple times. A sleep is required for this.
      * 
      * @throws InterruptedException
      */

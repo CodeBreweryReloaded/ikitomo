@@ -93,11 +93,12 @@ public class JavaFXUtils {
      */
     public static <K, T> ObservableList<T> observableValuesFromMap(ObservableMap<K, T> map) {
         Objects.requireNonNull(map, "ObservableMap must not be null");
-        ObservableList<T> list = FXCollections.observableArrayList();
+        ObservableList<T> list = FXCollections.observableArrayList(map.values());
         MapChangeListener<K, T> listener = change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
-            } else if (change.wasRemoved()) {
+            }
+            if (change.wasRemoved()) {
                 list.remove(change.getValueRemoved());
             }
         };

@@ -19,14 +19,18 @@ import javafx.collections.ObservableList;
  */
 public class SettingsModel {
     /**
-     * the logger
+     * The logger
      */
-    private static final Logger logger = Logger.getLogger(SettingsModel.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SettingsModel.class.getName());
+
     /**
-     * the delay in ms between the last keystroke and the saving of the settings
+     * The delay in ms between the last keystroke and the saving of the settings
      */
     private static final long SAVING_DELAY = 200;
 
+    /**
+     * The global tomodachi environment object
+     */
     private TomodachiEnvironment environment;
 
     /**
@@ -38,7 +42,7 @@ public class SettingsModel {
      * A delayed runnable for saving the settings. It prevents the save function
      * being called too rapidly
      */
-    private DelayedRunnable delayedSaveRunnable = new DelayedRunnable(this::actuallySaveToFile,
+    private DelayedRunnable delayedSaveRunnable = new DelayedRunnable(this::saveImmediately,
             SAVING_DELAY);
 
     /**
@@ -66,6 +70,15 @@ public class SettingsModel {
     }
 
     /**
+     * Gets the environment object
+     * 
+     * @return The environment object
+     */
+    public TomodachiEnvironment getEnvironment() {
+        return environment;
+    }
+
+    /**
      * Saves the current settings after a period to make sure that the program only
      * saves when the user finished an action.
      * The waiting period is defined in {@link #SAVING_DELAY}
@@ -75,20 +88,24 @@ public class SettingsModel {
     }
 
     /**
-     * The method called by the {@link #delayedSaveRunnable} which actually saves
-     * the content of settings
+     * Saves the settings immediately with no synchronization. {@link #save()}
+     * may be used normally since it only saves after the {@link #save()} method
+     * isn't invoked for a period
+     * 
+     * @see #save()
      */
-    private void actuallySaveToFile() {
+    public void saveImmediately() {
         try {
             environment.save();
+            LOGGER.info("Saved settings");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Could not save settings", e);
+            LOGGER.log(Level.SEVERE, "Could not save settings", e);
             fireSaveExceptionHandler(e);
         }
     }
 
     /**
-     * Setts the current {@link TomodachiDefinition}
+     * Sets the current {@link TomodachiDefinition}
      * 
      * @param tomodachiFile the tomodachi file
      */
@@ -98,7 +115,7 @@ public class SettingsModel {
     }
 
     /**
-     * Adds an exception handler which is called when saving the settings fails
+     * Adds an exception handler which is called when saving the settings fail
      * 
      * @param handler The handler
      */
@@ -118,7 +135,7 @@ public class SettingsModel {
     /**
      * Gets a list with all tomodachi files
      * 
-     * @return the list
+     * @return The list
      */
     public ObservableList<TomodachiDefinition> getTomodachiDefinitions() {
         return environment.getTomodachiDefinitions();
