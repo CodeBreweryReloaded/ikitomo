@@ -62,6 +62,8 @@ public class OverlayController implements Killable {
     public OverlayController(TomodachiEnvironment environment, Image image) {
         this.model = new OverlayModel(environment, this);
         this.animator = new SpritesheetAnimation(model.getObservableAnimations());
+        imageProperty.bind(animator.getImageProperty());
+        viewportPorperty.bind(animator.getCellProperty());
 
         createPane(image);
         createFrame(pane);
