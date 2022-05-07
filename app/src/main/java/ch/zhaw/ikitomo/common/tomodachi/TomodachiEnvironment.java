@@ -39,12 +39,6 @@ public class TomodachiEnvironment {
      */
     private static final URL DEFAULT_TOMODACHI_LOCATION = TomodachiEnvironment.class
             .getResource("/defaultTomodachi/tomodachi.json");
-            
-    /**
-     * The directory of the default Tomodachi
-     */
-    private static final URL DEFAULT_TOMODACHI_DIRECTORY = TomodachiEnvironment.class
-            .getResource("/defaultTomodachi");
 
     /**
      * A component for logging messages.
@@ -192,12 +186,6 @@ public class TomodachiEnvironment {
                         "The tomodachi definition \"" + tomodachiFolder.getAbsolutePath() + "\" could not be loaded.",
                         e);
             }
-        }
-
-        try {
-            localTomodachiDefinitions.add(tomodachiManager.load(new File(DEFAULT_TOMODACHI_DIRECTORY.toURI()).getAbsolutePath()));
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Default Tomodachi directory could not be opened.", e);
         }
         return localTomodachiDefinitions;
     }
