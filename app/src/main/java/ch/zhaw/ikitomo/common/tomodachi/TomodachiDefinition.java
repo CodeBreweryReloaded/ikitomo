@@ -130,12 +130,14 @@ public class TomodachiDefinition {
 
     private static int nextId = 0;
 
+    /*
     public static TomodachiDefinition createMockObject() {
         var tomodachiSettings = new TomodachiSettings(0.01f, 0.01f);
         var id = Integer.toString(nextId++);
         var states = Arrays.asList(new TomodachiStateDefinition(StateType.IDLE, null));
         return new TomodachiDefinition(Paths.get("./"), id, "Mock " + id, tomodachiSettings, states);
     }
+    */
 
     protected void setRootPath(Path rootFolder) {
         this.rootFolder = rootFolder;
