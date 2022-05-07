@@ -1,7 +1,5 @@
 package ch.zhaw.ikitomo.common.settings;
 
-import java.io.IOException;
-
 import ch.zhaw.ikitomo.common.JSONManager;
 
 /**
@@ -11,7 +9,7 @@ public class SettingsManager extends JSONManager<Settings> {
     /**
      * The default path for the ikitomo settings
      */
-    public static final String DEFAULT_SETTINGS_PATH = "./settings";
+    public static final String DEFAULT_SETTINGS_PATH = "./settings.json";
 
     /**
      * Initializes a new instance of the {@link SettingsManager} class

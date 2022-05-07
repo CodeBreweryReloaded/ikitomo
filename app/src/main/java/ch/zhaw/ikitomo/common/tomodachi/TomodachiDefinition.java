@@ -8,6 +8,10 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
+ * Represents a tomodachi file
+ * import com.fasterxml.jackson.annotation.JsonIgnore;
+ * 
+ * /**
  * Represents a the definition of a tomodachi
  */
 public class TomodachiDefinition {
@@ -37,6 +41,9 @@ public class TomodachiDefinition {
      */
     private List<TomodachiStateDefinition> states = new ArrayList<>();
 
+    private TomodachiDefinition() {
+    }
+
     /**
      * Constructor
      * 
@@ -60,6 +67,16 @@ public class TomodachiDefinition {
      */
     public Path getRootFolder() {
         return rootFolder;
+    }
+
+    /**
+     * Sets the root folder. This method is package-private that only
+     * {@link TomodachiManager} can set it (and other package classes)
+     * 
+     * @param rootFolder the root folder
+     */
+    void setRootPath(Path rootFolder) {
+        this.rootFolder = rootFolder;
     }
 
     /**

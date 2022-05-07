@@ -2,6 +2,8 @@ package ch.zhaw.ikitomo.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +53,8 @@ public abstract class JSONManager<T> {
     }
 
     /**
-     * Writes the specified {@code data} to a file located at the specified {@code path}
+     * Writes the specified {@code data} to a file located at the specified
+     * {@code path}
      *
      * @param path The path to save the data to
      * @param data The data to save
@@ -59,6 +62,28 @@ public abstract class JSONManager<T> {
      */
     public void save(String path, T data) throws IOException {
         getMapper().writeValue(new File(path), data);
+    }
+
+    /**
+     * Writes the specified {@code data} to the specified {@code outputStream}
+     *
+     * @param out  The output stream to write the data to
+     * @param data The data to save
+     * @throws IOException Occurs when the file could not be written
+     */
+    public void save(Writer out, T data) throws IOException {
+        getMapper().writeValue(out, data);
+    }
+
+    /**
+     * Reads the data from the specified input stream
+     *
+     * @param in The input stream to read the data from
+     * @return The data read from the file
+     * @throws IOException Occurs when the file could not be read
+     */
+    public T load(Reader in) throws IOException {
+        return getMapper().readValue(in, getDataType());
     }
 
     /**
