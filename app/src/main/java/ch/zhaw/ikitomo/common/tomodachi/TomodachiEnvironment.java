@@ -237,7 +237,7 @@ public class TomodachiEnvironment {
     }
 
     /**
-     * An internal helper method with gets the tomodachi definition currently
+     * An internal helper method that gets the tomodachi definition currently
      * selected in the {@link #settings} object.
      * If the currently selected tomodachi id doesn't exist then the
      * {@link #defaultTomodachiDefinition} is returned
