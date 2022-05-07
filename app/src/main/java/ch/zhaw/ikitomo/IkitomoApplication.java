@@ -20,6 +20,6 @@ public class IkitomoApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
-        OverlayController overlayController = new OverlayController(environment, new Image("file:../Assets/neko-classic-dev/sprites/awake.png"));
+        OverlayController overlayController = new OverlayController(environment);
     }
 }

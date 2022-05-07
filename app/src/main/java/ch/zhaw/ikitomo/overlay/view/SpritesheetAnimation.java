@@ -1,14 +1,13 @@
 package ch.zhaw.ikitomo.overlay.view;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-import com.google.common.util.concurrent.Service.State;
-
-import ch.zhaw.ikitomo.common.Animation;
+import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
+import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import ch.zhaw.ikitomo.overlay.model.animation.Frame;
 import javafx.animation.AnimationTimer;
@@ -41,34 +40,57 @@ public class SpritesheetAnimation extends AnimationTimer {
      */
     private Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
 
+    /**
+     * The currently playing animation
+     */
     private AnimationData currentAnimation;
 
-    private long last;
+    /**
+     * The default animation. This will always be the first idle animation
+     */
+    private AnimationData defaultAnimation;
 
+    /**
+     * Which cell is currently being displayed
+     */
     private int currentFrameID = 0;
 
-    private long frameDuration = 0;
-
+    /**
+     * The timestamp of the last frame
+     */
     private long lastFrame;
 
+    /**
+     * If the animation has to be changed upon the next loop
+     */
     private boolean changeAnimation = true;
+
+    /**
+     * A random number generator used for picking animations
+     */
+    private Random rng = new Random();
 
     /**
      * Constructor
      * 
      * @param animations An observable map containing {@link AnimationData}
+     * @throws MissingAnimationException When the default animation can't be loaded (first {@link StateType#IDLE} animation)
      */
-    public SpritesheetAnimation(ObservableMap<StateType, List<AnimationData>> animations) {
+    protected SpritesheetAnimation(ObservableMap<StateType, List<AnimationData>> animations) throws MissingAnimationException {
         Bindings.bindContent(this.animations, animations);
+        defaultAnimation = animations.get(StateType.IDLE).get(0);
+        currentAnimation = defaultAnimation;
 
-        currentAnimation = animations.get(StateType.RUN).get(0);
-
+        if (defaultAnimation == null) {
+            throw new MissingAnimationException("First IDLE animation is missing or couldn't be loaded");
+        }
     }
 
     @Override
     public void handle(long now) {
         if (changeAnimation) {
             imageProperty.set(currentAnimation.getImage());
+            cellProperty.set(viewportFromCell(currentAnimation.getFrames()[0]));
             changeAnimation = false;
             currentFrameID = 0;
         }
@@ -80,21 +102,67 @@ public class SpritesheetAnimation extends AnimationTimer {
             currentFrameID = (currentFrameID + 1) % currentAnimation.getFrames().length;
 
             currentFrame = currentAnimation.getFrames()[currentFrameID];
-            cellProperty.set(new Rectangle2D(
-                    currentFrame.cell().positionX(),
-                    currentFrame.cell().positionY(),
-                    currentFrame.cell().width(),
-                    currentFrame.cell().height()));
+            cellProperty.set(viewportFromCell(currentFrame));
         }
 
     }
 
+    /**
+     * Gets a bindable {@link Image} property that is updated for every change of
+     * state or direction
+     * 
+     * @return
+     */
     public ObjectProperty<Image> getImageProperty() {
         return imageProperty;
     }
 
+    /**
+     * Gets a bindable {@link Rectangle2D} property that is update every animation
+     * frame
+     * 
+     * @return
+     */
     public ObjectProperty<Rectangle2D> getCellProperty() {
         return cellProperty;
     }
 
+    /**
+     * Stops the animator and loads an animation based on the provided state and
+     * direction. If no animation is found, the default animation is loaded. By
+     * default, this is the first idle animation.
+     * 
+     * <p>
+     * Note: If an animation is not directional (i.e. there is no movement
+     * involved), {@link Direction#NONE} should be used instead.
+     * </p>
+     * 
+     * @param state     Which state the animation is assigned to
+     * @param direction Which direction the animation is assigned to
+     */
+    public void setAnimation(StateType state, Direction direction) {
+        List<AnimationData> animationCandidates = animations.get(state).stream()
+                .filter(animation -> animation.getDirection().equals(direction)).toList();
+        stop();
+        if (animationCandidates.isEmpty()) {
+            currentAnimation = defaultAnimation;
+        } else {
+            currentAnimation = animationCandidates.get(rng.nextInt(animationCandidates.size()));
+        }
+        changeAnimation = true;
+        start();
+    }
+
+    /**
+     * A helper method to increase readability that creates a {@link Rectangle2D} from a {@link Frame}
+     * @param frame The frame/cell containing dimenions
+     * @return A 2D-rectangle
+     */
+    private Rectangle2D viewportFromCell(Frame frame) {
+        return new Rectangle2D(
+                frame.cell().positionX(),
+                frame.cell().positionY(),
+                frame.cell().width(),
+                frame.cell().height());
+    }
 }

@@ -3,12 +3,17 @@ package ch.zhaw.ikitomo.overlay;
 import java.awt.Window.Type;
 import java.util.concurrent.CompletableFuture;
 
+import javax.annotation.concurrent.ThreadSafe;
 import javax.swing.JFrame;
 
+import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.Killable;
+import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
+import ch.zhaw.ikitomo.overlay.view.AnimatedImageView;
 import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -27,46 +32,48 @@ import javafx.stage.Screen;
 public class OverlayController implements Killable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
-    private static final String TRANSPARENT_STYLE = "-fx-background-color: rgba(0,0,0,0);";
+    public static final String TRANSPARENT_STYLE = "-fx-background-color: rgba(0,0,0,0);";
+
     /**
      * The overlay model instance
      */
     private OverlayModel model;
+
     /**
      * Field containing the JFX Frame
      */
     private JFrame frame;
+
     /**
      * The JFX root pane
      */
     private Pane pane;
+
     /**
-     * The {@link Image} property from an {@link ImageView}
+     * The animated Tomodachi sprite
      */
-    private ImageView imageView;
-    /**
-     * The {@link Rectangle2D} property from an {@link ImageView}
-     */
-    private ObjectProperty<Rectangle2D> viewportPorperty;
-    /**
-     * Reference to the animator instance
-     */
+    private AnimatedImageView animatedImage;
+
     private SpritesheetAnimation animator;
 
     /**
      * Protected controller for {@link OverlayControllerBuilder}
+     * @throws MissingAnimationException
      */
-    public OverlayController(TomodachiEnvironment environment, Image image) {
-        createPane(image);
+    public OverlayController(TomodachiEnvironment environment) {
+        createPane();
         createFrame(pane);
 
-        this.model = new OverlayModel(environment, this);
-        this.animator = new SpritesheetAnimation(model.getObservableAnimations());
+        model = new OverlayModel(environment, this);
+        try {
+            animatedImage = new AnimatedImageView(model.getObservableAnimations());
+        } catch (MissingAnimationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        animator = animatedImage.getAnimator();
+        pane.getChildren().add(animatedImage);
         animator.start();
-
-        imageView.imageProperty().bind(animator.getImageProperty());
-        viewportPorperty.bind(animator.getCellProperty());
-
 
         pane.setOnMouseDragged(
                 dragEvent -> frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
@@ -96,13 +103,9 @@ public class OverlayController implements Killable {
      * 
      * @param image
      */
-    private void createPane(Image image) {
-        this.imageView = new ImageView(image);
-        this.viewportPorperty = imageView.viewportProperty();
-        imageView.setStyle(TRANSPARENT_STYLE);
+    private void createPane() {
         this.pane = new Pane();
         pane.setStyle(TRANSPARENT_STYLE);
-        this.pane.getChildren().add(imageView);
     }
 
     /**
