@@ -1,17 +1,36 @@
 package ch.zhaw.ikitomo.ipc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public record IPCCommand(String command, List<String> args) {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public IPCCommand(String command, List<String> args) {
+import ch.zhaw.ikitomo.ipc.IPCCommand.IPCCommandType;
+
+public record IPCCommand(@JsonProperty("command") IPCCommandType command, @JsonProperty("args") List<String> args) {
+    /*
+     * public IPCCommand(IPCCommandType command) {
+     * this(command, Collections.emptyList());
+     * }
+     */
+    @JsonCreator
+    public IPCCommand(@JsonProperty("command") IPCCommandType command, @JsonProperty("args") List<String> args) {
         this.command = command;
         this.args = new ArrayList<>(args);
     }
 
     public List<String> args() {
         return new ArrayList<>(args);
+    }
+
+    public enum IPCCommandType {
+        SHOW_SETTINGS
+    }
+
+    public static IPCCommand newShowSettingsCommand() {
+        return new IPCCommand(IPCCommandType.SHOW_SETTINGS, Collections.emptyList());
     }
 
 }
