@@ -27,7 +27,7 @@ public class OverlayController implements Killable {
     /**
      * The window width
      */
-    private static final int WIDTH = 16;
+    private static final int WIDTH = 32;
 
     /**
      * The window height
