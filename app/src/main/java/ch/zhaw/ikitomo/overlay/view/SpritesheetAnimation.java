@@ -74,9 +74,11 @@ public class SpritesheetAnimation extends AnimationTimer {
      * Constructor
      * 
      * @param animations An observable map containing {@link AnimationData}
-     * @throws MissingAnimationException When the default animation can't be loaded (first {@link StateType#IDLE} animation)
+     * @throws MissingAnimationException When the default animation can't be loaded
+     *                                   (first {@link StateType#IDLE} animation)
      */
-    protected SpritesheetAnimation(ObservableMap<StateType, List<AnimationData>> animations) throws MissingAnimationException {
+    protected SpritesheetAnimation(ObservableMap<StateType, List<AnimationData>> animations)
+            throws MissingAnimationException {
         Bindings.bindContent(this.animations, animations);
         defaultAnimation = animations.get(StateType.IDLE).get(0);
         currentAnimation = defaultAnimation;
@@ -88,6 +90,7 @@ public class SpritesheetAnimation extends AnimationTimer {
 
     @Override
     public void handle(long now) {
+        // Check if the spritesheet has changed
         if (changeAnimation) {
             imageProperty.set(currentAnimation.getImage());
             cellProperty.set(viewportFromCell(currentAnimation.getFrames()[0]));
@@ -97,6 +100,8 @@ public class SpritesheetAnimation extends AnimationTimer {
 
         Frame currentFrame = currentAnimation.getFrames()[currentFrameID];
 
+        // If the current timestamp is larger than the timestamp of the last frame plus
+        // its duration, change the frame
         if (currentFrame.duration() * 1_000_000 + lastFrame < now) {
             lastFrame = now;
             currentFrameID = (currentFrameID + 1) % currentAnimation.getFrames().length;
@@ -154,7 +159,9 @@ public class SpritesheetAnimation extends AnimationTimer {
     }
 
     /**
-     * A helper method to increase readability that creates a {@link Rectangle2D} from a {@link Frame}
+     * A helper method to increase readability that creates a {@link Rectangle2D}
+     * from a {@link Frame}
+     * 
      * @param frame The frame/cell containing dimenions
      * @return A 2D-rectangle
      */

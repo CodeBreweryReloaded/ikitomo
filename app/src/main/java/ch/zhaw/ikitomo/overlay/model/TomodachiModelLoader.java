@@ -17,20 +17,40 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiStateDefinition;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.scene.image.Image;
 
+/**
+ * A helper class that properly generates a {@link TomodachiModel} based on inputs
+ */
 public class TomodachiModelLoader {
     /**
      * The file extension that will be used to read metadata
      */
     private static final String METADATA_FORMAT = ".json";
+
     /**
      * The file extension that will be used to read images
      */
     private static final String IMAGE_FORMAT = ".png";
 
+    /**
+     * The Tomodachi definition instance
+     */
     private TomodachiDefinition definition;
+
+    /**
+     * The initial position
+     */
     private Vector2 initialPosition;
+
+    /**
+     * The root directory of the Tomodachi. Can be <code>null</code>
+     */
     private String rootPath;
 
+    /**
+     * Constructor
+     * @param definition The Tomodachi definition to be used in loading
+     * @param initialPosition The desired initial position
+     */
     public TomodachiModelLoader(TomodachiDefinition definition, Vector2 initialPosition) {
         this.definition = definition;
         this.initialPosition = initialPosition;
@@ -38,12 +58,10 @@ public class TomodachiModelLoader {
     }
 
     /**
-     * Creates complete {@link TomodachiModel} based on information inside the
+     * Creates a complete {@link TomodachiModel} based on information inside the
      * provided {@link TomodachiEnvironment}. It is also positioned at the given
      * vector
      * 
-     * @param environment The current environment
-     * @param position    The desired initial position
      * @return A working Tomodachi model
      */
     public TomodachiModel loadFromTomodachiFile() {
@@ -56,6 +74,11 @@ public class TomodachiModelLoader {
         return new TomodachiModel(definition, animations);
     }
 
+    /**
+     * Turns the animations of specific {@link StateType} into a list of {@link AnimationData}
+     * @param state The state to look up
+     * @return A list of animations belonging to a state
+     */
     private List<AnimationData> loadAnimations(TomodachiStateDefinition state) {
         String prefix = state.animationPrefix();
         // Create AnimationData from each animation
@@ -68,6 +91,13 @@ public class TomodachiModelLoader {
         }).toList();
     }
 
+    /**
+     * A helper function that loads an animation based on its type (i.e. file or resource)
+     * @param prefix The prefix from {@link TomodachiStateDefinition}
+     * @param animation The animation definition
+     * @return A complete AnimationData object
+     * @throws IOException When a file can't be read
+     */
     private AnimationData loadAnimationData(String prefix, TomodachiAnimationDefinition animation) throws IOException {
         // Load the JSON file
         AnimationData data;
@@ -82,6 +112,13 @@ public class TomodachiModelLoader {
         return data;
     }
 
+    /**
+     * A helper function that contains loading logic for cases where the files are resources, not files
+     * @param pathToMetadata The path to the metadata file
+     * @param pathToSpritesheet The path to the spritesheet
+     * @return An animation object
+     * @throws IOException If a file can't be read
+     */
     private AnimationData loadResource(String pathToMetadata, String pathToSpritesheet) throws IOException {
         try (InputStream metadataStream = getClass().getClassLoader().getResourceAsStream(pathToMetadata);
                 InputStream spritesheetStream = getClass().getClassLoader().getResourceAsStream(pathToSpritesheet);) {
@@ -97,6 +134,13 @@ public class TomodachiModelLoader {
         }
     }
 
+    /**
+     * A helper function that contains loading logic for cases where the files is actually a file
+     * @param pathToMetadata The path to the metadata file
+     * @param pathToSpritesheet The path to the spritesheet
+     * @return An animation object
+     * @throws IOException If a file can't be read
+     */
     private AnimationData loadFile(String pathToMetadata, String pathToSpritesheet) throws IOException {
         AnimationData data = new AnimationLoader().load(pathToMetadata);
         data.setImage(new Image(pathToSpritesheet));

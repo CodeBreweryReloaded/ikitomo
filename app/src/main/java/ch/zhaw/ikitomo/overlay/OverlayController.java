@@ -3,25 +3,19 @@ package ch.zhaw.ikitomo.overlay;
 import java.awt.Window.Type;
 import java.util.concurrent.CompletableFuture;
 
-import javax.annotation.concurrent.ThreadSafe;
 import javax.swing.JFrame;
 
-import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
 import ch.zhaw.ikitomo.overlay.view.AnimatedImageView;
 import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -30,8 +24,19 @@ import javafx.stage.Screen;
  * The controller for the overlay that displays the Tomodachi
  */
 public class OverlayController implements Killable {
-    private static final int WIDTH = 32;
+    /**
+     * The window width
+     */
+    private static final int WIDTH = 16;
+
+    /**
+     * The window height
+     */
     private static final int HEIGHT = 32;
+    
+    /**
+     * A JFX style to make a background transparent
+     */
     public static final String TRANSPARENT_STYLE = "-fx-background-color: rgba(0,0,0,0);";
 
     /**

@@ -59,6 +59,10 @@ public class OverlayModel {
         return tomodachi.get();
     }
 
+    /**
+     * Gets an observable map of {@link StateType}s to {@link AnimationData} lists
+     * @return
+     */
     public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
         return tomodachi.get().getObservableAnimations();
     }
