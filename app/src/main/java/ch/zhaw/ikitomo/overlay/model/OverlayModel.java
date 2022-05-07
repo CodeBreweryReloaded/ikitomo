@@ -3,6 +3,7 @@ package ch.zhaw.ikitomo.overlay.model;
 import java.util.List;
 
 import ch.zhaw.ikitomo.common.StateType;
+import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
@@ -38,7 +39,6 @@ public class OverlayModel {
         this.controller = controller;
         tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel,
                 environment.getSettings().tomodachiIDProperty());
-        loadTomodachiModel();
     }
 
     /**
@@ -69,7 +69,7 @@ public class OverlayModel {
      * @return The loaded Tomodachi model
      */
     private TomodachiModel loadTomodachiModel() {
-        return TomodachiModel.loadFromTomodachiFile(environment, controller.getScreenCenter());
+        return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition(), controller.getScreenCenter()).loadFromTomodachiFile();
     }
 
 }

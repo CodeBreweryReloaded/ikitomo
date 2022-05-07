@@ -8,7 +8,7 @@
     "states": [
         {
             "type": "IDLE",
-            "animationPrefix": "idle_",
+            "animationPrefix": "defaultTomodachi/idle_",
             "animations": [
                 {
                     "direction": "NONE",
@@ -26,7 +26,7 @@
         },
         {
             "type": "YAWN",
-            "animationPrefix": "yawn",
+            "animationPrefix": "defaultTomodachi/yawn",
             "animations": [
                 {
                     "direction": "NONE",
@@ -36,7 +36,7 @@
         },
         {
             "type": "SLEEP",
-            "animationPrefix": "sleep",
+            "animationPrefix": "defaultTomodachi/sleep",
             "animations": [
                 {
                     "direction": "NONE",
@@ -46,7 +46,7 @@
         },
         {
             "type": "WAKE",
-            "animationPrefix": "wake",
+            "animationPrefix": "defaultTomodachi/wake",
             "animations": [
                 {
                     "direction": "NONE",
@@ -56,7 +56,7 @@
         },
         {
             "type": "RUN",
-            "animationPrefix": "run_",
+            "animationPrefix": "defaultTomodachi/run_",
             "animations": [
                 {
                     "direction": "UP",

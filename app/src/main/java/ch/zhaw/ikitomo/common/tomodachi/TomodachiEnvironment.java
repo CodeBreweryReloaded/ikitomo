@@ -92,7 +92,7 @@ public class TomodachiEnvironment {
     public TomodachiEnvironment(SettingsManager settingsManager, TomodachiManager tomodachiManager) {
         this.settingsManager = settingsManager;
         this.tomodachiManager = tomodachiManager;
-        loadSettings();
+        loadSettings(); // ID is set here
         loadDefaultTomodachiDefinition();
         updateTomodachiDefinitions(readAvailableTomodachis());
         // settings is set by load()

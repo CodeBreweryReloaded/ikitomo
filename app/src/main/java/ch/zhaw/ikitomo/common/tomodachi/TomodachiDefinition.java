@@ -115,6 +115,10 @@ public class TomodachiDefinition {
         return new ArrayList<>(states);
     }
 
+    public boolean isResource() {
+        return getRootFolder() == null;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name, settings, states);

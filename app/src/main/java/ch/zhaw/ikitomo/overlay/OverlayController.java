@@ -11,6 +11,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
 import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -32,10 +33,6 @@ public class OverlayController implements Killable {
      */
     private OverlayModel model;
     /**
-     * The global environment object
-     */
-    private TomodachiEnvironment environment;
-    /**
      * Field containing the JFX Frame
      */
     private JFrame frame;
@@ -46,7 +43,7 @@ public class OverlayController implements Killable {
     /**
      * The {@link Image} property from an {@link ImageView}
      */
-    private ObjectProperty<Image> imageProperty;
+    private ImageView imageView;
     /**
      * The {@link Rectangle2D} property from an {@link ImageView}
      */
@@ -60,28 +57,31 @@ public class OverlayController implements Killable {
      * Protected controller for {@link OverlayControllerBuilder}
      */
     public OverlayController(TomodachiEnvironment environment, Image image) {
-        this.model = new OverlayModel(environment, this);
-        this.animator = new SpritesheetAnimation(model.getObservableAnimations());
-        imageProperty.bind(animator.getImageProperty());
-        viewportPorperty.bind(animator.getCellProperty());
-
         createPane(image);
         createFrame(pane);
 
-        pane.setOnMouseDragged(dragEvent -> {
-            frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
-                    (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2));
-        });
+        this.model = new OverlayModel(environment, this);
+        this.animator = new SpritesheetAnimation(model.getObservableAnimations());
+        animator.start();
+
+        imageView.imageProperty().bind(animator.getImageProperty());
+        viewportPorperty.bind(animator.getCellProperty());
+
+
+        pane.setOnMouseDragged(
+                dragEvent -> frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
+                        (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2)));
 
     }
 
     /**
      * Gets the center of the primary monitor
+     * 
      * @return A vector representing the center point
      */
     public Vector2 getScreenCenter() {
         Rectangle2D screen = Screen.getPrimary().getBounds();
-        return new Vector2((int)screen.getMaxX() / 2, (int)screen.getMaxY() / 2);
+        return new Vector2((int) screen.getMaxX() / 2, (int) screen.getMaxY() / 2);
     }
 
     @Override
@@ -97,10 +97,9 @@ public class OverlayController implements Killable {
      * @param image
      */
     private void createPane(Image image) {
-        ImageView imageView = new ImageView(image);
-        imageView.setStyle(TRANSPARENT_STYLE);
+        this.imageView = new ImageView(image);
         this.viewportPorperty = imageView.viewportProperty();
-        this.imageProperty = imageView.imageProperty();
+        imageView.setStyle(TRANSPARENT_STYLE);
         this.pane = new Pane();
         pane.setStyle(TRANSPARENT_STYLE);
         this.pane.getChildren().add(imageView);

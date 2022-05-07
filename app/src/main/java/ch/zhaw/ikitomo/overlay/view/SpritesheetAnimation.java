@@ -1,5 +1,7 @@
 package ch.zhaw.ikitomo.overlay.view;
 
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import ch.zhaw.ikitomo.overlay.model.animation.Frame;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -26,29 +29,27 @@ public class SpritesheetAnimation extends AnimationTimer {
     /**
      * Bindable property containing the current spritesheet
      */
-    private ObjectProperty<Image> imageProperty;
+    private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
 
     /**
      * Bindable property containing the current cell on the spritesheet
      */
-    private ObjectProperty<Rectangle2D> cellProperty;
+    private ObjectProperty<Rectangle2D> cellProperty = new SimpleObjectProperty<>();
 
     /**
      * A binding that binds to the currently loaded animations
      */
-    private Map<StateType, List<AnimationData>> animations;
+    private Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
 
     private AnimationData currentAnimation;
 
     private long last;
 
-    private Frame currentFrame;
-
     private int currentFrameID = 0;
 
-    private long delta;
-
     private long frameDuration = 0;
+
+    private long lastFrame;
 
     private boolean changeAnimation = true;
 
@@ -66,17 +67,18 @@ public class SpritesheetAnimation extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        delta = now - last;
-        frameDuration += delta;
         if (changeAnimation) {
             imageProperty.set(currentAnimation.getImage());
+            changeAnimation = false;
+            currentFrameID = 0;
         }
 
-        currentFrame = currentAnimation.getFrames()[currentFrameID];
+        Frame currentFrame = currentAnimation.getFrames()[currentFrameID];
 
-        if (currentFrame.duration() < frameDuration) {
-            currentFrameID++;
-            frameDuration -= currentFrame.duration();
+        if (currentFrame.duration() * 1_000_000 + lastFrame < now) {
+            lastFrame = now;
+            currentFrameID = (currentFrameID + 1) % currentAnimation.getFrames().length;
+
             currentFrame = currentAnimation.getFrames()[currentFrameID];
             cellProperty.set(new Rectangle2D(
                     currentFrame.cell().positionX(),
@@ -85,7 +87,6 @@ public class SpritesheetAnimation extends AnimationTimer {
                     currentFrame.cell().height()));
         }
 
-        last = now;
     }
 
     public ObjectProperty<Image> getImageProperty() {
