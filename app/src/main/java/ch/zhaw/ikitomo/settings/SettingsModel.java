@@ -89,7 +89,8 @@ public class SettingsModel {
 
     /**
      * Saves the settings immediately with no synchronization. {@link #save()}
-     * should be used usually because it is buffered
+     * may be used normally since it only saves after the {@link #save()} method
+     * isn't invoked for a period
      * 
      * @see #save()
      */
