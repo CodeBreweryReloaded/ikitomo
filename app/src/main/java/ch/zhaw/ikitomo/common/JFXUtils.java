@@ -17,11 +17,11 @@ import javafx.collections.ObservableMap;
 /**
  * An utils class for javafx related helper methods
  */
-public class JavaFXUtils {
+public class JFXUtils {
     /**
      * Private constructor
      */
-    private JavaFXUtils() {
+    private JFXUtils() {
     }
 
     /**
@@ -110,17 +110,56 @@ public class JavaFXUtils {
         return FXCollections.unmodifiableObservableList(list);
     }
 
+    /**
+     * Creates a binding to {@link ObservableValue} which is nested in an
+     * {@link ObservableValue}
+     * 
+     * @param <K>                The type of the object containing the property with
+     *                           the type V
+     * @param <V>                The type of the inner property
+     * @param observable         The outer observable containing the inner
+     *                           {@link ObservableValue}
+     * @param observableFunction A function supplying the inner
+     *                           {@link ObservableValue}
+     * @return An {@link NestedObservableBinding} to the value of the inner
+     *         {@link ObservableValue}
+     */
     public static <K, V> NestedObservableBinding<K, V> nestedBinding(ObservableValue<K> observable,
             Function<K, ObservableValue<V>> observableFunction) {
         return new NestedObservableBinding<>(observable, observableFunction);
     }
 
+    /**
+     * A binding to a nested {@link ObservableValue}. It can be created with
+     * {@link JFXUtils#nestedBinding(ObservableValue, Function)}
+     */
     public static class NestedObservableBinding<K, V> extends ObjectBinding<V> {
+        /**
+         * The outer observable value
+         */
         private ObservableValue<K> observable;
+        /**
+         * The inner/nested observable value. This value is updated when the outer
+         * observable value changes
+         */
         private ObservableValue<V> nestedObservable;
+        /**
+         * A function supplying the inner observable value
+         */
         private Function<K, ObservableValue<V>> observableFunction;
+        /**
+         * The listener for the nested observable value. This listener is added to the
+         * nested observable value
+         */
         private ChangeListener<? super V> nestedListener = this::nestedObservableChanges;
 
+        /**
+         * Constructor
+         * 
+         * @param observable         The outer observable value
+         * @param observableFunction The function to supply the inner observable value
+         * @see JFXUtils#nestedBinding(ObservableValue, Function)
+         */
         NestedObservableBinding(ObservableValue<K> observable,
                 Function<K, ObservableValue<V>> observableFunction) {
             this.observable = observable;
@@ -129,11 +168,28 @@ public class JavaFXUtils {
             setupNestedObservable(observable.getValue());
         }
 
+        /**
+         * The listener for the outer observable value. It reset ups the
+         * {@link #nestedObservable}
+         * 
+         * @param observable The observable value which changed
+         * @param oldValue   The old value
+         * @param newValue   The new value
+         */
         private void observableChanges(ObservableValue<? extends K> observable, K oldValue, K newValue) {
             setupNestedObservable(newValue);
             invalidate();
         }
 
+        /**
+         * Sets up the nested observable value. First {@link #nestedListener} is removed
+         * from the old {@link #nestedObservable}. Then it applies the given
+         * <code>newValue</code> to {@link #observableFunction} and sets the returned
+         * observable value to {@link #nestedListener} and adds {@link #nestedListener}
+         * to the {@link #nestedObservable}
+         * 
+         * @param newValue The new object containing the nested observable value
+         */
         private void setupNestedObservable(K newValue) {
             if (nestedObservable != null) {
                 nestedObservable.removeListener(nestedListener);
@@ -144,6 +200,13 @@ public class JavaFXUtils {
             }
         }
 
+        /**
+         * The listener for the nested observable value
+         * 
+         * @param observable The observable
+         * @param oldValue   The old value
+         * @param newValue   The new value
+         */
         private void nestedObservableChanges(ObservableValue<? extends V> observable, V oldValue, V newValue) {
             invalidate();
         }

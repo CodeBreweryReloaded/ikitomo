@@ -97,15 +97,30 @@ public class OverlayController implements Killable {
                 (state, direction) -> model.getBehaviorStrategy().animationFinished(state));
     }
 
+    /**
+     * Updates the animation in {@link #animator} from the {@link #model}
+     */
     private void updateAnimation() {
         animator.setAnimation(model.getTomodachiState(), model.getTomodachiDirection());
     }
 
+    /**
+     * An event listener which gets called when the {@link #pane} is dragged by the
+     * user
+     * 
+     * @param dragEvent The drag event
+     */
     private void onDragEvent(MouseEvent dragEvent) {
         var pos = new Vector2((float) (frame.getX() + dragEvent.getX()), (float) (frame.getY() + dragEvent.getY()));
         model.getTomodachi().setPosition(pos);
     }
 
+    /**
+     * Sets the location of the screen. The given position is in the middle of the
+     * window
+     * 
+     * @param position The new position
+     */
     private void setLocation(Vector2 position) {
         frame.setLocation((int) (position.x() - pane.getWidth() / 2), (int) (position.y() - pane.getHeight() / 2));
     }

@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
-import ch.zhaw.ikitomo.behavior.DefaultBehaviorStrategy;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
@@ -32,7 +31,7 @@ public class SpritesheetAnimation extends AnimationTimer {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(DefaultBehaviorStrategy.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SpritesheetAnimation.class.getName());
 
     /**
      * Bindable property containing the current spritesheet

@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import ch.zhaw.ikitomo.common.JavaFXUtils;
+import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import javafx.beans.binding.Bindings;
@@ -69,7 +69,7 @@ public class TomodachiEnvironment {
      * An observable list of all tomodachi definitions. It is dependent on
      * {@link #tomodachiDefinitionMap}
      */
-    private ObservableList<TomodachiDefinition> tomodachiDefinitionList = JavaFXUtils
+    private ObservableList<TomodachiDefinition> tomodachiDefinitionList = JFXUtils
             .observableValuesFromMap(tomodachiDefinitionMap);
 
     /**
@@ -164,7 +164,7 @@ public class TomodachiEnvironment {
      */
     public CompletableFuture<Void> reloadTomodachis() {
         return CompletableFuture.supplyAsync(this::readAvailableTomodachis)
-                .thenCompose(list -> JavaFXUtils.runLater(() -> updateTomodachiDefinitions(list)));
+                .thenCompose(list -> JFXUtils.runLater(() -> updateTomodachiDefinitions(list)));
     }
 
     /**

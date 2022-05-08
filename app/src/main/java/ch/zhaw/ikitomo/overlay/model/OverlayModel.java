@@ -4,7 +4,7 @@ import java.util.List;
 
 import ch.zhaw.ikitomo.behavior.BehaviorStrategy;
 import ch.zhaw.ikitomo.common.Direction;
-import ch.zhaw.ikitomo.common.JavaFXUtils;
+import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
@@ -76,9 +76,9 @@ public class OverlayModel {
         tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel,
                 environment.getSettings().tomodachiIDProperty());
 
-        tomodachiPosition = JavaFXUtils.nestedBinding(tomodachi, TomodachiModel::positionProperty);
-        tomodachiState = JavaFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationStateProperty);
-        tomodachiDirection = JavaFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationDirectionProperty);
+        tomodachiPosition = JFXUtils.nestedBinding(tomodachi, TomodachiModel::positionProperty);
+        tomodachiState = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationStateProperty);
+        tomodachiDirection = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationDirectionProperty);
 
         behaviorStrategy = Bindings
                 .createObjectBinding(() -> BehaviorStrategy.createInstance(getTomodachi(), environment), tomodachi);

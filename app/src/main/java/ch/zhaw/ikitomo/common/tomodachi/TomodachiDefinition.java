@@ -41,6 +41,9 @@ public class TomodachiDefinition {
      */
     private List<TomodachiStateDefinition> states = new ArrayList<>();
 
+    /**
+     * Constructor for jackson
+     */
     private TomodachiDefinition() {
     }
 

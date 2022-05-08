@@ -16,18 +16,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
 /**
- * Tests for {@link JavaFXUtils}
+ * Tests for {@link JFXUtils}
  */
 class JavaFXUtilsTest {
     /**
-     * Tests if {@link JavaFXUtils#observableValuesFromMap(ObservableMap)} works
+     * Tests if {@link JFXUtils#observableValuesFromMap(ObservableMap)} works
      * correctly
      */
     @Test
     void testObservableValuesFromMap() {
         ObservableMap<String, Integer> map = FXCollections.observableHashMap();
         map.put("test1", 1);
-        ObservableList<Integer> list = JavaFXUtils.observableValuesFromMap(map);
+        ObservableList<Integer> list = JFXUtils.observableValuesFromMap(map);
         assertTrue(list.contains(1));
 
         // check that list is updated when map changes
@@ -48,7 +48,7 @@ class JavaFXUtilsTest {
     }
 
     /**
-     * Tests if the nested properties of {@link JavaFXUtils} work
+     * Tests if the nested properties of {@link JFXUtils} work
      */
     @Test
     public void testNestedBinding() {
@@ -62,7 +62,7 @@ class JavaFXUtilsTest {
 
         // initialize properties and bindings
         var value = new SimpleObjectProperty<>(nestedObj);
-        var nestedBinding = JavaFXUtils.nestedBinding(value, obj -> obj == null ? null : obj.prop);
+        var nestedBinding = JFXUtils.nestedBinding(value, obj -> obj == null ? null : obj.prop);
 
         // start testing
         assertEquals("1", nestedBinding.get());
