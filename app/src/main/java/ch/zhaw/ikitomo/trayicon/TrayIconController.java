@@ -1,19 +1,13 @@
 package ch.zhaw.ikitomo.trayicon;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
-import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Platform;
-import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
@@ -22,19 +16,26 @@ import javax.imageio.ImageIO;
  */
 public class TrayIconController implements Killable {
 
+    /**
+     *
+     */
     private SettingsController settingsController;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public CompletableFuture<Void> kill() {
-
-
-        if (settingsController != null) {
-
-        }
+        if (settingsController != null) { }
 
         return CompletableFuture.completedFuture(null);
     }
 
+    /**
+     *
+     * @param environment
+     */
     public TrayIconController(TomodachiEnvironment environment) {
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported");
@@ -52,8 +53,7 @@ public class TrayIconController implements Killable {
 
             showSettingsItem.addActionListener(e -> {
                 Platform.runLater(() -> {
-                    this.settingsController = SettingsController.newSettingsUI(environment);
-                    settingsController.isVisible();
+                    if (this.settingsController == null || !settingsController.isVisible()) this.settingsController = SettingsController.newSettingsUI(environment);
                 });
             });
 
@@ -77,6 +77,11 @@ public class TrayIconController implements Killable {
         }
     }
 
+    /**
+     *
+     * @param environment
+     * @return
+     */
     public static TrayIconController newOverlayUI(TomodachiEnvironment environment) {
         return new TrayIconController(environment);
     }
