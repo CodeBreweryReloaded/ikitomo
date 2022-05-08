@@ -5,6 +5,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;
 import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.settings.SettingsController;
+import ch.zhaw.ikitomo.trayicon.TrayIconController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -21,7 +22,7 @@ public class IkitomoApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
-        Platform.runLater(() -> SettingsController.newSettingsUI(environment));
         OverlayController overlayController = OverlayController.newOverlayUI(environment, primaryStage);
+        TrayIconController.newOverlayUI(environment);
     }
 }

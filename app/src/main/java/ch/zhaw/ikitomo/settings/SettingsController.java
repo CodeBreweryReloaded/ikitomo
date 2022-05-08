@@ -141,6 +141,10 @@ public class SettingsController implements Killable {
         return CompletableFuture.completedFuture(null);
     }
 
+    public boolean isVisible() {
+        return rootPane.isVisible();
+    }
+
     /**
      * Creates a new settings window based on the settings FXML and returns the
      * Settings controller
@@ -174,5 +178,6 @@ public class SettingsController implements Killable {
             throw new LoadUIException("Could not load settings UI", e);
         }
     }
+
 
 }
