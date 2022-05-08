@@ -16,6 +16,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,8 @@ public class IPCManager implements Closeable {
     private boolean otherInstanceRunning;
 
     private Runnable showSettingsListener;
+
+    private CompletableFuture<Boolean> otherInstanceRunningFuture = new CompletableFuture<>();
 
     IPCManager(Path wellKnownPortFile, Runnable showSettingsListener) {
         this.wellKnownPortFile = Objects.requireNonNull(wellKnownPortFile, "wellKnownPortFile = null");
@@ -66,6 +69,9 @@ public class IPCManager implements Closeable {
         if (!otherInstanceRunning) {
             startUpIPCServer();
         }
+
+        // complete the otherInstanceRunningFuture
+        otherInstanceRunningFuture.complete(otherInstanceRunning);
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::deleteWellKnownPortFile));
     }
@@ -142,8 +148,8 @@ public class IPCManager implements Closeable {
         return wellKnownPortFile;
     }
 
-    public boolean isOtherInstanceRunning() {
-        return otherInstanceRunning;
+    public CompletableFuture<Boolean> isOtherInstanceRunning() {
+        return otherInstanceRunningFuture;
     }
 
     private void writeWellKnownPortFile(int port) throws IOException {

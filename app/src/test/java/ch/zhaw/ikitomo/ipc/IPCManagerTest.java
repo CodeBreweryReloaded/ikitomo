@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
@@ -73,20 +75,21 @@ class IPCManagerTest {
     }
 
     @Test
-    void testWellKnownPortFileIsCreated() throws IOException {
+    void testWellKnownPortFileIsCreated()
+            throws IOException, InterruptedException, ExecutionException, TimeoutException {
         Runnable identityRunnable = () -> {
         };
         Path portFile = Path.of("./testWellKnownPortFileIsInvalid.txt");
         try (var manager1 = new IPCManager(portFile, identityRunnable)) {
             manager1.init();
-            assertFalse(manager1.isOtherInstanceRunning());
+            assertFalse(manager1.isOtherInstanceRunning().get(2, TimeUnit.SECONDS));
         } finally {
             Files.deleteIfExists(portFile);
         }
     }
 
     @Test
-    void testOpenSettings() throws InterruptedException, IOException {
+    void testOpenSettings() throws InterruptedException, IOException, ExecutionException, TimeoutException {
         Runnable identityRunnable = () -> {
         };
         var latch = new CountDownLatch(1);
@@ -96,14 +99,14 @@ class IPCManagerTest {
             manager1.init();
             manager2.setSendShowSettingsCommand(true);
             manager2.init();
-            assertTrue(manager2.isOtherInstanceRunning());
-            assertFalse(manager1.isOtherInstanceRunning());
+            assertTrue(manager2.isOtherInstanceRunning().get(2, TimeUnit.SECONDS));
+            assertFalse(manager1.isOtherInstanceRunning().get(2, TimeUnit.SECONDS));
             assertTrue(latch.await(2, TimeUnit.SECONDS), "Command not received");
         }
     }
 
     @Test
-    void testNotOpeningSettings() throws IOException, InterruptedException {
+    void testNotOpeningSettings() throws IOException, InterruptedException, ExecutionException, TimeoutException {
         Runnable identityRunnable = () -> {
         };
         var latch = new CountDownLatch(1);
@@ -113,8 +116,8 @@ class IPCManagerTest {
             manager1.init();
             manager2.setSendShowSettingsCommand(false);
             manager2.init();
-            assertTrue(manager2.isOtherInstanceRunning());
-            assertFalse(manager1.isOtherInstanceRunning());
+            assertTrue(manager2.isOtherInstanceRunning().get(2, TimeUnit.SECONDS));
+            assertFalse(manager1.isOtherInstanceRunning().get(2, TimeUnit.SECONDS));
             assertFalse(latch.await(2, TimeUnit.SECONDS), "Command not received");
         }
     }
