@@ -16,6 +16,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
@@ -33,7 +34,7 @@ public class OverlayController implements Killable {
      * The window height
      */
     private static final int HEIGHT = 32;
-    
+
     /**
      * A JFX style to make a background transparent
      */
@@ -63,6 +64,7 @@ public class OverlayController implements Killable {
 
     /**
      * Protected controller for {@link OverlayControllerBuilder}
+     * 
      * @throws MissingAnimationException
      */
     public OverlayController(TomodachiEnvironment environment) {
@@ -70,6 +72,7 @@ public class OverlayController implements Killable {
         createFrame(pane);
 
         model = new OverlayModel(environment, this);
+        model.getTomodachi().setPosition(getScreenCenter());
         try {
             animatedImage = new AnimatedImageView(model.getObservableAnimations());
         } catch (MissingAnimationException e) {
@@ -80,10 +83,31 @@ public class OverlayController implements Killable {
         pane.getChildren().add(animatedImage);
         animator.start();
 
-        pane.setOnMouseDragged(
-                dragEvent -> frame.setLocation((int) (frame.getX() + dragEvent.getX() - pane.getWidth() / 2),
-                        (int) (frame.getY() + dragEvent.getY() - pane.getHeight() / 2)));
+        pane.setOnMouseDragged(this::onDragEvent);
 
+        // setup position listener
+        model.tomodachiPositionBinding().addListener((observable, oldValue, newValue) -> setLocation(newValue));
+
+        // setup animatino listeners
+        model.tomodachiStateBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
+        model.tomodachiDirectionBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
+
+        // if the animation finished, tell the current behavior strategy
+        animatedImage.getAnimator().addAnimationFinishedListener(
+                (state, direction) -> model.getBehaviorStrategy().animationFinished(state));
+    }
+
+    private void updateAnimation() {
+        animator.setAnimation(model.getTomodachiState(), model.getTomodachiDirection());
+    }
+
+    private void onDragEvent(MouseEvent dragEvent) {
+        var pos = new Vector2((float) (frame.getX() + dragEvent.getX()), (float) (frame.getY() + dragEvent.getY()));
+        model.getTomodachi().setPosition(pos);
+    }
+
+    private void setLocation(Vector2 position) {
+        frame.setLocation((int) (position.x() - pane.getWidth() / 2), (int) (position.y() - pane.getHeight() / 2));
     }
 
     /**

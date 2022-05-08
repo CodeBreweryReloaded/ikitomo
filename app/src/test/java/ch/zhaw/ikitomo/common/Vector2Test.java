@@ -57,7 +57,7 @@ class Vector2Test {
 
         // the coordinates will be rounded down
         var v2 = new Vector2(1, 1);
-        assertEquals(new Vector2(0, 0), v2.divide(2));
+        assertEquals(new Vector2(0.5f, 0.5f), v2.divide(2));
     }
 
     /**

@@ -1,10 +1,14 @@
 package ch.zhaw.ikitomo.overlay.view;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.logging.Logger;
 
+import ch.zhaw.ikitomo.behavior.DefaultBehaviorStrategy;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
@@ -25,6 +29,11 @@ import javafx.scene.image.Image;
  * property that can be bound to a GUI element
  */
 public class SpritesheetAnimation extends AnimationTimer {
+    /**
+     * Logger
+     */
+    private static final Logger LOGGER = Logger.getLogger(DefaultBehaviorStrategy.class.getName());
+
     /**
      * Bindable property containing the current spritesheet
      */
@@ -71,6 +80,21 @@ public class SpritesheetAnimation extends AnimationTimer {
     private Random rng = new Random();
 
     /**
+     * The current state
+     */
+    private StateType currentState;
+
+    /**
+     * The current direction
+     */
+    private Direction currentDirection;
+
+    /**
+     * The listeners which are notified when an animation finished
+     */
+    private List<BiConsumer<StateType, Direction>> animationFinishedListeners = new ArrayList<>();
+
+    /**
      * Constructor
      * 
      * @param animations An observable map containing {@link AnimationData}
@@ -82,6 +106,8 @@ public class SpritesheetAnimation extends AnimationTimer {
         Bindings.bindContent(this.animations, animations);
         defaultAnimation = animations.get(StateType.IDLE).get(0);
         currentAnimation = defaultAnimation;
+        currentState = StateType.IDLE;
+        currentDirection = Direction.NONE;
 
         if (defaultAnimation == null) {
             throw new MissingAnimationException("First IDLE animation is missing or couldn't be loaded");
@@ -105,6 +131,10 @@ public class SpritesheetAnimation extends AnimationTimer {
         if (currentFrame.duration() * 1_000_000 + lastFrame < now) {
             lastFrame = now;
             currentFrameID = (currentFrameID + 1) % currentAnimation.getFrames().length;
+            // call the listeners when an animation finished
+            if (currentFrameID == 0) {
+                animationFinishedListeners.forEach(l -> l.accept(currentState, currentDirection));
+            }
 
             currentFrame = currentAnimation.getFrames()[currentFrameID];
             cellProperty.set(viewportFromCell(currentFrame));
@@ -151,11 +181,43 @@ public class SpritesheetAnimation extends AnimationTimer {
         stop();
         if (animationCandidates.isEmpty()) {
             currentAnimation = defaultAnimation;
+            this.currentState = StateType.IDLE;
+            this.currentDirection = Direction.NONE;
+            LOGGER.info("Unknown animation %s/%s".formatted(state, direction));
         } else {
             currentAnimation = animationCandidates.get(rng.nextInt(animationCandidates.size()));
+            this.currentState = state;
+            this.currentDirection = direction;
         }
         changeAnimation = true;
         start();
+    }
+
+    /**
+     * Gets the current state of the animator
+     * 
+     * @return The current state
+     */
+    public StateType getCurrentState() {
+        return currentState;
+    }
+
+    /**
+     * Gets the current direction of the animator
+     * 
+     * @return the current direction
+     */
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
+    /**
+     * Adds a listener which is called when the current animation finishes
+     * 
+     * @param listener the listener to add
+     */
+    public void addAnimationFinishedListener(BiConsumer<StateType, Direction> listener) {
+        animationFinishedListeners.add(listener);
     }
 
     /**

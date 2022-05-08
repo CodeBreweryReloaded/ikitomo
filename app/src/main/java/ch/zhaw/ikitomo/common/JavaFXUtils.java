@@ -2,9 +2,13 @@ package ch.zhaw.ikitomo.common;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javafx.application.Platform;
+import javafx.beans.binding.ObjectBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -105,4 +109,51 @@ public class JavaFXUtils {
         map.addListener(listener);
         return FXCollections.unmodifiableObservableList(list);
     }
+
+    public static <K, V> NestedObservableBinding<K, V> nestedBinding(ObservableValue<K> observable,
+            Function<K, ObservableValue<V>> observableFunction) {
+        return new NestedObservableBinding<>(observable, observableFunction);
+    }
+
+    public static class NestedObservableBinding<K, V> extends ObjectBinding<V> {
+        private ObservableValue<K> observable;
+        private ObservableValue<V> nestedObservable;
+        private Function<K, ObservableValue<V>> observableFunction;
+        private ChangeListener<? super V> nestedListener = this::nestedObservableChanges;
+
+        NestedObservableBinding(ObservableValue<K> observable,
+                Function<K, ObservableValue<V>> observableFunction) {
+            this.observable = observable;
+            this.observableFunction = observableFunction;
+            this.observable.addListener(this::observableChanges);
+            setupNestedObservable(observable.getValue());
+        }
+
+        private void observableChanges(ObservableValue<? extends K> observable, K oldValue, K newValue) {
+            setupNestedObservable(newValue);
+            invalidate();
+        }
+
+        private void setupNestedObservable(K newValue) {
+            if (nestedObservable != null) {
+                nestedObservable.removeListener(nestedListener);
+            }
+            nestedObservable = observableFunction.apply(newValue);
+            if (nestedObservable != null) {
+                nestedObservable.addListener(nestedListener);
+            }
+        }
+
+        private void nestedObservableChanges(ObservableValue<? extends V> observable, V oldValue, V newValue) {
+            invalidate();
+        }
+
+        @Override
+        protected V computeValue() {
+            if (nestedObservable == null)
+                return null;
+            return nestedObservable.getValue();
+        }
+    }
+
 }

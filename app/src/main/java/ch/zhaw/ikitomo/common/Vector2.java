@@ -1,12 +1,14 @@
 package ch.zhaw.ikitomo.common;
 
+import java.util.Arrays;
+
 /**
  * Represents a vetor
  * 
  * @param x The x coordinate
  * @param y The y coordinate
  */
-public record Vector2(int x, int y) {
+public record Vector2(float x, float y) {
     /**
      * The zero vector
      */
@@ -38,7 +40,7 @@ public record Vector2(int x, int y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 multiply(int n) {
+    public Vector2 multiply(float n) {
         return new Vector2(x * n, y * n);
     }
 
@@ -58,8 +60,21 @@ public record Vector2(int x, int y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 divide(int n) {
+    public Vector2 divide(float n) {
         return new Vector2(x / n, y / n);
+    }
+
+    /**
+     * Returns the normalized vector
+     * 
+     * @return the normalized vector with a length of approximately 1
+     */
+    public Vector2 normalize() {
+        int length = (int) absolute();
+        if (length == 0) {
+            return ZERO;
+        }
+        return divide(length);
     }
 
     /**
@@ -69,5 +84,16 @@ public record Vector2(int x, int y) {
      */
     public float absolute() {
         return (float) Math.sqrt(x * x + y * y);
+    }
+
+    /**
+     * Returns the direction of this vector
+     * 
+     * @return the direction of this vector
+     */
+    public Direction direction() {
+        Vector2 norm = normalize();
+        return Arrays.stream(Direction.values()).filter(d -> d.getVector().equals(norm)).findAny()
+                .orElse(Direction.NONE);
     }
 }
