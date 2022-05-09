@@ -33,7 +33,7 @@ public class TomodachiBehavior {
     private RandomGenerator random = new Random();
 
     /**
-     * The behaivor model
+     * The behavior model
      */
     private BehaviorModel model;
 
