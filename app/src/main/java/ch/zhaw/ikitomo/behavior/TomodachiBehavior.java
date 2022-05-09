@@ -1,24 +1,22 @@
 package ch.zhaw.ikitomo.behavior;
 
-import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.random.RandomGenerator;
 
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
-import ch.zhaw.ikitomo.overlay.model.TomodachiModel;
 
 /**
  * The default behavior strategy for tomodachis
  */
-public class DefaultBehaviorStrategy implements BehaviorStrategy {
+public class TomodachiBehavior {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(DefaultBehaviorStrategy.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TomodachiBehavior.class.getName());
 
     /**
      * The distance when the tomodachi changes from the idle state to the run state
@@ -28,22 +26,12 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
     /**
      * The random instance
      */
-    private Random random = new Random();
+    private RandomGenerator random = new Random();
 
     /**
-     * The tomodachi environment
+     * The behaivor model
      */
-    private TomodachiEnvironment environment;
-
-    /**
-     * The tomodachi model which is controlled by this strategy
-     */
-    private TomodachiModel tomodachiModel;
-
-    /**
-     * The strategy to get the next target in the running state
-     */
-    private NextPositionStrategy nextPositionStrategy;
+    private BehaviorModel model;
 
     /**
      * Constructor
@@ -51,29 +39,20 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
      * @param tomodachiModel The tomodachi model controlled by this strategy
      * @param environment    The tomodachi environment
      */
-    public DefaultBehaviorStrategy(TomodachiModel tomodachiModel, TomodachiEnvironment environment) {
-        this.tomodachiModel = tomodachiModel;
-        this.environment = environment;
-
-        calculateNextPositionStrategy();
-
-        // calculate new NextPositionStrategy when the factory changes
-        this.tomodachiModel.getSettings().nextPositionStrategyFactoryProperty()
-                .addListener((observable, oldValue, newValue) -> calculateNextPositionStrategy());
+    public TomodachiBehavior(BehaviorModel model) {
+        this.model = model;
     }
 
-    @Override
-    public void update(long now) {
-        StateType currentState = tomodachiModel.getCurrentAnimationState();
+    public void update(double delta) {
+        StateType currentState = model.getCurrentAnimationState();
         switch (currentState) {
             case RUN:
-                doRunState();
+                doRunState(delta);
                 break;
             case IDLE:
             case SLEEP:
             case YAWN:
             case WAKE:
-                tomodachiModel.setCurrentAnimationDirection(Direction.NONE);
                 break;
             default:
                 LOGGER.log(Level.WARNING, "Unknown state: {0}", currentState.name());
@@ -85,16 +64,18 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
      * Calculates the new position of the tomodachi. It moves towards the position
      * returned by {@link #nextPositionStrategy}
      */
-    private void doRunState() {
-        Vector2 oldPosition = tomodachiModel.getPosition();
-        Vector2 target = getNextPosition();
-        Vector2 diff = target.subtract(oldPosition).normalize().multiply(tomodachiModel.getSettings().getSpeed());
+    private void doRunState(double delta) {
+        Vector2 oldPosition = model.getPosition();
+        Vector2 target = model.getNextPosition();
+        Vector2 diff = target.subtract(oldPosition).normalize()
+                .multiply(model.getSettings().getSpeed() * delta);
         Direction direction = diff.direction();
-        tomodachiModel.setPosition(oldPosition.add(diff));
-        tomodachiModel.setCurrentAnimationDirection(direction);
+        var nextPosition = oldPosition.add(diff);
+        LOGGER.log(Level.FINE, "next position is {0}", nextPosition);
+        model.setPosition(nextPosition);
+        model.setCurrentAnimationDirection(direction);
     }
 
-    @Override
     public void animationFinished(StateType oldState) {
         StateType nextState = switch (oldState) {
             case IDLE -> getNextStateAfterIdle();
@@ -107,10 +88,19 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
                 yield StateType.IDLE;
             }
         };
-        tomodachiModel.setCurrentAnimation(nextState);
+        model.setCurrentAnimation(nextState);
         if (nextState != oldState) {
             LOGGER.log(Level.INFO, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
         }
+    }
+
+    /**
+     * Sets the random generator
+     * 
+     * @param random The random
+     */
+    void setRandom(RandomGenerator random) {
+        this.random = random;
     }
 
     /**
@@ -152,9 +142,9 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
      * 
      * @return The distance to the next target position
      */
-    private float getDistanceToNextPosition() {
-        Vector2 nextPosition = getNextPosition();
-        Vector2 current = tomodachiModel.getPosition();
+    private double getDistanceToNextPosition() {
+        Vector2 nextPosition = model.getNextPosition();
+        Vector2 current = model.getPosition();
         return nextPosition.subtract(current).absolute();
     }
 
@@ -164,7 +154,7 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
      * @return If the tomodachi should wake up
      */
     private boolean isWakingUp() {
-        return tomodachiModel.getSettings().getWakeChance() > random.nextFloat();
+        return model.getSettings().getWakeChance() > random.nextFloat();
     }
 
     /**
@@ -173,40 +163,11 @@ public class DefaultBehaviorStrategy implements BehaviorStrategy {
      * @return If the tomodachi should yawn
      */
     private boolean isYawning() {
-        return tomodachiModel.getSettings().getSleepChance() > random.nextFloat();
+        return model.getSettings().getSleepChance() > random.nextFloat();
     }
 
-    @Override
     public void reset() {
-        // currently not needed in this implementation
-    }
-
-    /**
-     * Gets the next position from the {@link #nextPositionStrategy}
-     * 
-     * @return the next target position
-     */
-    private Vector2 getNextPosition() {
-        return getNextPositionStrategy().nextPosition(tomodachiModel);
-    }
-
-    /**
-     * Creates a new {@link NextPositionStrategy} from the factory sets it to
-     * {@link #nextPositionStrategy}
-     */
-    private void calculateNextPositionStrategy() {
-        nextPositionStrategy = tomodachiModel.getSettings().getNextPositionStrategyFactory()
-                .createNextPosition(environment);
-        Objects.requireNonNull(nextPositionStrategy, "NextPositionStrategy must not be null");
-    }
-
-    /**
-     * Gets the current next position strategy
-     * 
-     * @return the strategy
-     */
-    public NextPositionStrategy getNextPositionStrategy() {
-        return nextPositionStrategy;
+        model.setCurrentAnimation(StateType.IDLE);
     }
 
 }

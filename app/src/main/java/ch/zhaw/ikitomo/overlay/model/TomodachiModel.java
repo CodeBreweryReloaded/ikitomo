@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
+import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.property.ObjectProperty;
@@ -226,5 +229,17 @@ public class TomodachiModel {
      */
     public void setCurrentAnimation(StateType state) {
         setCurrentAnimation(state, Direction.NONE);
+    }
+
+    /**
+     * Creates a new {@link NextPositionStrategy} from the
+     * {@link NextPositionStrategyFactory} set in the {@link TomodachiSettings}
+     * 
+     * @param env The tomodachi environment
+     * @return The created strategy
+     * @see NextPositionStrategyFactory#createNextPosition(TomodachiEnvironment)
+     */
+    public NextPositionStrategy createNextPointStrategy() {
+        return getSettings().getNextPositionStrategyFactory().createNextPosition();
     }
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @param x The x coordinate
  * @param y The y coordinate
  */
-public record Vector2(float x, float y) {
+public record Vector2(double x, double y) {
     /**
      * The zero vector
      */
@@ -40,7 +40,7 @@ public record Vector2(float x, float y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 multiply(float n) {
+    public Vector2 multiply(double n) {
         return new Vector2(x * n, y * n);
     }
 
@@ -60,7 +60,7 @@ public record Vector2(float x, float y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 divide(float n) {
+    public Vector2 divide(double n) {
         return new Vector2(x / n, y / n);
     }
 
@@ -70,7 +70,7 @@ public record Vector2(float x, float y) {
      * @return the normalized vector with a length of approximately 1
      */
     public Vector2 normalize() {
-        int length = (int) absolute();
+        double length = absolute();
         if (length == 0) {
             return ZERO;
         }
@@ -82,8 +82,20 @@ public record Vector2(float x, float y) {
      *
      * @return The length of this vector
      */
-    public float absolute() {
-        return (float) Math.sqrt(x * x + y * y);
+    public double absolute() {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    /**
+     * Tests if the given vector is equal to this vector with the given precision
+     * 
+     * @param vec       the vector
+     * @param precision the precision
+     * @return true if the vectors are equal with the given precision
+     */
+    public boolean equals(Vector2 vec, double precision) {
+        return x() < vec.x() + precision && x() > vec.x() - precision
+                && y() < vec.y() + precision && y() > vec.y() - precision;
     }
 
     /**
@@ -93,7 +105,7 @@ public record Vector2(float x, float y) {
      */
     public Direction direction() {
         Vector2 norm = normalize();
-        return Arrays.stream(Direction.values()).filter(d -> d.getVector().equals(norm)).findAny()
+        return Arrays.stream(Direction.values()).filter(d -> d.getVector().normalize().equals(norm, 0.001)).findAny()
                 .orElse(Direction.NONE);
     }
 }

@@ -2,7 +2,8 @@ package ch.zhaw.ikitomo.overlay.model;
 
 import java.util.List;
 
-import ch.zhaw.ikitomo.behavior.BehaviorStrategy;
+import ch.zhaw.ikitomo.behavior.BehaviorModel;
+import ch.zhaw.ikitomo.behavior.TomodachiBehavior;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.StateType;
@@ -37,7 +38,7 @@ public class OverlayModel {
      * A binding to the current behavior strategy. It is dependent on
      * {@link #tomodachi}
      */
-    private ObjectBinding<BehaviorStrategy> behaviorStrategy;
+    private ObjectBinding<TomodachiBehavior> behaviorStrategy;
 
     /**
      * A binding to the current position of the tomodachi
@@ -58,10 +59,17 @@ public class OverlayModel {
      * The animation timer for the behavior
      */
     private AnimationTimer behaviorTimer = new AnimationTimer() {
+        private long lastUpdate = 0;
 
         @Override
         public void handle(long now) {
-            getBehaviorStrategy().update(now);
+            // if this is the first call, skip the call to BehaviorStrategy#update(delta) to
+            // initialize lastUpdate
+            if (lastUpdate != 0) {
+                double delta = (now - lastUpdate) / 1_000_000.0;
+                getBehaviorStrategy().update(delta);
+            }
+            lastUpdate = now;
         }
     };
 
@@ -81,7 +89,7 @@ public class OverlayModel {
         tomodachiDirection = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationDirectionProperty);
 
         behaviorStrategy = Bindings
-                .createObjectBinding(() -> BehaviorStrategy.createInstance(getTomodachi(), environment), tomodachi);
+                .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
 
         behaviorTimer.start();
     }
@@ -109,7 +117,7 @@ public class OverlayModel {
      * 
      * @return The binging to the strategy
      */
-    public ObjectBinding<BehaviorStrategy> behaviorStrategyBinding() {
+    public ObjectBinding<TomodachiBehavior> behaviorStrategyBinding() {
         return behaviorStrategy;
     }
 
@@ -118,7 +126,7 @@ public class OverlayModel {
      * 
      * @return The strategy
      */
-    public BehaviorStrategy getBehaviorStrategy() {
+    public TomodachiBehavior getBehaviorStrategy() {
         return behaviorStrategy.get();
     }
 

@@ -7,7 +7,7 @@ import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.overlay.model.TomodachiModel;
 
 /**
- * A strategy for the {@link DefaultBehaviorStrategy} which returns for the next
+ * A strategy for the {@link TomodachiBehavior} which returns for the next
  * position the mouse position
  */
 public class MouseFollowStrategy implements NextPositionStrategy {

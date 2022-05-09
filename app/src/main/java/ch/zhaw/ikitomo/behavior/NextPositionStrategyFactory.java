@@ -1,17 +1,15 @@
 package ch.zhaw.ikitomo.behavior;
 
-import java.util.function.Function;
-
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import java.util.function.Supplier;
 
 /**
  * An enum with all possible factory methods for {@link NextPositionStrategy}s.
  * For this an enum is used to allow for serialization via Jackson
  */
 public enum NextPositionStrategyFactory {
-    FOLLOW_MOUSE(env -> new MouseFollowStrategy());
+    FOLLOW_MOUSE(MouseFollowStrategy::new);
 
-    private Function<TomodachiEnvironment, NextPositionStrategy> factory;
+    private Supplier<NextPositionStrategy> factory;
 
     /**
      * Constructor
@@ -19,7 +17,7 @@ public enum NextPositionStrategyFactory {
      * @param factory The factory method creating the {@link NextPositionStrategy}
      *                object
      */
-    private NextPositionStrategyFactory(Function<TomodachiEnvironment, NextPositionStrategy> factory) {
+    private NextPositionStrategyFactory(Supplier<NextPositionStrategy> factory) {
         this.factory = factory;
     }
 
@@ -29,7 +27,7 @@ public enum NextPositionStrategyFactory {
      * @param environment the environment
      * @return the newly created {@link NextPositionStrategy} object
      */
-    public NextPositionStrategy createNextPosition(TomodachiEnvironment environment) {
-        return factory.apply(environment);
+    public NextPositionStrategy createNextPosition() {
+        return factory.get();
     }
 }

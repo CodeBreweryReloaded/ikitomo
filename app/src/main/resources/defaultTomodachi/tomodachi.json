@@ -4,7 +4,7 @@
     "settings": {
         "sleepChance": 0.5,
         "wakeChance": 0.5,
-        "speed": 2,
+        "speed": 0.5,
         "nextPositionStrategy": "FOLLOW_MOUSE"
     },
     "states": [
