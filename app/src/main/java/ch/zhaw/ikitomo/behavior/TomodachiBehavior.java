@@ -85,7 +85,7 @@ public class TomodachiBehavior {
     }
 
     /**
-     * This method is called when an animation finished playing. The
+     * This method is called when an animation finished playing
      * 
      * @param oldState The animation state
      */
