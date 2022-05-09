@@ -176,6 +176,16 @@ class TomodachiBehaviorTest {
     }
 
     /**
+     * Tests that {@link TomodachiBehavior#tomodachiWasClicked()} changes the state
+     * to {@link StateType#EAT}
+     */
+    @Test
+    void testTomodachiWasClicked() {
+        strategy.tomodachiWasClicked();
+        verify(behaviorModel).setCurrentAnimation(StateType.EAT);
+    }
+
+    /**
      * Makes sure that the given vector is within the given tolerance. This method
      * is used like {@link org.mockito.Mockito#argThat(org.mockito.ArgumentMatcher)}
      * 
