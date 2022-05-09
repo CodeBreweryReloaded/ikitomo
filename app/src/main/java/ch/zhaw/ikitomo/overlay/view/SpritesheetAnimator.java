@@ -27,11 +27,11 @@ import javafx.scene.image.Image;
  * provides an observable {@link Image} property and {@link Rectangle2D}
  * property that can be bound to a GUI element
  */
-public class SpritesheetAnimation extends AnimationTimer {
+public class SpritesheetAnimator extends AnimationTimer {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(SpritesheetAnimation.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SpritesheetAnimator.class.getName());
 
     /**
      * Bindable property containing the current spritesheet
@@ -100,7 +100,7 @@ public class SpritesheetAnimation extends AnimationTimer {
      * @throws MissingAnimationException When the default animation can't be loaded
      *                                   (first {@link StateType#IDLE} animation)
      */
-    protected SpritesheetAnimation(ObservableMap<StateType, List<AnimationData>> animations)
+    protected SpritesheetAnimator(ObservableMap<StateType, List<AnimationData>> animations)
             throws MissingAnimationException {
         Bindings.bindContent(this.animations, animations);
         defaultAnimation = animations.get(StateType.IDLE).get(0);
