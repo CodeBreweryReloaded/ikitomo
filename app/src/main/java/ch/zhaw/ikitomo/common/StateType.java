@@ -23,5 +23,9 @@ public enum StateType {
     /**
      * The yawning state
      */
-    YAWN
+    YAWN,
+    /**
+     * The eating state
+     */
+    EAT
 }

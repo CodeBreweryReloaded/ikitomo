@@ -96,6 +96,7 @@ public class TomodachiBehavior {
             case SLEEP -> isWakingUp() ? StateType.WAKE : StateType.SLEEP;
             case WAKE -> StateType.IDLE;
             case YAWN -> StateType.SLEEP;
+            case EAT -> StateType.IDLE;
             default -> {
                 LOGGER.log(Level.WARNING, "Unknown state: {0}", oldState.name());
                 yield StateType.IDLE;
@@ -105,6 +106,13 @@ public class TomodachiBehavior {
         if (nextState != oldState) {
             LOGGER.log(Level.INFO, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
         }
+    }
+
+    /**
+     * This method is called when the tomodachi was clicked by the user
+     */
+    public void tomodachiWasClicked() {
+        model.setCurrentAnimation(StateType.EAT);
     }
 
     /**

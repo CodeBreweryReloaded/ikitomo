@@ -67,7 +67,7 @@ public class OverlayModel {
             // initialize lastUpdate
             if (lastUpdate != 0) {
                 double delta = (now - lastUpdate) / 1_000_000.0;
-                getBehaviorStrategy().update(delta);
+                getBehavior().update(delta);
             }
             lastUpdate = now;
         }
@@ -126,7 +126,7 @@ public class OverlayModel {
      * 
      * @return The strategy
      */
-    public TomodachiBehavior getBehaviorStrategy() {
+    public TomodachiBehavior getBehavior() {
         return behaviorStrategy.get();
     }
 

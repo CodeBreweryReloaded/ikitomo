@@ -89,13 +89,16 @@ public class OverlayController implements Killable {
         setLocation(model.getTomodachiPosition());
         model.tomodachiPositionBinding().addListener((observable, oldValue, newValue) -> setLocation(newValue));
 
-        // setup animatino listeners
+        // setup animation listeners
         model.tomodachiStateBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
         model.tomodachiDirectionBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
 
         // if the animation finished, tell the current behavior strategy
         animatedImage.getAnimator().addAnimationFinishedListener(
-                (state, direction) -> model.getBehaviorStrategy().animationFinished(state));
+                (state, direction) -> model.getBehavior().animationFinished(state));
+
+        // if the pane is clicked, tell the TomodachiBehavior
+        pane.setOnMouseClicked(event -> model.getBehavior().tomodachiWasClicked());
     }
 
     /**
