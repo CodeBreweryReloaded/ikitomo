@@ -11,7 +11,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.OverlayModel;
 import ch.zhaw.ikitomo.overlay.view.AnimatedImageView;
-import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimation;
+import ch.zhaw.ikitomo.overlay.view.SpritesheetAnimator;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -60,7 +60,7 @@ public class OverlayController implements Killable {
      */
     private AnimatedImageView animatedImage;
 
-    private SpritesheetAnimation animator;
+    private SpritesheetAnimator animator;
 
     /**
      * Protected controller for {@link OverlayControllerBuilder}

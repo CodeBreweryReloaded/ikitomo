@@ -118,6 +118,10 @@ public class TomodachiDefinition {
         return new ArrayList<>(states);
     }
 
+    /**
+     * Checks if this Definition is a resource (part of the program) or an external file
+     * @return True if it is resource, false if it is a file
+     */
     public boolean isResource() {
         return getRootFolder() == null;
     }

@@ -7,6 +7,8 @@ import ch.zhaw.ikitomo.common.Direction;
 
 /**
  * Defines the variables of an animation
+ * @param direction The direction of the animation
+ * @param animationSuffix The suffix of the animation filename
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TomodachiAnimationDefinition(

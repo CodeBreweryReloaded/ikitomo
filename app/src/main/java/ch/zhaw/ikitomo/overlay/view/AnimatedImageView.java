@@ -23,7 +23,7 @@ public class AnimatedImageView extends ImageView {
     /**
      * Holds the animator
      */
-    private SpritesheetAnimation animator;
+    private SpritesheetAnimator animator;
 
     /**
      * Constructor
@@ -32,7 +32,7 @@ public class AnimatedImageView extends ImageView {
      */
     public AnimatedImageView(ObservableMap<StateType, List<AnimationData>> animations) throws MissingAnimationException {
         setStyle(OverlayController.TRANSPARENT_STYLE);
-        this.animator = new SpritesheetAnimation(animations);
+        this.animator = new SpritesheetAnimator(animations);
         imageProperty().bind(animator.getImageProperty());
         viewportProperty().bind(animator.getCellProperty());
     }
@@ -41,7 +41,7 @@ public class AnimatedImageView extends ImageView {
      * Gets the active {@link SpritesheetAnimator} instanve
      * @return The animator
      */
-    public SpritesheetAnimation getAnimator() {
+    public SpritesheetAnimator getAnimator() {
         return animator;
     }
 }
