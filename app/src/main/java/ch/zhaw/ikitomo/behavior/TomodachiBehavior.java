@@ -22,6 +22,10 @@ public class TomodachiBehavior {
      * The distance when the tomodachi changes from the idle state to the run state
      */
     private static final float DISTANCE_BEFORE_START_MOVING = 200;
+    /**
+     * The distance when the tomodachi changes from the run state to the idle state
+     */
+    private static final float DISTANCE_TO_STOP_MOVING = 100;
 
     /**
      * The random instance
@@ -45,18 +49,11 @@ public class TomodachiBehavior {
 
     public void update(double delta) {
         StateType currentState = model.getCurrentAnimationState();
-        switch (currentState) {
-            case RUN:
-                doRunState(delta);
-                break;
-            case IDLE:
-            case SLEEP:
-            case YAWN:
-            case WAKE:
-                break;
-            default:
-                LOGGER.log(Level.WARNING, "Unknown state: {0}", currentState.name());
-                break;
+        if (currentState == StateType.RUN) {
+            doRunState(delta);
+        }
+        if (currentState == StateType.IDLE && getDistanceToNextPosition() > DISTANCE_BEFORE_START_MOVING) {
+            model.setCurrentAnimation(StateType.RUN);
         }
     }
 
@@ -65,6 +62,11 @@ public class TomodachiBehavior {
      * returned by {@link #nextPositionStrategy}
      */
     private void doRunState(double delta) {
+        // change to idle state if the tomodachi is close enough to the next position
+        if (getDistanceToNextPosition() < DISTANCE_TO_STOP_MOVING) {
+            model.setCurrentAnimation(StateType.IDLE);
+        }
+
         Vector2 oldPosition = model.getPosition();
         Vector2 target = model.getNextPosition();
         Vector2 diff = target.subtract(oldPosition).normalize()
@@ -78,8 +80,8 @@ public class TomodachiBehavior {
 
     public void animationFinished(StateType oldState) {
         StateType nextState = switch (oldState) {
-            case IDLE -> getNextStateAfterIdle();
-            case RUN -> getNextStateAfterRun();
+            case IDLE -> isYawning() ? StateType.YAWN : StateType.IDLE;
+            case RUN -> isYawning() ? StateType.YAWN : StateType.RUN;
             case SLEEP -> isWakingUp() ? StateType.WAKE : StateType.SLEEP;
             case WAKE -> StateType.IDLE;
             case YAWN -> StateType.SLEEP;
@@ -101,39 +103,6 @@ public class TomodachiBehavior {
      */
     void setRandom(RandomGenerator random) {
         this.random = random;
-    }
-
-    /**
-     * Gets the next state after the idle animation finished. If the distance to the
-     * next position is greater than {@link #DISTANCE_BEFORE_START_MOVING} the
-     * tomodachi will start running.
-     * There is a chance that the tomodachi will start yawning and then sleeping
-     * else the tomodachi will continue idling.
-     * 
-     * @return The next state
-     */
-    private StateType getNextStateAfterIdle() {
-        if (getDistanceToNextPosition() > DISTANCE_BEFORE_START_MOVING) {
-            return StateType.RUN;
-        }
-        if (isYawning()) {
-            return StateType.YAWN;
-        }
-        return StateType.IDLE;
-    }
-
-    /**
-     * Gets the state after the run animation finished. The tomodachi will either
-     * start yawning or sleep.
-     */
-    private StateType getNextStateAfterRun() {
-        if (getDistanceToNextPosition() < DISTANCE_BEFORE_START_MOVING) {
-            return StateType.IDLE;
-        }
-        if (isYawning()) {
-            return StateType.YAWN;
-        }
-        return StateType.RUN;
     }
 
     /**
