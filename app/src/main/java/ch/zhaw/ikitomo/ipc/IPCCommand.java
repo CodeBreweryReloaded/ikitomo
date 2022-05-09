@@ -9,11 +9,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import ch.zhaw.ikitomo.ipc.IPCCommand.IPCCommandType;
 
+/**
+ * A command which is sent and received by the
+ * {@link ch.zhaw.ikitomo.ipc.IPCManager.IPCClient} and
+ * {@link ch.zhaw.ikitomo.ipc.IPCManager.IPCServer}
+ * 
+ * @param command The IPC command type
+ * @param args    the arguments for the command
+ */
 public record IPCCommand(@JsonProperty("command") IPCCommandType command, @JsonProperty("args") List<String> args) {
-    /*
-     * public IPCCommand(IPCCommandType command) {
-     * this(command, Collections.emptyList());
-     * }
+    /**
+     * Constructor
+     * 
+     * @param command The IPC command type
+     * @param args    the arguments for the command
      */
     @JsonCreator
     public IPCCommand(@JsonProperty("command") IPCCommandType command, @JsonProperty("args") List<String> args) {
@@ -21,14 +30,28 @@ public record IPCCommand(@JsonProperty("command") IPCCommandType command, @JsonP
         this.args = new ArrayList<>(args);
     }
 
+    /**
+     * Returns a copy of the arguments list
+     * 
+     * @returns A list of arguments
+     */
     public List<String> args() {
         return new ArrayList<>(args);
     }
 
+    /**
+     * All possible types for IPC commands
+     */
     public enum IPCCommandType {
         SHOW_SETTINGS
     }
 
+    /**
+     * Creates a new {@link ch.zhaw.ikitomo.ipc.IPCCommand} with the
+     * {@link IPCCommandType#SHOW_SETTINGS} type
+     * 
+     * @return The newly created command
+     */
     public static IPCCommand newShowSettingsCommand() {
         return new IPCCommand(IPCCommandType.SHOW_SETTINGS, Collections.emptyList());
     }
