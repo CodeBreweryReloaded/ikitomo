@@ -19,14 +19,18 @@ import javafx.collections.ObservableList;
  */
 public class SettingsModel {
     /**
-     * the logger
+     * The logger
      */
     private static final Logger LOGGER = Logger.getLogger(SettingsModel.class.getName());
+
     /**
-     * the delay in ms between the last keystroke and the saving of the settings
+     * The delay in ms between the last keystroke and the saving of the settings
      */
     private static final long SAVING_DELAY = 200;
 
+    /**
+     * The global tomodachi environment object
+     */
     private TomodachiEnvironment environment;
 
     /**
@@ -85,7 +89,8 @@ public class SettingsModel {
 
     /**
      * Saves the settings immediately with no synchronization. {@link #save()}
-     * should be used usually because it is buffered
+     * may be used normally since it only saves after the {@link #save()} method
+     * isn't invoked for a period
      * 
      * @see #save()
      */
@@ -100,7 +105,7 @@ public class SettingsModel {
     }
 
     /**
-     * Setts the current {@link TomodachiDefinition}
+     * Sets the current {@link TomodachiDefinition}
      * 
      * @param tomodachiFile the tomodachi file
      */
@@ -110,7 +115,7 @@ public class SettingsModel {
     }
 
     /**
-     * Adds an exception handler which is called when saving the settings fails
+     * Adds an exception handler which is called when saving the settings fail
      * 
      * @param handler The handler
      */
@@ -130,7 +135,7 @@ public class SettingsModel {
     /**
      * Gets a list with all tomodachi files
      * 
-     * @return the list
+     * @return The list
      */
     public ObservableList<TomodachiDefinition> getTomodachiDefinitions() {
         return environment.getTomodachiDefinitions();

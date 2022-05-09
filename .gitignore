@@ -28,6 +28,7 @@ build/
 
 # ignore logfiles
 *.log*
+log/
 
 # OS dependant files
 .DS_Store

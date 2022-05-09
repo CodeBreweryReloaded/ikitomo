@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -98,19 +97,12 @@ public class JavaFXUtils {
         MapChangeListener<K, T> listener = change -> {
             if (change.wasAdded()) {
                 list.add(change.getValueAdded());
-            } else if (change.wasRemoved()) {
+            }
+            if (change.wasRemoved()) {
                 list.remove(change.getValueRemoved());
             }
         };
         map.addListener(listener);
-        list.addListener(new ListChangeListener<>() {
-
-            @Override
-            public void onChanged(Change<? extends T> c) {
-                System.out.println("added: " + c.getList());
-            }
-
-        });
         return FXCollections.unmodifiableObservableList(list);
     }
 }
