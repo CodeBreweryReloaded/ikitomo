@@ -47,6 +47,12 @@ public class TomodachiBehavior {
         this.model = model;
     }
 
+    /**
+     * This method is called every JavaFX pulse by an
+     * {@link javafx.animation.AnimationTimer}
+     * 
+     * @param delta The time in milliseconds since the last pulse
+     */
     public void update(double delta) {
         StateType currentState = model.getCurrentAnimationState();
         if (currentState == StateType.RUN) {
@@ -65,19 +71,24 @@ public class TomodachiBehavior {
         // change to idle state if the tomodachi is close enough to the next position
         if (getDistanceToNextPosition() < DISTANCE_TO_STOP_MOVING) {
             model.setCurrentAnimation(StateType.IDLE);
+        } else {
+            Vector2 oldPosition = model.getPosition();
+            Vector2 target = model.getNextPosition();
+            Vector2 diff = target.subtract(oldPosition).normalize()
+                    .multiply(model.getSettings().getSpeed() * delta);
+            Direction direction = diff.direction();
+            var nextPosition = oldPosition.add(diff);
+            LOGGER.log(Level.FINE, "next position is {0}", nextPosition);
+            model.setPosition(nextPosition);
+            model.setCurrentAnimationDirection(direction);
         }
-
-        Vector2 oldPosition = model.getPosition();
-        Vector2 target = model.getNextPosition();
-        Vector2 diff = target.subtract(oldPosition).normalize()
-                .multiply(model.getSettings().getSpeed() * delta);
-        Direction direction = diff.direction();
-        var nextPosition = oldPosition.add(diff);
-        LOGGER.log(Level.FINE, "next position is {0}", nextPosition);
-        model.setPosition(nextPosition);
-        model.setCurrentAnimationDirection(direction);
     }
 
+    /**
+     * This method is called when an animation finished playing. The
+     * 
+     * @param oldState The animation state
+     */
     public void animationFinished(StateType oldState) {
         StateType nextState = switch (oldState) {
             case IDLE -> isYawning() ? StateType.YAWN : StateType.IDLE;
@@ -133,10 +144,6 @@ public class TomodachiBehavior {
      */
     private boolean isYawning() {
         return model.getSettings().getSleepChance() > random.nextFloat();
-    }
-
-    public void reset() {
-        model.setCurrentAnimation(StateType.IDLE);
     }
 
 }
