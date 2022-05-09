@@ -86,6 +86,7 @@ public class OverlayController implements Killable {
         pane.setOnMouseDragged(this::onDragEvent);
 
         // setup position listener
+        setLocation(model.getTomodachiPosition());
         model.tomodachiPositionBinding().addListener((observable, oldValue, newValue) -> setLocation(newValue));
 
         // setup animatino listeners

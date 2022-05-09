@@ -104,8 +104,8 @@ public record Vector2(double x, double y) {
      * @return the direction of this vector
      */
     public Direction direction() {
-        Vector2 norm = normalize();
-        return Arrays.stream(Direction.values()).filter(d -> d.getVector().normalize().equals(norm, 0.001)).findAny()
+        Vector2 norm = new Vector2(Math.signum(x()), Math.signum(y()));
+        return Arrays.stream(Direction.values()).filter(d -> d.getVector().equals(norm)).findAny()
                 .orElse(Direction.NONE);
     }
 }

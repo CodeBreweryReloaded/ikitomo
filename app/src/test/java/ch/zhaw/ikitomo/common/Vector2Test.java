@@ -124,9 +124,9 @@ class Vector2Test {
                 new TestDirectionInput(new Vector2(-1, 0), Direction.LEFT),
                 new TestDirectionInput(new Vector2(0, 1), Direction.DOWN),
                 new TestDirectionInput(new Vector2(0, -1), Direction.UP),
-                new TestDirectionInput(new Vector2(1, 1), Direction.DOWN_RIGHT),
-                new TestDirectionInput(new Vector2(1, -1), Direction.UP_RIGHT),
-                new TestDirectionInput(new Vector2(-1, 1), Direction.DOWN_LEFT),
-                new TestDirectionInput(new Vector2(-1, -1), Direction.UP_LEFT));
+                new TestDirectionInput(new Vector2(1.1, 0.5), Direction.DOWN_RIGHT),
+                new TestDirectionInput(new Vector2(1.1, -1.5), Direction.UP_RIGHT),
+                new TestDirectionInput(new Vector2(-0.7, 1.5), Direction.DOWN_LEFT),
+                new TestDirectionInput(new Vector2(-0.7, -1.6), Direction.UP_LEFT));
     }
 }

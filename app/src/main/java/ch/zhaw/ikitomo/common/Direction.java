@@ -52,11 +52,11 @@ public enum Direction {
      * @param vector the directional vector of this direction
      */
     private Direction(Vector2 vector) {
-        this.vector = vector.normalize();
+        this.vector = vector;
     }
 
     /**
-     * Gets the normalized direction vector of this direction
+     * Gets the direction vector of this direction
      * 
      * @return the direction vector
      */
