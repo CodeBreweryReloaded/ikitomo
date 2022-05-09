@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.overlay.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -175,7 +176,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * @param direction Which direction the animation is assigned to
      */
     public void setAnimation(StateType state, Direction direction) {
-        List<AnimationData> animationCandidates = animations.get(state).stream()
+        List<AnimationData> animationCandidates = animations.getOrDefault(state, Collections.emptyList()).stream()
                 .filter(animation -> animation.getDirection().equals(direction)).toList();
         stop();
         if (animationCandidates.isEmpty()) {
