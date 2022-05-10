@@ -4,7 +4,6 @@ import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;
 import ch.zhaw.ikitomo.overlay.OverlayController;
-import ch.zhaw.ikitomo.settings.SettingsController;
 import ch.zhaw.ikitomo.trayicon.TrayIconController;
 import javafx.application.Application;
 import javafx.application.Platform;

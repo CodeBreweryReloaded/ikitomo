@@ -3,11 +3,9 @@ package ch.zhaw.ikitomo.trayicon;
 import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.IkitomoApplication;
 import ch.zhaw.ikitomo.common.Killable;
-import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Platform;
 
