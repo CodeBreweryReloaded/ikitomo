@@ -36,7 +36,7 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
     @Override
     public TomodachiDefinition load(String rootFolder) throws IOException {
         Path rootFolderPath = Paths.get(rootFolder, getConfigBaseName());
-        var result = super.load(rootFolderPath.toString());
+        TomodachiDefinition result = super.load(rootFolderPath.toString());
         result.setRootPath(rootFolderPath);
         return result;
     }
