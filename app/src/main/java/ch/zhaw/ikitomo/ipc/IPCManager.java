@@ -52,33 +52,32 @@ public class IPCManager implements Closeable {
         return sendShowSettingsCommand;
     }
 
-    void init() {
+    public void init() {
         // if the well-known port file exists, we assume that another instance is
         // running
         otherInstanceRunning = Files.exists(wellKnownPortFile);
-        if (!otherInstanceRunning) {
-            startUpIPCServer();
-        }
-        // while startup up the server we might detected an other instance, thus we
-        // check the boolean flag again
         if (otherInstanceRunning) {
+            LOGGER.log(Level.INFO, "Detected other instance running, trying to contact it");
             tryToConnectToIPCServer();
         }
-        // if we couldn't connect to the server -> try again to create a server and
-        // write the well known port file
+
+        // While connecting to the server we might run in to trouble, so we try to start
+        // up our own server
         if (!otherInstanceRunning) {
+            LOGGER.log(Level.INFO,
+                    "The well known port file {0} does not exist or the connection to the server failed, assuming that no other instance is running and starting the ipc server",
+                    wellKnownPortFile.toAbsolutePath());
             startUpIPCServer();
         }
-
         // complete the otherInstanceRunningFuture
         otherInstanceRunningFuture.complete(otherInstanceRunning);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(this::deleteWellKnownPortFile));
     }
 
     private void deleteWellKnownPortFile() {
         if (Files.exists(wellKnownPortFile)) {
             try {
+                LOGGER.log(Level.INFO, "Deleting well known port file {0}", wellKnownPortFile.toAbsolutePath());
                 Files.delete(wellKnownPortFile);
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Could not delete well known port file", e);
@@ -100,6 +99,7 @@ public class IPCManager implements Closeable {
 
     private void onClientConnected(IPCClient client) throws IOException {
         if (isSendShowSettingsCommand()) {
+            LOGGER.log(Level.INFO, "Sending show settings command");
             client.send(IPCCommand.newShowSettingsCommand());
         }
     }
@@ -112,7 +112,10 @@ public class IPCManager implements Closeable {
             ipcServer = new IPCServer();
             ipcServer.setCommandListener(this::onCommandReceived);
             ipcServer.start();
+
+            LOGGER.log(Level.INFO, "Starting up ipc server on port \"{0}\"", ipcServer.getPort());
             writeWellKnownPortFile(ipcServer.getPort());
+            Runtime.getRuntime().addShutdownHook(new Thread(this::deleteWellKnownPortFile));
         } catch (IOException e) {
             LOGGER.log(Level.WARNING,
                     "Couldn't start IPC server or write well-known port file at \"" + wellKnownPortFile + "\"", e);
@@ -176,10 +179,16 @@ public class IPCManager implements Closeable {
 
     private static IPCManager instance;
 
-    public static void init(boolean sendShowSettingsCommand, Runnable showSettingsListener) {
+    public static IPCManager createInstance(boolean sendShowSettingsCommand, Runnable showSettingsListener) {
+        if (instance != null) {
+            LOGGER.warning("IPCManager already created");
+            return instance;
+        }
         Path wellKnownPortFile = Paths.get(DEFAULT_WELL_KNOWN_PORT_FILE);
         instance = new IPCManager(wellKnownPortFile, showSettingsListener);
         instance.setSendShowSettingsCommand(sendShowSettingsCommand);
+        instance.init();
+        return instance;
     }
 
     public static IPCManager getInstance() {
@@ -214,8 +223,8 @@ public class IPCManager implements Closeable {
             try {
                 while (!server.isClosed()) {
                     Socket socket = server.accept();
-                    var client = new IPCClient(socket);
-                    client.setCommandListener(commandListener);
+                    LOGGER.log(Level.INFO, "Accepted connection from {0}", socket.getInetAddress());
+                    var client = new IPCClient(socket, commandListener);
                     clients.add(client);
                     if (connectListener != null) {
                         connectListener.accept(client);
@@ -266,11 +275,11 @@ public class IPCManager implements Closeable {
         private Thread thread;
 
         public IPCClient(int port, Consumer<IPCCommand> commandListener) throws IOException {
-            this.commandListener = commandListener;
-            setupSocket(new Socket(InetAddress.getLoopbackAddress(), port));
+            this(new Socket(InetAddress.getLoopbackAddress(), port), commandListener);
         }
 
-        public IPCClient(Socket socket) throws IOException {
+        public IPCClient(Socket socket, Consumer<IPCCommand> commandListener) throws IOException {
+            this.commandListener = commandListener;
             setupSocket(socket);
         }
 
@@ -322,6 +331,7 @@ public class IPCManager implements Closeable {
         private void parseReceivedString(String input) {
             try {
                 IPCCommand cmd = IPC_COMMAND_MANAGER.loadFromString(input);
+                LOGGER.log(Level.INFO, "Received command: {0}", cmd);
                 if (commandListener != null) {
                     commandListener.accept(cmd);
                 }

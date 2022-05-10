@@ -1,18 +1,22 @@
 package ch.zhaw.ikitomo.trayicon;
 
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
 import ch.zhaw.ikitomo.IkitomoApplication;
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Platform;
-
-import javax.imageio.ImageIO;
 
 /**
  * The tray icon controller
@@ -29,14 +33,10 @@ public class TrayIconController implements Killable {
      */
     private SettingsController settingsController;
 
-    @Override
-    public CompletableFuture<Void> kill() {
-        if (this.settingsController != null) {
-            this.settingsController.kill();
-        }
-
-        return CompletableFuture.completedFuture(null);
-    }
+    /**
+     * The application launcher instance
+     */
+    private IkitomoApplication application;
 
     /**
      * Constructor of Class TrayIconController
@@ -50,6 +50,7 @@ public class TrayIconController implements Killable {
             LOGGER.log(Level.WARNING, "OS does not support SystemTray.");
             return;
         }
+        this.application = application;
 
         try {
             final PopupMenu popup = new PopupMenu();
@@ -64,11 +65,7 @@ public class TrayIconController implements Killable {
 
             MenuItem showSettingsItem = new MenuItem("Settings");
 
-            showSettingsItem.addActionListener(e -> {
-                Platform.runLater(() -> {
-                    if (this.settingsController == null || !settingsController.isVisible()) this.settingsController = SettingsController.newSettingsUI(application.getEnvironment());
-                });
-            });
+            showSettingsItem.addActionListener(e -> showSettings());
 
             MenuItem exitItem = new MenuItem("Exit");
             exitItem.addActionListener(e -> {
@@ -83,8 +80,25 @@ public class TrayIconController implements Killable {
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } catch (AWTException | IOException ioE) {
-            LOGGER.log(Level.SEVERE,"An error occured during initialization of program.", ioE);
+            LOGGER.log(Level.SEVERE, "An error occured during initialization of program.", ioE);
         }
+    }
+
+    @Override
+    public CompletableFuture<Void> kill() {
+        if (this.settingsController != null) {
+            this.settingsController.kill();
+        }
+
+        return CompletableFuture.completedFuture(null);
+    }
+
+    public void showSettings() {
+        Platform.runLater(() -> {
+            if (this.settingsController == null || !settingsController.isVisible()) {
+                this.settingsController = SettingsController.newSettingsUI(application.getEnvironment());
+            }
+        });
     }
 
     /**

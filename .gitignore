@@ -69,3 +69,6 @@ Desktop.ini
 
 # databases
 *.sqlite
+
+# well-known port file
+.ipc-port

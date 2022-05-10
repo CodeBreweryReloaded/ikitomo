@@ -1,6 +1,13 @@
 package ch.zhaw.ikitomo;
 
 import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
@@ -11,11 +18,6 @@ import ch.zhaw.ikitomo.trayicon.TrayIconController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.CompletionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The javafx application class to bootstrap the GUI.
@@ -46,7 +48,25 @@ public class IkitomoApplication extends Application {
     public void start(Stage primaryStage) {
         IkitomoParameters parameters = IkitomoParameters.parseParameters(getParameters());
 
-        IPCManager.init(parameters.showSettings(), this::showSettings);
+        IPCManager ipcManager = IPCManager.createInstance(parameters.showSettings(), () -> {
+            if (trayIconController != null) {
+                trayIconController.showSettings();
+            }
+        });
+        ipcManager.init();
+
+        try {
+            Boolean otherInstanceRunning = ipcManager.isOtherInstanceRunning().get(200, TimeUnit.SECONDS);
+            if (Boolean.TRUE.equals(otherInstanceRunning)) {
+                LOGGER.log(Level.INFO, "Other instance running, exiting");
+                Platform.exit();
+                return;
+            }
+        } catch (ExecutionException | TimeoutException e) {
+            LOGGER.log(Level.SEVERE, "Could not check if other instance is running", e);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
         overlayController = OverlayController.newOverlayUI(environment, primaryStage);
@@ -78,10 +98,6 @@ public class IkitomoApplication extends Application {
      */
     public TomodachiEnvironment getEnvironment() {
         return environment;
-    }
-
-    private void showSettings() {
-
     }
 
     private static record IkitomoParameters(boolean showSettings, boolean showHelp) {
