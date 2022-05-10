@@ -6,10 +6,11 @@ import java.io.InputStreamReader;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.JSONManager;
 import ch.zhaw.ikitomo.common.StateType;
-import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiAnimationDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
@@ -22,6 +23,7 @@ import javafx.scene.image.Image;
  * A helper class that properly generates a {@link TomodachiModel} based on inputs
  */
 public class TomodachiModelLoader {
+    private static final Logger LOGGER = Logger.getLogger(TomodachiModelLoader.class.getName());
     /**
      * The file extension that will be used to read metadata
      */
@@ -85,7 +87,7 @@ public class TomodachiModelLoader {
             try {
                 consumer.accept(loadAnimationData(prefix, animation));
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Unable to load animation \"%s/%s\"".formatted(state, animation.direction()), e);
             }
         }).toList();
     }
