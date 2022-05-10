@@ -20,6 +20,8 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.collections.ObservableMap;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 /**
  * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
@@ -193,6 +195,16 @@ public class OverlayModel {
      */
     public Direction getTomodachiDirection() {
         return tomodachiDirection.get();
+    }
+
+    /**
+     * Gets the center of the primary monitor
+     * 
+     * @return A vector representing the center point
+     */
+    public Vector2 getScreenCenter() {
+        Rectangle2D screen = Screen.getPrimary().getBounds();
+        return new Vector2((int) screen.getMaxX() / 2, (int) screen.getMaxY() / 2);
     }
 
     /**
