@@ -2,7 +2,10 @@ package ch.zhaw.ikitomo.trayicon;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.IkitomoApplication;
 import ch.zhaw.ikitomo.common.Killable;
@@ -15,6 +18,12 @@ import javax.imageio.ImageIO;
  * The tray icon controller
  */
 public class TrayIconController implements Killable {
+
+    /**
+     * {@link Logger} of the application.
+     */
+    private static final Logger LOGGER = Logger.getLogger(TrayIconController.class.getName());
+
     /**
      * Instance of SettingsController
      */
@@ -38,17 +47,19 @@ public class TrayIconController implements Killable {
      */
     public TrayIconController(IkitomoApplication application) {
         if (!SystemTray.isSupported()) {
-            System.out.println("SystemTray is not supported");
+            LOGGER.log(Level.WARNING, "OS does not support SystemTray.");
             return;
         }
 
         try {
             final PopupMenu popup = new PopupMenu();
 
-            if (TrayIconController.class.getResource("/icon.png") == null) return;
-            final TrayIcon trayIcon =
-                    new TrayIcon(ImageIO.read(TrayIconController.class.getResource("/icon.png")));
-
+            URL iconUrl = TrayIconController.class.getResource("/icon.png");
+            if (iconUrl == null) {
+                LOGGER.log(Level.SEVERE, "Could not find icon.png in resources.");
+                return;
+            }
+            final TrayIcon trayIcon = new TrayIcon(ImageIO.read(iconUrl));
             final SystemTray tray = SystemTray.getSystemTray();
 
             MenuItem showSettingsItem = new MenuItem("Settings");
@@ -72,7 +83,7 @@ public class TrayIconController implements Killable {
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } catch (AWTException | IOException ioE) {
-            ioE.printStackTrace();
+            LOGGER.log(Level.SEVERE,"An error occured during initialization of program.", ioE);
         }
     }
 
