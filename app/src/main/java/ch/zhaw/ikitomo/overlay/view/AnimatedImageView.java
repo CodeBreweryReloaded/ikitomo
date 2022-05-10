@@ -3,7 +3,6 @@ package ch.zhaw.ikitomo.overlay.view;
 import java.util.List;
 
 import ch.zhaw.ikitomo.common.StateType;
-import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.collections.ObservableMap;
@@ -32,8 +31,8 @@ public class AnimatedImageView extends ImageView {
     public AnimatedImageView(ObservableMap<StateType, List<AnimationData>> animations) {
         setStyle(OverlayController.TRANSPARENT_STYLE);
         this.animator = new SpritesheetAnimator(animations);
-        imageProperty().bind(animator.getImageProperty());
-        viewportProperty().bind(animator.getCellProperty());
+        imageProperty().bind(animator.imageProperty());
+        viewportProperty().bind(animator.viewportProperty());
     }
 
     /**

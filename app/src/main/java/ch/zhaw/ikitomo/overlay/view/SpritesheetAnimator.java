@@ -18,6 +18,7 @@ import ch.zhaw.ikitomo.overlay.model.animation.Frame;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Rectangle2D;
@@ -148,9 +149,9 @@ public class SpritesheetAnimator extends AnimationTimer {
      * Gets a bindable {@link Image} property that is updated for every change of
      * state or direction
      * 
-     * @return A an image property that requently changes pictures
+     * @return An image property that requently changes pictures
      */
-    public ObjectProperty<Image> getImageProperty() {
+    public ReadOnlyObjectProperty<Image> imageProperty() {
         return imageProperty;
     }
 
@@ -160,7 +161,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * 
      * @return A rectangle property that frequently changes shape and position
      */
-    public ObjectProperty<Rectangle2D> getCellProperty() {
+    public ReadOnlyObjectProperty<Rectangle2D> viewportProperty() {
         return cellProperty;
     }
 
@@ -207,7 +208,7 @@ public class SpritesheetAnimator extends AnimationTimer {
     /**
      * Gets the current direction of the animator
      * 
-     * @return the current direction
+     * @return The current direction
      */
     public Direction getCurrentDirection() {
         return currentDirection;
@@ -216,7 +217,7 @@ public class SpritesheetAnimator extends AnimationTimer {
     /**
      * Adds a listener which is called when the current animation finishes
      * 
-     * @param listener the listener to add
+     * @param listener The listener to add
      */
     public void addAnimationFinishedListener(BiConsumer<StateType, Direction> listener) {
         animationFinishedListeners.add(listener);

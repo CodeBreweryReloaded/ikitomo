@@ -8,6 +8,7 @@ import ch.zhaw.ikitomo.common.StateType;
  * {@link ch.zhaw.ikitomo.overlay.OverlayController}
  * 
  * @param type      The type of the state
+ * @param direction The direction of the animation
  * @param animation The animation
  */
 public record TomodachiModelState(StateType type, Direction direction, String animationName) {

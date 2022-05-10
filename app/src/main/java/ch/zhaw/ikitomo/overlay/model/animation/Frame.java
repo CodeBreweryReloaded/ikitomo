@@ -5,15 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Contains cell and duration of single animation frame
+ * 
+ * @param cell     The spritesheet cell
+ * @param duration The duration of this frame in miliseconds
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record Frame(
-        /**
-         * The spritesheet cell
-         */
-        @JsonProperty("frame") Cell cell,
-        /**
-         * The duration of this frame in miliseconds
-         */
-        @JsonProperty("duration") int duration) {
+                @JsonProperty("frame") Cell cell,
+                @JsonProperty("duration") int duration) {
 }

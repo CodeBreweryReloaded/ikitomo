@@ -69,9 +69,9 @@ public class TomodachiModelLoader {
         }
 
         if (animations.isEmpty()) {
-            throw new MissingAnimationException("No animations found for Tomodachi ID \"%s\"".formatted(definition.getID()));
+            throw new MissingAnimationException("No animations found for Tomodachi \"%s\" (%s)".formatted(definition.getName(), definition.getID()));
         }
-
+        LOGGER.log(Level.INFO, "Succesfully loaded Tomodachi \"%s\" (%s)".formatted(definition.getName(), definition.getID()));
         return new TomodachiModel(definition, animations);
     }
 
@@ -86,8 +86,9 @@ public class TomodachiModelLoader {
         return state.animations().stream().<AnimationData>mapMulti((animation, consumer) -> {
             try {
                 consumer.accept(loadAnimationData(prefix, animation));
+                LOGGER.log(Level.INFO, "Loaded animation \"%s/%s\"".formatted(state.type(), animation.direction()));
             } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Unable to load animation \"%s/%s\"".formatted(state, animation.direction()), e);
+                LOGGER.log(Level.WARNING, "Unable to load animation \"%s/%s\"".formatted(state.type(), animation.direction()), e);
             }
         }).toList();
     }
