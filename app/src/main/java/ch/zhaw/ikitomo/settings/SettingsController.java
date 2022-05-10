@@ -141,8 +141,12 @@ public class SettingsController implements Killable {
         return CompletableFuture.completedFuture(null);
     }
 
+    /**
+     * Checks if Window of SettingsController is displayed on the monitor.
+     * @return boolean
+     */
     public boolean isVisible() {
-        return rootPane.isVisible();
+        return rootPane.getScene().getWindow().isShowing();
     }
 
     /**

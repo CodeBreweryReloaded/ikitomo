@@ -17,14 +17,10 @@ import javax.imageio.ImageIO;
 public class TrayIconController implements Killable {
 
     /**
-     *
+     * Instance of SettingsController
      */
     private SettingsController settingsController;
 
-    /**
-     *
-     * @return
-     */
     @Override
     public CompletableFuture<Void> kill() {
         if (settingsController != null) { }
@@ -33,16 +29,19 @@ public class TrayIconController implements Killable {
     }
 
     /**
+     * Constructor of Class TrayIconController
+     * Checks if Tray is supported on the Operating System.
+     * If supported the constructor will set the tray with the icon and clickevents.
      *
      * @param environment
      */
     public TrayIconController(TomodachiEnvironment environment) {
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported");
+            return;
         }
 
         try {
-
             final PopupMenu popup = new PopupMenu();
             final TrayIcon trayIcon =
                     new TrayIcon(ImageIO.read(TrayIconController.class.getResource("/icon.png")));
@@ -58,8 +57,10 @@ public class TrayIconController implements Killable {
             });
 
             MenuItem exitItem = new MenuItem("Exit");
+            exitItem.addActionListener(e -> {
+                System.exit(0);
+            });
 
-            //Add components to pop-up menu
             popup.add(aboutItem);
             popup.addSeparator();
             popup.add(showSettingsItem);
@@ -67,20 +68,17 @@ public class TrayIconController implements Killable {
             popup.add(exitItem);
 
             trayIcon.setPopupMenu(popup);
-
             tray.add(trayIcon);
-
-        } catch (IOException ioE) {
+        } catch (IOException | AWTException ioE) {
             ioE.printStackTrace();
-        } catch (AWTException e) {
-            e.printStackTrace();
         }
     }
 
     /**
+     * Creates and returns an instance of TrayIconController
      *
-     * @param environment
-     * @return
+     * @param environment The global environment object
+     * @return The new {@link TrayIconController}
      */
     public static TrayIconController newOverlayUI(TomodachiEnvironment environment) {
         return new TrayIconController(environment);
