@@ -201,7 +201,7 @@ public class OverlayModel {
      */
     public Vector2 getScreenCenter() {
         Rectangle2D screen = Screen.getPrimary().getBounds();
-        return new Vector2((int) screen.getMaxX() / 2, (int) screen.getMaxY() / 2);
+        return new Vector2(screen.getMaxX() / 2, screen.getMaxY() / 2);
     }
 
     /**
