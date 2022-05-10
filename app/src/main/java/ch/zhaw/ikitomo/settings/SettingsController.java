@@ -143,7 +143,7 @@ public class SettingsController implements Killable {
 
     /**
      * Checks if Window of SettingsController is displayed on the monitor.
-     * @return boolean
+     * @return If the settings window is visible
      */
     public boolean isVisible() {
         return rootPane.getScene().getWindow().isShowing();
