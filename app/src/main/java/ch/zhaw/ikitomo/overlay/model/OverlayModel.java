@@ -210,7 +210,7 @@ public class OverlayModel {
      * 
      * @return The loaded Tomodachi model
      */
-    private TomodachiModel loadTomodachiModel() {
+    protected TomodachiModel loadTomodachiModel() {
         try {
             return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition()).loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
@@ -225,7 +225,7 @@ public class OverlayModel {
      * 
      * @return The default tomodachi model
      */
-    private TomodachiModel loadDefaultTomodachiModel() {
+    protected TomodachiModel loadDefaultTomodachiModel() {
         try {
             return new TomodachiModelLoader(environment.getDefaultTomodachiDefinition()).loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
