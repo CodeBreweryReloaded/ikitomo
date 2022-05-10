@@ -22,7 +22,9 @@ public class TrayIconController implements Killable {
 
     @Override
     public CompletableFuture<Void> kill() {
-        if (settingsController != null) { }
+        if (this.settingsController != null) {
+            this.settingsController.kill();
+        }
 
         return CompletableFuture.completedFuture(null);
     }
@@ -49,7 +51,6 @@ public class TrayIconController implements Killable {
 
             final SystemTray tray = SystemTray.getSystemTray();
 
-            MenuItem aboutItem = new MenuItem("About");
             MenuItem showSettingsItem = new MenuItem("Settings");
 
             showSettingsItem.addActionListener(e -> {
@@ -64,8 +65,6 @@ public class TrayIconController implements Killable {
                 app.close();
             });
 
-            popup.add(aboutItem);
-            popup.addSeparator();
             popup.add(showSettingsItem);
             popup.addSeparator();
             popup.add(exitItem);
