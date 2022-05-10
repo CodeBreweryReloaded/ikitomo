@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.management.RuntimeErrorException;
-
 import ch.zhaw.ikitomo.behavior.BehaviorModel;
 import ch.zhaw.ikitomo.behavior.TomodachiBehavior;
 import ch.zhaw.ikitomo.common.Direction;
@@ -14,7 +12,6 @@ import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
-import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
