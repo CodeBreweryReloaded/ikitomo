@@ -3,7 +3,9 @@ package ch.zhaw.ikitomo.trayicon;
 import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 
+import ch.zhaw.ikitomo.IkitomoApplication;
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.settings.SettingsController;
@@ -15,7 +17,6 @@ import javax.imageio.ImageIO;
  * The tray icon controller
  */
 public class TrayIconController implements Killable {
-
     /**
      * Instance of SettingsController
      */
@@ -33,9 +34,9 @@ public class TrayIconController implements Killable {
      * Checks if Tray is supported on the Operating System.
      * If supported the constructor will set the tray with the icon and clickevents.
      *
-     * @param environment
+     * @param application The global application object
      */
-    public TrayIconController(TomodachiEnvironment environment) {
+    public TrayIconController(IkitomoApplication application) {
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported");
             return;
@@ -43,8 +44,11 @@ public class TrayIconController implements Killable {
 
         try {
             final PopupMenu popup = new PopupMenu();
+
+            if (TrayIconController.class.getResource("/icon.png") == null) return;
             final TrayIcon trayIcon =
                     new TrayIcon(ImageIO.read(TrayIconController.class.getResource("/icon.png")));
+
             final SystemTray tray = SystemTray.getSystemTray();
 
             MenuItem aboutItem = new MenuItem("About");
@@ -52,13 +56,14 @@ public class TrayIconController implements Killable {
 
             showSettingsItem.addActionListener(e -> {
                 Platform.runLater(() -> {
-                    if (this.settingsController == null || !settingsController.isVisible()) this.settingsController = SettingsController.newSettingsUI(environment);
+                    if (this.settingsController == null || !settingsController.isVisible()) this.settingsController = SettingsController.newSettingsUI(application.getEnvironment());
                 });
             });
 
             MenuItem exitItem = new MenuItem("Exit");
             exitItem.addActionListener(e -> {
-                System.exit(0);
+                IkitomoApplication app = new IkitomoApplication();
+                app.close();
             });
 
             popup.add(aboutItem);
@@ -69,7 +74,7 @@ public class TrayIconController implements Killable {
 
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
-        } catch (IOException | AWTException ioE) {
+        } catch (AWTException | IOException ioE) {
             ioE.printStackTrace();
         }
     }
@@ -77,11 +82,11 @@ public class TrayIconController implements Killable {
     /**
      * Creates and returns an instance of TrayIconController
      *
-     * @param environment The global environment object
+     * @param application The Ikitomo application itself
      * @return The new {@link TrayIconController}
      */
-    public static TrayIconController newOverlayUI(TomodachiEnvironment environment) {
-        return new TrayIconController(environment);
+    public static TrayIconController newOverlayUI(IkitomoApplication application) {
+        return new TrayIconController(application);
     }
 
 }
