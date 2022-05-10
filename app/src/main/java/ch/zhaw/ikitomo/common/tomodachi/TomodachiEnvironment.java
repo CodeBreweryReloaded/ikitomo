@@ -249,6 +249,10 @@ public class TomodachiEnvironment {
         return tomodachiDefinitionMap.getOrDefault(settings.getTomodachiID(), defaultTomodachiDefinition);
     }
 
+    public TomodachiDefinition getDefaultTomodachiDefinition() {
+        return defaultTomodachiDefinition;
+    }
+
     /**
      * Gets a {@link ObjectBinding} to the currently selected tomodachi definition
      * 

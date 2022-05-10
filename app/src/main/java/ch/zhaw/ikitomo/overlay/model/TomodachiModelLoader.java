@@ -14,6 +14,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiAnimationDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiStateDefinition;
+import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.scene.image.Image;
 
@@ -37,11 +38,6 @@ public class TomodachiModelLoader {
     private TomodachiDefinition definition;
 
     /**
-     * The initial position
-     */
-    private Vector2 initialPosition;
-
-    /**
      * The root directory of the Tomodachi. Can be <code>null</code>
      */
     private String rootPath;
@@ -51,9 +47,8 @@ public class TomodachiModelLoader {
      * @param definition The Tomodachi definition to be used in loading
      * @param initialPosition The desired initial position
      */
-    public TomodachiModelLoader(TomodachiDefinition definition, Vector2 initialPosition) {
+    public TomodachiModelLoader(TomodachiDefinition definition) {
         this.definition = definition;
-        this.initialPosition = initialPosition;
         this.rootPath = definition.isResource() ? null : definition.getRootFolder().toString();
     }
 
@@ -64,11 +59,15 @@ public class TomodachiModelLoader {
      * 
      * @return A working Tomodachi model
      */
-    public TomodachiModel loadFromTomodachiFile() {
+    public TomodachiModel loadFromTomodachiFile() throws MissingAnimationException {
         Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
 
         for (TomodachiStateDefinition state : definition.getStates()) {
             animations.put(state.type(), loadAnimations(state));
+        }
+
+        if (animations.isEmpty()) {
+            throw new MissingAnimationException("No animations found for Tomodachi ID \"%s\"".formatted(definition.getID()));
         }
 
         return new TomodachiModel(definition, animations);
@@ -149,9 +148,12 @@ public class TomodachiModelLoader {
 
     /**
      * A small {@link JSONManager} extension class for
-     * <code>loadFromTomodachiFile()</code>
+     * {@link TomodachiModelLoader#loadFromTomodachiFile()}
      */
     static class AnimationLoader extends JSONManager<AnimationData> {
+        /**
+         * Constructor
+         */
         protected AnimationLoader() {
             super(AnimationData.class);
         }

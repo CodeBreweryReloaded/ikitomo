@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.overlay.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -98,20 +99,21 @@ public class SpritesheetAnimator extends AnimationTimer {
      * Constructor
      * 
      * @param animations An observable map containing {@link AnimationData}
-     * @throws MissingAnimationException When the default animation can't be loaded
-     *                                   (first {@link StateType#IDLE} animation)
      */
-    protected SpritesheetAnimator(ObservableMap<StateType, List<AnimationData>> animations)
-            throws MissingAnimationException {
+    protected SpritesheetAnimator(ObservableMap<StateType, List<AnimationData>> animations) {
         Bindings.bindContent(this.animations, animations);
-        defaultAnimation = animations.get(StateType.IDLE).get(0);
+
+        // Load default animation
+        defaultAnimation = animations.values().stream()
+                .flatMap(Collection::stream)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No animations available to fall back to"));
         currentAnimation = defaultAnimation;
+
+        // Setup initial states and direction
         currentState = StateType.IDLE;
         currentDirection = Direction.NONE;
 
-        if (defaultAnimation == null) {
-            throw new MissingAnimationException("First IDLE animation is missing or couldn't be loaded");
-        }
     }
 
     @Override
@@ -146,7 +148,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * Gets a bindable {@link Image} property that is updated for every change of
      * state or direction
      * 
-     * @return
+     * @return A an image property that requently changes pictures
      */
     public ObjectProperty<Image> getImageProperty() {
         return imageProperty;
@@ -156,7 +158,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * Gets a bindable {@link Rectangle2D} property that is update every animation
      * frame
      * 
-     * @return
+     * @return A rectangle property that frequently changes shape and position
      */
     public ObjectProperty<Rectangle2D> getCellProperty() {
         return cellProperty;
@@ -164,8 +166,8 @@ public class SpritesheetAnimator extends AnimationTimer {
 
     /**
      * Stops the animator and loads an animation based on the provided state and
-     * direction. If no animation is found, the default animation is loaded. By
-     * default, this is the first idle animation.
+     * direction. If no animation is found, the default animation is loaded.
+     * Usually, this is the first idle animation.
      * 
      * <p>
      * Note: If an animation is not directional (i.e. there is no movement

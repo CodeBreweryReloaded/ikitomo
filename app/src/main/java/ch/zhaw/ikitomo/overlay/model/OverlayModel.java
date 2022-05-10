@@ -1,6 +1,10 @@
 package ch.zhaw.ikitomo.overlay.model;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.management.RuntimeErrorException;
 
 import ch.zhaw.ikitomo.behavior.BehaviorModel;
 import ch.zhaw.ikitomo.behavior.TomodachiBehavior;
@@ -9,6 +13,7 @@ import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.animation.AnimationTimer;
@@ -20,15 +25,13 @@ import javafx.collections.ObservableMap;
  * The model for the {@link ch.zhaw.ikitomo.overlay.OverlayController}
  */
 public class OverlayModel {
+    private static final Logger LOGGER = Logger.getLogger(OverlayModel.class.getName());
 
     /**
      * The current tomodachi environment object
      */
     private TomodachiEnvironment environment;
-    /**
-     * A reference to the controller that created this model
-     */
-    private OverlayController controller;
+
     /**
      * The currently loaded tomodachi
      */
@@ -78,9 +81,8 @@ public class OverlayModel {
      *
      * @param environment The global settings object
      */
-    public OverlayModel(TomodachiEnvironment environment, OverlayController controller) {
+    public OverlayModel(TomodachiEnvironment environment) {
         this.environment = environment;
-        this.controller = controller;
         tomodachi = Bindings.createObjectBinding(this::loadTomodachiModel,
                 environment.getSettings().tomodachiIDProperty());
 
@@ -194,13 +196,32 @@ public class OverlayModel {
     }
 
     /**
-     * Loads a Tomodachi model from the currently loaded Tomodachi
+     * Loads a Tomodachi model from the currently loaded Tomodachi. The default
+     * Tomodachi is loaded upon failure
      * 
      * @return The loaded Tomodachi model
      */
     private TomodachiModel loadTomodachiModel() {
-        return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition(), controller.getScreenCenter())
-                .loadFromTomodachiFile();
+        try {
+            return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition()).loadFromTomodachiFile();
+        } catch (MissingAnimationException e) {
+            LOGGER.log(Level.WARNING, "Unable to load model. Loading default fallback model", e);
+            return loadDefaultTomodachiModel();
+        }
+    }
+
+    /**
+     * Helper method to load the default Tomodachi in case of an error. Throws a
+     * runtime error when even this fails. Should not happen in any case.
+     * 
+     * @return The default tomodachi model
+     */
+    private TomodachiModel loadDefaultTomodachiModel() {
+        try {
+            return new TomodachiModelLoader(environment.getDefaultTomodachiDefinition()).loadFromTomodachiFile();
+        } catch (MissingAnimationException e) {
+            throw new IllegalStateException("Unable to load default Tomodachi model", e);
+        }
     }
 
 }

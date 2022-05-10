@@ -28,9 +28,8 @@ public class AnimatedImageView extends ImageView {
     /**
      * Constructor
      * @param animations The observable map of animations
-     * @throws MissingAnimationException When the default animation can't be loaded
      */
-    public AnimatedImageView(ObservableMap<StateType, List<AnimationData>> animations) throws MissingAnimationException {
+    public AnimatedImageView(ObservableMap<StateType, List<AnimationData>> animations) {
         setStyle(OverlayController.TRANSPARENT_STYLE);
         this.animator = new SpritesheetAnimator(animations);
         imageProperty().bind(animator.getImageProperty());

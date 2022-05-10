@@ -71,14 +71,10 @@ public class OverlayController implements Killable {
         createPane();
         createFrame(pane);
 
-        model = new OverlayModel(environment, this);
+        model = new OverlayModel(environment);
         model.getTomodachi().setPosition(getScreenCenter());
-        try {
-            animatedImage = new AnimatedImageView(model.getObservableAnimations());
-        } catch (MissingAnimationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        animatedImage = new AnimatedImageView(model.getObservableAnimations());
+
         animator = animatedImage.getAnimator();
         pane.getChildren().add(animatedImage);
         animator.start();
