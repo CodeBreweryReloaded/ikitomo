@@ -39,7 +39,7 @@ public class Settings {
      */
     @JsonIgnore
     private ObjectBinding<TomodachiSettings> currentTomodachiSettings = Bindings
-            .createObjectBinding(this::getTomodachiSettings, tomodachiID);
+            .createObjectBinding(() -> getTomodachiSettings(getTomodachiID()), tomodachiID);
 
     /**
      * Initializes a new instance of the {@link Settings} class
@@ -82,14 +82,37 @@ public class Settings {
     }
 
     /**
-     * Gets the currently selected tomodachi settings
+     * Gets the tomodachi settings of the given id or null if no tomodachi
+     * settings for the given id exists yet
      *
-     * @return The tomodachiSettings
+     * @param id The id of the tomodachi settings to get
+     * @return The tomodachi settings
      */
     @JsonIgnore
-    public TomodachiSettings getTomodachiSettings() {
-        tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
-        return tomodachiSettings.get(getTomodachiID());
+    public TomodachiSettings getTomodachiSettings(String id) {
+        return tomodachiSettings.get(id);
+    }
+
+    /**
+     * Checks if there is an {@link TomodachiSettings} for the given id
+     * 
+     * @param id The id to check
+     * @return If the given id exists or not
+     */
+    @JsonIgnore
+    public boolean containsTomodachiSettings(String id) {
+        return tomodachiSettings.containsKey(id);
+    }
+
+    /**
+     * Sets the tomodachi settings of the given id
+     * 
+     * @param id       The id of the tomodachi to set
+     * @param settings The tomodachi settings
+     */
+    @JsonIgnore
+    public void setTomodachiSettings(String id, TomodachiSettings settings) {
+        tomodachiSettings.put(id, settings);
     }
 
     /**
@@ -110,6 +133,17 @@ public class Settings {
     @JsonIgnore
     public ObjectBinding<TomodachiSettings> currentTomodachiSettingsBinding() {
         return currentTomodachiSettings;
+    }
+
+    /**
+     * Gets the current tomodachi settings <b>or null</b> if no settings for the
+     * current selected tomodachi exists
+     * 
+     * @return The tomodachi settings or null
+     */
+    @JsonIgnore
+    public TomodachiSettings getCurrentTomodachiSettings() {
+        return currentTomodachiSettings.get();
     }
 
     /**

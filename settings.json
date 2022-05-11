@@ -2,8 +2,10 @@
   "tomodachiID" : "ch.zhaw.ikitomo.defaultNeko",
   "settings" : {
     "ch.zhaw.ikitomo.defaultNeko" : {
-      "sleepChance" : 3.5,
-      "wakeChance" : 0.0
+      "sleepChance" : 0.1,
+      "wakeChance" : 1.0,
+      "speed" : 0.0,
+      "nextPositionStrategy" : "FOLLOW_MOUSE"
     }
   }
 }
