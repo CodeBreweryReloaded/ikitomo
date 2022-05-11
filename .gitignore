@@ -68,3 +68,6 @@ Desktop.ini
 
 # databases
 *.sqlite
+
+# ikitomo settings file
+settings.json
