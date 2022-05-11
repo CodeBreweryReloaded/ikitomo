@@ -27,7 +27,7 @@ import ch.zhaw.ikitomo.ipc.IPCCommand.IPCCommandType;
 /**
  * A class which manges the inter process communication (IPC)
  */
-public class IPCManager {
+public class IPCManager implements Closeable {
     /**
      * The logger
      */
@@ -277,6 +277,13 @@ public class IPCManager {
             return Integer.parseInt(wellKnownPortContent.trim());
         } catch (NumberFormatException e) {
             throw new IOException("Invalid content in well known port file \"" + wellKnownPortContent + "\"", e);
+        }
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (ipcServer != null) {
+            ipcServer.close();
         }
     }
 
@@ -564,7 +571,9 @@ public class IPCManager {
 
         @Override
         public void close() throws IOException {
-            closeListener.accept(this);
+            if (closeListener != null) {
+                closeListener.accept(this);
+            }
             if (socket != null) {
                 socket.close();
             }
