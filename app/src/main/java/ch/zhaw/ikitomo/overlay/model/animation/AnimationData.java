@@ -37,6 +37,18 @@ public class AnimationData {
     }
 
     /**
+     * Public constructor that should only ever be used for testing
+     * @param frames The array of frames
+     * @param image The spritesheet
+     * @param direction The animation direction
+     */
+    public AnimationData(Frame[] frames, Image image, Direction direction) {
+        this.frames = frames.clone();
+        this.image = image;
+        this.direction = direction;
+    }
+
+    /**
      * Gets all animation frames
      * @return All animation frames
      */

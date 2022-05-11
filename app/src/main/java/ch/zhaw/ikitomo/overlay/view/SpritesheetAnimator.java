@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
+import com.google.common.util.concurrent.Service.State;
+
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
@@ -82,12 +84,12 @@ public class SpritesheetAnimator {
     /**
      * The current state
      */
-    private StateType currentState;
+    private StateType currentState = StateType.IDLE;
 
     /**
      * The current direction
      */
-    private Direction currentDirection;
+    private Direction currentDirection = Direction.NONE;
 
     /**
      * The listeners which are notified when an animation finished
@@ -119,10 +121,9 @@ public class SpritesheetAnimator {
                 .orElseThrow(() -> new IllegalStateException("No animations available to fall back to"));
         currentAnimation = defaultAnimation;
 
-        setAnimation(StateType.IDLE, Direction.NONE);
     }
 
-    private void update(long now) {
+    void update(long now) {
         // Check if the spritesheet has changed
         if (changeAnimation) {
             imageProperty.set(currentAnimation.getImage());
@@ -240,5 +241,13 @@ public class SpritesheetAnimator {
                 frame.cell().positionY(),
                 frame.cell().width(),
                 frame.cell().height());
+    }
+
+    /**
+     * Animation timer setter for testing
+     * @param animationTimer The animation timer
+     */
+    void setAnimationTimer(AnimationTimer animationTimer) {
+        this.animationTimer = animationTimer;
     }
 }
