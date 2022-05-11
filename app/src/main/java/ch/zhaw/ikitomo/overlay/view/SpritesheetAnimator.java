@@ -250,4 +250,8 @@ public class SpritesheetAnimator {
     void setAnimationTimer(AnimationTimer animationTimer) {
         this.animationTimer = animationTimer;
     }
+
+    public int getCurrentFrameID() {
+        return currentFrameID;
+    }
 }
