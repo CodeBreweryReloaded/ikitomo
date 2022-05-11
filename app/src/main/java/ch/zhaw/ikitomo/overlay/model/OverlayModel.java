@@ -86,7 +86,12 @@ public class OverlayModel {
 
         behaviorStrategy = Bindings
                 .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
+    }
 
+    /**
+     * Starts the behavior animation timer
+     */
+    public void start() {
         behaviorTimer.start();
     }
 

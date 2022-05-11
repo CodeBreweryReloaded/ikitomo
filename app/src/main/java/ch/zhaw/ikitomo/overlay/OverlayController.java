@@ -91,6 +91,9 @@ public class OverlayController implements Killable {
 
         // if the pane is clicked, tell the TomodachiBehavior
         pane.setOnMouseClicked(event -> model.getBehavior().tomodachiWasClicked());
+
+        // starts the behavior animation timer
+        model.start();
     }
 
     /**
