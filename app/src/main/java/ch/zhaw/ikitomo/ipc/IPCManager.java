@@ -456,8 +456,9 @@ public class IPCManager implements Closeable {
 
         @Override
         public void close() throws IOException {
-            synchronized (clients) {
-                for (IPCClient client : clients) {
+            synchronized (clientsLock) {
+                var clientListCopy = new ArrayList<>(clients);
+                for (IPCClient client : clientListCopy) {
                     try {
                         client.close();
                     } catch (IOException e) {
