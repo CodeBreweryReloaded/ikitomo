@@ -4,14 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.settings.Settings;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -28,9 +34,8 @@ public class OverlayModelTest {
     TomodachiEnvironment environment;
 
     /**
-     * Mocked settings
+     * Settings
      */
-    @Mock
     Settings settings;
 
     /**
@@ -38,20 +43,24 @@ public class OverlayModelTest {
      */
     OverlayModel model;
 
+    TomodachiDefinition definition;
+
     /**
      * Setup function that is run before each test
      */
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
-
+        
+        settings = Settings.createDefaultSettings();
+        definition = new TomodachiDefinition(null, null, null, null, null, Collections.EMPTY_LIST);
         // Setup mocks
-        //when(Screen.getPrimary().getBounds()).thenReturn(new Rectangle2D(0, 0, 50, 50));
         when(environment.getSettings()).thenReturn(settings);
-        when(settings.getTomodachiID()).thenReturn("ch.zhaw.ikitomo.defaultNeko");
-        when(environment.getCurrentTomodachiDefinition()).thenThrow(new MissingAnimationException(""));
+        when(environment.getCurrentTomodachiDefinition()).thenReturn(definition);
+        when(environment.getDefaultTomodachiDefinition()).thenReturn(definition);
 
         model = new OverlayModel(environment);
+
     }
 
     /**

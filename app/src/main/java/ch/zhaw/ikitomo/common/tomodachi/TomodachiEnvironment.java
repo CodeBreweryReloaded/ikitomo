@@ -39,7 +39,7 @@ public class TomodachiEnvironment {
      * The location of the default Tomodachi definition file
      */
     private static final URL DEFAULT_TOMODACHI_LOCATION = TomodachiEnvironment.class
-            .getResource("/defaultTomodachi/tomodachi.json");
+            .getResource("/defaultTomodachi/_tomodachi.json");
 
     /**
      * A component for logging messages.
