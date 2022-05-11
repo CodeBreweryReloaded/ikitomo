@@ -165,15 +165,6 @@ public class TomodachiModel {
     }
 
     /**
-     * Sets the current animation state
-     * 
-     * @param currentAnimationState The new animation state
-     */
-    public void setCurrentAnimationState(StateType currentAnimationState) {
-        this.currentAnimationState.set(currentAnimationState);
-    }
-
-    /**
      * Gets the current animation state
      * 
      * @return The current state
@@ -189,15 +180,6 @@ public class TomodachiModel {
      */
     public ObjectProperty<Direction> currentAnimationDirectionProperty() {
         return currentAnimationDirection;
-    }
-
-    /**
-     * Sets the current animation direction
-     * 
-     * @param currentAnimationDirection The direction
-     */
-    public void setCurrentAnimationDirection(Direction currentAnimationDirection) {
-        this.currentAnimationDirection.set(currentAnimationDirection);
     }
 
     /**

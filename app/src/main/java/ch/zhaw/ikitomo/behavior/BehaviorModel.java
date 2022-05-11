@@ -74,24 +74,6 @@ public class BehaviorModel {
     }
 
     /**
-     * @param currentAnimationState
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#setCurrentAnimationState(ch.zhaw.ikitomo.common.StateType)
-     */
-
-    public void setCurrentAnimationState(StateType currentAnimationState) {
-        tomodachiModel.setCurrentAnimationState(currentAnimationState);
-    }
-
-    /**
-     * @param currentAnimationDirection
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#setCurrentAnimationDirection(ch.zhaw.ikitomo.common.Direction)
-     */
-
-    public void setCurrentAnimationDirection(Direction currentAnimationDirection) {
-        tomodachiModel.setCurrentAnimationDirection(currentAnimationDirection);
-    }
-
-    /**
      * Creates a new {@link NextPositionStrategy} from the factory sets it to
      * {@link #nextPositionStrategy}
      */
