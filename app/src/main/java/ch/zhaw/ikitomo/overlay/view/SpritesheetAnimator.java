@@ -19,6 +19,7 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Rectangle2D;
@@ -39,12 +40,12 @@ public class SpritesheetAnimator extends AnimationTimer {
     /**
      * Bindable property containing the current spritesheet
      */
-    private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<>();
+    private ReadOnlyObjectWrapper<Image> imageProperty = new ReadOnlyObjectWrapper<>();
 
     /**
      * Bindable property containing the current cell on the spritesheet
      */
-    private ObjectProperty<Rectangle2D> cellProperty = new SimpleObjectProperty<>();
+    private ReadOnlyObjectWrapper<Rectangle2D> cellProperty = new ReadOnlyObjectWrapper<>();
 
     /**
      * A binding that binds to the currently loaded animations
@@ -152,7 +153,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * @return An image property that requently changes pictures
      */
     public ReadOnlyObjectProperty<Image> imageProperty() {
-        return imageProperty;
+        return imageProperty.getReadOnlyProperty();
     }
 
     /**
@@ -162,7 +163,7 @@ public class SpritesheetAnimator extends AnimationTimer {
      * @return A rectangle property that frequently changes shape and position
      */
     public ReadOnlyObjectProperty<Rectangle2D> viewportProperty() {
-        return cellProperty;
+        return cellProperty.getReadOnlyProperty();
     }
 
     /**

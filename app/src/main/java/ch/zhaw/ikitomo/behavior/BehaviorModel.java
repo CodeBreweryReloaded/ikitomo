@@ -14,9 +14,21 @@ import ch.zhaw.ikitomo.overlay.model.TomodachiModel;
  * primarily exists to reduce the api surface for mock testing
  */
 public class BehaviorModel {
+    /**
+     * Holds the Tomodachi model instance
+     */
     private TomodachiModel tomodachiModel;
+
+    /**
+     * Stores the strategy that returns next position
+     */
     private NextPositionStrategy nextPositionStrategy;
 
+    /**
+     * Constructor
+     * 
+     * @param model The model to animate
+     */
     public BehaviorModel(TomodachiModel model) {
         this.tomodachiModel = model;
         // calculate new NextPositionStrategy when the factory changes
@@ -26,69 +38,71 @@ public class BehaviorModel {
     }
 
     /**
-     * @return
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#getSettings()
+     * Returns the used Tomodachi settings
+     * 
+     * @return The settings
+     * @see TomodachiModel#getSettings()
      */
-
     public TomodachiSettings getSettings() {
         return tomodachiModel.getSettings();
     }
 
     /**
+     * Sets the Tomodachi position
+     * 
      * @param position
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#setPosition(ch.zhaw.ikitomo.common.Vector2)
+     * @see TomodachiModel#setPosition(Vector2)
      */
-
     public void setPosition(Vector2 position) {
         tomodachiModel.setPosition(position);
     }
 
+    /**
+     * Returns the current position of the Tomodachi
+     * 
+     * @return The current position vector
+     */
     public Vector2 getPosition() {
         return tomodachiModel.getPosition();
     }
 
+    /**
+     * Changes the animation state of the Tomodachi
+     * 
+     * @param state The state to change to
+     */
     public void setCurrentAnimation(StateType state) {
         tomodachiModel.setCurrentAnimation(state);
     }
 
+    /**
+     * Changes the animation state and direction of the Tomodachi
+     * 
+     * @param state     The state to change to
+     * @param direction The direction to set
+     */
     public void setCurrentAnimation(StateType state, Direction direction) {
         tomodachiModel.setCurrentAnimation(state, direction);
     }
 
     /**
-     * @return
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#getCurrentAnimationState()
+     * Gets the current animation state
+     * 
+     * @return The current state
+     * @see TomodachiModel#getCurrentAnimationState()
      */
-
     public StateType getCurrentAnimationState() {
         return tomodachiModel.getCurrentAnimationState();
     }
 
     /**
-     * @return
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#getCurrentAnimationDirection()
+     * Gets the current animation direction
+     * 
+     * @return The current direction
+     * @see TomodachiModel#getCurrentAnimationDirection()
      */
-
     public Direction getCurrentAnimationDirection() {
         return tomodachiModel.getCurrentAnimationDirection();
-    }
-
-    /**
-     * @param currentAnimationState
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#setCurrentAnimationState(ch.zhaw.ikitomo.common.StateType)
-     */
-
-    public void setCurrentAnimationState(StateType currentAnimationState) {
-        tomodachiModel.setCurrentAnimationState(currentAnimationState);
-    }
-
-    /**
-     * @param currentAnimationDirection
-     * @see ch.zhaw.ikitomo.overlay.model.TomodachiModel#setCurrentAnimationDirection(ch.zhaw.ikitomo.common.Direction)
-     */
-
-    public void setCurrentAnimationDirection(Direction currentAnimationDirection) {
-        tomodachiModel.setCurrentAnimationDirection(currentAnimationDirection);
     }
 
     /**

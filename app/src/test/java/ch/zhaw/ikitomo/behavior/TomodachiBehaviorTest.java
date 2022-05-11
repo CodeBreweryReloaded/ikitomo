@@ -94,7 +94,7 @@ class TomodachiBehaviorTest {
         when(behaviorModel.getNextPosition()).thenReturn(Vector2.ZERO);
         strategy.update(2);
         verify(behaviorModel).setPosition(vectorThat(new Vector2(98.585786, 98.585786), 0.001));
-        verify(behaviorModel).setCurrentAnimationDirection(Direction.UP_LEFT);
+        verify(behaviorModel).setCurrentAnimation(StateType.RUN, Direction.UP_LEFT);
     }
 
     /**

@@ -59,7 +59,7 @@ public class TomodachiBehavior {
             doRunState(delta);
         }
         if (currentState == StateType.IDLE && getDistanceToNextPosition() > DISTANCE_BEFORE_START_MOVING) {
-            model.setCurrentAnimation(StateType.RUN);
+            doRunState(delta);
         }
     }
 
@@ -80,7 +80,7 @@ public class TomodachiBehavior {
             var nextPosition = oldPosition.add(diff);
             LOGGER.log(Level.FINE, "next position is {0}", nextPosition);
             model.setPosition(nextPosition);
-            model.setCurrentAnimationDirection(direction);
+            model.setCurrentAnimation(StateType.RUN, direction);
         }
     }
 
@@ -102,7 +102,13 @@ public class TomodachiBehavior {
                 yield StateType.IDLE;
             }
         };
-        model.setCurrentAnimation(nextState);
+
+        if (nextState == StateType.RUN) {
+            model.setCurrentAnimation(nextState, model.getCurrentAnimationDirection());
+        } else {
+            model.setCurrentAnimation(nextState, Direction.NONE);
+        }
+
         if (nextState != oldState) {
             LOGGER.log(Level.INFO, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
         }

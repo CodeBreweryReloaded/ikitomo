@@ -46,7 +46,7 @@ public class OverlayModelTest {
         MockitoAnnotations.openMocks(this);
 
         // Setup mocks
-        when(Screen.getPrimary().getBounds()).thenReturn(new Rectangle2D(0, 0, 50, 50));
+        //when(Screen.getPrimary().getBounds()).thenReturn(new Rectangle2D(0, 0, 50, 50));
         when(environment.getSettings()).thenReturn(settings);
         when(settings.getTomodachiID()).thenReturn("ch.zhaw.ikitomo.defaultNeko");
         when(environment.getCurrentTomodachiDefinition()).thenThrow(new MissingAnimationException(""));
@@ -63,11 +63,4 @@ public class OverlayModelTest {
         verify(model).loadDefaultTomodachiModel();
     }
 
-    /**
-     * Checks if the screen center calculation is correct
-     */
-    @Test
-    void testScreenCenter() {
-        assertEquals(new Vector2(25.0f, 25.0f), model.getScreenCenter());
-    }
 }
