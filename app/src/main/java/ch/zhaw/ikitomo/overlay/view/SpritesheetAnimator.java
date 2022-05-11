@@ -12,15 +12,12 @@ import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
-import ch.zhaw.ikitomo.exception.MissingAnimationException;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import ch.zhaw.ikitomo.overlay.model.animation.Frame;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -31,7 +28,7 @@ import javafx.scene.image.Image;
  * provides an observable {@link Image} property and {@link Rectangle2D}
  * property that can be bound to a GUI element
  */
-public class SpritesheetAnimator extends AnimationTimer {
+public class SpritesheetAnimator {
     /**
      * Logger
      */
@@ -98,6 +95,16 @@ public class SpritesheetAnimator extends AnimationTimer {
     private List<BiConsumer<StateType, Direction>> animationFinishedListeners = new ArrayList<>();
 
     /**
+     * Anonymous implementation of {@link AnimationTimer} to aid in testing
+     */
+    private AnimationTimer animationTimer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+            update(now);
+        }
+    };
+
+    /**
      * Constructor
      * 
      * @param animations An observable map containing {@link AnimationData}
@@ -112,14 +119,10 @@ public class SpritesheetAnimator extends AnimationTimer {
                 .orElseThrow(() -> new IllegalStateException("No animations available to fall back to"));
         currentAnimation = defaultAnimation;
 
-        // Setup initial states and direction
-        currentState = StateType.IDLE;
-        currentDirection = Direction.NONE;
-
+        setAnimation(StateType.IDLE, Direction.NONE);
     }
 
-    @Override
-    public void handle(long now) {
+    private void update(long now) {
         // Check if the spritesheet has changed
         if (changeAnimation) {
             imageProperty.set(currentAnimation.getImage());
@@ -182,7 +185,7 @@ public class SpritesheetAnimator extends AnimationTimer {
     public void setAnimation(StateType state, Direction direction) {
         List<AnimationData> animationCandidates = animations.getOrDefault(state, Collections.emptyList()).stream()
                 .filter(animation -> animation.getDirection().equals(direction)).toList();
-        stop();
+        animationTimer.stop();
         if (animationCandidates.isEmpty()) {
             currentAnimation = defaultAnimation;
             this.currentState = StateType.IDLE;
@@ -194,7 +197,7 @@ public class SpritesheetAnimator extends AnimationTimer {
             this.currentDirection = direction;
         }
         changeAnimation = true;
-        start();
+        animationTimer.start();
     }
 
     /**

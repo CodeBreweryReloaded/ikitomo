@@ -75,7 +75,6 @@ public class OverlayController implements Killable {
 
         animator = animatedImage.getAnimator();
         pane.getChildren().add(animatedImage);
-        animator.start();
 
         pane.setOnMouseDragged(this::onDragEvent);
 
