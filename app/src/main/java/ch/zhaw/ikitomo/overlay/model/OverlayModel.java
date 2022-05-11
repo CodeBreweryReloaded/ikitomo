@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.management.RuntimeErrorException;
-
 import ch.zhaw.ikitomo.behavior.BehaviorModel;
 import ch.zhaw.ikitomo.behavior.TomodachiBehavior;
 import ch.zhaw.ikitomo.common.Direction;
@@ -14,7 +12,6 @@ import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
-import ch.zhaw.ikitomo.overlay.OverlayController;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
@@ -204,7 +201,7 @@ public class OverlayModel {
      */
     public Vector2 getScreenCenter() {
         Rectangle2D screen = Screen.getPrimary().getBounds();
-        return new Vector2((int) screen.getMaxX() / 2, (int) screen.getMaxY() / 2);
+        return new Vector2(screen.getMaxX() / 2, screen.getMaxY() / 2);
     }
 
     /**
@@ -213,7 +210,7 @@ public class OverlayModel {
      * 
      * @return The loaded Tomodachi model
      */
-    private TomodachiModel loadTomodachiModel() {
+    protected TomodachiModel loadTomodachiModel() {
         try {
             return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition()).loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
@@ -228,7 +225,7 @@ public class OverlayModel {
      * 
      * @return The default tomodachi model
      */
-    private TomodachiModel loadDefaultTomodachiModel() {
+    protected TomodachiModel loadDefaultTomodachiModel() {
         try {
             return new TomodachiModelLoader(environment.getDefaultTomodachiDefinition()).loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
