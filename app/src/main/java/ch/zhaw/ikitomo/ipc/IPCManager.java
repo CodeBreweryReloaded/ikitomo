@@ -344,6 +344,12 @@ public class IPCManager {
          * The thread of the server
          */
         private Thread thread = new Thread(this::runThread, "IPC Server Thread");
+
+        /**
+         * The lock for {@link #clients}
+         */
+        private Object clientsLock = new Object();
+
         /**
          * A list of all connected clients
          */
@@ -385,14 +391,22 @@ public class IPCManager {
                 while (!server.isClosed()) {
                     Socket socket = server.accept();
                     LOGGER.log(Level.INFO, "Accepted connection from {0}", socket.getInetAddress());
-                    var client = new IPCClient(socket, commandListener);
-                    clients.add(client);
+                    var client = new IPCClient(socket, commandListener, this::onClientCloses);
+                    synchronized (clientsLock) {
+                        clients.add(client);
+                    }
                     if (connectListener != null) {
                         connectListener.accept(client);
                     }
                 }
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Couldn't accept connection", e);
+            }
+        }
+
+        private void onClientCloses(IPCClient client) {
+            synchronized (clientsLock) {
+                clients.remove(client);
             }
         }
 
@@ -435,11 +449,13 @@ public class IPCManager {
 
         @Override
         public void close() throws IOException {
-            for (IPCClient client : clients) {
-                try {
-                    client.close();
-                } catch (IOException e) {
-                    LOGGER.log(Level.WARNING, "Couldn't close a client", e);
+            synchronized (clients) {
+                for (IPCClient client : clients) {
+                    try {
+                        client.close();
+                    } catch (IOException e) {
+                        LOGGER.log(Level.WARNING, "Couldn't close a client", e);
+                    }
                 }
             }
             if (server != null) {
@@ -475,9 +491,9 @@ public class IPCManager {
         private Consumer<IPCCommand> commandListener;
 
         /**
-         * The thread of this client
+         * A listener which is called when the client is closed
          */
-        private Thread thread;
+        private Consumer<IPCClient> closeListener;
 
         /**
          * Constructor
@@ -493,7 +509,7 @@ public class IPCManager {
          * @see InetAddress#getLoopbackAddress()
          */
         public IPCClient(int port, Consumer<IPCCommand> commandListener) throws IOException {
-            this(new Socket(InetAddress.getLoopbackAddress(), port), commandListener);
+            this(new Socket(InetAddress.getLoopbackAddress(), port), commandListener, null);
         }
 
         /**
@@ -503,8 +519,10 @@ public class IPCManager {
          * @param commandListener The command listener
          * @throws IOException If the socket can't be setup
          */
-        public IPCClient(Socket socket, Consumer<IPCCommand> commandListener) throws IOException {
+        public IPCClient(Socket socket, Consumer<IPCCommand> commandListener, Consumer<IPCClient> closeListener)
+                throws IOException {
             this.commandListener = commandListener;
+            this.closeListener = closeListener;
             setupSocket(socket);
         }
 
@@ -516,10 +534,10 @@ public class IPCManager {
          */
         private void setupSocket(Socket socket) throws IOException {
             this.socket = socket;
+            this.socket.setKeepAlive(true);
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.out = socket.getOutputStream();
-            this.thread = new Thread(this::runReceiveLoop, "ICP Client Thread");
-            this.thread.start();
+            new Thread(this::runReceiveLoop, "ICP Client Thread").start();
         }
 
         /**
@@ -546,6 +564,7 @@ public class IPCManager {
 
         @Override
         public void close() throws IOException {
+            closeListener.accept(this);
             if (socket != null) {
                 socket.close();
             }
