@@ -85,7 +85,6 @@ public class OverlayController implements Killable {
 
         // setup animation listeners
         model.tomodachiStateBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
-        model.tomodachiDirectionBinding().addListener((observable, oldValue, newValue) -> updateAnimation());
 
         // if the animation finished, tell the current behavior strategy
         animatedImage.getAnimator().addAnimationFinishedListener(

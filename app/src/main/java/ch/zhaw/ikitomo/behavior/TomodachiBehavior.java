@@ -102,7 +102,13 @@ public class TomodachiBehavior {
                 yield StateType.IDLE;
             }
         };
-        model.setCurrentAnimation(nextState);
+
+        if (nextState == StateType.RUN) {
+            model.setCurrentAnimation(nextState, model.getCurrentAnimationDirection());
+        } else {
+            model.setCurrentAnimation(nextState, Direction.NONE);
+        }
+
         if (nextState != oldState) {
             LOGGER.log(Level.INFO, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
         }

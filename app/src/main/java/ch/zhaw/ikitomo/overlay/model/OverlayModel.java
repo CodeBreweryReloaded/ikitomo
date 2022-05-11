@@ -12,6 +12,7 @@ import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.exception.MissingAnimationException;
+import ch.zhaw.ikitomo.overlay.model.TomodachiModel.TomodachiAnimationState;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
@@ -50,12 +51,7 @@ public class OverlayModel {
     /**
      * A binding to the state of the current tomodachi
      */
-    private ObjectBinding<StateType> tomodachiState;
-
-    /**
-     * A binding to the direction of the current tomodachi
-     */
-    private ObjectBinding<Direction> tomodachiDirection;
+    private ObjectBinding<TomodachiAnimationState> tomodachiState;
 
     /**
      * The animation timer for the behavior
@@ -87,7 +83,6 @@ public class OverlayModel {
 
         tomodachiPosition = JFXUtils.nestedBinding(tomodachi, TomodachiModel::positionProperty);
         tomodachiState = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationStateProperty);
-        tomodachiDirection = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationDirectionProperty);
 
         behaviorStrategy = Bindings
                 .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
@@ -163,7 +158,7 @@ public class OverlayModel {
      * 
      * @return The binding
      */
-    public ObjectBinding<StateType> tomodachiStateBinding() {
+    public ObjectBinding<TomodachiAnimationState> tomodachiStateBinding() {
         return tomodachiState;
     }
 
@@ -173,16 +168,7 @@ public class OverlayModel {
      * @return The state
      */
     public StateType getTomodachiState() {
-        return tomodachiState.get();
-    }
-
-    /**
-     * Gets the binding to the direction of the current tomodachi
-     * 
-     * @return The binding
-     */
-    public ObjectBinding<Direction> tomodachiDirectionBinding() {
-        return tomodachiDirection;
+        return tomodachiState.get().currentAnimationState();
     }
 
     /**
@@ -191,7 +177,7 @@ public class OverlayModel {
      * @return The direction
      */
     public Direction getTomodachiDirection() {
-        return tomodachiDirection.get();
+        return tomodachiState.get().currentAnimationDirection();
     }
 
     /**

@@ -3,9 +3,9 @@
     "name": "Default Neko",
     "icon": "defaultTomodachi/icon.png",
     "settings": {
-        "sleepChance": 0.5,
-        "wakeChance": 0.5,
-        "speed": 0.5,
+        "sleepChance": 0.05,
+        "wakeChance": 0.05,
+        "speed": 0.125,
         "nextPositionStrategy": "FOLLOW_MOUSE"
     },
     "states": [
@@ -62,6 +62,10 @@
             "animationPrefix": "defaultTomodachi/run_",
             "animations": [
                 {
+                    "direction": "NONE",
+                    "animationSuffix": "up"
+                },
+                {
                     "direction": "UP",
                     "animationSuffix": "up"
                 },
@@ -79,7 +83,7 @@
                 },
                 {
                     "direction": "DOWN",
-                    "animationSuffix": "down_right"
+                    "animationSuffix": "down"
                 },
                 {
                     "direction": "DOWN_LEFT",

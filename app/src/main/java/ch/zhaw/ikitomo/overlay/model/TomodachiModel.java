@@ -48,14 +48,9 @@ public class TomodachiModel {
     private ObjectProperty<Vector2> position = new SimpleObjectProperty<>(Vector2.ZERO);
 
     /**
-     * The current state of the animation
+     * 
      */
-    private ObjectProperty<StateType> currentAnimationState = new SimpleObjectProperty<>(StateType.IDLE);
-
-    /**
-     * The current direction of the animation
-     */
-    private ObjectProperty<Direction> currentAnimationDirection = new SimpleObjectProperty<>(Direction.NONE);
+    private ObjectProperty<TomodachiAnimationState> currentAnimationState = new SimpleObjectProperty<>(new TomodachiAnimationState(StateType.IDLE, Direction.NONE));
 
     /**
      * The available states of the tomodachi
@@ -160,7 +155,7 @@ public class TomodachiModel {
      * 
      * @return The property
      */
-    public ObjectProperty<StateType> currentAnimationStateProperty() {
+    public ObjectProperty<TomodachiAnimationState> currentAnimationStateProperty() {
         return currentAnimationState;
     }
 
@@ -170,16 +165,7 @@ public class TomodachiModel {
      * @return The current state
      */
     public StateType getCurrentAnimationState() {
-        return currentAnimationState.get();
-    }
-
-    /**
-     * Gets the current direction of the animation
-     * 
-     * @return The direction
-     */
-    public ObjectProperty<Direction> currentAnimationDirectionProperty() {
-        return currentAnimationDirection;
+        return currentAnimationState.get().currentAnimationState();
     }
 
     /**
@@ -188,7 +174,7 @@ public class TomodachiModel {
      * @return The direction
      */
     public Direction getCurrentAnimationDirection() {
-        return currentAnimationDirection.get();
+        return currentAnimationState.get().currentAnimationDirection();
     }
 
     /**
@@ -199,8 +185,7 @@ public class TomodachiModel {
      * @param direction the direction
      */
     public void setCurrentAnimation(StateType state, Direction direction) {
-        currentAnimationState.set(state);
-        currentAnimationDirection.set(direction);
+        currentAnimationState.set(new TomodachiAnimationState(state, direction));
     }
 
     /**
@@ -223,5 +208,13 @@ public class TomodachiModel {
      */
     public NextPositionStrategy createNextPointStrategy() {
         return getSettings().getNextPositionStrategyFactory().createNextPosition();
+    }
+
+    /**
+     * Wrapper record that holds both states of the animation state
+     * @param currentAnimationState The current animation state
+     * @param currentAnimationdirection The current animation direction
+     */
+    public record TomodachiAnimationState(StateType currentAnimationState, Direction currentAnimationDirection) {
     }
 }
