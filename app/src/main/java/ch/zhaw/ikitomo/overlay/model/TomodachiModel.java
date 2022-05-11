@@ -72,14 +72,16 @@ public class TomodachiModel {
      * 
      * @param id       The id
      * @param name     The name
+     * @param settings The settings
      * @param position The position
      * @param velocity The velocity
      * @param states   The states
      */
-    public TomodachiModel(TomodachiDefinition definition, Map<StateType, List<AnimationData>> animations) {
+    public TomodachiModel(TomodachiDefinition definition, TomodachiSettings settings,
+            Map<StateType, List<AnimationData>> animations) {
         this.id = definition.getID();
         this.name = definition.getName();
-        this.settings = definition.getSettings();
+        this.settings = settings;
         this.animations.putAll(animations);
     }
 

@@ -212,7 +212,8 @@ public class OverlayModel {
      */
     protected TomodachiModel loadTomodachiModel() {
         try {
-            return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition()).loadFromTomodachiFile();
+            return new TomodachiModelLoader(environment.getCurrentTomodachiDefinition(), environment.getSettings())
+                    .loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
             LOGGER.log(Level.WARNING, "Unable to load model. Loading default fallback model", e);
             return loadDefaultTomodachiModel();
@@ -227,7 +228,8 @@ public class OverlayModel {
      */
     protected TomodachiModel loadDefaultTomodachiModel() {
         try {
-            return new TomodachiModelLoader(environment.getDefaultTomodachiDefinition()).loadFromTomodachiFile();
+            return new TomodachiModelLoader(environment.getDefaultTomodachiDefinition(), environment.getSettings())
+                    .loadFromTomodachiFile();
         } catch (MissingAnimationException e) {
             throw new IllegalStateException("Unable to load default Tomodachi model", e);
         }
