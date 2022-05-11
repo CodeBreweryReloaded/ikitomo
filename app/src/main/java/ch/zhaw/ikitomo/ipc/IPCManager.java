@@ -22,36 +22,104 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class IPCManager implements Closeable {
+import ch.zhaw.ikitomo.ipc.IPCCommand.IPCCommandType;
+
+/**
+ * A class which manges the inter process communication (IPC)
+ */
+public class IPCManager {
+    /**
+     * The logger
+     */
     private static final Logger LOGGER = Logger.getLogger(IPCManager.class.getName());
+    /**
+     * The path to the default well known port file
+     */
     private static final String DEFAULT_WELL_KNOWN_PORT_FILE = "./.ipc-port";
+    /**
+     * The {@link IPCCommandManager} used to serialize and deserialize
+     * {@link IPCCommand}s
+     */
     private static final IPCCommandManager IPC_COMMAND_MANAGER = new IPCCommandManager();
 
+    /**
+     * The path to the well known port file of this {@link IPCManager}
+     */
     private Path wellKnownPortFile;
 
+    /**
+     * The {@link IPCServer} if started else the ipcServer is null
+     */
     private IPCServer ipcServer;
 
+    /**
+     * If the {@link IPCCommandType#SHOW_SETTINGS} should be sent to the other
+     * instance if detected
+     */
     private boolean sendShowSettingsCommand;
 
+    /**
+     * If an other instance is running. This flag is set in {@link #init()} and
+     * maybe has to wrong value before it was called
+     */
     private boolean otherInstanceRunning;
 
+    /**
+     * The method to call when the {@link IPCManager} wants to open the settings
+     */
     private Runnable showSettingsListener;
 
+    /**
+     * A completable future which will complete if it is clear if another instance
+     * is running
+     */
     private CompletableFuture<Boolean> otherInstanceRunningFuture = new CompletableFuture<>();
 
+    /**
+     * Constructor
+     * 
+     * @param wellKnownPortFile    The path to the well known port file
+     * @param showSettingsListener The method to call when the {@link IPCManager}
+     *                             wants to open the settings
+     */
     IPCManager(Path wellKnownPortFile, Runnable showSettingsListener) {
         this.wellKnownPortFile = Objects.requireNonNull(wellKnownPortFile, "wellKnownPortFile = null");
         this.showSettingsListener = Objects.requireNonNull(showSettingsListener, "showSettingsListener = null");
     }
 
+    /**
+     * Sets if the {@link IPCCommandType#SHOW_SETTINGS} should be sent to the other
+     * instance (if one is detected)
+     * 
+     * @param sendShowSettingsCommand If the {@link IPCCommandType#SHOW_SETTINGS} is
+     *                                sent
+     */
     public void setSendShowSettingsCommand(boolean sendShowSettingsCommand) {
         this.sendShowSettingsCommand = sendShowSettingsCommand;
     }
 
+    /**
+     * Gets if {@link IPCCommandType#SHOW_SETTINGS} is sent to the other instance if
+     * one is detected
+     * 
+     * @return If the {@link IPCCommandType#SHOW_SETTINGS} is sent
+     */
     public boolean isSendShowSettingsCommand() {
         return sendShowSettingsCommand;
     }
 
+    /**
+     * <p>
+     * Initializes the {@link IPCManager}. This method checks if the well known port
+     * file exists and the {@link IPCManager} can connect to the server. If this is
+     * the case, the {@link IPCCommandType#SHOW_SETTINGS} is sent if
+     * {@link #sendShowSettingsCommand} is set to true.
+     * </p>
+     * <p>
+     * The {@link #otherInstanceRunning} is set in this method and before is
+     * uninitialized.
+     * </p>
+     */
     public void init() {
         // if the well-known port file exists, we assume that another instance is
         // running
@@ -74,6 +142,9 @@ public class IPCManager implements Closeable {
 
     }
 
+    /**
+     * Deletes the well known port file if it exists
+     */
     private void deleteWellKnownPortFile() {
         if (Files.exists(wellKnownPortFile)) {
             try {
@@ -85,6 +156,10 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * Trying to connect to the ipc server of the other instance. If it fails,
+     * {@link #otherInstanceRunning} is set to false
+     */
     private void tryToConnectToIPCServer() {
         try {
             int port = readPortFromWellKnownPortFile();
@@ -97,6 +172,13 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * Sends the {@link IPCCommandType#SHOW_SETTINGS} to the other instance if
+     * {@link #sendShowSettingsCommand} is set to true
+     * 
+     * @param client The client
+     * @throws IOException When something goes wrong while sending the command
+     */
     private void onClientConnected(IPCClient client) throws IOException {
         if (isSendShowSettingsCommand()) {
             LOGGER.log(Level.INFO, "Sending show settings command");
@@ -104,6 +186,9 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * Starts the {@link IPCServer} and writing the port to the well known port file
+     */
     private void startUpIPCServer() {
         if (ipcServer != null && !ipcServer.isClosed()) {
             return;
@@ -125,6 +210,12 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * A listener which is called by the {@link #ipcServer} when a command is
+     * received
+     * 
+     * @param command The received command
+     */
     private void onCommandReceived(IPCCommand command) {
         if (command.command() == null) {
             LOGGER.warning("Received command with null command type");
@@ -137,6 +228,9 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * Closes the {@link #ipcServer} if it is open else the method fails silently
+     */
     private void closeIPCServer() {
         if (ipcServer != null && !ipcServer.isClosed()) {
             try {
@@ -147,20 +241,36 @@ public class IPCManager implements Closeable {
         }
     }
 
-    public Path getWellKnownPortFile() {
-        return wellKnownPortFile;
-    }
-
+    /**
+     * Gets a future which complete when this manager determined if another instance
+     * is running. This is done in {@link #init()}. The future returns true if
+     * another instance was detected and false if not.
+     * 
+     * @return The future which completes to whether another instance is running
+     */
     public CompletableFuture<Boolean> isOtherInstanceRunning() {
         return otherInstanceRunningFuture;
     }
 
+    /**
+     * Writes the well known port file with the given port
+     * 
+     * @param port The port to write
+     * @throws IOException If something went wrong wile writing
+     */
     private void writeWellKnownPortFile(int port) throws IOException {
         var wellKnownPortContent = String.valueOf(port).getBytes(StandardCharsets.UTF_8);
         Files.write(wellKnownPortFile, wellKnownPortContent, StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.SYNC);
     }
 
+    /**
+     * Reads the well known port file from {@link #wellKnownPortFile} and returns
+     * the port written in it
+     * 
+     * @return The port read from {@link #wellKnownPortFile}
+     * @throws IOException If something went wrong while reading
+     */
     private int readPortFromWellKnownPortFile() throws IOException {
         String wellKnownPortContent = new String(Files.readAllBytes(wellKnownPortFile), StandardCharsets.UTF_8);
         try {
@@ -170,15 +280,25 @@ public class IPCManager implements Closeable {
         }
     }
 
-    @Override
-    public void close() throws IOException {
-        if (ipcServer != null && !ipcServer.isClosed()) {
-            ipcServer.close();
-        }
-    }
-
+    /**
+     * The static instance of {@link IPCManager}
+     */
     private static IPCManager instance;
 
+    /**
+     * 
+     * Initializes the global {@link IPCManager} instance. If the instance already
+     * exists this method will return instantly, ignoring the parameters.
+     * 
+     * @param sendShowSettingsCommand If {@link IPCCommandType#SHOW_SETTINGS} should
+     *                                be sent to the other instance when one is
+     *                                detected
+     * @param showSettingsListener    The method called by the {@link IPCServer}
+     *                                when {@link IPCCommandType#SHOW_SETTINGS} is
+     *                                received
+     * @return The created {@link IPCManager}
+     * @see #getInstance()
+     */
     public static IPCManager createInstance(boolean sendShowSettingsCommand, Runnable showSettingsListener) {
         if (instance != null) {
             LOGGER.warning("IPCManager already created");
@@ -191,6 +311,16 @@ public class IPCManager implements Closeable {
         return instance;
     }
 
+    /**
+     * Returns the global {@link IPCManager} instance. To initialize the global
+     * instance, use {@link #createInstance(boolean, Runnable)}. If the instance
+     * doesn't exist a {@link IllegalStateException} is thrown.
+     * 
+     * @return The global instance
+     * @throws IllegalStateException If the instance wasn't initialized with
+     *                               {@link #createInstance(boolean, Runnable)}
+     * @see #createInstance(boolean, Runnable)
+     */
     public static IPCManager getInstance() {
         if (instance == null) {
             throw new IllegalStateException("IPCManager not initialized");
@@ -198,27 +328,58 @@ public class IPCManager implements Closeable {
         return instance;
     }
 
+    /**
+     * The IPC server class
+     */
     static class IPCServer implements Closeable {
+        /**
+         * Logger
+         */
         private static final Logger LOGGER = Logger.getLogger(IPCServer.class.getName());
+        /**
+         * The server socket
+         */
         private ServerSocket server;
+        /**
+         * The thread of the server
+         */
         private Thread thread = new Thread(this::runThread, "IPC Server Thread");
+        /**
+         * A list of all connected clients
+         */
         private List<IPCClient> clients = new ArrayList<>();
 
+        /**
+         * A listener which is called when an {@link IPCCommand} was received
+         */
         private Consumer<IPCCommand> commandListener;
+        /**
+         * A listener which is called when a client connected to this server
+         */
         private Consumer<IPCClient> connectListener;
 
+        /**
+         * Constructor
+         * 
+         * @ses {@link #start()}
+         */
         public IPCServer() {
         }
 
-        public List<IPCClient> getClients() {
-            return new ArrayList<>(clients);
-        }
-
+        /**
+         * Starts the ipc server on a random port on the loopback interface
+         * 
+         * @see InetAddress#getLoopbackAddress()
+         * @see #getPort()
+         */
         public void start() throws IOException {
             server = new ServerSocket(0, 50, InetAddress.getLoopbackAddress());
             thread.start();
         }
 
+        /**
+         * The main loop of the server called by {@link #thread}
+         */
         private void runThread() {
             try {
                 while (!server.isClosed()) {
@@ -235,18 +396,39 @@ public class IPCManager implements Closeable {
             }
         }
 
+        /**
+         * 
+         * Sets a listener which is called when an {@link IPCCommand} was received
+         * 
+         * @param commandListener The listener
+         */
         public void setCommandListener(Consumer<IPCCommand> commandListener) {
             this.commandListener = commandListener;
         }
 
+        /**
+         * Sets a listener which is called when a client connected to this server
+         * 
+         * @param connectListener The listener
+         */
         public void setConnectListener(Consumer<IPCClient> connectListener) {
             this.connectListener = connectListener;
         }
 
+        /**
+         * Gets the port of the server
+         * 
+         * @return The port
+         */
         public int getPort() {
             return server.getLocalPort();
         }
 
+        /**
+         * Returns if the server is closed
+         * 
+         * @return if it is closed
+         */
         public boolean isClosed() {
             return server.isClosed();
         }
@@ -266,23 +448,72 @@ public class IPCManager implements Closeable {
         }
     }
 
+    /**
+     * A client of a server either created by the server instance to represent a
+     * user or by the {@link IPCManager} to connect a server
+     */
     static class IPCClient implements Closeable {
+        /**
+         * The logger
+         */
         private static final Logger LOGGER = Logger.getLogger(IPCClient.class.getName());
+        /**
+         * The socket
+         */
         private Socket socket;
+        /**
+         * The buffered reader to read from the socket
+         */
         private BufferedReader in;
+        /**
+         * The output stream to write to the socket
+         */
         private OutputStream out;
+        /**
+         * A listener which is called when the client receives a command
+         */
         private Consumer<IPCCommand> commandListener;
+
+        /**
+         * The thread of this client
+         */
         private Thread thread;
 
+        /**
+         * Constructor
+         * <p>
+         * Creates a new socket on the given port and the loop back interface. The
+         * commandListener should be set here as it might miss commands when it is set
+         * later.
+         * </p>
+         * 
+         * @param port            The port to connect to
+         * @param commandListener The command listener
+         * @throws IOException If the socket couldn't be created
+         * @see InetAddress#getLoopbackAddress()
+         */
         public IPCClient(int port, Consumer<IPCCommand> commandListener) throws IOException {
             this(new Socket(InetAddress.getLoopbackAddress(), port), commandListener);
         }
 
+        /**
+         * Constructor
+         * 
+         * @param socket          The socket to use
+         * @param commandListener The command listener
+         * @throws IOException If the socket can't be setup
+         */
         public IPCClient(Socket socket, Consumer<IPCCommand> commandListener) throws IOException {
             this.commandListener = commandListener;
             setupSocket(socket);
         }
 
+        /**
+         * Sets up the given socket
+         * 
+         * @param socket The socket
+         * @throws IOException If something went wrong while setting up
+         */
         private void setupSocket(Socket socket) throws IOException {
             this.socket = socket;
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -291,10 +522,12 @@ public class IPCManager implements Closeable {
             this.thread.start();
         }
 
-        public void setCommandListener(Consumer<IPCCommand> commandListener) {
-            this.commandListener = commandListener;
-        }
-
+        /**
+         * Sends the given IPC command to the server/client
+         * 
+         * @param command The command
+         * @throws IOException If something went wrong while sending
+         */
         public void send(IPCCommand command) throws IOException {
             String commandString = IPC_COMMAND_MANAGER.saveToString(command).lines().collect(Collectors.joining(" "))
                     + "\n";
@@ -302,6 +535,11 @@ public class IPCManager implements Closeable {
             out.flush();
         }
 
+        /**
+         * Gets if this client is closed
+         * 
+         * @return If the client is closed
+         */
         public boolean isClosed() {
             return socket.isClosed();
         }
@@ -313,6 +551,9 @@ public class IPCManager implements Closeable {
             }
         }
 
+        /**
+         * The run method of {@link #thread}
+         */
         private void runReceiveLoop() {
             try {
                 String input;
@@ -328,6 +569,12 @@ public class IPCManager implements Closeable {
             }
         }
 
+        /**
+         * The parses the given string and calls the command listener if the received
+         * command was valid and the listener isn't null
+         * 
+         * @param input The input to parse
+         */
         private void parseReceivedString(String input) {
             try {
                 IPCCommand cmd = IPC_COMMAND_MANAGER.loadFromString(input);
