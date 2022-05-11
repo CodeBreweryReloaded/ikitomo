@@ -1,7 +1,11 @@
 package ch.zhaw.ikitomo.settings.view;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.exception.LoadUIException;
@@ -9,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -16,6 +21,18 @@ import javafx.scene.layout.BorderPane;
  * A cell for a list showing {@link TomodachiDefinition}s
  */
 public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
+    /**
+     * The logger
+     */
+    private static final Logger LOGGER = Logger.getLogger(TomodachiListViewCell.class.getName());
+
+    /**
+     * The size the images should be scaled to. All images need to be scaled by
+     * {@link Image} because {@link ImageView#setSmooth(boolean)} doesn't work. See
+     * <a href=
+     * "https://bugs.openjdk.java.net/browse/JDK-8211861">https://bugs.openjdk.java.net/browse/JDK-8211861</a>
+     */
+    private static final int IMAGE_SIZE = 300;
 
     /**
      * The root pane
@@ -58,6 +75,7 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
             } else {
                 setStyle("-fx-background-color: -fx-background;");
             }
+            tomodachiImage.setImage(loadIconImage(item));
             setGraphic(rootPane);
         }
     }
@@ -83,4 +101,38 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
         tomodachiImage.fitWidthProperty().bind(prefWidthProperty());
     }
 
+    private Image loadIconImage(TomodachiDefinition tomodachiDefinition) {
+        if (tomodachiDefinition.getIcon() == null) {
+            LOGGER.log(Level.WARNING, "No icon was set for tomodachi {0}", tomodachiDefinition.getName());
+            return null;
+        }
+        try {
+            if (tomodachiDefinition.isResource()) {
+                return loadIconImageFromClasspath(tomodachiDefinition);
+            } else {
+                return loadIconImageFromFile(tomodachiDefinition);
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Couldn't load icon image of \"%s\" (from classpath: %s)"
+                    .formatted(tomodachiDefinition.getID(), tomodachiDefinition.isResource()), e);
+            return null;
+        }
+    }
+
+    private Image loadIconImageFromClasspath(TomodachiDefinition tomodachiDefinition) throws IOException {
+        InputStream in = getClass().getClassLoader().getResourceAsStream(tomodachiDefinition.getIcon());
+        if (in == null) {
+            throw new IOException("Couldn't load the icon image of \"" + tomodachiDefinition.getID() + "\" from \""
+                    + tomodachiDefinition.getIcon() + "\"");
+        }
+        try (in) {
+            return new Image(in, IMAGE_SIZE, IMAGE_SIZE, true, false);
+        }
+    }
+
+    private Image loadIconImageFromFile(TomodachiDefinition tomodachiDefinition) throws IOException {
+        try (var in = new FileInputStream(tomodachiDefinition.getIcon())) {
+            return new Image(in, IMAGE_SIZE, IMAGE_SIZE, true, false);
+        }
+    }
 }

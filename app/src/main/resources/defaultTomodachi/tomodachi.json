@@ -1,6 +1,7 @@
 {
     "id": "ch.zhaw.ikitomo.defaultNeko",
     "name": "Default Neko",
+    "icon": "defaultTomodachi/icon.png",
     "settings": {
         "sleepChance": 0.5,
         "wakeChance": 0.5,
