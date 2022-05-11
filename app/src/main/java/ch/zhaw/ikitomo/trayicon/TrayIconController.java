@@ -24,6 +24,21 @@ import javafx.application.Platform;
 public class TrayIconController implements Killable {
 
     /**
+     * Instance of SystemTray
+     */
+    private SystemTray tray;
+
+    /**
+     * Instance of TrayIcon
+     */
+    private TrayIcon trayIcon;
+
+    /**
+     * Instance of PopupMenu
+     */
+    private PopupMenu popup;
+
+    /**
      * {@link Logger} of the application.
      */
     private static final Logger LOGGER = Logger.getLogger(TrayIconController.class.getName());
@@ -53,25 +68,21 @@ public class TrayIconController implements Killable {
         this.application = application;
 
         try {
-            final PopupMenu popup = new PopupMenu();
+            popup = new PopupMenu();
 
             URL iconUrl = TrayIconController.class.getResource("/icon.png");
             if (iconUrl == null) {
                 LOGGER.log(Level.SEVERE, "Could not find icon.png in resources.");
                 return;
             }
-            final TrayIcon trayIcon = new TrayIcon(ImageIO.read(iconUrl));
-            final SystemTray tray = SystemTray.getSystemTray();
+            trayIcon = new TrayIcon(ImageIO.read(iconUrl));
+            tray = SystemTray.getSystemTray();
 
             MenuItem showSettingsItem = new MenuItem("Settings");
-
             showSettingsItem.addActionListener(e -> showSettings());
 
             MenuItem exitItem = new MenuItem("Exit");
-            exitItem.addActionListener(e -> {
-                IkitomoApplication app = new IkitomoApplication();
-                app.close();
-            });
+            exitItem.addActionListener(e -> application.close());
 
             popup.add(showSettingsItem);
             popup.addSeparator();
@@ -89,10 +100,14 @@ public class TrayIconController implements Killable {
         if (this.settingsController != null) {
             this.settingsController.kill();
         }
+        tray.remove(trayIcon);
 
         return CompletableFuture.completedFuture(null);
     }
 
+    /**
+     * Displays SettingsController
+     */
     public void showSettings() {
         Platform.runLater(() -> {
             if (this.settingsController == null || !settingsController.isVisible()) {

@@ -200,7 +200,10 @@ public class IPCManager implements Closeable {
 
             LOGGER.log(Level.INFO, "Starting up ipc server on port \"{0}\"", ipcServer.getPort());
             writeWellKnownPortFile(ipcServer.getPort());
-            Runtime.getRuntime().addShutdownHook(new Thread(this::deleteWellKnownPortFile));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                this.deleteWellKnownPortFile();
+                this.closeIPCServer();
+            }));
         } catch (IOException e) {
             LOGGER.log(Level.WARNING,
                     "Couldn't start IPC server or write well-known port file at \"" + wellKnownPortFile + "\"", e);
@@ -314,7 +317,6 @@ public class IPCManager implements Closeable {
         Path wellKnownPortFile = Paths.get(DEFAULT_WELL_KNOWN_PORT_FILE);
         instance = new IPCManager(wellKnownPortFile, showSettingsListener);
         instance.setSendShowSettingsCommand(sendShowSettingsCommand);
-        instance.init();
         return instance;
     }
 
@@ -387,6 +389,7 @@ public class IPCManager implements Closeable {
          */
         public void start() throws IOException {
             server = new ServerSocket(0, 50, InetAddress.getLoopbackAddress());
+            thread.setDaemon(true);
             thread.start();
         }
 
@@ -545,7 +548,9 @@ public class IPCManager implements Closeable {
             this.socket.setKeepAlive(true);
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.out = socket.getOutputStream();
-            new Thread(this::runReceiveLoop, "ICP Client Thread").start();
+            Thread t = new Thread(this::runReceiveLoop, "ICP Client Thread");
+            t.setDaemon(true);
+            t.start();
         }
 
         /**
@@ -581,7 +586,7 @@ public class IPCManager implements Closeable {
         }
 
         /**
-         * The run method of {@link #thread}
+         * The run method of the thread
          */
         private void runReceiveLoop() {
             try {

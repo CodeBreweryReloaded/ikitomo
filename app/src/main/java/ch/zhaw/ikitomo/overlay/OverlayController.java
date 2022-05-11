@@ -39,7 +39,10 @@ public class OverlayController implements Killable {
     
     @Override
     public CompletableFuture<Void> kill() {
-        frame.dispose();
+        if (frame != null) {
+            frame.dispose();
+        }
+
         return CompletableFuture.completedFuture(null);
     }
 

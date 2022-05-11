@@ -1,5 +1,7 @@
 package ch.zhaw.ikitomo;
 
+import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletionException;
@@ -57,7 +59,7 @@ public class IkitomoApplication extends Application {
         ipcManager.init();
 
         try {
-            Boolean otherInstanceRunning = ipcManager.isOtherInstanceRunning().get(200, TimeUnit.SECONDS);
+            Boolean otherInstanceRunning = ipcManager.isOtherInstanceRunning().get(3, TimeUnit.SECONDS);
             if (Boolean.TRUE.equals(otherInstanceRunning)) {
                 LOGGER.log(Level.INFO, "Other instance running, exiting");
                 Platform.exit();
@@ -90,6 +92,7 @@ public class IkitomoApplication extends Application {
         }
 
         Platform.exit();
+        Arrays.stream(Frame.getFrames()).forEach(Frame::dispose);
     }
 
     /**
