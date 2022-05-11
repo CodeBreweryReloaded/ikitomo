@@ -55,9 +55,10 @@ public class TomodachiSettings {
      * @param sleepChance The sleep chance
      * @param wakeChance  The wake up chance
      */
-    public TomodachiSettings(float sleepChance, float wakeChance) {
+    public TomodachiSettings(float sleepChance, float wakeChance, float speed) {
         this.sleepChance.set(sleepChance);
         this.wakeChance.set(wakeChance);
+        this.sleepChance.set(speed);
     }
 
     /**

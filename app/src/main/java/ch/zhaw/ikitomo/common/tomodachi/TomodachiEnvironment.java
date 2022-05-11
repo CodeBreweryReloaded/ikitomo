@@ -2,6 +2,7 @@ package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -146,8 +147,9 @@ public class TomodachiEnvironment {
     private void loadDefaultTomodachiDefinition() {
         Objects.requireNonNull(DEFAULT_TOMODACHI_LOCATION,
                 "The default tomodachi definition could not be loaded because the location is null");
-        try {
-            var reader = new InputStreamReader(DEFAULT_TOMODACHI_LOCATION.openStream(), StandardCharsets.UTF_8);
+
+        try (InputStream inStream = DEFAULT_TOMODACHI_LOCATION.openStream()) {
+            var reader = new InputStreamReader(inStream, StandardCharsets.UTF_8);
             defaultTomodachiDefinition = tomodachiManager.load(reader);
         } catch (IOException e) {
             throw new IllegalStateException(
