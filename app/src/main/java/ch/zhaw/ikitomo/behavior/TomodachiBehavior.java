@@ -5,8 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.random.RandomGenerator;
 
-import com.google.common.util.concurrent.Service.State;
-
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;

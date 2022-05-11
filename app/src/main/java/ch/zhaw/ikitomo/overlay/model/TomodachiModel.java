@@ -43,7 +43,7 @@ public class TomodachiModel {
     private TomodachiSettings settings;
 
     /**
-     * The position property
+     * The position property containing the Tomodachi's current position
      */
     private ObjectProperty<Vector2> position = new SimpleObjectProperty<>(Vector2.ZERO);
 
