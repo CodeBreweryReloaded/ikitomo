@@ -152,7 +152,7 @@ public class SpritesheetAnimator {
      * Gets a bindable {@link Image} property that is updated for every change of
      * state or direction
      * 
-     * @return An image property that requently changes pictures
+     * @return An image property of the currently displayed image
      */
     public ReadOnlyObjectProperty<Image> imageProperty() {
         return imageProperty.getReadOnlyProperty();
@@ -230,7 +230,7 @@ public class SpritesheetAnimator {
      * A helper method to increase readability that creates a {@link Rectangle2D}
      * from a {@link Frame}
      * 
-     * @param frame The frame/cell containing dimenions
+     * @param frame The frame/cell containing dimensions
      * @return A 2D-rectangle
      */
     private Rectangle2D viewportFromCell(Frame frame) {
@@ -250,6 +250,11 @@ public class SpritesheetAnimator {
         this.animationTimer = animationTimer;
     }
 
+    /**
+     * Gets the id of the current frame
+     * 
+     * @return The id of the frame
+     */
     public int getCurrentFrameID() {
         return currentFrameID;
     }

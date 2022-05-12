@@ -7,8 +7,14 @@ import java.util.function.Supplier;
  * For this an enum is used to allow for serialization via Jackson
  */
 public enum NextPositionStrategyFactory {
+    /**
+     * The factory to create a {@link NextPositionStrategy} that follows the mouse
+     */
     FOLLOW_MOUSE(MouseFollowStrategy::new);
 
+    /**
+     * The supplier which supplies the {@link NextPositionStrategy} instance
+     */
     private Supplier<NextPositionStrategy> factory;
 
     /**

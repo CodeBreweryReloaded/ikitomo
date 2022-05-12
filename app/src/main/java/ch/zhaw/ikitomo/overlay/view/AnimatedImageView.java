@@ -26,6 +26,7 @@ public class AnimatedImageView extends ImageView {
 
     /**
      * Constructor
+     * 
      * @param animations The observable map of animations
      */
     public AnimatedImageView(ObservableMap<StateType, List<AnimationData>> animations) {
@@ -36,7 +37,8 @@ public class AnimatedImageView extends ImageView {
     }
 
     /**
-     * Gets the active {@link SpritesheetAnimator} instanve
+     * Gets the active {@link SpritesheetAnimator} instance
+     * 
      * @return The animator
      */
     public SpritesheetAnimator getAnimator() {

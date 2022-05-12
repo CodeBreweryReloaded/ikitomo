@@ -101,6 +101,12 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
         tomodachiImage.fitWidthProperty().bind(prefWidthProperty());
     }
 
+    /**
+     * Loads the icon image for the tomodachi
+     * 
+     * @param tomodachiDefinition The definition to load the icon for
+     * @return The loaded image
+     */
     private Image loadIconImage(TomodachiDefinition tomodachiDefinition) {
         if (tomodachiDefinition.getIcon() == null) {
             LOGGER.log(Level.WARNING, "No icon was set for tomodachi {0}", tomodachiDefinition.getName());
@@ -119,6 +125,13 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
         }
     }
 
+    /**
+     * Loads the icon for the given {@link TomodachiDefinition} from the classpath
+     * 
+     * @param tomodachiDefinition The definition to load the icon for
+     * @return The loaded icon
+     * @throws IOException If the icon could not be loaded
+     */
     private Image loadIconImageFromClasspath(TomodachiDefinition tomodachiDefinition) throws IOException {
         InputStream in = getClass().getClassLoader().getResourceAsStream(tomodachiDefinition.getIcon());
         if (in == null) {
@@ -130,6 +143,13 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
         }
     }
 
+    /**
+     * Loads the icon for the given {@link TomodachiDefinition}
+     * 
+     * @param tomodachiDefinition The definition
+     * @return The loaded image
+     * @throws IOException If the file could not be loaded
+     */
     private Image loadIconImageFromFile(TomodachiDefinition tomodachiDefinition) throws IOException {
         try (var in = new FileInputStream(tomodachiDefinition.getIcon())) {
             return new Image(in, IMAGE_SIZE, IMAGE_SIZE, true, false);

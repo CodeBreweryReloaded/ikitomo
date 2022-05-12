@@ -58,6 +58,9 @@ public class OverlayController implements Killable {
      */
     private AnimatedImageView animatedImage;
 
+    /**
+     * The spritesheet animator
+     */
     private SpritesheetAnimator animator;
 
     /**

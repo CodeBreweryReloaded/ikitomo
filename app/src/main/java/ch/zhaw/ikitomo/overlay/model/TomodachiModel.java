@@ -48,9 +48,10 @@ public class TomodachiModel {
     private ObjectProperty<Vector2> position = new SimpleObjectProperty<>(Vector2.ZERO);
 
     /**
-     * 
+     * A property holding the current animation state
      */
-    private ObjectProperty<TomodachiAnimationState> currentAnimationState = new SimpleObjectProperty<>(new TomodachiAnimationState(StateType.IDLE, Direction.NONE));
+    private ObjectProperty<TomodachiAnimationState> currentAnimationState = new SimpleObjectProperty<>(
+            new TomodachiAnimationState(StateType.IDLE, Direction.NONE));
 
     /**
      * The available states of the tomodachi
@@ -65,12 +66,9 @@ public class TomodachiModel {
     /**
      * Constructor
      * 
-     * @param id       The id
-     * @param name     The name
-     * @param settings The settings
-     * @param position The position
-     * @param velocity The velocity
-     * @param states   The states
+     * @param definition The definition on which this model is based on
+     * @param settings   The tomodachi settings of this model
+     * @param animations The animation map
      */
     public TomodachiModel(TomodachiDefinition definition, TomodachiSettings settings,
             Map<StateType, List<AnimationData>> animations) {
@@ -214,8 +212,9 @@ public class TomodachiModel {
 
     /**
      * Wrapper record that holds both states of the animation state
-     * @param currentAnimationState The current animation state
-     * @param currentAnimationdirection The current animation direction
+     * 
+     * @param currentAnimationState     The current animation state
+     * @param currentAnimationDirection The current animation direction
      */
     public record TomodachiAnimationState(StateType currentAnimationState, Direction currentAnimationDirection) {
     }

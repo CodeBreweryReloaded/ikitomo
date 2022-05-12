@@ -251,6 +251,11 @@ public class TomodachiEnvironment {
         return tomodachiDefinitionMap.getOrDefault(settings.getTomodachiID(), defaultTomodachiDefinition);
     }
 
+    /**
+     * Gets the default tomodachi definition. This should never be null
+     * 
+     * @return The default tomodachi definition
+     */
     public TomodachiDefinition getDefaultTomodachiDefinition() {
         return defaultTomodachiDefinition;
     }

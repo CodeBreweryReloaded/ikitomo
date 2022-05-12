@@ -42,6 +42,9 @@ public class SettingsModel {
      */
     private Settings settings;
 
+    /**
+     * A property to the current tomodachi settings
+     */
     private ObjectBinding<TomodachiSettings> currentTomodachiSettings;
 
     /**
@@ -68,15 +71,20 @@ public class SettingsModel {
                 settings.tomodachiIDProperty());
     }
 
+    /**
+     * Calculates the current {@link TomodachiSettings} from the currently selected
+     * tomodachi id. The {@link TomodachiSettings} is taken from {@link #settings}.
+     * If it doesn't exist yet then
+     * the default settings from the {@link TomodachiDefinition} are used.
+     */
     private TomodachiSettings calculateCurrentTomodachiSettings() {
         String currentID = settings.getTomodachiID();
-        if (settings.containsTomodachiSettings(currentID)) {
+        if (!settings.containsTomodachiSettings(currentID)) {
             TomodachiDefinition definition = environment.getTomodachiDefinition(currentID);
             if (definition == null) {
                 throw new IllegalStateException("Unknown tomodachi ID: \"%s\"".formatted(currentID));
             }
             settings.setTomodachiSettings(currentID, definition.getSettings());
-
         }
         return settings.getTomodachiSettings(currentID);
     }
