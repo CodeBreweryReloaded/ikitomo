@@ -143,6 +143,14 @@ public class SettingsController implements Killable {
     }
 
     /**
+     * Checks if Window of SettingsController is displayed on the monitor.
+     * @return If the settings window is visible
+     */
+    public boolean isVisible() {
+        return rootPane.getScene().getWindow().isShowing();
+    }
+
+    /**
      * Creates a new settings window based on the settings FXML and returns the
      * Settings controller
      * 
@@ -175,5 +183,6 @@ public class SettingsController implements Killable {
             throw new LoadUIException("Could not load settings UI", e);
         }
     }
+
 
 }
