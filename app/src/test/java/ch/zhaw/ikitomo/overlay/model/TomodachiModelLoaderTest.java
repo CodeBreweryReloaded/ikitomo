@@ -30,7 +30,7 @@ import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 /**
  * Tests the {@link TomodachiModelLoader}
  */
-public class TomodachiModelLoaderTest {
+class TomodachiModelLoaderTest {
     /**
      * The default definition
      */
