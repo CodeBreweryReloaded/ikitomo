@@ -18,7 +18,9 @@ public class AnimationData {
 
     /**
      * The spritesheet
-     * <p>Note: Cell size can be determined from any element inside <code>frames[]</code>
+     * <p>
+     * Note: Cell size can be determined from any element inside
+     * <code>frames[]</code>
      */
     @JsonIgnore
     private Image image;
@@ -32,14 +34,16 @@ public class AnimationData {
     /**
      * Private constructor for Jackson
      */
+    @SuppressWarnings("unused")
     private AnimationData() {
 
     }
 
     /**
      * Public constructor that should only ever be used for testing
-     * @param frames The array of frames
-     * @param image The spritesheet
+     * 
+     * @param frames    The array of frames
+     * @param image     The spritesheet
      * @param direction The animation direction
      */
     public AnimationData(Frame[] frames, Image image, Direction direction) {
@@ -50,6 +54,7 @@ public class AnimationData {
 
     /**
      * Gets all animation frames
+     * 
      * @return All animation frames
      */
     public Frame[] getFrames() {
@@ -58,6 +63,7 @@ public class AnimationData {
 
     /**
      * Sets the spritesheet
+     * 
      * @param image The spritesheet
      */
     public void setImage(Image image) {
@@ -66,6 +72,7 @@ public class AnimationData {
 
     /**
      * Gets the current spritesheet
+     * 
      * @return The spritesheet
      */
     public Image getImage() {
@@ -74,6 +81,7 @@ public class AnimationData {
 
     /**
      * Gets the current directional value
+     * 
      * @return The direction
      */
     public Direction getDirection() {
@@ -82,6 +90,7 @@ public class AnimationData {
 
     /**
      * Sets the animation's direction
+     * 
      * @param direction
      */
     public void setDirection(Direction direction) {

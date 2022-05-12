@@ -44,6 +44,7 @@ public class Settings {
     /**
      * Initializes a new instance of the {@link Settings} class
      */
+    @SuppressWarnings("unused")
     private Settings() {
     }
 
