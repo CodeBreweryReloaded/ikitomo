@@ -5,9 +5,15 @@ import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -15,9 +21,22 @@ import javafx.util.Duration;
  */
 public class BottomNotificationPane extends Pane {
     /**
-     * The duration of the animation
+     * The duration of the translate animation
      */
-    private static final Duration ANIMATION_DURATION = Duration.seconds(0.2);
+    private static final Duration TRANSLATE_ANIMATION_DURATION = Duration.seconds(0.2);
+    /**
+     * The duration of the color animation
+     */
+    private static final Duration COLOR_ANIMATION_DURATION = Duration.seconds(0.35);
+
+    /**
+     * The color of the error notification
+     */
+    private static final Color ERROR_BACKGROUND_COLOR = new Color(0.97, 0.84, 0.85, 1);
+    /**
+     * The color of the info notification
+     */
+    private static final Color INFO_BACKGROUND_COLOR = new Color(0.83, 0.93, 0.85, 1);
 
     /**
      * The timeline object
@@ -40,6 +59,11 @@ public class BottomNotificationPane extends Pane {
     private DelayedRunnable autoHideDelayedRunnable;
 
     /**
+     * The last used background color
+     */
+    private Color lastBackgroundColor = Color.WHEAT;
+
+    /**
      * Constructor
      */
     public BottomNotificationPane() {
@@ -55,7 +79,6 @@ public class BottomNotificationPane extends Pane {
         getChildren().setAll(borderPane);
         borderPane.prefWidthProperty().bind(widthProperty());
         borderPane.setPrefHeight(40);
-        borderPane.setStyle("-fx-background-color: f8d7da;");
 
         setVisible(false);
 
@@ -63,18 +86,54 @@ public class BottomNotificationPane extends Pane {
     }
 
     /**
-     * Shows the notification. If a notification is already up then the text is
+     * Shows an error notification. If a notification is already up then the text is
      * replaced and the hide timer is reset
      * 
-     * @param text The text of the animation
+     * @param text The text of the notification
      */
-    public void showText(String text) {
+    public void showError(String text) {
+        showText(text, ERROR_BACKGROUND_COLOR);
+    }
+
+    /**
+     * Shows an info notification. If a notification is already up then the text is
+     * * replaced and the hide timer is reset
+     * 
+     * @param text The text of the notification
+     */
+    public void showInfo(String text) {
+        showText(text, INFO_BACKGROUND_COLOR);
+    }
+
+    /**
+     * Shows the given text with the given background color. If a notification is
+     * already up then the text is * replaced and the hide timer is reset
+     * 
+     * @param text  The text
+     * @param color The color of the notification
+     */
+    private void showText(String text, Color color) {
         label.setText(text);
         if (!isVisible() || timeline.getStatus() != Status.STOPPED) {
+            borderPane.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
             playShowAnimation();
+        } else {
+            playColorChangeAnimation(lastBackgroundColor, color);
         }
         setVisible(true);
         autoHideDelayedRunnable.run();
+
+        lastBackgroundColor = color;
+    }
+
+    /**
+     * Plays an animation changing from the old color the the new color
+     * 
+     * @param lastColor The previous color
+     * @param newColor  The new color
+     */
+    private void playColorChangeAnimation(Color lastColor, Color newColor) {
+        new ColorTransition(newColor, lastColor).play();
     }
 
     /**
@@ -84,7 +143,7 @@ public class BottomNotificationPane extends Pane {
         timeline.stop();
         setTranslateY(borderPane.getHeight());
         timeline.getKeyFrames().setAll(createKeyFrame(Duration.ZERO, 0),
-                createKeyFrame(ANIMATION_DURATION, -borderPane.getHeight()));
+                createKeyFrame(TRANSLATE_ANIMATION_DURATION, -borderPane.getHeight()));
         timeline.play();
     }
 
@@ -94,7 +153,7 @@ public class BottomNotificationPane extends Pane {
     private void playHideAnimation() {
         timeline.stop();
         timeline.getKeyFrames().setAll(createKeyFrame(Duration.ZERO, -borderPane.getHeight()),
-                createKeyFrame(ANIMATION_DURATION, 0, false));
+                createKeyFrame(TRANSLATE_ANIMATION_DURATION, 0, false));
         timeline.play();
     }
 
@@ -120,6 +179,28 @@ public class BottomNotificationPane extends Pane {
     private KeyFrame createKeyFrame(Duration duration, double y, boolean visible) {
         return new KeyFrame(duration, new KeyValue(borderPane.translateYProperty(), y),
                 new KeyValue(visibleProperty(), visible));
+    }
+
+    private Background createBackground(Color paint) {
+        return new Background(new BackgroundFill(paint, CornerRadii.EMPTY, Insets.EMPTY));
+    }
+
+    private class ColorTransition extends Transition {
+        private Color newColor;
+        private Color lastColor;
+
+        private ColorTransition(Color newColor, Color lastColor) {
+            this.newColor = newColor;
+            this.lastColor = lastColor;
+            setCycleDuration(COLOR_ANIMATION_DURATION);
+        }
+
+        @Override
+        protected void interpolate(double frac) {
+            Color color = lastColor.interpolate(newColor, frac);
+            borderPane.setBackground(createBackground(color));
+
+        }
     }
 
 }
