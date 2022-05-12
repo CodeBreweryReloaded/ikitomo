@@ -13,7 +13,6 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
 import ch.zhaw.ikitomo.settings.model.SettingsModel;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
-import ch.zhaw.ikitomo.settings.view.FloatFilter;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
@@ -26,7 +25,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 /**
  * The settings controller
@@ -96,6 +94,16 @@ public class SettingsController implements Killable {
     private DoubleProperty speedProperty = null;
 
     /**
+     * A property holding the sleep chance of the tomodachi
+     */
+    private DoubleProperty sleepChanceProperty = null;
+
+    /**
+     * A property holding the wake up chance of the tomodachi
+     */
+    private DoubleProperty wakeUpChanceProperty = null;
+
+    /**
      * Private constructor
      * 
      * @param environment The global environment object
@@ -113,6 +121,8 @@ public class SettingsController implements Killable {
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
         speed.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 5, 1, 0.1));
         speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
+        sleepChanceProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
+        wakeUpChanceProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
         tomodachiList.setItems(model.getTomodachiDefinitions());
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
@@ -125,9 +135,6 @@ public class SettingsController implements Killable {
 
         sleepChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
         wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
-
-        sleepChance.setTextFormatter(FloatFilter.newFloatTextFormatter());
-        wakeUpChance.setTextFormatter(FloatFilter.newFloatTextFormatter());
 
         rootPane.setBottom(notificationPane);
         model.addSaveExceptionHandler(
@@ -145,15 +152,13 @@ public class SettingsController implements Killable {
         if (oldSettings != null) {
             // unbind properties from oldSettings
             speedProperty.unbindBidirectional(oldSettings.speedProperty());
-            sleepChance.textProperty().unbindBidirectional(oldSettings.sleepChanceProperty());
-            wakeUpChance.textProperty().unbindBidirectional(oldSettings.wakeChanceProperty());
+            sleepChanceProperty.unbindBidirectional(oldSettings.sleepChanceProperty());
+            wakeUpChanceProperty.unbindBidirectional(oldSettings.wakeChanceProperty());
         }
 
         speedProperty.bindBidirectional(newSettings.speedProperty());;
-        sleepChance.textProperty().bindBidirectional(newSettings.sleepChanceProperty(),
-                new NumberStringConverter());
-        wakeUpChance.textProperty().bindBidirectional(newSettings.wakeChanceProperty(),
-                new NumberStringConverter());
+        sleepChanceProperty.bindBidirectional(newSettings.sleepChanceProperty());
+        wakeUpChanceProperty.bindBidirectional(newSettings.wakeChanceProperty());
     }
 
     @Override
