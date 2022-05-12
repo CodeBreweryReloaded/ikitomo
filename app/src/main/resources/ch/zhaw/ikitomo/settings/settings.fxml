@@ -28,9 +28,9 @@
               </rowConstraints>
                <children>
                   <Label text="Speed" />
-                  <Spinner fx:id="sleepChance" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="sleepChance" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Sleep Chance" GridPane.rowIndex="1" />
-                  <Spinner fx:id="wakeUpChance" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Spinner fx:id="wakeUpChance" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Wake-Up Chance" GridPane.rowIndex="2" />
                   <Spinner fx:id="speed" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                </children>
