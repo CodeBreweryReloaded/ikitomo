@@ -10,7 +10,18 @@ public enum NextPositionStrategyFactory {
     /**
      * The factory to create a {@link NextPositionStrategy} that follows the mouse
      */
-    FOLLOW_MOUSE(MouseFollowStrategy::new);
+    FOLLOW_MOUSE("Follow the Mouse", MouseFollowStrategy::new),
+    /**
+     * The factory to create a {@link NextPositionStrategy} that returns a random
+     * position. The same position is returned until the Tomodachi walks into a
+     * radius around the last returned position
+     */
+    RANDOM_POSITION("Random Position", RandomNextPositionStrategy::new);
+
+    /**
+     * The name shown in the ui
+     */
+    private String name;
 
     /**
      * The supplier which supplies the {@link NextPositionStrategy} instance
@@ -23,8 +34,18 @@ public enum NextPositionStrategyFactory {
      * @param factory The factory method creating the {@link NextPositionStrategy}
      *                object
      */
-    private NextPositionStrategyFactory(Supplier<NextPositionStrategy> factory) {
+    private NextPositionStrategyFactory(String name, Supplier<NextPositionStrategy> factory) {
+        this.name = name;
         this.factory = factory;
+    }
+
+    /**
+     * Gets the name shown in the ui
+     * 
+     * @return The name
+     */
+    public String getName() {
+        return name;
     }
 
     /**
