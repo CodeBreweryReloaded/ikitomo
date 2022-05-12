@@ -15,11 +15,14 @@ import ch.zhaw.ikitomo.settings.model.SettingsModel;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
 import ch.zhaw.ikitomo.settings.view.FloatFilter;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -65,6 +68,12 @@ public class SettingsController implements Killable {
     private ListView<TomodachiDefinition> tomodachiList;
 
     /**
+     * The control holding the speed of the tomodachi
+     */
+    @FXML
+    private Spinner<Double> speed;
+
+    /**
      * The text field for the sleep chance of the tomodachi
      */
     @FXML
@@ -82,6 +91,11 @@ public class SettingsController implements Killable {
     private BottomNotificationPane notificationPane = new BottomNotificationPane();
 
     /**
+     * A property holding the speed of the tomodachi
+     */
+    private DoubleProperty speedProperty = null;
+
+    /**
      * Private constructor
      * 
      * @param environment The global environment object
@@ -97,6 +111,8 @@ public class SettingsController implements Killable {
     private void initialize() {
         Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
+        speed.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 5, 1, 0.1));
+        speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
         tomodachiList.setItems(model.getTomodachiDefinitions());
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
@@ -106,6 +122,7 @@ public class SettingsController implements Killable {
 
         tomodachiList.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.setTomodachi(newValue));
+
         sleepChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
         wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
 
@@ -127,9 +144,12 @@ public class SettingsController implements Killable {
     private void initProperties(TomodachiSettings oldSettings, TomodachiSettings newSettings) {
         if (oldSettings != null) {
             // unbind properties from oldSettings
+            speedProperty.unbindBidirectional(oldSettings.speedProperty());
             sleepChance.textProperty().unbindBidirectional(oldSettings.sleepChanceProperty());
             wakeUpChance.textProperty().unbindBidirectional(oldSettings.wakeChanceProperty());
         }
+
+        speedProperty.bindBidirectional(newSettings.speedProperty());;
         sleepChance.textProperty().bindBidirectional(newSettings.sleepChanceProperty(),
                 new NumberStringConverter());
         wakeUpChance.textProperty().bindBidirectional(newSettings.wakeChanceProperty(),
