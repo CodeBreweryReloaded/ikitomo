@@ -2,6 +2,7 @@ package ch.zhaw.ikitomo.settings;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import ch.zhaw.ikitomo.settings.model.SettingsModel;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -127,14 +129,18 @@ public class SettingsController implements Killable {
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
         initProperties(null, settings.getCurrentTomodachiSettings());
+
         settings.currentTomodachiSettingsBinding()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
 
         tomodachiList.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.setTomodachi(newValue));
 
-        sleepChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
-        wakeUpChance.textProperty().addListener((observable, oldValue, newValue) -> model.save());
+        List<ObservableValue<?>> properties = List.of(sleepChance.textProperty(), wakeUpChance.textProperty(), speed.valueProperty());
+
+        for (ObservableValue<?> property : properties) {
+            property.addListener((observable, oldValue, newValue) -> model.save());
+        }
 
         rootPane.setBottom(notificationPane);
         model.addSaveExceptionHandler(
