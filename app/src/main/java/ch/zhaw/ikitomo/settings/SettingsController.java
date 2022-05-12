@@ -75,13 +75,13 @@ public class SettingsController implements Killable {
     private Spinner<Double> speed;
 
     /**
-     * The text field for the sleep chance of the tomodachi
+     * The spinner for the sleep chance of the tomodachi
      */
     @FXML
     private Spinner<Double> sleepChance;
 
     /**
-     * The text field for the wake up chance of the tomodachi
+     * The spinner for the wake up chance of the tomodachi
      */
     @FXML
     private Spinner<Double> wakeUpChance;
