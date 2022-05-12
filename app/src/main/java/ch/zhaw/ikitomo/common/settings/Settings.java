@@ -6,7 +6,6 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.binding.Bindings;
@@ -32,7 +31,7 @@ public class Settings {
 
     /**
      * A binding to the current selected tomodachi settings. If
-     * {@link #tomodachiFileProperty()} points to a {@link TomodachiDefinition} for
+     * {@link TomodachiFileProperty()} points to a {@link TomodachiDefinition} for
      * which
      * no Settings currently exists than a new {@link TomodachiSettings} object is
      * created and added to the {@link #tomodachiSettings} map
@@ -54,8 +53,6 @@ public class Settings {
      * @param tomodachiID                 the currently selected tomodachi id
      * @param tomodachiSettings           A set of tomodachi ids and their
      *                                    corresponding settings
-     * @param nextPositionStrategyFactory the currently selected factory method for
-     *                                    the {@link NextPositionStrategy}
      */
     public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
         this.setTomodachiID(tomodachiID);
@@ -78,8 +75,8 @@ public class Settings {
      * @param tomodachiID The id of the currently selected tomodachi
      */
     @JsonProperty(SettingKey.TOMODACHI_ID)
-    public void setTomodachiID(String value) {
-        this.tomodachiID.set(value);
+    public void setTomodachiID(String tomodachiID) {
+        this.tomodachiID.set(tomodachiID);
     }
 
     /**
