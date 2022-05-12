@@ -11,9 +11,21 @@ public enum StateType {
     /**
      * The walking state
      */
-    WALK,
+    RUN,
     /**
      * The sleeping state
      */
-    SLEEP
+    SLEEP,
+    /**
+     * The wakening state
+     */
+    WAKE,
+    /**
+     * The yawning state
+     */
+    YAWN,
+    /**
+     * The eating state
+     */
+    EAT
 }

@@ -1,5 +1,10 @@
 package ch.zhaw.ikitomo;
 
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;
@@ -8,11 +13,6 @@ import ch.zhaw.ikitomo.trayicon.TrayIconController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.CompletionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The javafx application class to bootstrap the GUI.
@@ -42,7 +42,7 @@ public class IkitomoApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
-        overlayController = OverlayController.newOverlayUI(environment, primaryStage);
+        overlayController = new OverlayController(environment);
         trayIconController = TrayIconController.newOverlayUI(this);
     }
 

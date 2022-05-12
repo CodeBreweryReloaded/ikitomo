@@ -1,5 +1,6 @@
-{ "frames": {
-   "groom 0.aseprite": {
+{ "frames": [
+   {
+    "filename": "yawn_0",
     "frame": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +8,8 @@
     "sourceSize": { "w": 32, "h": 32 },
     "duration": 100
    },
-   "groom 1.aseprite": {
+   {
+    "filename": "yawn_1",
     "frame": { "x": 32, "y": 0, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -15,11 +17,11 @@
     "sourceSize": { "w": 32, "h": 32 },
     "duration": 100
    }
- },
+ ],
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.3-beta14-x64",
-  "image": "groom.png",
+  "image": "yawn.png",
   "format": "RGBA8888",
   "size": { "w": 64, "h": 32 },
   "scale": "1"

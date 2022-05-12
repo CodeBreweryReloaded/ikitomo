@@ -1,12 +1,14 @@
 package ch.zhaw.ikitomo.common;
 
+import java.util.Arrays;
+
 /**
  * Represents a vetor
  * 
  * @param x The x coordinate
  * @param y The y coordinate
  */
-public record Vector2(int x, int y) {
+public record Vector2(double x, double y) {
     /**
      * The zero vector
      */
@@ -38,7 +40,7 @@ public record Vector2(int x, int y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 multiply(int n) {
+    public Vector2 multiply(double n) {
         return new Vector2(x * n, y * n);
     }
 
@@ -58,8 +60,21 @@ public record Vector2(int x, int y) {
      * @param n The scalar
      * @return The newly calculated vector
      */
-    public Vector2 divide(int n) {
+    public Vector2 divide(double n) {
         return new Vector2(x / n, y / n);
+    }
+
+    /**
+     * Returns the normalized vector
+     * 
+     * @return the normalized vector with a length of approximately 1
+     */
+    public Vector2 normalize() {
+        double length = absolute();
+        if (length == 0) {
+            return ZERO;
+        }
+        return divide(length);
     }
 
     /**
@@ -67,7 +82,31 @@ public record Vector2(int x, int y) {
      *
      * @return The length of this vector
      */
-    public float absolute() {
-        return (float) Math.sqrt(x * x + y * y);
+    public double absolute() {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    /**
+     * Tests if the given vector is equal to this vector with the given precision
+     * 
+     * @param vec       the vector
+     * @param precision the precision
+     * @return true if the vectors are equal with the given precision
+     */
+    public boolean equals(Vector2 vec, double precision) {
+        return x() < vec.x() + precision && x() > vec.x() - precision
+                && y() < vec.y() + precision && y() > vec.y() - precision;
+    }
+
+    /**
+     * Returns the direction of this vector
+     * 
+     * @return the direction of this vector
+     */
+    public Direction direction() {
+        Vector2 norm = normalize();
+        Vector2 round = new Vector2(Math.round(norm.x()), Math.round(norm.y()));
+        return Arrays.stream(Direction.values()).filter(d -> d.getVector().equals(round)).findAny()
+                .orElse(Direction.NONE);
     }
 }

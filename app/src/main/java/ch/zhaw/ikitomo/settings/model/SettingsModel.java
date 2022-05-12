@@ -1,4 +1,4 @@
-package ch.zhaw.ikitomo.settings;
+package ch.zhaw.ikitomo.settings.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,11 @@ import ch.zhaw.ikitomo.common.DelayedRunnable;
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
+import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.collections.ObservableList;
 
 /**
@@ -39,6 +43,11 @@ public class SettingsModel {
     private Settings settings;
 
     /**
+     * A property to the current tomodachi settings
+     */
+    private ObjectBinding<TomodachiSettings> currentTomodachiSettings;
+
+    /**
      * A delayed runnable for saving the settings. It prevents the save function
      * being called too rapidly
      */
@@ -58,6 +67,45 @@ public class SettingsModel {
     public SettingsModel(TomodachiEnvironment environment) {
         this.environment = environment;
         this.settings = environment.getSettings();
+        this.currentTomodachiSettings = Bindings.createObjectBinding(this::calculateCurrentTomodachiSettings,
+                settings.tomodachiIDProperty());
+    }
+
+    /**
+     * Calculates the current {@link TomodachiSettings} from the currently selected
+     * tomodachi id. The {@link TomodachiSettings} is taken from {@link #settings}.
+     * If it doesn't exist yet then
+     * the default settings from the {@link TomodachiDefinition} are used.
+     */
+    private TomodachiSettings calculateCurrentTomodachiSettings() {
+        String currentID = settings.getTomodachiID();
+        if (!settings.containsTomodachiSettings(currentID)) {
+            TomodachiDefinition definition = environment.getTomodachiDefinition(currentID);
+            if (definition == null) {
+                throw new IllegalStateException("Unknown tomodachi ID: \"%s\"".formatted(currentID));
+            }
+            settings.setTomodachiSettings(currentID, definition.getSettings());
+        }
+        return settings.getTomodachiSettings(currentID);
+    }
+
+    /**
+     * Gets the binding to the current tomodachi settings. If the currently selected
+     * tomodachi id doesn't have a settings associated with it, then the default
+     * settings from the {@link TomodachiDefinition} is copied over and set in
+     * {@link #settings}
+     * 
+     * @return The tomodachi settings of the currently selected tomodachi
+     */
+    public ObjectBinding<TomodachiSettings> currentTomodachiSettings() {
+        return currentTomodachiSettings;
+    }
+
+    /**
+     * @return the currentTomodachiSettings
+     */
+    public TomodachiSettings getCurrentTomodachiSettings() {
+        return currentTomodachiSettings.get();
     }
 
     /**

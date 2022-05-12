@@ -11,6 +11,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
+import ch.zhaw.ikitomo.settings.model.SettingsModel;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
 import ch.zhaw.ikitomo.settings.view.FloatFilter;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
@@ -99,7 +100,7 @@ public class SettingsController implements Killable {
         tomodachiList.setItems(model.getTomodachiDefinitions());
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
-        initProperties(null, settings.getTomodachiSettings());
+        initProperties(null, settings.getCurrentTomodachiSettings());
         settings.currentTomodachiSettingsBinding()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
 
