@@ -57,9 +57,9 @@ class TomodachiBehaviorTest {
         MockitoAnnotations.openMocks(this);
 
         // setup tomodachiSettings
-        when(tomodachiSettings.getSpeed()).thenReturn(1f);
-        when(tomodachiSettings.getWakeChance()).thenReturn(1f);
-        when(tomodachiSettings.getSleepChance()).thenReturn(1f);
+        when(tomodachiSettings.getSpeed()).thenReturn(1d);
+        when(tomodachiSettings.getWakeChance()).thenReturn(1d);
+        when(tomodachiSettings.getSleepChance()).thenReturn(1d);
 
         // setup behaviorModel
         when(behaviorModel.getSettings()).thenReturn(tomodachiSettings);
