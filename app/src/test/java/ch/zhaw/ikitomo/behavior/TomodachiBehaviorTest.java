@@ -22,7 +22,7 @@ import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 
 /**
- * Tests the {@link TomodachiBehavior}
+ * Tests the {@link TomodachiBehaviour}
  */
 class TomodachiBehaviorTest {
 
@@ -33,10 +33,10 @@ class TomodachiBehaviorTest {
     private TomodachiSettings tomodachiSettings;
 
     /**
-     * A mocked {@link BehaviorModel}
+     * A mocked {@link BehaviourModel}
      */
     @Mock
-    private BehaviorModel behaviorModel;
+    private BehaviourModel behaviorModel;
 
     /**
      * A mocked random generator used in {@link #strategy}
@@ -45,12 +45,12 @@ class TomodachiBehaviorTest {
     private RandomGenerator random;
 
     /**
-     * The {@link TomodachiBehavior} under test
+     * The {@link TomodachiBehaviour} under test
      */
-    private TomodachiBehavior strategy;
+    private TomodachiBehaviour strategy;
 
     /**
-     * Sets up the basic behavior of the {@link TomodachiBehavior} instance
+     * Sets up the basic behavior of the {@link TomodachiBehaviour} instance
      */
     @BeforeEach
     void setup() {
@@ -65,12 +65,12 @@ class TomodachiBehaviorTest {
         when(behaviorModel.getSettings()).thenReturn(tomodachiSettings);
 
         // setup strategy object to mock
-        strategy = new TomodachiBehavior(behaviorModel);
+        strategy = new TomodachiBehaviour(behaviorModel);
         strategy.setRandom(random);
     }
 
     /**
-     * Tests that the {@link TomodachiBehavior#update(double)} does nothing for
+     * Tests that the {@link TomodachiBehaviour#update(double)} does nothing for
      * SLEEP, YAWN and WAKE
      * 
      * @param input The input for test
@@ -98,7 +98,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests that {@link TomodachiBehavior#update(double)} changes to the IDLE state
+     * Tests that {@link TomodachiBehaviour#update(double)} changes to the IDLE state
      * from the RUN state when the tomodachi is close enough to the mouse
      */
     @Test
@@ -113,7 +113,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests that the {@link TomodachiBehavior#update(double)} changes from idle to
+     * Tests that the {@link TomodachiBehaviour#update(double)} changes from idle to
      * run when the tomodachi is too far away from the mouse
      */
     @Test
@@ -127,7 +127,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests that {@link TomodachiBehavior#animationFinished(StateType)} for yawn
+     * Tests that {@link TomodachiBehaviour#animationFinished(StateType)} for yawn
      * and wake transitions to sleep and idle
      * 
      * @param input    The current state
@@ -141,7 +141,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests if {@link TomodachiBehavior#animationFinished(StateType)} changes from
+     * Tests if {@link TomodachiBehaviour#animationFinished(StateType)} changes from
      * sleep to wake when the random generator returns a number higher than the wake
      * chance
      * 
@@ -158,7 +158,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests if {@link TomodachiBehavior#animationFinished(StateType)} changes from
+     * Tests if {@link TomodachiBehaviour#animationFinished(StateType)} changes from
      * idle/run to yawn
      * 
      * 
@@ -175,7 +175,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests if {@link TomodachiBehavior#animationFinished(StateType)} when the
+     * Tests if {@link TomodachiBehaviour#animationFinished(StateType)} when the
      * tomodachi doesn't yawn will stay in the run state and doesn't change the
      * direction
      */
@@ -188,7 +188,7 @@ class TomodachiBehaviorTest {
     }
 
     /**
-     * Tests that {@link TomodachiBehavior#tomodachiWasClicked()} changes the state
+     * Tests that {@link TomodachiBehaviour#tomodachiWasClicked()} changes the state
      * to {@link StateType#EAT}
      */
     @Test

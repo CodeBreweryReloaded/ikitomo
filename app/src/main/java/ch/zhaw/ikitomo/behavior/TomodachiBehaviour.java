@@ -12,11 +12,11 @@ import ch.zhaw.ikitomo.common.Vector2;
 /**
  * The default behavior strategy for tomodachis
  */
-public class TomodachiBehavior {
+public class TomodachiBehaviour {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(TomodachiBehavior.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TomodachiBehaviour.class.getName());
 
     /**
      * The distance when the tomodachi changes from the idle state to the run state
@@ -35,7 +35,7 @@ public class TomodachiBehavior {
     /**
      * The behavior model
      */
-    private BehaviorModel model;
+    private BehaviourModel model;
 
     /**
      * Constructor
@@ -43,7 +43,7 @@ public class TomodachiBehavior {
      * @param tomodachiModel The tomodachi model controlled by this strategy
      * @param environment    The tomodachi environment
      */
-    public TomodachiBehavior(BehaviorModel model) {
+    public TomodachiBehaviour(BehaviourModel model) {
         this.model = model;
     }
 
