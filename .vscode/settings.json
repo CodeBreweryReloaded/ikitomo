@@ -12,5 +12,9 @@
         "Killable",
         "Tomodachi",
         "Tomodachis"
+    ],
+    "cSpell.ignorePaths": [
+        ".git/objects",
+        "Assets/*/sprites/*.json"
     ]
 }
