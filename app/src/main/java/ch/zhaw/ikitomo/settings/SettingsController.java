@@ -2,6 +2,7 @@ package ch.zhaw.ikitomo.settings;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.exception.LoadUIException;
 import ch.zhaw.ikitomo.settings.model.SettingsModel;
 import ch.zhaw.ikitomo.settings.view.BottomNotificationPane;
+import ch.zhaw.ikitomo.settings.view.PositiveFloatFilter;
 import ch.zhaw.ikitomo.settings.view.TomodachiListViewCell;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
@@ -122,12 +124,18 @@ public class SettingsController implements Killable {
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
 
         List<Spinner<Double>> percentageControls = List.of(sleepChance, wakeUpChance);
+        List<Spinner<Double>> doubleSpinnerControls = new ArrayList<>(percentageControls);
+        doubleSpinnerControls.add(speed);
 
         for (Spinner<Double> spinner : percentageControls) {
             spinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1, 1, 0.01));
         }
 
         speed.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 5, 1, 0.1));
+
+        for (Spinner<Double> spinner : doubleSpinnerControls) {
+            spinner.getEditor().setTextFormatter(PositiveFloatFilter.newFloatTextFormatter());
+        }
 
         speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
         sleepChanceProperty = DoubleProperty.doubleProperty(sleepChance.getValueFactory().valueProperty());
