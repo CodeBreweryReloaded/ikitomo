@@ -105,7 +105,6 @@ public class TomodachiModelLoaderTest {
     /**
      * Tests if the {@link TomodachiModelLoader} continues loading even when an
      * animation fails loading
-     * 
      */
     @Test
     void testContinueLoadingIfOneAnimationFailsToLoad() throws MissingAnimationException {
