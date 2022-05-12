@@ -1,5 +1,6 @@
 package ch.zhaw.ikitomo.overlay.model;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -133,7 +134,7 @@ public class TomodachiModelLoader {
         if (definition.isResource()) {
             data = loadResource(pathToMetadata, pathToSpritesheet);
         } else {
-            data = loadFile(rootPath + pathToMetadata, rootPath + pathToSpritesheet);
+            data = loadFile(rootPath + "/" + pathToMetadata, rootPath + "/" + pathToSpritesheet);
         }
         data.setDirection(animation.direction());
         return data;
@@ -173,9 +174,11 @@ public class TomodachiModelLoader {
      * @throws IOException If a file can't be read
      */
     private AnimationData loadFile(String pathToMetadata, String pathToSpritesheet) throws IOException {
-        AnimationData data = new AnimationLoader().load(pathToMetadata);
-        data.setImage(new Image(pathToSpritesheet));
-        return data;
+        try (var spritesheetInStream = new FileInputStream(pathToSpritesheet)) {
+            AnimationData data = new AnimationLoader().load(pathToMetadata);
+            data.setImage(new Image(spritesheetInStream));
+            return data;
+        }
     }
 
     /**
