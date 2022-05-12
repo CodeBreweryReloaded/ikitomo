@@ -9,11 +9,11 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.overlay.model.TomodachiModel;
 
 /**
- * This is the model for {@link TomodachiBehaviour}. This class is a layer
- * between the {@link TomodachiModel} and the {@link TomodachiBehaviour}. It
+ * This is the model for {@link TomodachiBehavior}. This class is a layer
+ * between the {@link TomodachiModel} and the {@link TomodachiBehavior}. It
  * primarily exists to reduce the api surface for mock testing
  */
-public class BehaviourModel {
+public class BehaviorModel {
     /**
      * Holds the Tomodachi model instance
      */
@@ -29,7 +29,7 @@ public class BehaviourModel {
      * 
      * @param model The model to animate
      */
-    public BehaviourModel(TomodachiModel model) {
+    public BehaviorModel(TomodachiModel model) {
         this.tomodachiModel = model;
         // calculate new NextPositionStrategy when the factory changes
         calculateNextPositionStrategy();

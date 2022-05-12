@@ -12,11 +12,11 @@ import ch.zhaw.ikitomo.common.Vector2;
 /**
  * The default behavior strategy for tomodachis
  */
-public class TomodachiBehaviour {
+public class TomodachiBehavior {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(TomodachiBehaviour.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TomodachiBehavior.class.getName());
 
     /**
      * The distance when the tomodachi changes from the idle state to the run state
@@ -35,15 +35,14 @@ public class TomodachiBehaviour {
     /**
      * The behavior model
      */
-    private BehaviourModel model;
+    private BehaviorModel model;
 
     /**
      * Constructor
      * 
-     * @param tomodachiModel The tomodachi model controlled by this strategy
-     * @param environment    The tomodachi environment
+     * @param model The tomodachi model controlled by this strategy
      */
-    public TomodachiBehaviour(BehaviourModel model) {
+    public TomodachiBehavior(BehaviorModel model) {
         this.model = model;
     }
 
@@ -65,7 +64,7 @@ public class TomodachiBehaviour {
 
     /**
      * Calculates the new position of the tomodachi. It moves towards the position
-     * returned by {@link #nextPositionStrategy}
+     * returned by {@link NextPositionStrategy}
      */
     private void doRunState(double delta) {
         // change to idle state if the tomodachi is close enough to the next position
@@ -132,7 +131,7 @@ public class TomodachiBehaviour {
 
     /**
      * Calculates the distance between the tomodachi and the position returned by
-     * {@link #nextPositionStrategy}
+     * {@link NextPositionStrategy}
      * 
      * @return The distance to the next target position
      */

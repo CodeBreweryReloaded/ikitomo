@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ch.zhaw.ikitomo.behavior.BehaviourModel;
-import ch.zhaw.ikitomo.behavior.TomodachiBehaviour;
+import ch.zhaw.ikitomo.behavior.BehaviorModel;
+import ch.zhaw.ikitomo.behavior.TomodachiBehavior;
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.StateType;
@@ -41,7 +41,7 @@ public class OverlayModel {
      * A binding to the current behavior strategy. It is dependent on
      * {@link #tomodachi}
      */
-    private ObjectBinding<TomodachiBehaviour> behaviorStrategy;
+    private ObjectBinding<TomodachiBehavior> behaviorStrategy;
 
     /**
      * A binding to the current position of the tomodachi
@@ -85,7 +85,7 @@ public class OverlayModel {
         tomodachiState = JFXUtils.nestedBinding(tomodachi, TomodachiModel::currentAnimationStateProperty);
 
         behaviorStrategy = Bindings
-                .createObjectBinding(() -> new TomodachiBehaviour(new BehaviourModel(getTomodachi())), tomodachi);
+                .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
     }
 
     /**
@@ -118,7 +118,7 @@ public class OverlayModel {
      * 
      * @return The binging to the strategy
      */
-    public ObjectBinding<TomodachiBehaviour> behaviorStrategyBinding() {
+    public ObjectBinding<TomodachiBehavior> behaviorStrategyBinding() {
         return behaviorStrategy;
     }
 
@@ -127,7 +127,7 @@ public class OverlayModel {
      * 
      * @return The strategy
      */
-    public TomodachiBehaviour getBehavior() {
+    public TomodachiBehavior getBehavior() {
         return behaviorStrategy.get();
     }
 
