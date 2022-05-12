@@ -11,9 +11,9 @@ import ch.zhaw.ikitomo.common.JSONManager;
  */
 public class TomodachiManager extends JSONManager<TomodachiDefinition> {
     /**
-     *
+     * The name of the tomodachi json file
      */
-    private static final String DEFAULT_TOMODACHI = "_tomodachi.json";
+    private static final String TOMODACHI_FILE_NAME = "_tomodachi.json";
 
     /**
      * Private constructor
@@ -28,7 +28,7 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
      * @return The base name of the tomodachi definition files
      */
     protected String getConfigBaseName() {
-        return DEFAULT_TOMODACHI;
+        return TOMODACHI_FILE_NAME;
     }
 
     /**
