@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,6 +52,11 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
      */
     @FXML
     private ImageView tomodachiImage;
+
+    /**
+     * An cache for the images
+     */
+    private Map<TomodachiDefinition, Image> imageCache = new HashMap<>();
 
     /**
      * Constructor
@@ -112,12 +119,16 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
             LOGGER.log(Level.WARNING, "No icon was set for tomodachi {0}", tomodachiDefinition.getName());
             return null;
         }
+        if (imageCache.containsKey(tomodachiDefinition)) {
+            return imageCache.get(tomodachiDefinition);
+        }
+        LOGGER.log(Level.INFO, "Load icon for tomodachi \"{0}\" from \"{1}\"",
+                new Object[] { tomodachiDefinition.getName(), tomodachiDefinition.getIcon() });
         try {
-            if (tomodachiDefinition.isResource()) {
-                return loadIconImageFromClasspath(tomodachiDefinition);
-            } else {
-                return loadIconImageFromFile(tomodachiDefinition);
-            }
+            Image img = tomodachiDefinition.isResource() ? loadIconImageFromClasspath(tomodachiDefinition)
+                    : loadIconImageFromFile(tomodachiDefinition);
+            imageCache.put(tomodachiDefinition, img);
+            return img;
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Couldn't load icon image of \"%s\" (from classpath: %s)"
                     .formatted(tomodachiDefinition.getID(), tomodachiDefinition.isResource()), e);
