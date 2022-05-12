@@ -37,10 +37,18 @@ public class TomodachiDefinition {
     private TomodachiSettings settings;
 
     /**
+     * The path to the icon
+     */
+    private String icon;
+
+    /**
      * The available states of the tomodachi
      */
     private List<TomodachiStateDefinition> states = new ArrayList<>();
 
+    /**
+     * Constructor for jackson
+     */
     private TomodachiDefinition() {
     }
 
@@ -51,12 +59,13 @@ public class TomodachiDefinition {
      * @param config   The config
      * @param states   The states
      */
-    public TomodachiDefinition(Path rootFolder, String id, String name, TomodachiSettings settings,
+    public TomodachiDefinition(Path rootFolder, String id, String name, TomodachiSettings settings, String icon,
             List<TomodachiStateDefinition> states) {
         this.rootFolder = rootFolder;
         this.id = id;
         this.name = name;
         this.settings = settings;
+        this.icon = icon;
         this.states.addAll(states);
     }
 
@@ -98,6 +107,16 @@ public class TomodachiDefinition {
     }
 
     /**
+     * Gets the path to the icon. If {@link #isResource()} returns true the icon has
+     * to be loaded from the classpath
+     * 
+     * @return The path to the icon
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
      * Gets the settings
      *
      * @return The settings
@@ -115,9 +134,19 @@ public class TomodachiDefinition {
         return new ArrayList<>(states);
     }
 
+    /**
+     * Checks if this Definition is a resource (part of the program) or an external
+     * file
+     * 
+     * @return True if it is resource, false if it is a file
+     */
+    public boolean isResource() {
+        return getRootFolder() == null;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, settings, states);
+        return Objects.hash(icon, id, name, rootFolder, settings, states);
     }
 
     @Override
@@ -129,8 +158,8 @@ public class TomodachiDefinition {
             return false;
         }
         TomodachiDefinition other = (TomodachiDefinition) obj;
-        return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-                && Objects.equals(settings, other.settings)
+        return Objects.equals(icon, other.icon) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
+                && Objects.equals(rootFolder, other.rootFolder) && Objects.equals(settings, other.settings)
                 && Objects.equals(states, other.states);
     }
 

@@ -72,7 +72,7 @@ public class IkitomoApplication extends Application {
         }
 
         environment = new TomodachiEnvironment(new SettingsManager(), new TomodachiManager());
-        overlayController = OverlayController.newOverlayUI(environment, primaryStage);
+        overlayController = new OverlayController(environment);
         trayIconController = TrayIconController.newOverlayUI(this);
     }
 

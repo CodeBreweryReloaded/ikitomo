@@ -14,7 +14,7 @@ public class DelayedRunnable implements Runnable {
     /**
      * The logger
      */
-    private static final Logger logger = Logger.getLogger(DelayedRunnable.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DelayedRunnable.class.getName());
     /**
      * The global timer for delayed runnable instances
      */
@@ -62,7 +62,7 @@ public class DelayedRunnable implements Runnable {
                 try {
                     runnable.run();
                 } catch (Exception e) {
-                    logger.log(Level.SEVERE, "The runnable threw an exception: ", e);
+                    LOGGER.log(Level.SEVERE, "The runnable threw an exception: ", e);
                 }
             }
         };

@@ -2,6 +2,7 @@ package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import ch.zhaw.ikitomo.common.JavaFXUtils;
+import ch.zhaw.ikitomo.common.JFXUtils;
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.settings.SettingsManager;
 import javafx.beans.binding.Bindings;
@@ -35,10 +36,10 @@ public class TomodachiEnvironment {
     private static final String DEFAULT_TOMODACHI_FOLDER_PATH = "./tomodachi";
 
     /**
-     * The location of the default tomodachi definition file
+     * The location of the default Tomodachi definition file
      */
     private static final URL DEFAULT_TOMODACHI_LOCATION = TomodachiEnvironment.class
-            .getResource("/defaultTomodachi/tomodachi.json");
+            .getResource("/defaultTomodachi/_tomodachi.json");
 
     /**
      * A component for logging messages.
@@ -69,7 +70,7 @@ public class TomodachiEnvironment {
      * An observable list of all tomodachi definitions. It is dependent on
      * {@link #tomodachiDefinitionMap}
      */
-    private ObservableList<TomodachiDefinition> tomodachiDefinitionList = JavaFXUtils
+    private ObservableList<TomodachiDefinition> tomodachiDefinitionList = JFXUtils
             .observableValuesFromMap(tomodachiDefinitionMap);
 
     /**
@@ -92,7 +93,7 @@ public class TomodachiEnvironment {
     public TomodachiEnvironment(SettingsManager settingsManager, TomodachiManager tomodachiManager) {
         this.settingsManager = settingsManager;
         this.tomodachiManager = tomodachiManager;
-        loadSettings();
+        loadSettings(); // ID is set here
         loadDefaultTomodachiDefinition();
         updateTomodachiDefinitions(readAvailableTomodachis());
         // settings is set by load()
@@ -146,8 +147,9 @@ public class TomodachiEnvironment {
     private void loadDefaultTomodachiDefinition() {
         Objects.requireNonNull(DEFAULT_TOMODACHI_LOCATION,
                 "The default tomodachi definition could not be loaded because the location is null");
-        try {
-            var reader = new InputStreamReader(DEFAULT_TOMODACHI_LOCATION.openStream(), StandardCharsets.UTF_8);
+
+        try (InputStream inStream = DEFAULT_TOMODACHI_LOCATION.openStream()) {
+            var reader = new InputStreamReader(inStream, StandardCharsets.UTF_8);
             defaultTomodachiDefinition = tomodachiManager.load(reader);
         } catch (IOException e) {
             throw new IllegalStateException(
@@ -164,7 +166,7 @@ public class TomodachiEnvironment {
      */
     public CompletableFuture<Void> reloadTomodachis() {
         return CompletableFuture.supplyAsync(this::readAvailableTomodachis)
-                .thenCompose(list -> JavaFXUtils.runLater(() -> updateTomodachiDefinitions(list)));
+                .thenCompose(list -> JFXUtils.runLater(() -> updateTomodachiDefinitions(list)));
     }
 
     /**
@@ -247,6 +249,15 @@ public class TomodachiEnvironment {
      */
     private TomodachiDefinition getCurrentTomodachiDefinitionFromTomodachiDefinitionMap() {
         return tomodachiDefinitionMap.getOrDefault(settings.getTomodachiID(), defaultTomodachiDefinition);
+    }
+
+    /**
+     * Gets the default tomodachi definition. This should never be null
+     * 
+     * @return The default tomodachi definition
+     */
+    public TomodachiDefinition getDefaultTomodachiDefinition() {
+        return defaultTomodachiDefinition;
     }
 
     /**

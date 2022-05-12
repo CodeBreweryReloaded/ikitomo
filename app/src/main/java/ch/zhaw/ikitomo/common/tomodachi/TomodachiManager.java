@@ -11,6 +11,11 @@ import ch.zhaw.ikitomo.common.JSONManager;
  */
 public class TomodachiManager extends JSONManager<TomodachiDefinition> {
     /**
+     * The name of the tomodachi json file
+     */
+    private static final String TOMODACHI_FILE_NAME = "_tomodachi.json";
+
+    /**
      * Private constructor
      */
     public TomodachiManager() {
@@ -23,7 +28,7 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
      * @return The base name of the tomodachi definition files
      */
     protected String getConfigBaseName() {
-        return "tomodachi.json";
+        return TOMODACHI_FILE_NAME;
     }
 
     /**
@@ -35,8 +40,12 @@ public class TomodachiManager extends JSONManager<TomodachiDefinition> {
      */
     @Override
     public TomodachiDefinition load(String rootFolder) throws IOException {
-        Path rootFolderPath = Paths.get(rootFolder, getConfigBaseName());
-        TomodachiDefinition result = super.load(rootFolderPath.toString());
+        Path tomodachiFilePath = Paths.get(rootFolder, getConfigBaseName()).toAbsolutePath();
+        TomodachiDefinition result = super.load(tomodachiFilePath.toString());
+        Path rootFolderPath = tomodachiFilePath.getParent();
+        if (rootFolderPath == null) {
+            throw new IOException("The file \"" + tomodachiFilePath + "\" has no parent folder");
+        }
         result.setRootPath(rootFolderPath);
         return result;
     }

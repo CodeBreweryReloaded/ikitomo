@@ -72,3 +72,6 @@ Desktop.ini
 
 # well-known port file
 .ipc-port
+# ikitomo settings file
+/settings.json
+/app/settings.json

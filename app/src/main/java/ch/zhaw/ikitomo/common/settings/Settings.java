@@ -6,6 +6,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import javafx.beans.binding.Bindings;
@@ -36,20 +37,25 @@ public class Settings {
      * no Settings currently exists than a new {@link TomodachiSettings} object is
      * created and added to the {@link #tomodachiSettings} map
      */
+    @JsonIgnore
     private ObjectBinding<TomodachiSettings> currentTomodachiSettings = Bindings
-            .createObjectBinding(this::getTomodachiSettings, tomodachiID);
+            .createObjectBinding(() -> getTomodachiSettings(getTomodachiID()), tomodachiID);
 
     /**
      * Initializes a new instance of the {@link Settings} class
      */
+    @SuppressWarnings("unused")
     private Settings() {
     }
 
     /**
      * Initializes a new instance of the {@link Settings} class
      *
-     * @param tomodachiSettings A set of tomodachi ids and their corresponding
-     *                          settings
+     * @param tomodachiID                 the currently selected tomodachi id
+     * @param tomodachiSettings           A set of tomodachi ids and their
+     *                                    corresponding settings
+     * @param nextPositionStrategyFactory the currently selected factory method for
+     *                                    the {@link NextPositionStrategy}
      */
     public Settings(String tomodachiID, Map<String, TomodachiSettings> tomodachiSettings) {
         this.setTomodachiID(tomodachiID);
@@ -77,14 +83,37 @@ public class Settings {
     }
 
     /**
-     * Gets the currently selected tomodachi settings
+     * Gets the tomodachi settings of the given id or null if no tomodachi
+     * settings for the given id exists yet
      *
-     * @return The tomodachiSettings
+     * @param id The id of the tomodachi settings to get
+     * @return The tomodachi settings
      */
     @JsonIgnore
-    public TomodachiSettings getTomodachiSettings() {
-        tomodachiSettings.computeIfAbsent(getTomodachiID(), key -> new TomodachiSettings());
-        return tomodachiSettings.get(getTomodachiID());
+    public TomodachiSettings getTomodachiSettings(String id) {
+        return tomodachiSettings.get(id);
+    }
+
+    /**
+     * Checks if there is an {@link TomodachiSettings} for the given id
+     * 
+     * @param id The id to check
+     * @return If the given id exists or not
+     */
+    @JsonIgnore
+    public boolean containsTomodachiSettings(String id) {
+        return tomodachiSettings.containsKey(id);
+    }
+
+    /**
+     * Sets the tomodachi settings of the given id
+     * 
+     * @param id       The id of the tomodachi to set
+     * @param settings The tomodachi settings
+     */
+    @JsonIgnore
+    public void setTomodachiSettings(String id, TomodachiSettings settings) {
+        tomodachiSettings.put(id, settings);
     }
 
     /**
@@ -105,6 +134,17 @@ public class Settings {
     @JsonIgnore
     public ObjectBinding<TomodachiSettings> currentTomodachiSettingsBinding() {
         return currentTomodachiSettings;
+    }
+
+    /**
+     * Gets the current tomodachi settings <b>or null</b> if no settings for the
+     * current selected tomodachi exists
+     * 
+     * @return The tomodachi settings or null
+     */
+    @JsonIgnore
+    public TomodachiSettings getCurrentTomodachiSettings() {
+        return currentTomodachiSettings.get();
     }
 
     /**

@@ -2,11 +2,21 @@ package ch.zhaw.ikitomo.overlay.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
+import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
+import ch.zhaw.ikitomo.common.Direction;
+import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.common.Vector2;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiEnvironment;
+import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
+import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 
 /**
  * Represents a the model for the
@@ -17,6 +27,7 @@ import javafx.beans.property.SimpleObjectProperty;
  * </p>
  */
 public class TomodachiModel {
+
     /**
      * The id of the tomodachi
      */
@@ -27,14 +38,20 @@ public class TomodachiModel {
     private String name;
 
     /**
-     * The position property
+     * The tomodachi settings
      */
-    private ObjectProperty<Vector2> position = new SimpleObjectProperty<>();
+    private TomodachiSettings settings;
 
     /**
-     * The velocity property
+     * The position property containing the Tomodachi's current position
      */
-    private ObjectProperty<Vector2> velocity = new SimpleObjectProperty<>(Vector2.ZERO);
+    private ObjectProperty<Vector2> position = new SimpleObjectProperty<>(Vector2.ZERO);
+
+    /**
+     * A property holding the current animation state
+     */
+    private ObjectProperty<TomodachiAnimationState> currentAnimationState = new SimpleObjectProperty<>(
+            new TomodachiAnimationState(StateType.IDLE, Direction.NONE));
 
     /**
      * The available states of the tomodachi
@@ -42,21 +59,23 @@ public class TomodachiModel {
     private List<TomodachiModelState> states = new ArrayList<>();
 
     /**
+     * A hash map containing all available animations for each {@link StateType}
+     */
+    private ObservableMap<StateType, List<AnimationData>> animations = FXCollections.observableHashMap();
+
+    /**
      * Constructor
      * 
-     * @param id       The id
-     * @param name     The name
-     * @param position The position
-     * @param velocity The velocity
-     * @param states   The states
+     * @param definition The definition on which this model is based on
+     * @param settings   The tomodachi settings of this model
+     * @param animations The animation map
      */
-    public TomodachiModel(String id, String name, Vector2 position, Vector2 velocity,
-            List<TomodachiModelState> states) {
-        this.id = id;
-        this.name = name;
-        this.position.set(position);
-        this.velocity.set(velocity);
-        this.states.addAll(states);
+    public TomodachiModel(TomodachiDefinition definition, TomodachiSettings settings,
+            Map<StateType, List<AnimationData>> animations) {
+        this.id = definition.getID();
+        this.name = definition.getName();
+        this.settings = settings;
+        this.animations.putAll(animations);
     }
 
     /**
@@ -78,6 +97,15 @@ public class TomodachiModel {
     }
 
     /**
+     * Gets the tomodachi settings
+     * 
+     * @return the settings
+     */
+    public TomodachiSettings getSettings() {
+        return settings;
+    }
+
+    /**
      * Gets a copy of the list of available states
      *
      * @return A copy of the list of available states
@@ -87,20 +115,107 @@ public class TomodachiModel {
     }
 
     /**
-     * Loads a {@link TomodachiModel} from a given {@link TomodachiDefinition}.
-     * <p>
-     * The model is set at the given initial position with the velocity of zero.
-     * </p>
+     * Provides an observable map containing all currently loaded animations
      * 
-     * @param tomodachi The tomodachi definition
-     * @param position  The initial position
-     * @return The created model
+     * @return An observable map
      */
-    public static TomodachiModel loadFromTomodachiFile(TomodachiDefinition tomodachi, Vector2 position) {
-        TomodachiModel model = new TomodachiModel(tomodachi.getID(),
-                tomodachi.getName(), position,
-                Vector2.ZERO, null);
-        throw new UnsupportedOperationException("not implemented yet loading the animations");
+    public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
+        return animations;
     }
 
+    /**
+     * Gets the position property
+     * 
+     * @return The property
+     */
+    public ObjectProperty<Vector2> positionProperty() {
+        return position;
+    }
+
+    /**
+     * Sets the position of this tomodachi
+     * 
+     * @param position The position
+     */
+    public void setPosition(Vector2 position) {
+        this.position.set(position);
+    }
+
+    /**
+     * Gets the current position of this tomodachi
+     * 
+     * @return The position
+     */
+    public Vector2 getPosition() {
+        return position.get();
+    }
+
+    /**
+     * Gets the object property for the current animation state
+     * 
+     * @return The property
+     */
+    public ObjectProperty<TomodachiAnimationState> currentAnimationStateProperty() {
+        return currentAnimationState;
+    }
+
+    /**
+     * Gets the current animation state
+     * 
+     * @return The current state
+     */
+    public StateType getCurrentAnimationState() {
+        return currentAnimationState.get().currentAnimationState();
+    }
+
+    /**
+     * Gets the current animation direction
+     * 
+     * @return The direction
+     */
+    public Direction getCurrentAnimationDirection() {
+        return currentAnimationState.get().currentAnimationDirection();
+    }
+
+    /**
+     * Sets the current animation by setting the state and direction of the
+     * tomodachi
+     * 
+     * @param state     the new state
+     * @param direction the direction
+     */
+    public void setCurrentAnimation(StateType state, Direction direction) {
+        currentAnimationState.set(new TomodachiAnimationState(state, direction));
+    }
+
+    /**
+     * Sets the current animation by setting the state. The direction is set to
+     * {@link Direction#NONE}
+     * 
+     * @param state the new state
+     */
+    public void setCurrentAnimation(StateType state) {
+        setCurrentAnimation(state, Direction.NONE);
+    }
+
+    /**
+     * Creates a new {@link NextPositionStrategy} from the
+     * {@link NextPositionStrategyFactory} set in the {@link TomodachiSettings}
+     * 
+     * @param env The tomodachi environment
+     * @return The created strategy
+     * @see NextPositionStrategyFactory#createNextPosition(TomodachiEnvironment)
+     */
+    public NextPositionStrategy createNextPointStrategy() {
+        return getSettings().getNextPositionStrategyFactory().createNextPosition();
+    }
+
+    /**
+     * Wrapper record that holds both states of the animation state
+     * 
+     * @param currentAnimationState     The current animation state
+     * @param currentAnimationDirection The current animation direction
+     */
+    public record TomodachiAnimationState(StateType currentAnimationState, Direction currentAnimationDirection) {
+    }
 }

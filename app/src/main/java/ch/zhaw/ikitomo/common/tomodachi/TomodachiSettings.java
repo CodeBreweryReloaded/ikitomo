@@ -5,11 +5,16 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
+import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
 import javafx.beans.property.FloatProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * Represents the user settings of a Tomodachi. These may also be modified by the user.
+ * Represents the user settings of a Tomodachi. These may also be modified by
+ * the user.
  */
 public class TomodachiSettings {
     /**
@@ -25,6 +30,20 @@ public class TomodachiSettings {
     private FloatProperty wakeChance = new SimpleFloatProperty();
 
     /**
+     * The speed of the tomodachi
+     */
+    @JsonIgnore
+    private FloatProperty speed = new SimpleFloatProperty();
+
+    /**
+     * The factory for the {@link NextPositionStrategy} used. It defaults to
+     * {@link NextPositionStrategyFactory#FOLLOW_MOUSE}
+     */
+    @JsonIgnore
+    private ObjectProperty<NextPositionStrategyFactory> nextPositionStrategyFactory = new SimpleObjectProperty<>(
+            NextPositionStrategyFactory.FOLLOW_MOUSE);
+
+    /**
      * Constructor
      */
     public TomodachiSettings() {
@@ -36,9 +55,10 @@ public class TomodachiSettings {
      * @param sleepChance The sleep chance
      * @param wakeChance  The wake up chance
      */
-    public TomodachiSettings(float sleepChance, float wakeChance) {
+    public TomodachiSettings(float sleepChance, float wakeChance, float speed) {
         this.sleepChance.set(sleepChance);
         this.wakeChance.set(wakeChance);
+        this.sleepChance.set(speed);
     }
 
     /**
@@ -99,9 +119,67 @@ public class TomodachiSettings {
         return wakeChance;
     }
 
+    /**
+     * Gets the property holding the speed of the tomodachi
+     * 
+     * @return The property
+     */
+    public FloatProperty speedProperty() {
+        return speed;
+    }
+
+    /**
+     * Sets the speed of the tomodachi
+     * 
+     * @param speed The speed
+     */
+    @JsonProperty(TomodachiSettingKey.SPEED)
+    public void setSpeed(float speed) {
+        this.speed.set(speed);
+    }
+
+    /**
+     * Gets the speed of the tomodachi
+     * 
+     * @return The speed
+     */
+    @JsonProperty(TomodachiSettingKey.SPEED)
+    public float getSpeed() {
+        return speed.get();
+    }
+
+    /**
+     * Gets the property to the factory for the {@link NextPositionStrategy}
+     * 
+     * @return The property
+     */
+    public ObjectProperty<NextPositionStrategyFactory> nextPositionStrategyFactoryProperty() {
+        return nextPositionStrategyFactory;
+    }
+
+    /**
+     * Sets the factory for the {@link NextPositionStrategy}
+     * 
+     * @param nextPositionStrategyFactory The new factory
+     */
+    @JsonProperty(TomodachiSettingKey.NEXT_POSITION_STRATEGY)
+    public void setNextPositionStrategyFactory(NextPositionStrategyFactory nextPositionStrategyFactory) {
+        this.nextPositionStrategyFactory.set(nextPositionStrategyFactory);
+    }
+
+    /**
+     * Gets the factory for the {@link NextPositionStrategy}
+     * 
+     * @return The factory
+     */
+    @JsonProperty(TomodachiSettingKey.NEXT_POSITION_STRATEGY)
+    public NextPositionStrategyFactory getNextPositionStrategyFactory() {
+        return nextPositionStrategyFactory.get();
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(sleepChance, wakeChance);
+        return Objects.hash(nextPositionStrategyFactory, sleepChance, wakeChance);
     }
 
     @Override
@@ -113,7 +191,8 @@ public class TomodachiSettings {
             return false;
         }
         TomodachiSettings other = (TomodachiSettings) obj;
-        return Objects.equals(sleepChance, other.sleepChance) && Objects.equals(wakeChance, other.wakeChance);
+        return Objects.equals(nextPositionStrategyFactory, other.nextPositionStrategyFactory)
+                && Objects.equals(sleepChance, other.sleepChance) && Objects.equals(wakeChance, other.wakeChance);
     }
 
 }
