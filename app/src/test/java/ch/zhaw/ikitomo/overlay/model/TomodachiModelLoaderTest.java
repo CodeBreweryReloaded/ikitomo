@@ -65,8 +65,6 @@ public class TomodachiModelLoaderTest {
     /**
      * Tests if the {@link TomodachiModelLoader#loadFromTomodachiFile()} loads the
      * default definition from the classpath correctly
-     * 
-     * @throws MissingAnimationException
      */
     @Test
     void testLoadingFromClasspath() throws MissingAnimationException {
