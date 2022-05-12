@@ -76,6 +76,7 @@ public class TrayIconController implements Killable {
                 return;
             }
             trayIcon = new TrayIcon(ImageIO.read(iconUrl));
+            trayIcon.setImageAutoSize(true);
             tray = SystemTray.getSystemTray();
 
             MenuItem showSettingsItem = new MenuItem("Settings");
