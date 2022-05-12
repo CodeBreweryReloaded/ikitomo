@@ -120,7 +120,15 @@ public class SettingsController implements Killable {
     private void initialize() {
         Settings settings = model.getSettings();
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
+
+        List<Spinner<Double>> percentageControls = List.of(sleepChance, wakeUpChance);
+
+        for (Spinner<Double> spinner : percentageControls) {
+            spinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1, 1, 0.01));
+        }
+
         speed.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 5, 1, 0.1));
+
         speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
         sleepChanceProperty = DoubleProperty.doubleProperty(sleepChance.getValueFactory().valueProperty());
         wakeUpChanceProperty = DoubleProperty.doubleProperty(wakeUpChance.getValueFactory().valueProperty());
