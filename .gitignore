@@ -71,4 +71,5 @@ Desktop.ini
 *.sqlite
 
 # ikitomo settings file
-settings.json
+/settings.json
+/app/settings.json
