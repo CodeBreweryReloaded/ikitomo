@@ -107,7 +107,7 @@ public class TrayIconController implements Killable {
     }
 
     /**
-     * Displays SettingsController
+     * Will display the settings controller
      */
     public void showSettings() {
         Platform.runLater(() -> {

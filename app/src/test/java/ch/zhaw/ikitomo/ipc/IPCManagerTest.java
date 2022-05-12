@@ -15,11 +15,18 @@ import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
+import ch.zhaw.ikitomo.ipc.IPCCommand.IPCCommandType;
 import ch.zhaw.ikitomo.ipc.IPCManager.IPCClient;
 import ch.zhaw.ikitomo.ipc.IPCManager.IPCServer;
 
+/**
+ * Tests the {@link IPCManager}
+ */
 class IPCManagerTest {
 
+    /**
+     * Tests if the server uses an unallocated port
+     */
     @Test
     void testPortFinding() throws IOException {
         try (IPCServer server1 = new IPCServer();
@@ -30,6 +37,9 @@ class IPCManagerTest {
         }
     }
 
+    /**
+     * Tests if the server receives commands from clients
+     */
     @Test
     void testIPCServerReceiving() throws IOException, InterruptedException {
         var latch = new CountDownLatch(1);
@@ -44,6 +54,12 @@ class IPCManagerTest {
         }
     }
 
+    /**
+     * Tests if the client receives commands from the server
+     * 
+     * @throws IOException          If the server/client couldn't be created
+     * @throws InterruptedException The test was interrupted
+     */
     @Test
     void testIPCClientReceiving() throws IOException, InterruptedException {
         var latch = new CountDownLatch(1);
@@ -57,6 +73,15 @@ class IPCManagerTest {
         }
     }
 
+    /**
+     * A helper method which creates a command listener which will countdown the
+     * given latch and check that the received command is the same as the given
+     * command
+     * 
+     * @param latch   The latch to countdown
+     * @param command The command which has to be received
+     * @return The created listener
+     */
     private Consumer<IPCCommand> createCommandReceiverListener(CountDownLatch latch, IPCCommand command) {
         return cmd -> {
             assertEquals(command, cmd);
@@ -64,6 +89,13 @@ class IPCManagerTest {
         };
     }
 
+    /**
+     * A helper method which creates a connection listener which sends the given
+     * command
+     * 
+     * @param command The command to send when a client connects
+     * @return The connection listener
+     */
     private Consumer<IPCClient> createConnectListener(IPCCommand command) {
         return client -> {
             try {
@@ -74,6 +106,9 @@ class IPCManagerTest {
         };
     }
 
+    /**
+     * Tests if the well known port file is created
+     */
     @Test
     void testWellKnownPortFileIsCreated()
             throws IOException, InterruptedException, ExecutionException, TimeoutException {
@@ -88,6 +123,11 @@ class IPCManagerTest {
         }
     }
 
+    /**
+     * Tests if the settings open listener is called when an other instance is
+     * launched and {@link IPCManager#setSendShowSettingsCommand(boolean)} is set to
+     * true
+     */
     @Test
     void testOpenSettings() throws InterruptedException, IOException, ExecutionException, TimeoutException {
         Runnable identityRunnable = () -> {
@@ -105,6 +145,10 @@ class IPCManagerTest {
         }
     }
 
+    /**
+     * Tests if {@link IPCManager#setSendShowSettingsCommand(boolean)} is set to
+     * false then the {@link IPCCommandType#SHOW_SETTINGS} should be sent
+     */
     @Test
     void testNotOpeningSettings() throws IOException, InterruptedException, ExecutionException, TimeoutException {
         Runnable identityRunnable = () -> {

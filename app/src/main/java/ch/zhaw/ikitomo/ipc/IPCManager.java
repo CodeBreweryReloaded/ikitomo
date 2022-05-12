@@ -224,7 +224,7 @@ public class IPCManager implements Closeable {
             LOGGER.warning("Received command with null command type");
             return;
         }
-        LOGGER.log(Level.INFO, "Reveived command: {0}", command);
+        LOGGER.log(Level.INFO, "Received command: {0}", command);
         switch (command.command()) {
             case SHOW_SETTINGS -> showSettingsListener.run();
             default -> LOGGER.log(Level.WARNING, "Received unknown command: {0}", command.command());
@@ -414,6 +414,9 @@ public class IPCManager implements Closeable {
             }
         }
 
+        /**
+         * A method called by {@link IPCClient} when it closes
+         */
         private void onClientCloses(IPCClient client) {
             synchronized (clientsLock) {
                 clients.remove(client);

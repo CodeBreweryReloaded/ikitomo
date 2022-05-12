@@ -26,7 +26,7 @@ public class IPCCommandManager extends JSONManager<IPCCommand> {
      * 
      * @param input The string input
      * @return The parsed command
-     * @throws IOException If an exception while parsing happend. Jackson throws
+     * @throws IOException If an exception while parsing happened. Jackson throws
      *                     {@link JsonParseException}, {@link JsonMappingException}
      *                     when something goes wrong while parsing. Both Exception
      *                     extend from {@link IOException}, which gets also thrown

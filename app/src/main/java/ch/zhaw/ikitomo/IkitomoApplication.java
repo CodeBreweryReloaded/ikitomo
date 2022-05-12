@@ -1,6 +1,6 @@
 package ch.zhaw.ikitomo;
 
-import java.awt.*;
+import java.awt.Frame;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
@@ -104,7 +104,20 @@ public class IkitomoApplication extends Application {
         return environment;
     }
 
+    /**
+     * The parameters of the application
+     * 
+     * @param showSettings If the settings pane should be shown in an another
+     *                     instance if another instance is detected
+     * @param showHelp     If the help page should be shown
+     */
     private static record IkitomoParameters(boolean showSettings, boolean showHelp) {
+        /**
+         * Parses the given parameter object into an {@link IkitomoParameters}
+         * 
+         * @param parameters The parameters to parse
+         * @return The parsed {@link IkitomoParameters} object
+         */
         public static IkitomoParameters parseParameters(Parameters parameters) {
             List<String> unnamedParams = parameters.getUnnamed();
             return new IkitomoParameters(unnamedParams.contains("--show-settings"),
