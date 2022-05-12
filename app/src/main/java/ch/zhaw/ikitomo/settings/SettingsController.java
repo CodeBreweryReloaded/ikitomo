@@ -24,7 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -77,13 +76,13 @@ public class SettingsController implements Killable {
      * The text field for the sleep chance of the tomodachi
      */
     @FXML
-    private TextField sleepChance;
+    private Spinner<Double> sleepChance;
 
     /**
      * The text field for the wake up chance of the tomodachi
      */
     @FXML
-    private TextField wakeUpChance;
+    private Spinner<Double> wakeUpChance;
 
     /**
      * The notification pane to show error messages
@@ -123,8 +122,8 @@ public class SettingsController implements Killable {
         tomodachiList.setCellFactory(listView -> new TomodachiListViewCell());
         speed.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.01, 5, 1, 0.1));
         speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
-        sleepChanceProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
-        wakeUpChanceProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
+        sleepChanceProperty = DoubleProperty.doubleProperty(sleepChance.getValueFactory().valueProperty());
+        wakeUpChanceProperty = DoubleProperty.doubleProperty(wakeUpChance.getValueFactory().valueProperty());
         tomodachiList.setItems(model.getTomodachiDefinitions());
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
