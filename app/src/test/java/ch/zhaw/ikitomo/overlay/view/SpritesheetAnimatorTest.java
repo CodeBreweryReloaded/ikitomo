@@ -24,8 +24,8 @@ import javafx.collections.ObservableMap;
 /**
  * Tests the {@link SpritesheetAnimator}
  */
-public class SpritesheetAnimatorTest {
-    
+class SpritesheetAnimatorTest {
+
     /**
      * The mocked animation Timer
      */
@@ -55,14 +55,16 @@ public class SpritesheetAnimatorTest {
 
         animations = FXCollections.observableMap(new EnumMap<>(StateType.class));
         Frame frame = new Frame(new Cell(8, 8, 8, 8), 1);
-        animations.put(StateType.RUN, Arrays.asList(new AnimationData(new Frame[]{frame, frame}, null, Direction.UP)));
+        animations.put(StateType.RUN,
+                Arrays.asList(new AnimationData(new Frame[] { frame, frame }, null, Direction.UP)));
 
         animator = new SpritesheetAnimator(animations);
         animator.setAnimationTimer(animationTimer);
     }
 
     /**
-     * Tests if the animator correctly chooses a fallback animation when the preferred one doesn't exist
+     * Tests if the animator correctly chooses a fallback animation when the
+     * preferred one doesn't exist
      */
     @Test
     void testFallbackAnimation() {

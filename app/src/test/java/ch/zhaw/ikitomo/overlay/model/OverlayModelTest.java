@@ -19,7 +19,7 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiManager;
 /**
  * Tests the {@link OverlayModel}
  */
-public class OverlayModelTest {
+class OverlayModelTest {
 
     /**
      * Mocked environment

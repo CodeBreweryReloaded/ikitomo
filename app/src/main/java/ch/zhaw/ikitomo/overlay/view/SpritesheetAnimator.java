@@ -10,8 +10,6 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
-import com.google.common.util.concurrent.Service.State;
-
 import ch.zhaw.ikitomo.common.Direction;
 import ch.zhaw.ikitomo.common.StateType;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
@@ -245,6 +243,7 @@ public class SpritesheetAnimator {
 
     /**
      * Animation timer setter for testing
+     * 
      * @param animationTimer The animation timer
      */
     void setAnimationTimer(AnimationTimer animationTimer) {

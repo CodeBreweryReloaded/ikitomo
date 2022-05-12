@@ -51,7 +51,7 @@ class JavaFXUtilsTest {
      * Tests if the nested properties of {@link JFXUtils} work
      */
     @Test
-    public void testNestedBinding() {
+    void testNestedBinding() {
         // an object with a nested property is needed for the tests
         record NestedObject(StringProperty prop) {
         }
