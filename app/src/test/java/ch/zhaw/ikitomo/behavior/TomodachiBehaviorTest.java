@@ -118,13 +118,12 @@ class TomodachiBehaviorTest {
      */
     @Test
     void testUpdateIdleToRun() {
-        var oldPosition = new Vector2(200, 100);
+        var oldPosition = new Vector2(200, 200);
         when(behaviorModel.getCurrentAnimationState()).thenReturn(StateType.IDLE);
         when(behaviorModel.getPosition()).thenReturn(oldPosition);
         when(behaviorModel.getNextPosition()).thenReturn(Vector2.ZERO);
         strategy.update(2);
-        verify(behaviorModel, never()).setPosition(any());
-        verify(behaviorModel).setCurrentAnimation(StateType.RUN);
+        verify(behaviorModel).setCurrentAnimation(StateType.RUN, Direction.UP_LEFT);
     }
 
     /**
@@ -138,7 +137,7 @@ class TomodachiBehaviorTest {
     @CsvSource({ "YAWN,SLEEP", "WAKE,IDLE" })
     void testAnimationFinishedSimpleStates(StateType input, StateType expected) {
         strategy.animationFinished(input);
-        verify(behaviorModel).setCurrentAnimation(expected);
+        verify(behaviorModel).setCurrentAnimation(expected, Direction.NONE);
     }
 
     /**
@@ -155,7 +154,7 @@ class TomodachiBehaviorTest {
     void testAnimationFinishedSleep(float chance, StateType inputState, StateType expected) {
         when(random.nextFloat()).thenReturn(chance);
         strategy.animationFinished(inputState);
-        verify(behaviorModel).setCurrentAnimation(expected);
+        verify(behaviorModel).setCurrentAnimation(expected, Direction.NONE);
     }
 
     /**
@@ -168,11 +167,24 @@ class TomodachiBehaviorTest {
      * @param expected   The expected state
      */
     @ParameterizedTest
-    @CsvSource({ "1,IDLE,IDLE", "0,IDLE,YAWN", "1,RUN,RUN", "0,RUN,YAWN" })
+    @CsvSource({ "1,IDLE,IDLE", "0,IDLE,YAWN", "0,RUN,YAWN" })
     void testAnimationFinishedIdleOrRunToYawn(float chance, StateType inputState, StateType expected) {
         when(random.nextFloat()).thenReturn(chance);
         strategy.animationFinished(inputState);
-        verify(behaviorModel).setCurrentAnimation(expected);
+        verify(behaviorModel).setCurrentAnimation(expected, Direction.NONE);
+    }
+
+    /**
+     * Tests if {@link TomodachiBehavior#animationFinished(StateType)} when the
+     * tomodachi doesn't yawn will stay in the run state and doesn't change the
+     * direction
+     */
+    @Test
+    void testAnimationFinishedRunToRun() {
+        when(random.nextFloat()).thenReturn(1f);
+        when(behaviorModel.getCurrentAnimationDirection()).thenReturn(Direction.DOWN);
+        strategy.animationFinished(StateType.RUN);
+        verify(behaviorModel).setCurrentAnimation(StateType.RUN, Direction.DOWN);
     }
 
     /**
