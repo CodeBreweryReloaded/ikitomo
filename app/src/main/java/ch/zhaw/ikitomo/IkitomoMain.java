@@ -3,6 +3,7 @@
  */
 package ch.zhaw.ikitomo;
 
+import ch.zhaw.ikitomo.common.logging.LogConfiguration;
 import javafx.application.Application;
 
 /**
@@ -21,6 +22,7 @@ public class IkitomoMain {
      * @param args The console arguments
      */
     public static void main(String[] args) {
+        LogConfiguration.init();
         Application.launch(IkitomoApplication.class, args);
     }
 }
