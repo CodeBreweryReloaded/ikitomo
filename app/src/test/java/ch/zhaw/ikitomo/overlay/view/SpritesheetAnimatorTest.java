@@ -30,17 +30,17 @@ class SpritesheetAnimatorTest {
      * The mocked animation Timer
      */
     @Mock
-    AnimationTimer animationTimer;
+    private AnimationTimer animationTimer;
 
     /**
      * The mocked animation map
      */
-    ObservableMap<StateType, List<AnimationData>> animations;
+    private ObservableMap<StateType, List<AnimationData>> animations;
 
     /**
      * The animator instance
      */
-    SpritesheetAnimator animator;
+    private SpritesheetAnimator animator;
 
     /**
      * Setup function that is run before each test
