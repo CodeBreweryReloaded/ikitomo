@@ -136,13 +136,14 @@ public class SettingsController implements Killable {
         tomodachiList.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.setTomodachi(newValue));
 
-        List<ObservableValue<?>> properties = List.of(sleepChance.textProperty(), wakeUpChance.textProperty(), speed.valueProperty());
+        List<ObservableValue<?>> properties = List.of(speedProperty, sleepChanceProperty, wakeUpChanceProperty);
 
         for (ObservableValue<?> property : properties) {
             property.addListener((observable, oldValue, newValue) -> model.save());
         }
 
         rootPane.setBottom(notificationPane);
+
         model.addSaveExceptionHandler(
                 exception -> notificationPane.showText("Couldn't save: " + exception.getMessage()));
     }
