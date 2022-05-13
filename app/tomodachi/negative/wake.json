@@ -6,14 +6,14 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 100
+    "duration": 320
    }
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.3-beta14-x64",
   "image": "awake.png",
-  "format": "RGBA8888",
+  "format": "I8",
   "size": { "w": 32, "h": 32 },
   "scale": "1"
  }
