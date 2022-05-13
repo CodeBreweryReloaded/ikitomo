@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,8 @@ public class TomodachiModelLoader {
         Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
 
         for (TomodachiStateDefinition state : definition.getStates()) {
-            animations.put(state.type(), loadAnimations(state));
+            animations.putIfAbsent(state.type(), new ArrayList<>());
+            animations.get(state.type()).addAll(loadAnimations(state));
         }
 
         if (animations.isEmpty()) {
