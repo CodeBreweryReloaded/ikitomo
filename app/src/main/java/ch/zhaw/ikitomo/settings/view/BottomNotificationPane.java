@@ -181,14 +181,27 @@ public class BottomNotificationPane extends Pane {
                 new KeyValue(visibleProperty(), visible));
     }
 
-    private Background createBackground(Color paint) {
-        return new Background(new BackgroundFill(paint, CornerRadii.EMPTY, Insets.EMPTY));
-    }
-
+    /**
+     * A transition which transitions between two colors
+     */
     private class ColorTransition extends Transition {
+        /**
+         * The new color to transition to
+         */
         private Color newColor;
+        /**
+         * The old color to transition from
+         */
         private Color lastColor;
 
+        /**
+         * Constructor<br/>
+         * The {@link #setCycleDuration(Duration)} is set to
+         * {@link BottomNotificationPane#COLOR_ANIMATION_DURATION}
+         * 
+         * @param newColor  The new color to transition to
+         * @param lastColor The old color to transition from
+         */
         private ColorTransition(Color newColor, Color lastColor) {
             this.newColor = newColor;
             this.lastColor = lastColor;
@@ -198,9 +211,9 @@ public class BottomNotificationPane extends Pane {
         @Override
         protected void interpolate(double frac) {
             Color color = lastColor.interpolate(newColor, frac);
-            borderPane.setBackground(createBackground(color));
+            var background = new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY));
+            borderPane.setBackground(background);
 
         }
     }
-
 }
