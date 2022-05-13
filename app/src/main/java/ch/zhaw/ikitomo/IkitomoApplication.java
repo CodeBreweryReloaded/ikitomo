@@ -55,7 +55,6 @@ public class IkitomoApplication extends Application {
                 trayIconController.showSettings();
             }
         });
-        ipcManager.setSendShowSettingsCommand(true);
         ipcManager.init();
 
         try {

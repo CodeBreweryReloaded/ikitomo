@@ -40,6 +40,11 @@ import javafx.util.StringConverter;
  */
 public class SettingsController implements Killable {
     /**
+     * The path in the classpath to the icon
+     */
+    private static final String ICON_PATH = "/icon.png";
+
+    /**
      * The logger
      */
     private static final Logger LOGGER = Logger.getLogger(SettingsController.class.getName());
@@ -273,15 +278,15 @@ public class SettingsController implements Killable {
      * @param stage The stage
      */
     private static void loadIcon(Stage stage) {
-        InputStream iconIn = SettingsController.class.getResourceAsStream("/icon.png");
+        InputStream iconIn = SettingsController.class.getResourceAsStream(ICON_PATH);
         if (iconIn == null) {
-            LOGGER.info("No icon found at  \"/icon.png\"");
+            LOGGER.log(Level.INFO, "No icon found at  \"{0}\"", ICON_PATH);
             return;
         }
         try (iconIn) {
             stage.getIcons().add(new Image(iconIn));
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Couldn\'t load icon image from \"/icon.png\"", e);
+            LOGGER.log(Level.WARNING, "Couldn\'t load icon image from \"%s\"".formatted(ICON_PATH), e);
         }
 
     }
