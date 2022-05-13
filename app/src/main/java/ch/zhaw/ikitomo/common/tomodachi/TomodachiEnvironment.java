@@ -146,6 +146,9 @@ public class TomodachiEnvironment {
         }
     }
 
+    /**
+     * Creates a new settings file and writes it to the default location
+     */
     private void createSettingsFile() {
         settings = Settings.createDefaultSettings();
         try {
