@@ -195,9 +195,11 @@ public class BottomNotificationPane extends Pane {
         private Color lastColor;
 
         /**
-         * Constructor<br/>
+         * Constructor
+         * <p>
          * The {@link #setCycleDuration(Duration)} is set to
          * {@link BottomNotificationPane#COLOR_ANIMATION_DURATION}
+         * </p>
          * 
          * @param newColor  The new color to transition to
          * @param lastColor The old color to transition from
