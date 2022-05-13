@@ -160,7 +160,9 @@ public class SettingsController implements Killable {
         rootPane.setBottom(notificationPane);
 
         model.addSaveExceptionHandler(
-                exception -> notificationPane.showText("Couldn't save: " + exception.getMessage()));
+                exception -> notificationPane.showError("Couldn't save: " + exception.getMessage()));
+
+        model.addSaveSuccessfullyHandler(() -> notificationPane.showInfo("Saved successfully"));
     }
 
     /**

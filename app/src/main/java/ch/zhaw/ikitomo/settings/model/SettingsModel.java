@@ -30,7 +30,7 @@ public class SettingsModel {
     /**
      * The delay in ms between the last keystroke and the saving of the settings
      */
-    private static final long SAVING_DELAY = 200;
+    private static final long SAVING_DELAY = 300;
 
     /**
      * The global tomodachi environment object
@@ -57,7 +57,12 @@ public class SettingsModel {
     /**
      * A List with exception handlers called when saving the settings fails
      */
-    private List<Consumer<Exception>> saveExceptionHandler = new ArrayList<>();
+    private List<Consumer<Exception>> saveExceptionHandlers = new ArrayList<>();
+
+    /**
+     * A List withhandlers which are called when saving the settings was successfull
+     */
+    private List<Runnable> saveSuccessfullyHandlers = new ArrayList<>();
 
     /**
      * Constructor
@@ -142,13 +147,14 @@ public class SettingsModel {
      * 
      * @see #save()
      */
-    public void saveImmediately() {
+    public synchronized void saveImmediately() {
         try {
             environment.save();
             LOGGER.info("Saved settings");
+            fireSaveSuccessfullyHandlers();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Could not save settings", e);
-            fireSaveExceptionHandler(e);
+            fireSaveExceptionHandlers(e);
         }
     }
 
@@ -168,16 +174,34 @@ public class SettingsModel {
      * @param handler The handler
      */
     public void addSaveExceptionHandler(Consumer<Exception> handler) {
-        saveExceptionHandler.add(handler);
+        saveExceptionHandlers.add(handler);
     }
 
     /**
-     * Fires all {@link #saveExceptionHandler}
+     * Fires all {@link #saveExceptionHandlers}
      * 
      * @param e The exception which is given to the exception handlers
      */
-    private void fireSaveExceptionHandler(Exception e) {
-        Platform.runLater(() -> saveExceptionHandler.forEach(handler -> handler.accept(e)));
+    private void fireSaveExceptionHandlers(Exception e) {
+        Platform.runLater(() -> saveExceptionHandlers.forEach(handler -> handler.accept(e)));
+    }
+
+    /**
+     * Adds a handler which is called when saving the settings was successful
+     * 
+     * @param handler The handler
+     */
+    public void addSaveSuccessfullyHandler(Runnable handler) {
+        saveSuccessfullyHandlers.add(handler);
+    }
+
+    /**
+     * Fires all {@link #saveSuccessfullyHandlers}
+     * 
+     * @param e The exception which is given to the exception handlers
+     */
+    private void fireSaveSuccessfullyHandlers() {
+        Platform.runLater(() -> saveSuccessfullyHandlers.forEach(Runnable::run));
     }
 
     /**
