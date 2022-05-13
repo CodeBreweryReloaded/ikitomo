@@ -58,6 +58,16 @@
             ]
         },
         {
+            "type": "EAT",
+            "animationPrefix": "defaultTomodachi/eat",
+            "animations": [
+                {
+                    "direction": "NONE",
+                    "animationSuffix": ""
+                }
+            ]
+        },
+        {
             "type": "RUN",
             "animationPrefix": "defaultTomodachi/run_",
             "animations": [

@@ -94,7 +94,6 @@ public abstract class JSONManager<T> {
      * @throws IOException Occurs when the file could not be read
      */
     public T load(String path) throws IOException {
-        System.out.println(path);
         return getMapper().readValue(new File(path), getDataType());
     }
 

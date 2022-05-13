@@ -108,7 +108,7 @@ class TomodachiModelLoaderTest {
     void testContinueLoadingIfOneAnimationFailsToLoad() throws MissingAnimationException {
         // create animation definition list based on the animations from the default
         List<TomodachiStateDefinition> animationDefinitionList = new ArrayList<>(defaultDefinition.getStates());
-        animationDefinitionList.add(new TomodachiStateDefinition(StateType.EAT, "test",
+        animationDefinitionList.add(new TomodachiStateDefinition(StateType.WAKE, "test",
                 Arrays.asList(new TomodachiAnimationDefinition(Direction.NONE, "invalid/path"))));
         var definition = new TomodachiDefinition(null, "ch.ikitomo.test2", "Test2", new TomodachiSettings(), "",
                 animationDefinitionList);

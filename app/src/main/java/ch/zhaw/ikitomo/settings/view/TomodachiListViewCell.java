@@ -1,5 +1,6 @@
 package ch.zhaw.ikitomo.settings.view;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -162,7 +163,8 @@ public class TomodachiListViewCell extends ListCell<TomodachiDefinition> {
      * @throws IOException If the file could not be loaded
      */
     private Image loadIconImageFromFile(TomodachiDefinition tomodachiDefinition) throws IOException {
-        try (var in = new FileInputStream(tomodachiDefinition.getIcon())) {
+        File iconFile = tomodachiDefinition.getRootFolder().resolve(tomodachiDefinition.getIcon()).toFile();
+        try (var in = new FileInputStream(iconFile)) {
             return new Image(in, IMAGE_SIZE, IMAGE_SIZE, true, false);
         }
     }

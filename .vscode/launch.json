@@ -8,14 +8,16 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
+            "cwd": "${workspaceFolder}/app"
         },
         {
             "type": "java",
             "name": "Launch IkitomoMain",
             "request": "launch",
             "mainClass": "ch.zhaw.ikitomo.IkitomoMain",
-            "projectName": "app"
+            "projectName": "app",
+            "cwd": "${workspaceFolder}/app"
         }
     ]
 }
