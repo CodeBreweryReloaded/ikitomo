@@ -60,7 +60,7 @@ public class RandomNextPositionStrategy implements NextPositionStrategy {
     }
 
     /**
-     * Sets the screen bounds supplier. This is used for testing as the staic
+     * Sets the screen bounds supplier. This is used for testing as the static
      * methods in {@link Screen} can't be mocked
      * 
      * @param screenBoundsSupplier The screenBoundsSupplier to set
