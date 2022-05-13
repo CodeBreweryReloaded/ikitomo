@@ -13,6 +13,7 @@
   - [The Sprites](#the-sprites)
   - [Importing](#importing)
 - [Design Decisions](#design-decisions)
+  - [Class diagram](#class-diagram)
   - [Models](#models)
   - [Information Flow](#information-flow)
   - [Behaviors](#behaviors)
@@ -128,7 +129,7 @@ FOR %%f IN ("aseprite/*.aseprite") DO (
 )
 ```
 
-In our case, all source files are contained in the `aseprite` folder and all different palettes are inside the `plattes` folder. The script renders each animation to a spritesheet and some metadata and dumps it all into the `export` folder.
+In our case, all source files are contained in the `aseprite` folder and all different palettes are inside the `palattes` folder. The script renders each animation to a spritesheet and some metadata and dumps it all into the `export` folder.
 
 ### Importing
 
@@ -137,6 +138,9 @@ To use your Tomodachi, simply copy your folder containing the `_tomodachi.json` 
 ## Design Decisions
 
 *Also known as the Architecture Documentation*
+
+### Class diagram
+
 ![classdiagram](Notes/classdiagram_v2.svg)
 
 ### Models
