@@ -37,6 +37,11 @@ public class RandomNextPositionStrategy implements NextPositionStrategy {
      */
     private Vector2 lastPosition = null;
 
+    /**
+     * A supplier which gets the current screen bounds. In normal operation it will
+     * return the bounds of the primary screen.
+     * However, it was moved to a supplier to allow for testing.
+     */
     private Supplier<Rectangle2D> screenBoundsSupplier = () -> Screen.getPrimary().getBounds();
 
     /**
@@ -52,6 +57,16 @@ public class RandomNextPositionStrategy implements NextPositionStrategy {
      */
     void setRandom(RandomGenerator random) {
         this.random = random;
+    }
+
+    /**
+     * Sets the screen bounds supplier. This is used for testing as the staic
+     * methods in {@link Screen} can't be mocked
+     * 
+     * @param screenBoundsSupplier The screenBoundsSupplier to set
+     */
+    void setScreenBoundsSupplier(Supplier<Rectangle2D> screenBoundsSupplier) {
+        this.screenBoundsSupplier = screenBoundsSupplier;
     }
 
     @Override
