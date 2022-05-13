@@ -6,5 +6,5 @@
 *.aseprite      binary
 
 # Mark tomodachi files as generated files and autocollapse them in PRs
-tomodachi/* linguist-generated
-app/src/main/resources/defaultTomodachi/* linguist-generated
+tomodachi/** linguist-generated
+app/src/main/resources/defaultTomodachi/** linguist-generated
