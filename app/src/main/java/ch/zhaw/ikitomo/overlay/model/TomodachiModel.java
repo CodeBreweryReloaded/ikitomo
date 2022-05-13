@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.overlay.model;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,6 @@ import ch.zhaw.ikitomo.common.tomodachi.TomodachiSettings;
 import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 
 /**
  * Represents a the model for the
@@ -61,7 +60,7 @@ public class TomodachiModel {
     /**
      * A hash map containing all available animations for each {@link StateType}
      */
-    private ObservableMap<StateType, List<AnimationData>> animations = FXCollections.observableHashMap();
+    private Map<StateType, List<AnimationData>> animations = new EnumMap<>(StateType.class);
 
     /**
      * Constructor
@@ -119,7 +118,7 @@ public class TomodachiModel {
      * 
      * @return An observable map
      */
-    public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
+    public Map<StateType, List<AnimationData>> getObservableAnimations() {
         return animations;
     }
 
