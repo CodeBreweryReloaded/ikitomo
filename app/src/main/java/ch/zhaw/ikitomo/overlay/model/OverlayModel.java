@@ -95,6 +95,8 @@ public class OverlayModel {
                 .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
         updateTomodachiAnimations(getTomodachi());
         tomodachi.addListener((observable, oldValue, newValue) -> updateTomodachiAnimations(newValue));
+
+        tomodachi.addListener((observable, oldValue, newValue) -> newValue.setPosition(oldValue.getPosition()));
     }
 
     /**
