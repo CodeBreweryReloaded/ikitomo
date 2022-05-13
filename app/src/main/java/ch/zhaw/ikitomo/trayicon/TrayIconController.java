@@ -1,23 +1,42 @@
 package ch.zhaw.ikitomo.trayicon;
 
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
 import ch.zhaw.ikitomo.IkitomoApplication;
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.settings.SettingsController;
 import javafx.application.Platform;
 
-import javax.imageio.ImageIO;
-
 /**
  * The tray icon controller
  */
 public class TrayIconController implements Killable {
+
+    /**
+     * Instance of SystemTray
+     */
+    private SystemTray tray;
+
+    /**
+     * Instance of TrayIcon
+     */
+    private TrayIcon trayIcon;
+
+    /**
+     * Instance of PopupMenu
+     */
+    private PopupMenu popup;
 
     /**
      * {@link Logger} of the application.
@@ -29,14 +48,10 @@ public class TrayIconController implements Killable {
      */
     private SettingsController settingsController;
 
-    @Override
-    public CompletableFuture<Void> kill() {
-        if (this.settingsController != null) {
-            this.settingsController.kill();
-        }
-
-        return CompletableFuture.completedFuture(null);
-    }
+    /**
+     * The application launcher instance
+     */
+    private IkitomoApplication application;
 
     /**
      * Constructor of Class TrayIconController
@@ -50,31 +65,25 @@ public class TrayIconController implements Killable {
             LOGGER.log(Level.WARNING, "OS does not support SystemTray.");
             return;
         }
+        this.application = application;
 
         try {
-            final PopupMenu popup = new PopupMenu();
+            popup = new PopupMenu();
 
             URL iconUrl = TrayIconController.class.getResource("/icon.png");
             if (iconUrl == null) {
                 LOGGER.log(Level.SEVERE, "Could not find icon.png in resources.");
                 return;
             }
-            final TrayIcon trayIcon = new TrayIcon(ImageIO.read(iconUrl));
-            final SystemTray tray = SystemTray.getSystemTray();
+            trayIcon = new TrayIcon(ImageIO.read(iconUrl));
+            trayIcon.setImageAutoSize(true);
+            tray = SystemTray.getSystemTray();
 
             MenuItem showSettingsItem = new MenuItem("Settings");
-
-            showSettingsItem.addActionListener(e -> {
-                Platform.runLater(() -> {
-                    if (this.settingsController == null || !settingsController.isVisible()) this.settingsController = SettingsController.newSettingsUI(application.getEnvironment());
-                });
-            });
+            showSettingsItem.addActionListener(e -> showSettings());
 
             MenuItem exitItem = new MenuItem("Exit");
-            exitItem.addActionListener(e -> {
-                IkitomoApplication app = new IkitomoApplication();
-                app.close();
-            });
+            exitItem.addActionListener(e -> application.close());
 
             popup.add(showSettingsItem);
             popup.addSeparator();
@@ -83,8 +92,29 @@ public class TrayIconController implements Killable {
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } catch (AWTException | IOException ioE) {
-            LOGGER.log(Level.SEVERE,"An error occured during initialization of program.", ioE);
+            LOGGER.log(Level.SEVERE, "An error occured during initialization of program.", ioE);
         }
+    }
+
+    @Override
+    public CompletableFuture<Void> kill() {
+        if (this.settingsController != null) {
+            this.settingsController.kill();
+        }
+        tray.remove(trayIcon);
+
+        return CompletableFuture.completedFuture(null);
+    }
+
+    /**
+     * Will display the settings controller
+     */
+    public void showSettings() {
+        Platform.runLater(() -> {
+            if (this.settingsController == null || !settingsController.isVisible()) {
+                this.settingsController = SettingsController.newSettingsUI(application.getEnvironment());
+            }
+        });
     }
 
     /**
