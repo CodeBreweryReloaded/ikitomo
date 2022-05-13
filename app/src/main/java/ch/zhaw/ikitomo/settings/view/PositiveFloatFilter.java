@@ -14,7 +14,7 @@ import javafx.scene.control.TextFormatter.Change;
  * the allowed numbers. An empty string is always allowed for convenience of the
  * user.
  */
-public class FloatFilter implements UnaryOperator<Change> {
+public class PositiveFloatFilter implements UnaryOperator<Change> {
     /**
      * The pattern for recognizing a float number
      */
@@ -29,7 +29,7 @@ public class FloatFilter implements UnaryOperator<Change> {
     /**
      * Constructor
      */
-    public FloatFilter() {
+    public PositiveFloatFilter() {
     }
 
     /**
@@ -37,7 +37,7 @@ public class FloatFilter implements UnaryOperator<Change> {
      * 
      * @param predicate A predicate to further restrict the allowed numbers
      */
-    public FloatFilter(Predicate<Float> predicate) {
+    public PositiveFloatFilter(Predicate<Float> predicate) {
         this.predicate = predicate;
     }
 
@@ -57,10 +57,10 @@ public class FloatFilter implements UnaryOperator<Change> {
     /**
      * Creates a new TextFormatter which only allows float numbers
      * 
-     * @return The created {@link TextFormatter} with a new {@link FloatFilter}
+     * @return The created {@link TextFormatter} with a new {@link PositiveFloatFilter}
      */
     public static TextFormatter<?> newFloatTextFormatter() {
-        return new TextFormatter<>(new FloatFilter());
+        return new TextFormatter<>(new PositiveFloatFilter());
     }
 
     /**
@@ -68,10 +68,10 @@ public class FloatFilter implements UnaryOperator<Change> {
      * predicate is used to further restrict the allowed numbers
      * 
      * @param predicate The predicate to restrict the allowed numbers
-     * @return The created {@link TextFormatter} with a new {@link FloatFilter}
+     * @return The created {@link TextFormatter} with a new {@link PositiveFloatFilter}
      */
     public static TextFormatter<?> newFloatTextFormatter(Predicate<Float> predicate) {
-        return new TextFormatter<>(new FloatFilter(predicate));
+        return new TextFormatter<>(new PositiveFloatFilter(predicate));
     }
 
 }

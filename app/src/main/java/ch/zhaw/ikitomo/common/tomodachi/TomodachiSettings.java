@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import ch.zhaw.ikitomo.behavior.NextPositionStrategy;
 import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
-import javafx.beans.property.FloatProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
@@ -21,19 +21,19 @@ public class TomodachiSettings {
      * The chance to sleep
      */
     @JsonIgnore
-    private FloatProperty sleepChance = new SimpleFloatProperty();
+    private DoubleProperty sleepChance = new SimpleDoubleProperty();
 
     /**
      * The chance to wake up
      */
     @JsonIgnore
-    private FloatProperty wakeChance = new SimpleFloatProperty();
+    private DoubleProperty wakeChance = new SimpleDoubleProperty();
 
     /**
      * The speed of the tomodachi
      */
     @JsonIgnore
-    private FloatProperty speed = new SimpleFloatProperty();
+    private DoubleProperty speed = new SimpleDoubleProperty();
 
     /**
      * The factory for the {@link NextPositionStrategy} used. It defaults to
@@ -55,7 +55,7 @@ public class TomodachiSettings {
      * @param sleepChance The sleep chance
      * @param wakeChance  The wake up chance
      */
-    public TomodachiSettings(float sleepChance, float wakeChance, float speed) {
+    public TomodachiSettings(double sleepChance, double wakeChance, double speed) {
         this.sleepChance.set(sleepChance);
         this.wakeChance.set(wakeChance);
         this.sleepChance.set(speed);
@@ -67,7 +67,7 @@ public class TomodachiSettings {
      * @return The chance to sleep
      */
     @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
-    public float getSleepChance() {
+    public double getSleepChance() {
         return sleepChance.get();
     }
 
@@ -77,7 +77,7 @@ public class TomodachiSettings {
      * @param sleepChance The sleep chance
      */
     @JsonProperty(TomodachiSettingKey.SLEEP_CHANCE)
-    public void setSleepChance(float sleepChance) {
+    public void setSleepChance(double sleepChance) {
         this.sleepChance.set(sleepChance);
     }
 
@@ -87,7 +87,7 @@ public class TomodachiSettings {
      * @return The chance to wake-up
      */
     @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
-    public float getWakeChance() {
+    public double getWakeChance() {
         return wakeChance.get();
     }
 
@@ -97,7 +97,7 @@ public class TomodachiSettings {
      * @param wakeChance The wake-up chance
      */
     @JsonProperty(TomodachiSettingKey.WAKE_CHANCE)
-    public void setWakeChance(float wakeChance) {
+    public void setWakeChance(double wakeChance) {
         this.wakeChance.set(wakeChance);
     }
 
@@ -106,7 +106,7 @@ public class TomodachiSettings {
      *
      * @return The sleep chance property
      */
-    public FloatProperty sleepChanceProperty() {
+    public DoubleProperty sleepChanceProperty() {
         return sleepChance;
     }
 
@@ -115,7 +115,7 @@ public class TomodachiSettings {
      *
      * @return The wake up chance property
      */
-    public FloatProperty wakeChanceProperty() {
+    public DoubleProperty wakeChanceProperty() {
         return wakeChance;
     }
 
@@ -124,7 +124,7 @@ public class TomodachiSettings {
      * 
      * @return The property
      */
-    public FloatProperty speedProperty() {
+    public DoubleProperty speedProperty() {
         return speed;
     }
 
@@ -134,7 +134,7 @@ public class TomodachiSettings {
      * @param speed The speed
      */
     @JsonProperty(TomodachiSettingKey.SPEED)
-    public void setSpeed(float speed) {
+    public void setSpeed(double speed) {
         this.speed.set(speed);
     }
 
@@ -144,7 +144,7 @@ public class TomodachiSettings {
      * @return The speed
      */
     @JsonProperty(TomodachiSettingKey.SPEED)
-    public float getSpeed() {
+    public double getSpeed() {
         return speed.get();
     }
 
