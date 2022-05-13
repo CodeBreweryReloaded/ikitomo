@@ -137,7 +137,12 @@ To use your Tomodachi, simply copy your folder containing the `_tomodachi.json` 
 ## Design Decisions
 
 *Also known as the Architecture Documentation*
+The following class diagram contains the whole structure:
 ![classdiagram](Notes/classdiagram_v2.svg)
+
+Because this barely readable we left out classes which don't contribute to the model and controller structure to simplify the uml diagram. To avoid arrows across the diagram some classes and interfaces are duplicated.
+
+![classdiagram](Notes/ikitomo_classdiagram_reduced.svg)
 
 ### Models
 

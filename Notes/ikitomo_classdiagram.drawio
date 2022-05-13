@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="-k924pRx5TwtKSC0G_js" name="Seite-1">
-        <mxGraphModel dx="2570" dy="556" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="3028" dy="787" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -501,8 +501,8 @@
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="-961" y="615" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="-961" y="595"/>
-                            <mxPoint x="-961" y="595"/>
+                            <mxPoint x="-997" y="633"/>
+                            <mxPoint x="-997" y="633"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -795,19 +795,19 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="13" value="TomodachiAnimationDefinition" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="-1289" y="913" width="370" height="112" as="geometry"/>
+                    <mxGeometry x="-1289" y="913" width="423" height="112" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=none;" parent="13" vertex="1">
-                    <mxGeometry y="26" width="370" height="8" as="geometry"/>
+                    <mxGeometry y="26" width="423" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="qqEQn_MBsALpCIteSbxw-135" value="+ TomodachiAnimationDefinition(Direction direction, String animationSuffix)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="13" vertex="1">
-                    <mxGeometry y="34" width="370" height="26" as="geometry"/>
+                    <mxGeometry y="34" width="423" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="qqEQn_MBsALpCIteSbxw-136" value="+ direction(): Direction" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="13" vertex="1">
-                    <mxGeometry y="60" width="370" height="26" as="geometry"/>
+                    <mxGeometry y="60" width="423" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="57" value="+ animatinoSuffix(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="13" vertex="1">
-                    <mxGeometry y="86" width="370" height="26" as="geometry"/>
+                    <mxGeometry y="86" width="423" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="TomodachiSettingKey" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
                     <mxGeometry x="-1453" y="89" width="271" height="138" as="geometry"/>
@@ -837,7 +837,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="52" value="" style="endArrow=open;html=1;dashed=1;endSize=11;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;endFill=0;" parent="1" source="hj_B1nl4t0Jv-Di1GASs-237" target="13" edge="1">
+                <mxCell id="52" value="" style="endArrow=open;html=1;endSize=11;strokeWidth=2;edgeStyle=orthogonalEdgeStyle;endFill=0;" parent="1" source="hj_B1nl4t0Jv-Di1GASs-237" target="13" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-753" y="772" as="sourcePoint"/>
                         <mxPoint x="-693" y="462.0000000000002" as="targetPoint"/>
