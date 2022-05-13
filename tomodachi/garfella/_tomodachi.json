@@ -4,7 +4,7 @@
     "icon": "icon.png",
     "settings": {
         "sleepChance": 0.1,
-        "wakeChance": 0.01,
+        "wakeChance": 0.1,
         "speed": 0.1,
         "nextPositionStrategy": "FOLLOW_MOUSE"
     },
