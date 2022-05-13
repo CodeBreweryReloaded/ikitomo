@@ -39,7 +39,7 @@ class RandomNextPositionStrategyTest {
     /**
      * The screen bounds
      */
-    private Rectangle2D screenBounds = new Rectangle2D(10, 10, 100, 100);
+    private Rectangle2D screenBounds = new Rectangle2D(10, 10, 1000, 1000);
 
     /**
      * Setup mocks and objects
@@ -50,7 +50,7 @@ class RandomNextPositionStrategyTest {
         strategy = new RandomNextPositionStrategy();
         strategy.setRandom(random);
         strategy.setScreenBoundsSupplier(() -> screenBounds);
-        when(tomodachiModel.getPosition()).thenReturn(new Vector2(15, 15));
+        when(tomodachiModel.getPosition()).thenReturn(new Vector2(500, 500));
     }
 
     /**
@@ -78,12 +78,30 @@ class RandomNextPositionStrategyTest {
         var expectedPos1 = new Vector2(70, 70);
         var expectedPos2 = new Vector2(30, 30);
         when(random.nextDouble(anyDouble(), anyDouble())).thenReturn(expectedPos1.x(), expectedPos1.y(),
-                expectedPos2.x(), expectedPos2.y());
+                expectedPos2.x(), expectedPos2.y(), 100d);
         Vector2 nextPos1 = strategy.nextPosition(tomodachiModel);
         assertEquals(expectedPos1, nextPos1);
 
         // has to return the same position until the tomodachi is closer
         when(tomodachiModel.getPosition()).thenReturn(new Vector2(60, 60));
+        Vector2 nextPos2 = strategy.nextPosition(tomodachiModel);
+        assertEquals(expectedPos2, nextPos2);
+    }
+
+    /**
+     * Tests if a new next position is returned if the position is out of bounds
+     */
+    @Test
+    void testNextPositionWhenTomodachiWhenPositionIsOutOfBounds() {
+        var expectedPos1 = new Vector2(70, 70);
+        var expectedPos2 = new Vector2(30, 30);
+        when(random.nextDouble(anyDouble(), anyDouble())).thenReturn(expectedPos1.x(), expectedPos1.y(),
+                expectedPos2.x(), expectedPos2.y(), 100d);
+        Vector2 nextPos1 = strategy.nextPosition(tomodachiModel);
+        assertEquals(expectedPos1, nextPos1);
+
+        // has to return the same position until the tomodachi is closer
+        screenBounds = new Rectangle2D(0, 0, 10, 10);
         Vector2 nextPos2 = strategy.nextPosition(tomodachiModel);
         assertEquals(expectedPos2, nextPos2);
     }

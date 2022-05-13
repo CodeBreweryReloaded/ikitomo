@@ -21,7 +21,7 @@ public class RandomNextPositionStrategy implements NextPositionStrategy {
      * The distance the tomodachi has to have to the last position until a new
      * position is generated
      */
-    private static final double DISTANCE_TO_CALCULATE_NEW_POSITION = 50;
+    private static final double DISTANCE_TO_CALCULATE_NEW_POSITION = 150;
 
     /**
      * The logger
