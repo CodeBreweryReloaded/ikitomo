@@ -171,7 +171,7 @@ public class SettingsController implements Killable {
 
         initProperties(null, settings.getCurrentTomodachiSettings());
 
-        settings.currentTomodachiSettingsBinding()
+        model.currentTomodachiSettings()
                 .addListener((observable, oldValue, newValue) -> initProperties(oldValue, newValue));
 
         tomodachiList.getSelectionModel().selectedItemProperty()
