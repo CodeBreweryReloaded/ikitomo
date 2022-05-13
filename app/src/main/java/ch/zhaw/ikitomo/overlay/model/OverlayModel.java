@@ -155,7 +155,7 @@ public class OverlayModel {
     /**
      * Gets an observable map of {@link StateType}s to {@link AnimationData} lists
      * 
-     * @return
+     * @return The animation map of the currently selected tomodachi
      */
     public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
         return tomodachiAnimations;
