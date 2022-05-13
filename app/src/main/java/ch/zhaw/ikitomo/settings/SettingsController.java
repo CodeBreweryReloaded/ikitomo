@@ -48,11 +48,11 @@ public class SettingsController implements Killable {
     /**
      * The minimum width of the settings window
      */
-    private static final int SETTINGS_MIN_WIDTH = 650;
+    private static final int SETTINGS_MIN_WIDTH = 700;
     /**
      * The minimum height of the settings window
      */
-    private static final int SETTINGS_HEIGHT = 400;
+    private static final int SETTINGS_HEIGHT = 450;
 
     /**
      * The settings view model

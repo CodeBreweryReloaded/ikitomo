@@ -17,6 +17,7 @@ import ch.zhaw.ikitomo.overlay.model.animation.AnimationData;
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -72,6 +73,12 @@ public class OverlayModel {
     };
 
     /**
+     * The list of animations of the current tomodachi. This list is updated in
+     * {@link #updateTomodachiAnimations(TomodachiModel)}
+     */
+    private ObservableMap<StateType, List<AnimationData>> tomodachiAnimations = FXCollections.observableHashMap();
+
+    /**
      * Constructor
      *
      * @param environment The global settings object
@@ -86,6 +93,18 @@ public class OverlayModel {
 
         behaviorStrategy = Bindings
                 .createObjectBinding(() -> new TomodachiBehavior(new BehaviorModel(getTomodachi())), tomodachi);
+        updateTomodachiAnimations(getTomodachi());
+        tomodachi.addListener((observable, oldValue, newValue) -> updateTomodachiAnimations(newValue));
+    }
+
+    /**
+     * Updates the {@link #tomodachiAnimations} map
+     * 
+     * @param model the new tomodachi model
+     */
+    private void updateTomodachiAnimations(TomodachiModel model) {
+        tomodachiAnimations.clear();
+        tomodachiAnimations.putAll(model.getObservableAnimations());
     }
 
     /**
@@ -137,7 +156,7 @@ public class OverlayModel {
      * @return
      */
     public ObservableMap<StateType, List<AnimationData>> getObservableAnimations() {
-        return tomodachi.get().getObservableAnimations();
+        return tomodachiAnimations;
     }
 
     /**
