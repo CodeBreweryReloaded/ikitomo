@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
+import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
 import ch.zhaw.ikitomo.common.Killable;
 import ch.zhaw.ikitomo.common.settings.Settings;
 import ch.zhaw.ikitomo.common.tomodachi.TomodachiDefinition;
@@ -23,11 +24,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 /**
  * The settings controller
@@ -107,6 +110,12 @@ public class SettingsController implements Killable {
     private DoubleProperty wakeUpChanceProperty = null;
 
     /**
+     * The movement combo box
+     */
+    @FXML
+    private ComboBox<NextPositionStrategyFactory> movementComboBox;
+
+    /**
      * Private constructor
      * 
      * @param environment The global environment object
@@ -140,6 +149,23 @@ public class SettingsController implements Killable {
         speedProperty = DoubleProperty.doubleProperty(speed.getValueFactory().valueProperty());
         sleepChanceProperty = DoubleProperty.doubleProperty(sleepChance.getValueFactory().valueProperty());
         wakeUpChanceProperty = DoubleProperty.doubleProperty(wakeUpChance.getValueFactory().valueProperty());
+
+        // setup movement combo box
+        movementComboBox.getItems().addAll(NextPositionStrategyFactory.values());
+        movementComboBox.setConverter(new StringConverter<NextPositionStrategyFactory>() {
+
+            @Override
+            public String toString(NextPositionStrategyFactory object) {
+                return object != null ? object.getName() : "";
+            }
+
+            @Override
+            public NextPositionStrategyFactory fromString(String string) {
+                return NextPositionStrategyFactory.valueOf(string);
+            }
+
+        });
+
         tomodachiList.setItems(model.getTomodachiDefinitions());
         tomodachiList.getSelectionModel().select(model.getEnvironment().getCurrentTomodachiDefinition());
 
@@ -151,7 +177,8 @@ public class SettingsController implements Killable {
         tomodachiList.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.setTomodachi(newValue));
 
-        List<ObservableValue<?>> properties = List.of(speedProperty, sleepChanceProperty, wakeUpChanceProperty);
+        List<ObservableValue<?>> properties = List.of(speedProperty, sleepChanceProperty, wakeUpChanceProperty,
+                movementComboBox.valueProperty());
 
         for (ObservableValue<?> property : properties) {
             property.addListener((observable, oldValue, newValue) -> model.save());
@@ -178,11 +205,13 @@ public class SettingsController implements Killable {
             speedProperty.unbindBidirectional(oldSettings.speedProperty());
             sleepChanceProperty.unbindBidirectional(oldSettings.sleepChanceProperty());
             wakeUpChanceProperty.unbindBidirectional(oldSettings.wakeChanceProperty());
+            movementComboBox.valueProperty().unbindBidirectional(oldSettings.nextPositionStrategyFactoryProperty());
         }
 
-        speedProperty.bindBidirectional(newSettings.speedProperty());;
+        speedProperty.bindBidirectional(newSettings.speedProperty());
         sleepChanceProperty.bindBidirectional(newSettings.sleepChanceProperty());
         wakeUpChanceProperty.bindBidirectional(newSettings.wakeChanceProperty());
+        movementComboBox.valueProperty().bindBidirectional(newSettings.nextPositionStrategyFactoryProperty());
     }
 
     @Override
@@ -193,6 +222,7 @@ public class SettingsController implements Killable {
 
     /**
      * Checks if Window of SettingsController is displayed on the monitor.
+     * 
      * @return If the settings window is visible
      */
     public boolean isVisible() {
@@ -232,6 +262,5 @@ public class SettingsController implements Killable {
             throw new LoadUIException("Could not load settings UI", e);
         }
     }
-
 
 }

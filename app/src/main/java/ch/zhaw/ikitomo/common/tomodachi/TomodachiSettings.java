@@ -153,6 +153,7 @@ public class TomodachiSettings {
      * 
      * @return The property
      */
+    @JsonIgnore
     public ObjectProperty<NextPositionStrategyFactory> nextPositionStrategyFactoryProperty() {
         return nextPositionStrategyFactory;
     }
