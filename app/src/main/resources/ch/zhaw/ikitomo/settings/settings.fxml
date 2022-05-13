@@ -35,7 +35,6 @@
                   <Label text="Sleep Chance" GridPane.rowIndex="1" />
                   <Spinner fx:id="wakeUpChance" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Wake-Up Chance" GridPane.rowIndex="2" />
-                  <Spinner fx:id="speed" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
                   <Label text="Movement" GridPane.rowIndex="3" />
                   <ComboBox fx:id="movementComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
