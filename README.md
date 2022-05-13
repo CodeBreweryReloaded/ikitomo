@@ -137,8 +137,7 @@ To use your Tomodachi, simply copy your folder containing the `_tomodachi.json` 
 ## Design Decisions
 
 *Also known as the Architecture Documentation*
-
-**TODO: Insert class diagram**
+![classdiagram](Notes/classdiagram_v2.svg)
 
 ### Models
 
