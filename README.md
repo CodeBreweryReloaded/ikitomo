@@ -1,3 +1,5 @@
+![Logo](logo.png)
+
 # Ikitomo
 
 - [Installation](#installation)
