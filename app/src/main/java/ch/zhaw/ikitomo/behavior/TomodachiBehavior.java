@@ -109,7 +109,7 @@ public class TomodachiBehavior {
         }
 
         if (nextState != oldState) {
-            LOGGER.log(Level.INFO, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
+            LOGGER.log(Level.FINE, "Changed state from {0} to {1}", new Object[] { oldState.name(), nextState.name() });
         }
     }
 

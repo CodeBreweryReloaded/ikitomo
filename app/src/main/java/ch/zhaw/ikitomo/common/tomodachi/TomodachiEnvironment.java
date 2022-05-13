@@ -1,6 +1,7 @@
 package ch.zhaw.ikitomo.common.tomodachi;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -135,9 +136,23 @@ public class TomodachiEnvironment {
     private void loadSettings() {
         try {
             settings = settingsManager.load(SettingsManager.DEFAULT_SETTINGS_PATH);
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.WARNING, "The File \"{0}\" wasn\'t found. Creating a new default settings file",
+                    SettingsManager.DEFAULT_SETTINGS_PATH);
+            createSettingsFile();
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "The settings could not be loaded.", e);
             settings = Settings.createDefaultSettings();
+        }
+    }
+
+    private void createSettingsFile() {
+        settings = Settings.createDefaultSettings();
+        try {
+            save();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE,
+                    "The settings couldn't be saved to \"%s\"".formatted(SettingsManager.DEFAULT_SETTINGS_PATH), e);
         }
     }
 

@@ -1,9 +1,0 @@
-{
-  "tomodachiID" : "ch.zhaw.ikitomo.defaultNeko",
-  "settings" : {
-    "ch.zhaw.ikitomo.defaultNeko" : {
-      "sleepChance" : 4.3,
-      "wakeChance" : 0.0
-    }
-  }
-}
