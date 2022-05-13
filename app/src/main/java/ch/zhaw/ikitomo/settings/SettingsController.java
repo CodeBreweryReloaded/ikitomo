@@ -1,10 +1,12 @@
 package ch.zhaw.ikitomo.settings;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ch.zhaw.ikitomo.behavior.NextPositionStrategyFactory;
@@ -28,6 +30,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -36,6 +39,11 @@ import javafx.util.StringConverter;
  * The settings controller
  */
 public class SettingsController implements Killable {
+    /**
+     * The path in the classpath to the icon
+     */
+    private static final String ICON_PATH = "/icon.png";
+
     /**
      * The logger
      */
@@ -252,6 +260,7 @@ public class SettingsController implements Killable {
             Scene scene = new Scene(parent);
 
             Stage stage = new Stage();
+            loadIcon(stage);
             stage.setTitle(SETTINGS_TITLE);
             stage.setScene(scene);
             stage.setMinWidth(SETTINGS_MIN_WIDTH);
@@ -261,6 +270,25 @@ public class SettingsController implements Killable {
         } catch (IOException e) {
             throw new LoadUIException("Could not load settings UI", e);
         }
+    }
+
+    /**
+     * Loads the icon of the settings window
+     * 
+     * @param stage The stage
+     */
+    private static void loadIcon(Stage stage) {
+        InputStream iconIn = SettingsController.class.getResourceAsStream(ICON_PATH);
+        if (iconIn == null) {
+            LOGGER.log(Level.INFO, "No icon found at  \"{0}\"", ICON_PATH);
+            return;
+        }
+        try (iconIn) {
+            stage.getIcons().add(new Image(iconIn));
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Couldn\'t load icon image from \"%s\"".formatted(ICON_PATH), e);
+        }
+
     }
 
 }
